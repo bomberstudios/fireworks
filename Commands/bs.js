@@ -55,8 +55,13 @@ Text.prototype.resize = function(w,h) {
   } else this.autoExpand = true;
 };
 Element.set_position = function(x,y){
-  this.left = Math.round(x);
-  this.top = Math.round(y);
+  if (this.is_text()){
+    this.rawLeft = Math.round(x) + 2;
+    this.rawTop = Math.round(y) + 2;
+  } else {
+    this.left = Math.round(x);
+    this.top = Math.round(y);
+  }
 };
 Element.is_symbol = function(){
   return (this.__proto__ == Instance);

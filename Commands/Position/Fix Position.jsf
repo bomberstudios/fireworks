@@ -1,0 +1,13 @@
+// Fix object position
+// shortcut: CTRL + F
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e) {
+  alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
+};
+
+Selection.save();
+Selection.clone().each(function(o) {
+  o.set_position(o.left,o.top);
+});
+Selection.restore();
