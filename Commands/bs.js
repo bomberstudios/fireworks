@@ -20,7 +20,7 @@ Element.each_in_group = function(callback){
     }
   }
 };
-Array.prototype.each = function(callback){
+FwArray.prototype.each = function(callback){
   for (var s=0; s < this.length; s++){
     var el = this[s];
     if (el.is_group()) {
@@ -265,21 +265,12 @@ Selection = {
   bottom: function(){
     return Selection.get_bounds().bottom;
   },
-  each: function(callback){
-    for (var s=0; s < fw.selection.length; s++){
-      var el = fw.selection[s];
-      if (el.is_group()) {
-        el.each_in_group(callback);
-      } else {
-        callback.call(this,el);
-      }
-    }
-  },
+  each: function(callback){ fw.selection.each(callback); },
   save: function(){
     if (fw.selection != null && fw.selection.length > 0) {
       Selection.each(function(e){
         e.customData['is_selected'] = true;
-      })
+      });
     }
   },
   restore: function() {
