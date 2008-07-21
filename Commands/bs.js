@@ -1,3 +1,5 @@
+// bs.js Library
+// a collection of (hopefully) useful tools for Fireworks
 doc = fw.getDocumentDOM();
 
 Array.prototype.clone = function(){
