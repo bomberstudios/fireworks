@@ -1,0 +1,6 @@
+// Remove all guides
+// Ale Muñoz <ale@bomberstudios.com>
+
+fw.runScript(fw.currentScriptDir + "/../bs.js");
+
+Guides.clear();

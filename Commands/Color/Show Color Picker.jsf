@@ -1,0 +1,16 @@
+/*
+  Show Color Picker Command v1.0
+  Ale Muñoz
+  Bind to keyboard shortcut for fullscreen panel-less colorpicking goodness
+  
+  TODO: Add support for text selections
+*/
+selection_attr = fw.selection[0].pathAttributes;
+choice = fw.popupColorPickerOverMouse("#000000", true, false);
+if (choice == "#ffffff") {
+  // Stupid Fireworks bug
+  selection_attr.fillColor = "#fffff0";
+  selection_attr.fillColor = "#ffffff";
+} else {
+  selection_attr.fillColor = choice;
+}

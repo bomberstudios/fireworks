@@ -1,0 +1,10 @@
+// Reticulator 1.6
+// Ale Muñoz <ale@bomberstudios.com>
+
+fw.runScript(fw.currentScriptDir + "/../bs.js");
+
+grid_width = prompt("Layout width",Selection.width());
+number_of_columns = prompt("Number of Columns","16");
+gutter_width = prompt("Gutter Width","9");
+
+Guides.vertical_grid(grid_width,number_of_columns,gutter_width);

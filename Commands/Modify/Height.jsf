@@ -1,0 +1,23 @@
+// Modify object height
+
+try {
+  fw.runScript(fw.userJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
+};
+
+if (fw.selection.length == 1) {
+  default_height = fw.selection[0].height;
+} else {
+  default_height = 0;
+}
+
+var h = prompt("Object Height in Pixels",default_height);
+
+Selection.clone().each(function(o) {
+  o.resize(o.width,eval(h));
+});
+
+// Don't know why this wont work...
+// (well, it works but gives an error...)
+//Selection.restore();

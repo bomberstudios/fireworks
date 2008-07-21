@@ -1,0 +1,9 @@
+try {
+  fw.runScript(fw.userJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
+};
+
+Selection.clone().each(function(o) {
+  o.resize(o.width + 10,o.height);
+});

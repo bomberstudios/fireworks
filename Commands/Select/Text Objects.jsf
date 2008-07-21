@@ -1,0 +1,29 @@
+/*
+  Select Text Objects v1.0
+  Ale Muñoz <ale@bomberstudios.com>
+  
+  As requested by Keko Ponte
+*/
+
+fw.runScript(fw.currentScriptDir + "/../bs.js");
+
+fw.getDocumentDOM().selectAll();
+
+sel = fw.selection;
+
+var text_objects = new Array();
+
+sel.each_in_selection( function(el) {
+  if (el.is_text()) {
+    text_objects.push(el);
+  }
+  el.each_in_group(function(i) {
+    if(i.is_text()) {
+      text_objects.push(i);
+    }
+  });
+});
+
+if (text_objects.length > 0) {
+  fw.selection = text_objects;
+}

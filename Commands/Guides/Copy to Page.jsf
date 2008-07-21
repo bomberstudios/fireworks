@@ -1,0 +1,15 @@
+fw.runScript(fw.currentScriptDir + "/../bs.js");
+
+doc = fw.getDocumentDOM();
+
+old_guides = Guides.get();
+
+new_page = prompt("Copy guides to Page number:");
+doc.changeCurrentPage(new_page-1);
+
+for (var k = old_guides.vGuides.length - 1; k >= 0; k--){
+  doc.addGuide(old_guides.vGuides[k],"vertical");
+};
+for (var l = old_guides.hGuides.length - 1; l >= 0; l--){
+  doc.addGuide(old_guides.hGuides[l],"horizontal");
+};

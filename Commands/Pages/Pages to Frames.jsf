@@ -1,0 +1,35 @@
+// Pages to Frames
+//
+// A command that copies all your pages to frames on a new scratch page
+// Specially built for limalimon.com.es
+// Uses an undocumented attribute of the DOM: currentPageNum
+
+doc = fw.getDocumentDOM();
+
+// Create page at the end of page list...
+doc.addNewPage();
+
+// Move it to the first position
+last_page_index = fw.getDocumentDOM().currentPageNum;
+doc.reorderPages(last_page_index, 0);
+
+// Change active page to first page
+fw.getDocumentDOM().changeCurrentPage(0);
+
+// Rename first page
+doc.setPageName(0,"scratch_page");
+
+// Loop through pages...
+for(var i=1; i<=last_page_index; i++){
+  fw.getDocumentDOM().changeCurrentPage(i);
+  fw.getDocumentDOM().selectAll();
+  fw.getDocumentDOM().clipCopy();
+  fw.getDocumentDOM().changeCurrentPage(0);
+  fw.getDocumentDOM().addFrames(1, "end", true);
+  fw.getDocumentDOM().clipPaste("ask user", "vector");
+}
+
+// Delete the first frame on the first page
+fw.getDocumentDOM().changeCurrentPage(0);
+fw.getDocumentDOM().deleteFrames(0,1);
+//doc.setPageName(0,"Page 1");

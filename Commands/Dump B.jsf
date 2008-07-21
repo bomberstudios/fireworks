@@ -1,0 +1,108 @@
+// Dump the whole Fireworks API to a file
+// v1.1 - Ale Muñoz <ale@bomberstudios.com>
+
+function dump_obj(obj,prefix){
+  var dump = "\n";
+  dump += "===============================================================\n";
+  dump += prefix + "\n"
+  dump += "===============================================================\n";
+  for (var i in obj){
+    dump += prefix + "." + i + "\n";
+  }
+  return dump;
+}
+
+function save_to_file(contents){
+  // Delete any existing file with the same name. If
+  // you do not, and then open the file for rewriting,
+  // saved text will be written over the existing file
+  // which could leave remnants of the old file behind
+  fileURL = fw.browseForFileURL("select", "", "");
+
+  if (Files.deleteFileIfExisting(fileURL)){
+    // Create a new file to write in. Note:
+    // this is only required for Macs; Windows
+    // will create a file with the call to open()
+    if (Files.createFile(fileURL, ".txt", "TEXT")){
+      // Open the file for writing. If successful, this
+      // will return a reference to the file so that
+      // text can be added to it using the write()
+      // command.
+      var fileReference = Files.open(fileURL, true);
+        if (fileReference){
+          // Write the text to the opened file
+          fileReference.write(contents);
+          // When finished, be sure to close the
+          // file using the close() command so other
+          // processes will be able to access it
+          fileReference.close();
+          // Returning true signals a successful save
+          return true;
+      }
+    }
+  }
+  // Returning false signals a failed save
+  return false;
+}
+
+// Objects to be dumped:
+var objects_to_be_dumped = {
+  "fw": fw,
+  "Files": Files,
+  "FileReference": Files,
+  "Errors": Errors,
+  "Find": Find,
+  "System": System,
+  "document": fw.getDocumentDOM(),
+  "RectanglePrimitive": RectanglePrimitive,
+  "Image": Image,
+  "Text": Text,
+  //"HotSpot": HotSpot,
+  //"SlideHotSpot": SlideHotSpot,
+  "PathAttrs": PathAttrs,
+  "Group": Group,
+  "Instance": Instance,
+  "Path": Path
+};
+
+c = "";
+for (var o in objects_to_be_dumped){
+  c += dump_obj(objects_to_be_dumped[o],o);
+}
+save_to_file(c);
+
+// Core:
+  // app
+  // fw
+  // Errors
+  // Files
+  // FileReference
+  // Find
+  // System
+  // 
+
+// Global:
+// alert(msg)
+// confirm(msg)
+// prompt(caption,txt)
+// write(arg1,arg2,...,argN)
+
+// selection:
+  // HotSpot
+  // SlideHotSpot
+  // Path
+  // Group
+  // Instance
+  // Text
+  // RectanglePrimitive
+  // PathAttrs
+  // Image
+
+// elementMask
+// effectList
+// 
+
+// Check an object's type:
+// sel = fw.selection[0];
+// if (sel == "[object Text]") {};
+

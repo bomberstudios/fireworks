@@ -1,0 +1,83 @@
+function saveText(fileURL, text){
+    
+    // Delete any existing file with the same name. If
+    // you do not, and then open the file for rewriting,
+    // saved text will be written over the existing file
+    // which could leave remnants of the old file behind
+    if (Files.deleteFileIfExisting(fileURL)){
+        
+        // Create a new file to write in. Note:
+        // this is only required for Macs; Windows
+        // will create a file with the call to open()
+        if (Files.createFile(fileURL, ".txt", "TEXT")){
+            
+            // Open the file for writing. If successful, this
+            // will return a reference to the file so that
+            // text can be added to it using the write()
+            // command.  
+            var fileReference = Files.open(fileURL, true);
+            if (fileReference){
+                
+                // Write the text to the opened file
+                fileReference.write(text);
+                
+                // When finished, be sure to close the
+                // file using the close() command so other
+                // processes will be able to access it
+                fileReference.close();
+                
+                // Returning true signals a successful save
+                return true;
+            }
+        }
+    }
+    
+    // Returning false signals a failed save
+    return false;
+}
+
+function dump_obj(obj,prefix){
+  var dest_txt = "";
+  for(var i in obj){
+    
+    if (typeof obj[i] == "object") {
+      dest_txt += "\n" + prefix + "." + i + ":\n";
+      dest_txt += dump_obj(obj[i],prefix + "." + i);
+    } else {
+      dest_txt += prefix + "." + i + " ("+ typeof obj[i] +")\n";
+    }
+  }
+  return dest_txt;
+}
+
+debug =  "fw.getDocumentDOM() dump\n";
+debug += "---------------------------------------------------------------\n"
+debug += dump_obj(fw.getDocumentDOM(),"fw.getDocumentDOM()");
+debug += "---------------------------------------------------------------\n"
+debug += dump_obj(fw.selection,"fw.selection");
+debug += "---------------------------------------------------------------\n"
+
+// fw is special..
+//debug += dump_obj(fw,"fw");
+for(var i in fw){
+  debug += "fw." + i +"\n";
+}
+debug += "---------------------------------------------------------------\n"
+for(var i in Guides){
+  debug += "Guides." + i +"\n";
+}
+debug += "---------------------------------------------------------------\n"
+for(var i in Files){
+  debug += "Files." + i +"\n";
+}
+debug += "---------------------------------------------------------------\n"
+for(var i in Object){
+  debug += "Object." + i +"\n";
+}
+debug += "---------------------------------------------------------------\n"
+
+
+var fileForSave = fw.browseForFileURL("select", "", "");
+if (fileForSave){
+  saveText(fileForSave, debug);
+}
