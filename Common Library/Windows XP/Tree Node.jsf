@@ -1,0 +1,33 @@
+/*============================================================================*/
+/*                   Copyright (c) 2007 Adobe Systems Inc.                    */
+/*                            All rights reserved.                            */
+/*============================================================================*/
+
+function setDefaultValues()
+{
+	var currValues = new Array();
+
+	currValues.push({ name:"State", type:"ComboBox", value:"Collapsed,Expanded,Collapsed" });
+
+	Widget.elem.customData["currentValues"] = currValues;
+}
+
+function applyCurrentValues()
+{
+	var vals = Widget.elem.customData["currentValues"];
+	var state = vals[0].value.split(",")[0].toString();
+
+	Widget.GetObjectByName("expanded").visible  = (state=="Expanded");
+	Widget.GetObjectByName("collapsed").visible = (state=="Collapsed");
+}
+
+switch (Widget.opCode)
+{
+	case 1: setDefaultValues();   break;
+	case 2: applyCurrentValues(); break;
+}
+
+/*============================================================================*/
+/*                   Copyright (c) 2007 Adobe Systems Inc.                    */
+/*                            All rights reserved.                            */
+/*============================================================================*/

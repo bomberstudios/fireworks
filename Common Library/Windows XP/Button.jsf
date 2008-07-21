@@ -1,0 +1,43 @@
+function setDefaultValues() {
+  var currValues = new Array();
+
+  currValues.push({
+    name:"State",
+    type:"ComboBox",
+    value:"Normal,Normal,Over,Press"
+  });
+  currValues.push({
+    name:"Enabled",
+    type:"Boolean",
+    value:"true"
+  });
+  currValues.push({
+    name:"Label",
+    type:"Text",
+    value:"Label"
+  });
+
+  Widget.elem.customData["currentValues"] = currValues;
+}
+
+function applyCurrentValues() {
+  var vals = Widget.elem.customData["currentValues"];
+  var state = vals[0].value.split(",")[0].toString();
+  var enabled = (vals[1].value.toString()=="true");
+
+  Widget.GetObjectByName("normal").visible = (enabled && (state=="Normal"));
+  Widget.GetObjectByName("over").visible = (enabled && (state=="Over"  ));
+  Widget.GetObjectByName("press").visible = (enabled && (state=="Press" ));
+  Widget.GetObjectByName("disabled").visible = (!enabled);
+  Widget.GetObjectByName("label").textChars = vals[2].value;
+  Widget.GetObjectByName("label").pathAttributes.fillColor = (enabled)? "#000000" : "#ACA899";
+}
+
+switch (Widget.opCode) {
+  case 1:
+    setDefaultValues();
+    break;
+  case 2:
+    applyCurrentValues();
+    break;
+}

@@ -1,0 +1,53 @@
+function setDefaultValues() {
+  var currValues = new Array();
+
+  currValues.push({
+    name:"State",
+    type:"ComboBox",
+    value:"Normal,Normal,Over,Press"
+  });
+  currValues.push({
+    name:"Enabled",
+    type:"Boolean",
+    value:"true"
+  });
+  currValues.push({
+    name:"Label",
+    type:"Text",
+    value:"Label"
+  });
+  currValues.push({
+    name:"Selected",
+    type:"Boolean",
+    value:"false"
+  });
+
+  Widget.elem.customData["currentValues"] = currValues;
+}
+
+function applyCurrentValues() {
+  var vals = Widget.elem.customData["currentValues"];
+  var state = vals[0].value.split(",")[0].toString();
+  var enabled = (vals[1].value.toString()=="true");
+  var selected = (vals[3].value.toString()=="true");
+
+  Widget.GetObjectByName("normal").visible = ((enabled) && (!selected) && (state=="Normal"));
+  Widget.GetObjectByName("over").visible = ((enabled) && (!selected) && (state=="Over"  ));
+  Widget.GetObjectByName("press").visible = ((enabled) && (!selected) && (state=="Press" ));
+  Widget.GetObjectByName("disabled").visible = ((!enabled) && (!selected));
+  Widget.GetObjectByName("selected").visible = ((enabled) && (selected) && (state=="Normal"));
+  Widget.GetObjectByName("selected_over").visible = ((enabled) && (selected) && (state=="Over"  ));
+  Widget.GetObjectByName("selected_press").visible = ((enabled) && (selected) && (state=="Press" ));
+  Widget.GetObjectByName("selected_disabled").visible = ((!enabled) && ( selected));
+  Widget.GetObjectByName("label").textChars = vals[2].value;
+  Widget.GetObjectByName("label").pathAttributes.fillColor = (enabled)? "#000000" : "#ACA899";
+}
+
+switch (Widget.opCode) {
+  case 1:
+    setDefaultValues();
+    break;
+  case 2:
+    applyCurrentValues();
+    break;
+}

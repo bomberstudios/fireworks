@@ -1,0 +1,52 @@
+/*============================================================================*/
+/*                   Copyright (c) 2007 Adobe Systems Inc.                    */
+/*                            All rights reserved.                            */
+/*============================================================================*/
+
+function setDefaultValues()
+{
+	var currValues = new Array();
+
+	currValues.push({ name:"Thumb Type",  type:"ComboBox", value:"Default,Default,Left,Right" });
+	currValues.push({ name:"Thumb State", type:"ComboBox", value:"Normal,Normal,Over,Press"   });
+	currValues.push({ name:"enabled",     type:"Boolean",  value:"true"                       });
+
+	Widget.elem.customData["currentValues"] = currValues;
+}
+
+function applyCurrentValues()
+{
+	var vals    = Widget.elem.customData["currentValues"];
+	var types   = vals[0].value.split(",");
+	var type    = types.shift();
+	var states  = vals[1].value.split(",");
+	var state   = states.shift();
+	var enabled = (vals[2].value.toString()=="true");
+	var objName = type + "_" + ((enabled)? state : "disabled");
+	var i, j, n;
+
+	for (i=0; i<types.length; i++)
+	{
+		for (j=0; j<states.length; j++)
+		{
+			n = types[i]+"_"+states[j];
+
+			Widget.GetObjectByName(n).visible = (n==objName);
+		}
+
+		n = types[i]+"_disabled";
+
+		Widget.GetObjectByName(n).visible = (n==objName);
+	}
+}
+
+switch (Widget.opCode)
+{
+	case 1: setDefaultValues();   break;
+	case 2: applyCurrentValues(); break;
+}
+
+/*============================================================================*/
+/*                   Copyright (c) 2007 Adobe Systems Inc.                    */
+/*                            All rights reserved.                            */
+/*============================================================================*/

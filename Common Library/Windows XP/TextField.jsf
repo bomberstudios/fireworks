@@ -1,0 +1,35 @@
+function setDefaultValues() {
+  var current_values = new Array();
+
+  current_values.push({
+    name:"Enabled",
+    type:"Boolean",
+    value:"true"
+  });
+  current_values.push({
+    name:"Text",
+    type:"Text",
+    value:"Text"
+  });
+
+  Widget.elem.customData["currentValues"] = current_values;
+}
+
+function applyCurrentValues() {
+  var current_values = Widget.elem.customData["currentValues"];
+  var enabled = (current_values[0].value.toString()=="true");
+
+  Widget.GetObjectByName("normal").visible = (enabled);
+  Widget.GetObjectByName("disabled").visible = (!enabled);
+  Widget.GetObjectByName("text").textChars = current_values[1].value;
+  Widget.GetObjectByName("text").pathAttributes.fillColor = (enabled)? "#000000" : "#ACA899";
+}
+
+switch (Widget.opCode) {
+  case 1:
+    setDefaultValues();
+    break;
+  case 2:
+    applyCurrentValues();
+    break;
+}

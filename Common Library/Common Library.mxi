@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<macromedia-extension name="Common Library Fixed" version="0.0.3" type="library" requires-restart="false">
+  <author name="Ale Muñoz" />
+  <products>
+    <product name="Fireworks" version="9" primary="true" />
+  </products>
+  <description>
+    <![CDATA[
+    Common Library Fixed is a collection of fixes for the Common Library feature in Fireworks CS3
+    ]]>
+  </description>
+  <ui-access>
+    <![CDATA[
+    To use Common Library Fixed, just choose a symbols from the corresponding folder on the Common Library panel.
+
+    There are two folders: "Windows XP" and "Mac OSX"
+    ]]>
+  </ui-access>
+  <files>
+    <file source="Windows XP/Button.graphic.png"          destination="$fireworks/Configuration/Common Library/Windows XP" />
+    <file source="Windows XP/Button.jsf"                  destination="$fireworks/Configuration/Common Library/Windows XP" />
+    <file source="Windows XP/CheckBox.graphic.png"        destination="$fireworks/Configuration/Common Library/Windows XP" />
+    <file source="Windows XP/CheckBox.jsf"                destination="$fireworks/Configuration/Common Library/Windows XP" />
+    <file source="Windows XP/ComboBox.graphic.png"        destination="$fireworks/Configuration/Common Library/Windows XP" />
+    <file source="Windows XP/ComboBox.jsf"                destination="$fireworks/Configuration/Common Library/Windows XP" />
+    <file source="Windows XP/GroupBox.graphic.png"        destination="$fireworks/Configuration/Common Library/Windows XP" />
+    <file source="Windows XP/Tab.graphic.png"             destination="$fireworks/Configuration/Common Library/Windows XP" />
+    <file source="Windows XP/Tab.jsf"                     destination="$fireworks/Configuration/Common Library/Windows XP" />
+    <file source="Windows XP/TabPane.graphic.png"         destination="$fireworks/Configuration/Common Library/Windows XP" />
+    <file source="Windows XP/TextField.graphic.png"       destination="$fireworks/Configuration/Common Library/Windows XP" />
+    <file source="Windows XP/TextField.jsf"               destination="$fireworks/Configuration/Common Library/Windows XP" />
+    <!-- Clean these -->
+    <file source="Windows XP/HScrollBar.graphic.png"      destination="$fireworks/Configuration/Common Library/Windows XP" />
+    <file source="Windows XP/HScrollBar.jsf"              destination="$fireworks/Configuration/Common Library/Windows XP" />
+    <file source="Windows XP/HSlider.graphic.png"         destination="$fireworks/Configuration/Common Library/Windows XP" />
+    <file source="Windows XP/HSlider.jsf"                 destination="$fireworks/Configuration/Common Library/Windows XP" />
+    <file source="Windows XP/NumericStepper.graphic.png"  destination="$fireworks/Configuration/Common Library/Windows XP" />
+    <file source="Windows XP/NumericStepper.jsf"          destination="$fireworks/Configuration/Common Library/Windows XP" />
+    <file source="Windows XP/RadioButton.graphic.png"     destination="$fireworks/Configuration/Common Library/Windows XP" />
+    <file source="Windows XP/RadioButton.jsf"             destination="$fireworks/Configuration/Common Library/Windows XP" />
+    <file source="Windows XP/Tree Node.graphic.png"       destination="$fireworks/Configuration/Common Library/Windows XP" />
+    <file source="Windows XP/Tree Node.jsf"               destination="$fireworks/Configuration/Common Library/Windows XP" />
+    <file source="Windows XP/VScrollBar.graphic.png"      destination="$fireworks/Configuration/Common Library/Windows XP" />
+    <file source="Windows XP/VScrollBar.jsf"              destination="$fireworks/Configuration/Common Library/Windows XP" />
+    <file source="Windows XP/VSlider.graphic.png"         destination="$fireworks/Configuration/Common Library/Windows XP" />
+    <file source="Windows XP/VSlider.jsf"                 destination="$fireworks/Configuration/Common Library/Windows XP" />
+  </files>
+</macromedia-extension>

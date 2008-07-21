@@ -1,0 +1,59 @@
+/*============================================================================*/
+/*                   Copyright (c) 2007 Adobe Systems Inc.                    */
+/*                            All rights reserved.                            */
+/*============================================================================*/
+
+function setDefaultValues()
+{
+	var currValues = new Array();
+
+	currValues.push({ name:"State (Up)",    type:"ComboBox", value:"Normal,Normal,Over,Press" });
+	currValues.push({ name:"State (Thumb)", type:"ComboBox", value:"Normal,Normal,Over,Press" });
+	currValues.push({ name:"State (Track)", type:"ComboBox", value:"Normal,Normal,Over,Press" });
+	currValues.push({ name:"State (Down)",  type:"ComboBox", value:"Normal,Normal,Over,Press" });
+	currValues.push({ name:"enabled",       type:"Boolean",  value:"true"                     });
+
+	Widget.elem.customData["currentValues"] = currValues;
+}
+
+function applyCurrentValues()
+{
+	var vals       = Widget.elem.customData["currentValues"];
+	var stateup    = vals[0].value.split(",")[0].substr(0,1).toLowerCase();
+	var statethumb = vals[1].value.split(",")[0].substr(0,1).toLowerCase();
+	var statetrack = vals[2].value.split(",")[0].substr(0,1).toLowerCase();
+	var statedown  = vals[3].value.split(",")[0].substr(0,1).toLowerCase();
+	var state      = stateup + statethumb + statetrack + statedown;
+	var enabled    = (vals[4].value.toString()=="true");
+	var states     = ["n","o","p"];
+	var i, j, k, l, obj;
+
+	for (i=0; i<states.length; i++)
+	{
+		for (j=0; j<states.length; j++)
+		{
+			for (k=0; k<states.length; k++)
+			{
+				for (l=0; l<states.length; l++)
+				{
+					obj = states[i]+states[j]+states[k]+states[l];
+
+					Widget.GetObjectByName(obj).visible = (enabled && (state==obj));
+				}
+			}
+		}
+	}
+
+	Widget.GetObjectByName("disabled").visible = (!enabled);
+}
+
+switch (Widget.opCode)
+{
+	case 1: setDefaultValues();   break;
+	case 2: applyCurrentValues(); break;
+}
+
+/*============================================================================*/
+/*                   Copyright (c) 2007 Adobe Systems Inc.                    */
+/*                            All rights reserved.                            */
+/*============================================================================*/
