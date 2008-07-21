@@ -1,10 +1,13 @@
+# TODO: Complete KEYCODES & MODIFIERS array
+
 require "erb"
 
 OUTPUT = "en/Keyboard\ Shortcuts/Shortcuts.xml"
 
 MODIFIERS = {
   :CTRL => 8,
-  :SHIFT => 2
+  :SHIFT => 2,
+  :ALT => 1
 }
 KEYCODES = {
   :kLEFT => "28",
