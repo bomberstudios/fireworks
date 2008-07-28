@@ -1,3 +1,4 @@
+// shortcut: CTRL + SHIFT + LEFT
 try {
   fw.runScript(fw.userJsCommandsDir + "/bs.js");
 } catch(e){

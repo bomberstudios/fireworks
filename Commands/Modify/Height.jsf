@@ -1,5 +1,5 @@
 // Modify object height
-
+// shortcut: CTRL + H
 try {
   fw.runScript(fw.userJsCommandsDir + "/bs.js");
 } catch(e){

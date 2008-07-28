@@ -1,6 +1,6 @@
 // Modify object width
 // Text width based on Adobe's command
-
+// shortcut: CTRL + W
 try {
   fw.runScript(fw.userJsCommandsDir + "/bs.js");
 } catch(e){

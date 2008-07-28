@@ -1,1 +1,2 @@
+// shortcut: CTRL + 7
 fw.getDocumentDOM().setOpacity(70);
