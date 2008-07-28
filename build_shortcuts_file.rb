@@ -27,6 +27,31 @@ KEYCODES = {
   :k9 => "57",
 
   :kA => "65",
+  :kB => "66",
+  :kC => "67",
+  :kD => "68",
+  :kE => "69",
+  :kF => "70",
+  :kG => "71",
+  :kH => "72",
+  :kI => "73",
+  :kJ => "74",
+  :kK => "75",
+  :kL => "76",
+  :kM => "77",
+  :kN => "78",
+  :kO => "79",
+  :kP => "80",
+  :kQ => "81",
+  :kR => "82",
+  :kS => "83",
+  :kT => "84",
+  :kU => "85",
+  :kV => "86",
+  :kW => "87",
+  :kX => "88",
+  :kY => "89",
+  :kZ => "90",
 }
 
 class Command
@@ -60,7 +85,7 @@ Dir["Commands/**/**.jsf"].each do |f|
 end
 
 open(OUTPUT,"w") do |f|
-  f << ERB.new(IO.read("Shortcuts.erb")).result
+  f << ERB.new(IO.read("Shortcuts_b.erb")).result
 end
 
 %x(mate "#{OUTPUT}")
