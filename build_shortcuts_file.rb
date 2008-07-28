@@ -2,10 +2,11 @@
 
 require "erb"
 
-OUTPUT = "en/Keyboard\ Shortcuts/Shortcuts.xml"
+OUTPUT = "en/Keyboard Shortcuts/BS Shortcuts.xml"
 
 MODIFIERS = {
   :CTRL => 8,
+  :ALT => 4, # Wild guess
   :SHIFT => 2,
   :ALT => 1
 }
