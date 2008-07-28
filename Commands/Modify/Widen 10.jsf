@@ -4,6 +4,8 @@ try {
   alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
 };
 
+Selection.save();
 Selection.clone().each(function(o) {
   o.resize(o.width + 10,o.height);
 });
+Selection.restore();

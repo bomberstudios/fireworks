@@ -19,10 +19,8 @@ var s = prompt("Object Size in Pixels",default_width+","+default_width);
 var w = s.split(",")[0];
 var h = s.split(",")[1];
 
+Selection.save();
 Selection.clone().each(function(o) {
   o.resize(eval(w),eval(h));
 });
-
-// Don't know why this wont work...
-// (well, it works but gives an error...)
-//Selection.restore();
+Selection.restore();

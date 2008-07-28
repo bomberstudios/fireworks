@@ -14,10 +14,8 @@ if (fw.selection.length == 1) {
 }
 var w = prompt("Object Width (pixels; 0 for auto)",default_width);
 
+Selection.save();
 Selection.clone().each(function(o) {
   o.resize(eval(w),o.height);
 });
-
-// Don't know why this wont work...
-// (well, it works but gives an error...)
-//Selection.restore();
+Selection.restore();

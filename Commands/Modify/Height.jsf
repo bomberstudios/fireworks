@@ -13,11 +13,8 @@ if (fw.selection.length == 1) {
 }
 
 var h = prompt("Object Height in Pixels",default_height);
-
+Selection.save();
 Selection.clone().each(function(o) {
   o.resize(o.width,eval(h));
 });
-
-// Don't know why this wont work...
-// (well, it works but gives an error...)
-//Selection.restore();
+Selection.restore();
