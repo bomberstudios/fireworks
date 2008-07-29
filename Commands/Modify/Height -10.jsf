@@ -1,9 +1,11 @@
+// shortcut: CTRL + SHIFT + UP
 try {
   fw.runScript(fw.userJsCommandsDir + "/bs.js");
 } catch(e){
   alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
 };
-
+Selection.save();
 Selection.clone().each(function(o) {
   o.resize(o.width,o.height - 10);
 });
+Selection.restore();
