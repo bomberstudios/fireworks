@@ -1,0 +1,25 @@
+/*
+  Stroke Color Picker Command v1.0
+  Ale Muñoz
+  Bind to keyboard shortcut for fullscreen panel-less colorpicking goodness
+
+  TODO: Add support for text selections
+*/
+try {
+  fw.runScript(fw.userJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
+};
+
+choice = fw.popupColorPickerOverMouse("#00000000", true, false);
+
+Selection.each(function(sel) {
+  switch (choice) {
+    case "#ffffff00":
+      doc.setBrushNColor(null, "#ffffff00");
+      break;
+    default:
+      doc.setBrushColor(choice);
+      break;
+  }
+});
