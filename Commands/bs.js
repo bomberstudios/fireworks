@@ -1,6 +1,16 @@
 // bs.js Library
 // a collection of (hopefully) useful tools for Fireworks
-doc = fw.getDocumentDOM();
+// 
+// Credits:
+// ----------------------------------------------
+// Selection Save & Restore Functions v1.1
+// ----------------------------------------------
+// Created by Matt Stow & Amos Robinson 2008
+// http://www.mattstow.com
+// http://www.amospheric.com
+// ----------------------------------------------
+
+var doc = fw.getDocumentDOM();
 
 Array.prototype.clone = function(){
   var tmp_array = new Array();
@@ -221,12 +231,40 @@ Selection = {
     return tmp_array;
   },
   save: function(){
-    this.saved_selection = this.clone();
+    this.is_sel_id = "is_sel_id_" + new Date().getMilliseconds();
+    if (fw.selection != null && fw.selection.length > 0) {
+      for (var s in fw.selection) {
+        if (fw.selection[s].customData != null) {
+          fw.selection[s].customData[this.is_sel_id] = true;
+        }
+      }
+    }
   },
-  restore: function(){
-    // doesn't seem to work...
-    //var original_selection = this.saved_selection.clone();
-    //fw.selection = original_selection;
+  getObjects: function() {
+    var doc = fw.getDocumentDOM();
+    var objects = new Array();
+    for (var lay in doc.layers) {
+      for (var elem in doc.layers[lay].elems) {
+        if (doc.layers[lay].elems[elem].customData != null && doc.layers[lay].elems[elem].customData[this.is_sel_id]) {
+          objects.push(doc.layers[lay].elems[elem]);
+        }
+      }
+    }
+    return objects;
+  },
+  restore: function() {
+    fw.selection = this.getObjects();
+    this.destroy();
+  },
+  destroy: function() {
+    var doc = fw.getDocumentDOM();
+    for (var lay in doc.layers) {
+      for (var elem in doc.layers[lay].elems) {
+        if (doc.layers[lay].elems[elem].customData != null) {
+          delete doc.layers[lay].elems[elem].customData[this.is_sel_id];
+        }
+      }
+    }
   }
 };
 
