@@ -4,6 +4,8 @@
   Bind to keyboard shortcut for fullscreen panel-less colorpicking goodness
 
   TODO: Add support for text selections
+  
+  shortcut: CTRL + C
 */
 try {
   fw.runScript(fw.userJsCommandsDir + "/bs.js");

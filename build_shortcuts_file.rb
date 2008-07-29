@@ -86,7 +86,7 @@ Dir["Commands/**/**.jsf"].each do |f|
 end
 
 open(OUTPUT,"w") do |f|
-  f << ERB.new(IO.read("Shortcuts_b.erb")).result
+  f << ERB.new(IO.read("Shortcuts.erb")).result
 end
 
-%x(mate "#{OUTPUT}")
+# %x(mate "#{OUTPUT}")

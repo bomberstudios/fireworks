@@ -1,5 +1,6 @@
 // Reticulator 1.5
 // Ale Muñoz <ale@bomberstudios.com>
+// shortcut: CTRL + SHIFT + R
 
 fw.runScript(fw.currentScriptDir + "/../bs.js");
 Guides.vertical_grid(951,16,9);
