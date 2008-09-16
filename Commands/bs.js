@@ -326,10 +326,11 @@ Object.prototype.resize = function(w,h){
     fw.getDocumentDOM().setSelectionBounds({left:this.left,top:this.top,right:(this.left + w),bottom:(this.top + h)},"autoTrimImages transformAttributes");
   }
 }
-
+Object.prototype.is_symbol = function(){
+  return (this.__proto__ == Instance);
+}
 Object.prototype.is_text = function(){
-  if (this.__proto__ == Text.prototype) { return true; }
-  return false;
+  return (this.__proto__ == Text.prototype);
 }
 Object.prototype.is_group = function(){
   if (this.elements) { return true; }
