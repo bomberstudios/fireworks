@@ -314,6 +314,9 @@ File = {
 };
 
 Object.prototype.resize = function(w,h){
+  if (this.__proto__ == Instance) {
+    // FIXME: Object is a symbol, and they sometimes get destroyed when resized below its minimum size
+  };
   if(isNaN(w) || isNaN(h)) return;
   if (this.__proto__ == Text.prototype) {
     if (w){
