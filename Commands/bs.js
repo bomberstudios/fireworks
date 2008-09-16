@@ -231,7 +231,7 @@ Selection = {
     return tmp_array;
   },
   save: function(){
-    this.is_sel_id = "is_sel_id_" + new Date().getMilliseconds();
+    this.is_sel_id = "is_sel_id_" + (Math.random() * 100000000000000000000);
     if (fw.selection != null && fw.selection.length > 0) {
       for (var s in fw.selection) {
         if (fw.selection[s].customData != null) {
