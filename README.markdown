@@ -5,6 +5,12 @@ These are my commands and libraries for Adobe Fireworks.
 ## Commands
 Most of my commands are intended to be bound to keyboard shortcuts. You wouldn't believe how much time you can save just by using keys to change an object's size :)
 
+If you want to use my custom keyboard shortcuts, you can use a very-experimental, very-prone-to-fail Rake task by running
+
+    rake shortcuts
+
+It will generate a "Shortcuts.xml" file you can copy to $HOME/Library/Application Support/Adobe/Fireworks CS3/en/Keyboard Shortcuts/ and then choose in Fireworks by using the **Fireworks » Keyboard Shortcuts** menu.
+
 ### Alpha
 A collection of commands to change an object's alpha. They work on the currently selected object(s). I bind them to Control + 1 .. 0
 
