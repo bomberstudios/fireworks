@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+# echo "$0:$1:$2:$3" > test-output;
+# looks like Fireworks does a cd / before executing the script
+
+# env = []
+# ENV.to_hash.each do |key, value|
+#     env << "#{key}: #{value}"
+# end
+# 
+# envs = env.join(",")
+
+path = File.dirname(__FILE__)
+args = ARGV.join(",")
+
+%x(echo "Arguments: #{args}" > test-output)
+%x(echo "Path: #{path}" >> test-output)
+
+%x(open "#{path}")
