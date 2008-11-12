@@ -16,6 +16,11 @@ for(var i=0; i<doc.pagesCount; i++){
     if (el.is_text()) {
       el.antiAliased = false;
     }
+    el.each_in_group(function(i) {
+      if(i.is_text()) {
+        i.antiAliased = false;
+      }
+    });
   });
   doc.selectNone();
 }
