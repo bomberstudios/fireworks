@@ -1,0 +1,13 @@
+// alert("Mode: " + sel.mode); // Rectangle: percentage
+//                             // Text: undefined
+// alert("Transform: " + sel.transform); // fwDict
+// alert("symbolName: " + sel.symbolName); // undefined
+// 
+// alert(sel.javascriptString);
+
+// The *right* way to test new things...
+try {
+  foo();
+} catch(e) {
+  alert(e);
+};
