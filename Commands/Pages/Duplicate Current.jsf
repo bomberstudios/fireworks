@@ -1,0 +1,2 @@
+doc = fw.getDocumentDOM();
+doc.duplicatePage(doc.currentPageNum);
