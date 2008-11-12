@@ -1,0 +1,7 @@
+try {
+  fw.runScript(fw.userJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
+};
+
+Document.dump();
