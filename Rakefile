@@ -1,4 +1,5 @@
 require "erb"
+require "rdiscount"
 
 HOME = ENV["HOME"]
 CS3 = HOME + "/Library/Application Support/Adobe/Fireworks CS3/"
@@ -18,36 +19,35 @@ end
 desc "Build MXP file with Commands"
 task :commands do
   MXI = <<-XML
-  <?xml version="1.0" encoding="UTF-8"?>
-  <macromedia-extension name="Orange Commands" version="1.0" type="command" requires-restart="false">
-    <author name="Ale Muñoz" />
-    <products>
-      <product name="Fireworks" version="7" primary="true" />
-    </products>
-    <description>
-      <![CDATA[
-      An amazingly wonderful collection of Commands for Fireworks :)
-      ]]>
-    </description>
-    <ui-access>
-      <![CDATA[
-        Lorem...
-      ]]>
-    </ui-access>
-    <files>
-    <% @files.each do |filename| %>
-      <file source="<%= filename %>" destination="$fireworks/Configuration/Test/<%= filename %>" />
-    <% end %>
-    </files>
-  </macromedia-extension>
+<?xml version="1.0" encoding="UTF-8"?>
+<macromedia-extension name="Orange Commands" version="1.0" type="command" requires-restart="false">
+  <author name="Ale Muñoz" />
+  <products>
+    <product name="Fireworks" version="7" primary="true" />
+  </products>
+  <description>
+    <![CDATA[
+    An amazingly wonderful collection of Commands for Fireworks :)
+    ]]>
+  </description>
+  <ui-access>
+    <![CDATA[
+      <%= @documentation %>
+    ]]>
+  </ui-access>
+  <files>
+  <% @files.each do |filename| %>
+    <file source="<%= filename %>" destination="$fireworks/Configuration/<%= filename %>" />
+  <% end %>
+  </files>
+</macromedia-extension>
 XML
 
-  
+  @documentation = RDiscount.new(File.read("README.markdown")).to_html.gsub(/^\n/,"")
   @files = Dir["Commands/**/**.jsf","Commands/**/**.js"]
   open("OrangeCommands.mxi","w") do |f|
     f << ERB.new(MXI).result
   end
-  %x(mate "OrangeCommands.mxi")
 end
 
 desc "Build XML for keyboard shortcuts"
