@@ -1,3 +1,5 @@
+require "erb"
+
 HOME = ENV["HOME"]
 CS3 = HOME + "/Library/Application Support/Adobe/Fireworks CS3/"
 CS4 = HOME + "/Library/Application Support/Adobe/Fireworks CS4/"
@@ -13,13 +15,46 @@ task :install do
   end
 end
 
+desc "Build MXP file with Commands"
+task :commands do
+  MXI = <<-XML
+  <?xml version="1.0" encoding="UTF-8"?>
+  <macromedia-extension name="Orange Commands" version="1.0" type="command" requires-restart="false">
+    <author name="Ale Muñoz" />
+    <products>
+      <product name="Fireworks" version="7" primary="true" />
+    </products>
+    <description>
+      <![CDATA[
+      An amazingly wonderful collection of Commands for Fireworks :)
+      ]]>
+    </description>
+    <ui-access>
+      <![CDATA[
+        Lorem...
+      ]]>
+    </ui-access>
+    <files>
+    <% @files.each do |filename| %>
+      <file source="<%= filename %>" destination="$fireworks/Configuration/Test/<%= filename %>" />
+    <% end %>
+    </files>
+  </macromedia-extension>
+XML
+
+  
+  @files = Dir["Commands/**/**.jsf","Commands/**/**.js"]
+  open("OrangeCommands.mxi","w") do |f|
+    f << ERB.new(MXI).result
+  end
+  %x(mate "OrangeCommands.mxi")
+end
+
 desc "Build XML for keyboard shortcuts"
 task :shortcuts do
   # TODO: Complete KEYCODES & MODIFIERS array
 
-  require "erb"
-
-  OUTPUT = "en/Keyboard Shortcuts/BS Shortcuts.xml"
+  OUTPUT = "en/Keyboard Shortcuts/Shortcuts.xml"
 
   MODIFIERS = {
     :CTRL => 8,
