@@ -1,0 +1,28 @@
+var current_filename = Files.getFilename(fw.getDocumentPath(fw.documents[0]));
+
+var script_file_name = "test-script";
+var script_file_path = fw.currentScriptDir + "/" + script_file_name;
+
+var batch_file_name  = "test-script-data";
+var batch_file_path  = fw.currentScriptDir + "/" + batch_file_name;
+
+
+try {
+  // Delete batch file...
+  Files.deleteFileIfExisting(batch_file_path);
+  // ...and create it again
+  Files.createFile(batch_file_path, "TEXT", "????");
+  var batch_file = Files.open(batch_file_path, true);
+  var batch_file_contents = [
+    "#!/usr/bin/env bash",
+    "say 'foobar'&"
+  ].join("\n");
+  batch_file.write(batch_file_contents);
+  batch_file.close();
+  // Make script executable
+  fw.launchApp(batch_file_path,[]);
+  // Launch script
+  // fw.launchApp(batch_file_path,[]);
+} catch (exception) {
+  //alert([exception, exception.lineNumber, exception.fileName].join("\n"));
+}

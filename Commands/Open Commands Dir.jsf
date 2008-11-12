@@ -1,0 +1,5 @@
+try {
+  fw.launchApp(fw.userJsCommandsDir + "/open-commands-dir",[]);
+} catch (exception) {
+  //alert([exception, exception.lineNumber, exception.fileName].join("\n"));
+}
