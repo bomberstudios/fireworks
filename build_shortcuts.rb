@@ -17,12 +17,6 @@ require "erb"
 SOURCE_DIR = "/Applications/Adobe Fireworks CS4/Adobe Fireworks CS4.app/Contents/Resources/en.lproj/Keyboard Shortcuts/"
 TARGET_DIR = "en/Keyboard\ Shortcuts/"
 
-# Remove all XML files
-# Dir["#{TARGET_DIR}/*.xml"].each do |f|
-#   rm f
-# end
-
-# original_files_path = "/Applications/Adobe Fireworks CS4/Adobe Fireworks CS4.app/Contents/Resources/en.lproj/Keyboard Shortcuts/"
 line_regexp = /	<dynamic_commands \/>/ # cr(ap|ee)py
 
 # Generate the new <dynamic_commands/> node
@@ -31,14 +25,6 @@ COMMANDS_TEMPLATE = <<-HTML
   <jscommand name="<%= command.name %>" count="1" ><shortcut text="<%= command.modifier %> <%= command.key %>" /></jscommand><% end %>
 </dynamic_commands>
 HTML
-
-# COMMANDS_TEMPLATE = <<-ERB
-# <dynamic_commands><% @commands.each do |command| %>
-#   <jscommand name="<%= command.name %>" count="1" >
-#     <%= "<shortcut text='#{command.modifier} #{command.key}' />" unless command.modifier.nil? %>
-#   </jscommand><% end %>
-# </dynamic_commands>
-# ERB
 
 MODIFIERS = {
   :CTRL => 8,
@@ -121,8 +107,6 @@ Dir["Commands/**/**.jsf"].each do |f|
   end
 end
 new_commands = ERB.new(COMMANDS_TEMPLATE).result(binding)
-p new_commands
-
 
 Dir["#{SOURCE_DIR}/*.xml"].each do |f|
   file_name = File.basename(f,".xml")
