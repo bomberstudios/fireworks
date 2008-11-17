@@ -7,6 +7,7 @@ what this does:
 - replace the node by a new one full of stuff
 - save the contents to a new file
 
+TODO: add (dont replace) custom commands in Photoshop and Web Extras files
 
 =end
 
@@ -16,19 +17,20 @@ require "erb"
 
 SOURCE_DIR = "/Applications/Adobe Fireworks CS4/Adobe Fireworks CS4.app/Contents/Resources/en.lproj/Keyboard Shortcuts/"
 TARGET_DIR = "en/Keyboard\ Shortcuts/"
-
-line_regexp = /	<dynamic_commands \/>/ # cr(ap|ee)py
+LINE_REGEXP = /<dynamic_commands \/>|<dynamic_commands >(.+)<\/dynamic_commands>/ # cr(ap|ee)py
 
 # Generate the new <dynamic_commands/> node
 COMMANDS_TEMPLATE = <<-HTML
 <dynamic_commands><% @commands.each do |command| %>
-  <jscommand name="<%= command.name %>" count="1" ><shortcut text="<%= command.modifier %> <%= command.key %>" /></jscommand><% end %>
-</dynamic_commands>
+\t\t<jscommand name="<%= command.name %>" count="1" >
+\t\t\t<shortcut text="<%= command.modifier %> <%= command.key %>" />
+\t\t</jscommand><% end %>
+\t</dynamic_commands>
 HTML
 
 MODIFIERS = {
   :CTRL => 8,
-  :ALT => 4, # Wild guess
+  :COMMAND => 4,
   :SHIFT => 2,
   :ALT => 1
 }
@@ -107,12 +109,15 @@ Dir["Commands/**/**.jsf"].each do |f|
   end
 end
 new_commands = ERB.new(COMMANDS_TEMPLATE).result(binding)
+p new_commands
 
 Dir["#{SOURCE_DIR}/*.xml"].each do |f|
+  cp f, "#{TARGET_DIR}/"
   file_name = File.basename(f,".xml")
   puts "Generating #{file_name} + Extras"
   file_contents = File.read(f)
   open("#{TARGET_DIR}/#{file_name} + Extras.xml","w") do |new_file|
-    new_file << file_contents.gsub(line_regexp,new_commands)
+    p file_contents.match(LINE_REGEXP)
+    new_file << file_contents.gsub(LINE_REGEXP,new_commands)
   end
 end
