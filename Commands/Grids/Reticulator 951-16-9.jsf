@@ -1,6 +1,8 @@
-// Reticulator 1.5
-// Ale Muñoz <ale@bomberstudios.com>
 // shortcut: CTRL + SHIFT + R
+try {
+  fw.runScript(fw.userJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
+};
 
-fw.runScript(fw.currentScriptDir + "/../bs.js");
 Guides.vertical_grid(951,16,9);

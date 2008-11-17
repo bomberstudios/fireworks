@@ -1,7 +1,8 @@
-// Reticulator 1.6
-// Ale Muñoz <ale@bomberstudios.com>
-
-fw.runScript(fw.currentScriptDir + "/../bs.js");
+try {
+  fw.runScript(fw.userJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
+};
 
 grid_width = prompt("Layout Height",Selection.height());
 number_of_columns = prompt("Number of Rows","16");
