@@ -11,16 +11,18 @@ task :install do
   puts "Installing commands..."
   destinations.each do |dest|
     if File.directory?(dest)
-      %x(rsync -azv 'Commands' 'Common Library' 'en' '#{dest}')
+      %x(rsync -azv 'Commands' 'en' '#{dest}')
     end
   end
 end
 
 desc "Build MXP file with Commands"
 task :commands do
+# TODO: Install on *user* configuration, dammit
+# TODO: Find a way of installing onto 
   MXI = <<-XML
 <?xml version="1.0" encoding="UTF-8"?>
-<macromedia-extension name="Orange Commands" version="1.0" type="command" requires-restart="false">
+<macromedia-extension name="Orange Commands" version="0.9" type="command" requires-restart="true">
   <author name="Ale Muñoz" />
   <products>
     <product name="Fireworks" version="7" primary="true" />
@@ -32,19 +34,18 @@ task :commands do
   </description>
   <ui-access>
     <![CDATA[
-      <%= @documentation %>
+<%= @documentation %>
     ]]>
   </ui-access>
   <files>
-  <% @files.each do |filename| %>
-    <file source="<%= filename %>" destination="$fireworks/Configuration/<%= filename %>" />
-  <% end %>
+<% @files.each do |filename| %>    <file source="<%= filename %>" destination="$fireworks/Configuration/<%= filename %>" />
+<% end %>
   </files>
 </macromedia-extension>
 XML
 
   @documentation = RDiscount.new(File.read("README.markdown")).to_html.gsub(/^\n/,"")
-  @files = Dir["Commands/**/**.jsf","Commands/**/**.js"]
+  @files = Dir["Commands/**/**.jsf","Commands/**/**.js","en/**/**.xml"]
   open("OrangeCommands.mxi","w") do |f|
     f << ERB.new(MXI).result
   end
