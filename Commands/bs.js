@@ -329,6 +329,10 @@ Object.prototype.resize = function(w,h){
     fw.getDocumentDOM().setSelectionBounds({left:this.left,top:this.top,right:(this.left + w),bottom:(this.top + h)},"autoTrimImages transformAttributes");
   }
 }
+Object.prototype.position = function(x,y){
+  this.left = x;
+  this.top = y;
+}
 Object.prototype.is_symbol = function(){
   return (this.__proto__ == Instance);
 }

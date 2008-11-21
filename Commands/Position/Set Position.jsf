@@ -1,0 +1,22 @@
+// Modify object position
+// shortcut: CTRL + P
+try {
+  fw.runScript(fw.userJsCommandsDir + "/bs.js");
+} catch(e) {
+  alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
+};
+
+default_x = fw.selection[0].left;
+default_y = fw.selection[0].top;
+
+var s = prompt("New position:",default_x+","+default_y);
+if (s) {
+  var x = s.split(",")[0];
+  var y = s.split(",")[1];
+
+  Selection.save();
+  Selection.clone().each(function(o) {
+    o.position(eval(x),eval(y));
+  });
+  Selection.restore();
+};

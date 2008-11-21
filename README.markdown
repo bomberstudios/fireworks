@@ -3,19 +3,28 @@
 These are my commands and libraries for Adobe Fireworks.
 
 ## Commands
-Most of my commands are intended to be bound to keyboard shortcuts. You wouldn't believe how much time you can save just by using keys to change an object's size :)
-
-If you want to use my custom keyboard shortcuts, you can use a very-experimental, very-prone-to-fail Rake task by running
-
-    rake shortcuts
-
-It will generate a "Shortcuts.xml" file you can copy to $HOME/Library/Application Support/Adobe/Fireworks CS3/en/Keyboard Shortcuts/ and then choose in Fireworks by using the **Fireworks » Keyboard Shortcuts** menu.
 
 ### Alpha
-A collection of commands to change an object's alpha. They work on the currently selected object(s). I bind them to Control + 1 .. 0
+A collection of commands to change an object's alpha. They work on the currently selected object(s).
+
+#### Shortcuts
+  * &#x2303; + 1 — 10% Alpha
+  * &#x2303; + 2 — 20% Alpha
+  * &#x2303; + 3 — 30% Alpha
+  * &#x2303; + 4 — 40% Alpha
+  * &#x2303; + 5 — 50% Alpha
+  * &#x2303; + 6 — 60% Alpha
+  * &#x2303; + 7 — 70% Alpha
+  * &#x2303; + 8 — 80% Alpha
+  * &#x2303; + 9 — 90% Alpha
+  * &#x2303; + 0 — 100% Alpha
 
 ### Color
-Two commands to change an object's fill and stroke color. I bind them to Control + C (for Fill Color) and Control + Shift + C (for Stroke Color).
+Two commands to change an object's fill and stroke color.
+
+#### Shortcuts
+* &#x2303; + C — Set Fill Color
+* &#x2303; + &#x21E7; + C — Set Stroke Color
 
 ### Effects
 Right now there's just one command: Reflection. It creates a "wet floor" reflection of the currently selected object(s).
@@ -23,14 +32,30 @@ Right now there's just one command: Reflection. It creates a "wet floor" reflect
 ### Export
 A command to export the current page as a PNG in 24 bits.
 
+#### Shortcuts
+* &#x2303; + &#x21E7; + X — Export Current Page as 24 bits PNG
+
 ### Export Settings
 A command to set the export format of all pages as PNG in 24 bits.
 
 ### Grids
 Commands to create grids using guides (aka Reticulator)
 
+#### Shortcuts
+* &#x2303; + &#x21E7; + R — Create 951/16/9 Grid
+
 ### Guides
 Commands to manage guides. The "Around Selection" creates four guides that frame the currently selected object.
+
+#### Shortcuts
+* &#x2303; + &#x21E7; + W — Create Guides Around Selection
+
+
+### Position
+Sets the selection position on stage.
+
+#### Shortcuts
+* &#x2303; + P — Set Position
 
 ### Select
 Just one command that selects all Text objects in the page.
