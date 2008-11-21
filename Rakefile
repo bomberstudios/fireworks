@@ -1,29 +1,28 @@
+# TODO: Build MXP for CS3 and CS4, even if it has to be installed with CS4
+
 require "rubygems"
 require "rake"
 require "rdiscount"
 require "erb"
+
+ORANGE_COMMANDS_VERSION = "0.9.9"
 
 HOME = ENV["HOME"]
 CS3 = HOME + "/Library/Application Support/Adobe/Fireworks CS3/"
 CS4 = HOME + "/Library/Application Support/Adobe/Fireworks CS4/"
 destinations = [CS3,CS4]
 
-desc "Install commands and extensions in Fireworks CS3 and CS4"
-task :install do
-  puts "Installing commands..."
-  destinations.each do |dest|
-    if File.directory?(dest)
-      %x(rsync -azv 'Commands' 'en' '#{dest}')
-    end
-  end
-end
+COMMANDS_TEMPLATE = <<-EOF
+<dynamic_commands><% @commands.each do |command| %>
+\t\t<jscommand name="<%= command.name %>" count="1" >
+\t\t\t<shortcut text="<%= command.modifier %> <%= command.key %>" />
+\t\t</jscommand><% end %>
+\t</dynamic_commands>
+EOF
 
-desc "Build MXP file with Commands"
-task :commands do
-# TODO: Install on *user* configuration, dammit
-  MXI = <<-XML
+MXI = <<-XML
 <?xml version="1.0" encoding="UTF-8"?>
-<macromedia-extension name="Orange Commands" version="0.9" type="command" requires-restart="true">
+<macromedia-extension name="Orange Commands <%= @version %>" version="<%= ORANGE_COMMANDS_VERSION %>" type="command" requires-restart="true">
   <author name="Ale Muñoz" />
   <products>
     <product name="Fireworks" version="7" primary="true" />
@@ -39,36 +38,52 @@ task :commands do
     ]]>
   </ui-access>
   <file-tokens>
-    <token name="user_folder" definition="$ExtensionSpecificEMStore/../../../../Fireworks CS4" />
+    <token name="user_folder" definition="$ExtensionSpecificEMStore/../../../../Fireworks <%= @version %>/" />
   </file-tokens>
   <files>
-<% @files.each do |filename| %>    <file source="<%= filename %>" destination="$user_folder/<%= filename %>" />
+<% @files.each do |filename| %>    <file source="<%= filename %>" destination="$user_folder/<%= filename.gsub(@version + "/","") %>" />
 <% end %>
   </files>
 </macromedia-extension>
 XML
 
+desc "Install commands and extensions in Fireworks CS3 and CS4"
+task :install do
+  puts "Installing commands..."
+  destinations.each do |dest|
+    if File.directory?(dest)
+      %x(rsync -azv 'Commands' 'en' '#{dest}')
+    end
+  end
+end
+
+desc "Build MXI file with Commands"
+task :commands do
+  def build_mxi version
+    open("OrangeCommands_#{version}.mxi","w") do |f|
+      f << ERB.new(MXI).result
+    end
+  end
   @documentation = RDiscount.new(File.read("README.markdown")).to_html.gsub(/^\n/,"")
-  @files = Dir["Commands/**/**.jsf","Commands/**/**.js","en/**/**.xml"].reject { |o| (o =~ /Development/) }
-  open("OrangeCommands.mxi","w") do |f|
-    f << ERB.new(MXI).result
+  ["CS3","CS4"].each do |version|
+    @version = version
+    @files = Dir["Commands/**/**.jsf","Commands/**/**.js","en/**/#{@version}/**.xml"].reject { |o| (o =~ /Development/) }
+    build_mxi version
   end
 end
 
 desc "Build XML for keyboard shortcuts"
 task :shortcuts do
-  SOURCE_DIR = "/Applications/Adobe Fireworks CS4/Adobe Fireworks CS4.app/Contents/Resources/en.lproj/Keyboard Shortcuts/"
-  TARGET_DIR = "en/Keyboard\ Shortcuts/"
+  xml_source_dirs = [
+    "/Applications/Adobe Fireworks CS4/Adobe Fireworks CS4.app/Contents/Resources/en.lproj/Keyboard Shortcuts/",
+    "/Applications/Adobe Fireworks CS3/Adobe Fireworks CS3.app/Contents/Resources/en.lproj/Keyboard Shortcuts/"
+  ]
+  xml_target_dirs = [
+    "en/Keyboard\ Shortcuts/CS3",
+    "en/Keyboard\ Shortcuts/CS4"
+  ]
   LINE_REGEXP = /<dynamic_commands \/>|<dynamic_commands >(.+)<\/dynamic_commands>/ # cr(ap|ee)py
 
-  # Generate the new <dynamic_commands/> node
-  COMMANDS_TEMPLATE = <<-HTML
-<dynamic_commands><% @commands.each do |command| %>
-\t\t<jscommand name="<%= command.name %>" count="1" >
-\t\t\t<shortcut text="<%= command.modifier %> <%= command.key %>" />
-\t\t</jscommand><% end %>
-\t</dynamic_commands>
-HTML
 
   MODIFIERS = {
     :CTRL => 8,
@@ -140,25 +155,6 @@ HTML
     end
   end
 
-  class Command
-    attr_accessor :name
-    attr_accessor :modifier
-    attr_accessor :key
-
-    def initialize(command_path,shortcut_line)
-      self.name = File.basename(command_path,".jsf")
-      modifier = 0
-      parts = shortcut_line.match(/shortcut: (.*)/)[1].split(" + ")
-      self.key = KEYCODES["k#{parts.pop}".to_sym]
-      parts.each do |item|
-        if MODIFIERS[item.to_sym]
-          modifier += MODIFIERS[item.to_sym]
-        end
-      end
-      self.modifier = modifier
-    end
-  end
-
   @commands = []
 
   Dir["Commands/**/**.jsf"].each do |f|
@@ -171,16 +167,24 @@ HTML
   end
   new_commands = ERB.new(COMMANDS_TEMPLATE).result(binding)
 
-  Dir["#{SOURCE_DIR}/*.xml"].each do |f|
-    cp f, "#{TARGET_DIR}/"
-    file_name = File.basename(f,".xml")
-    puts "Generating #{file_name} + Extras"
-    file_contents = File.read(f)
-    open("#{TARGET_DIR}/#{file_name}.xml","w") do |new_file|
-      new_file << file_contents.gsub(LINE_REGEXP,new_commands)
+  xml_source_dirs.each_with_index do |folder,i|
+    Dir["#{folder}/*.xml"].each do |f|
+      cp f, "#{xml_target_dirs[i]}/"
+      file_name = File.basename(f,".xml")
+      puts "Generating #{file_name} + Extras"
+      file_contents = File.read(f)
+      open("#{xml_target_dirs[i]}/#{file_name}.xml","w") do |new_file|
+        new_file << file_contents.gsub(LINE_REGEXP,new_commands)
+      end
+      mv "#{xml_target_dirs[i]}/#{file_name}.xml", "#{xml_target_dirs[i]}/#{file_name} + Extras.xml"
     end
-    mv "#{TARGET_DIR}/#{file_name}.xml", "#{TARGET_DIR}/#{file_name} + Extras.xml"
   end
 end
 
-task :default => [:shortcuts,:commands]
+desc "Build MXP files"
+task :mxp do
+  %x("/Applications/Adobe Extension Manager CS4/Adobe Extension Manager CS4.app/Contents/MacOS/Adobe Extension Manager CS4" -package mxi="OrangeCommands_CS3.mxi" mxp="OrangeCommands_CS3.mxp")
+  %x("/Applications/Adobe Extension Manager CS4/Adobe Extension Manager CS4.app/Contents/MacOS/Adobe Extension Manager CS4" -package mxi="OrangeCommands_CS4.mxi" mxp="OrangeCommands_CS4.mxp")
+end
+
+task :default => [:shortcuts,:commands,:mxp]
