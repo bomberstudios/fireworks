@@ -1,6 +1,7 @@
 // Exports current page as a 24 bits PNG file,
 // regardless of what the Optimize settings are for that page.
 // Also changes the Optimize settings (I hate the "GIF as default format" :)
+// shortcut: CTRL + SHIFT + X
 fw.getDocumentDOM().setExportOptions({
   animAutoCrop:true,
   animAutoDifference:true,
