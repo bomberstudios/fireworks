@@ -12,6 +12,7 @@
 
 var doc = fw.getDocumentDOM();
 
+// Utility methods
 Array.prototype.clone = function(){
   var tmp_array = new Array();
   for(var i = 0; i < this.length; i++){
@@ -358,5 +359,7 @@ Object.prototype.each_in_group = function(callback){
     callback.call(this,this.elements[e]);
   }
 };
-
+Object.prototype.dump = function(){
+  alert(this);
+}
 // TODO: Object.prototype.each
