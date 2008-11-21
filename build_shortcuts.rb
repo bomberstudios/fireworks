@@ -116,8 +116,9 @@ Dir["#{SOURCE_DIR}/*.xml"].each do |f|
   file_name = File.basename(f,".xml")
   puts "Generating #{file_name} + Extras"
   file_contents = File.read(f)
-  open("#{TARGET_DIR}/#{file_name} + Extras.xml","w") do |new_file|
+  open("#{TARGET_DIR}/#{file_name}.xml","w") do |new_file|
     p file_contents.match(LINE_REGEXP)
     new_file << file_contents.gsub(LINE_REGEXP,new_commands)
   end
+  mv "#{TARGET_DIR}/#{file_name}.xml", "#{TARGET_DIR}/#{file_name} + Extras.xml"
 end
