@@ -1,8 +1,6 @@
-// shortcut: CTRL + SHIFT + R
 try {
   fw.runScript(fw.userJsCommandsDir + "/bs.js");
 } catch(e){
   alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
 };
-
-Guides.vertical_grid(951,16,9);
+Guides.vertical_grid(950,12,10);
