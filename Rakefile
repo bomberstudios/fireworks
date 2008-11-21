@@ -40,14 +40,14 @@ task :commands do
     <token name="user_folder" definition="$ExtensionSpecificEMStore/../../../../Fireworks CS4" />
   </file-tokens>
   <files>
-<% @files.each do |filename| %>    <file source="<%= filename %>" destination="$fireworks/Configuration/<%= filename %>" />
+<% @files.each do |filename| %>    <file source="<%= filename %>" destination="$user_folder/<%= filename %>" />
 <% end %>
   </files>
 </macromedia-extension>
 XML
 
   @documentation = RDiscount.new(File.read("README.markdown")).to_html.gsub(/^\n/,"")
-  @files = Dir["Commands/**/**.jsf","Commands/**/**.js","en/**/**.xml"]
+  @files = Dir["Commands/**/**.jsf","Commands/**/**.js","en/**/**.xml"].reject { |o| (o =~ /Development/) }
   open("OrangeCommands.mxi","w") do |f|
     f << ERB.new(MXI).result
   end
