@@ -1,5 +1,7 @@
-require "erb"
+require "rubygems"
+require "rake"
 require "rdiscount"
+require "erb"
 
 HOME = ENV["HOME"]
 CS3 = HOME + "/Library/Application Support/Adobe/Fireworks CS3/"
@@ -55,13 +57,22 @@ end
 
 desc "Build XML for keyboard shortcuts"
 task :shortcuts do
-  # TODO: Complete KEYCODES & MODIFIERS array
+  SOURCE_DIR = "/Applications/Adobe Fireworks CS4/Adobe Fireworks CS4.app/Contents/Resources/en.lproj/Keyboard Shortcuts/"
+  TARGET_DIR = "en/Keyboard\ Shortcuts/"
+  LINE_REGEXP = /<dynamic_commands \/>|<dynamic_commands >(.+)<\/dynamic_commands>/ # cr(ap|ee)py
 
-  OUTPUT = "en/Keyboard Shortcuts/Shortcuts.xml"
+  # Generate the new <dynamic_commands/> node
+  COMMANDS_TEMPLATE = <<-HTML
+<dynamic_commands><% @commands.each do |command| %>
+\t\t<jscommand name="<%= command.name %>" count="1" >
+\t\t\t<shortcut text="<%= command.modifier %> <%= command.key %>" />
+\t\t</jscommand><% end %>
+\t</dynamic_commands>
+HTML
 
   MODIFIERS = {
     :CTRL => 8,
-    :ALT => 4, # Wild guess
+    :COMMAND => 4,
     :SHIFT => 2,
     :ALT => 1
   }
@@ -129,6 +140,25 @@ task :shortcuts do
     end
   end
 
+  class Command
+    attr_accessor :name
+    attr_accessor :modifier
+    attr_accessor :key
+
+    def initialize(command_path,shortcut_line)
+      self.name = File.basename(command_path,".jsf")
+      modifier = 0
+      parts = shortcut_line.match(/shortcut: (.*)/)[1].split(" + ")
+      self.key = KEYCODES["k#{parts.pop}".to_sym]
+      parts.each do |item|
+        if MODIFIERS[item.to_sym]
+          modifier += MODIFIERS[item.to_sym]
+        end
+      end
+      self.modifier = modifier
+    end
+  end
+
   @commands = []
 
   Dir["Commands/**/**.jsf"].each do |f|
@@ -139,10 +169,18 @@ task :shortcuts do
       end
     end
   end
+  new_commands = ERB.new(COMMANDS_TEMPLATE).result(binding)
+  p new_commands
 
-  open(OUTPUT,"w") do |f|
-    f << ERB.new(IO.read("Shortcuts.erb")).result
+  Dir["#{SOURCE_DIR}/*.xml"].each do |f|
+    cp f, "#{TARGET_DIR}/"
+    file_name = File.basename(f,".xml")
+    puts "Generating #{file_name} + Extras"
+    file_contents = File.read(f)
+    open("#{TARGET_DIR}/#{file_name}.xml","w") do |new_file|
+      p file_contents.match(LINE_REGEXP)
+      new_file << file_contents.gsub(LINE_REGEXP,new_commands)
+    end
+    mv "#{TARGET_DIR}/#{file_name}.xml", "#{TARGET_DIR}/#{file_name} + Extras.xml"
   end
-
-  # %x(mate "#{OUTPUT}")
 end
