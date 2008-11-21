@@ -1,4 +1,8 @@
-fw.runScript(fw.currentScriptDir + "/../bs.js");
+try {
+  fw.runScript(fw.userJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
+};
 
 doc = fw.getDocumentDOM();
 start_page = doc.currentPageNum;

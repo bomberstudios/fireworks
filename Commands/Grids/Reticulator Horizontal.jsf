@@ -1,5 +1,3 @@
-// Reticulator 1.6
-// Ale Muñoz <ale@bomberstudios.com>
 try {
   fw.runScript(fw.userJsCommandsDir + "/bs.js");
 } catch(e){
