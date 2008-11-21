@@ -36,6 +36,9 @@ task :commands do
 <%= @documentation %>
     ]]>
   </ui-access>
+  <file-tokens>
+    <token name="user_folder" definition="$ExtensionSpecificEMStore/../../../../Fireworks CS4" />
+  </file-tokens>
   <files>
 <% @files.each do |filename| %>    <file source="<%= filename %>" destination="$fireworks/Configuration/<%= filename %>" />
 <% end %>
