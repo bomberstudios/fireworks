@@ -170,7 +170,6 @@ HTML
     end
   end
   new_commands = ERB.new(COMMANDS_TEMPLATE).result(binding)
-  p new_commands
 
   Dir["#{SOURCE_DIR}/*.xml"].each do |f|
     cp f, "#{TARGET_DIR}/"
@@ -178,7 +177,6 @@ HTML
     puts "Generating #{file_name} + Extras"
     file_contents = File.read(f)
     open("#{TARGET_DIR}/#{file_name}.xml","w") do |new_file|
-      p file_contents.match(LINE_REGEXP)
       new_file << file_contents.gsub(LINE_REGEXP,new_commands)
     end
     mv "#{TARGET_DIR}/#{file_name}.xml", "#{TARGET_DIR}/#{file_name} + Extras.xml"
