@@ -182,3 +182,5 @@ HTML
     mv "#{TARGET_DIR}/#{file_name}.xml", "#{TARGET_DIR}/#{file_name} + Extras.xml"
   end
 end
+
+task :default => [:shortcuts,:commands]
