@@ -1,0 +1,2 @@
+var code = prompt("Run code...");
+if(code) eval(code);
