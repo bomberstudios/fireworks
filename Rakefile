@@ -205,4 +205,10 @@ task :mxp do
   %x("/Applications/Adobe Extension Manager CS4/Adobe Extension Manager CS4.app/Contents/MacOS/Adobe Extension Manager CS4" -package mxi="OrangeCommands_CS4.mxi" mxp="OrangeCommands_CS4.mxp")
 end
 
+task :platypus => [:shortcuts, :commands] do
+  %x(rm -Rf OrangeCommands-#{ORANGE_COMMANDS_VERSION}.app)
+  %x(platypus -P ./OrangeCommands.platypus ./OrangeCommands-#{ORANGE_COMMANDS_VERSION}.app)
+  %x(open OrangeCommands-#{ORANGE_COMMANDS_VERSION}.app)
+end
+
 task :default => [:shortcuts,:commands,:mxp]
