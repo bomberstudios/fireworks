@@ -1,0 +1,1 @@
+alert(fw.selection[0].__proto__);
