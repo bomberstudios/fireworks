@@ -84,7 +84,6 @@ task :shortcuts do
   ]
   LINE_REGEXP = /<dynamic_commands \/>|<dynamic_commands >(.+)<\/dynamic_commands>/ # cr(ap|ee)py
 
-
   MODIFIERS = {
     :CTRL => 8,
     :COMMAND => 4,
@@ -166,6 +165,12 @@ task :shortcuts do
     end
   end
   new_commands = ERB.new(COMMANDS_TEMPLATE).result(binding)
+
+  xml_target_dirs.each do |dir|
+    if !File.exist? dir
+      mkdir dir
+    end
+  end
 
   xml_source_dirs.each_with_index do |folder,i|
     Dir["#{folder}/*.xml"].each do |f|
