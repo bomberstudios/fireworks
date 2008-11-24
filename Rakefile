@@ -74,14 +74,27 @@ end
 
 desc "Build XML for keyboard shortcuts"
 task :shortcuts do
-  xml_source_dirs = [
-    "/Applications/Adobe Fireworks CS4/Adobe Fireworks CS4.app/Contents/Resources/en.lproj/Keyboard Shortcuts/",
-    "/Applications/Adobe Fireworks CS3/Adobe Fireworks CS3.app/Contents/Resources/en.lproj/Keyboard Shortcuts/"
-  ]
-  xml_target_dirs = [
-    "en/Keyboard\ Shortcuts/CS3",
-    "en/Keyboard\ Shortcuts/CS4"
-  ]
+
+  running_folder = %x(pwd).chomp
+  if (running_folder == "#{HOME}/Library/Application Support/Adobe/Fireworks CS3" || running_folder == "#{HOME}/Library/Application Support/Adobe/Fireworks CS4")
+    version = running_folder.match(/CS(\d)/)[0]
+    xml_source_dirs = [
+      "/Applications/Adobe Fireworks #{version}/Adobe Fireworks #{version}.app/Contents/Resources/en.lproj/Keyboard Shortcuts/"
+    ]
+    xml_target_dirs = [
+      "en/Keyboard\ Shortcuts"
+    ]
+  else
+    xml_source_dirs = [
+      "/Applications/Adobe Fireworks CS4/Adobe Fireworks CS4.app/Contents/Resources/en.lproj/Keyboard Shortcuts/",
+      "/Applications/Adobe Fireworks CS3/Adobe Fireworks CS3.app/Contents/Resources/en.lproj/Keyboard Shortcuts/"
+    ]
+    xml_target_dirs = [
+      "en/Keyboard\ Shortcuts/CS3",
+      "en/Keyboard\ Shortcuts/CS4"
+    ]
+  end
+
   LINE_REGEXP = /<dynamic_commands \/>|<dynamic_commands >(.+)<\/dynamic_commands>/ # cr(ap|ee)py
 
   MODIFIERS = {
