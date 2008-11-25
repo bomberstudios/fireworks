@@ -16,7 +16,7 @@
 	<key>Creator</key>
 	<string>Platypus-4.0</string>
 	<key>CustomIconPath</key>
-	<string>/usr/local/share/platypus/PlatypusDefault.icns</string>
+	<string>OrangeCommands.icns</string>
 	<key>Destination</key>
 	<string>/Users/ale/Desktop/OrangeCommands.app</string>
 	<key>Droppable</key>
@@ -34,7 +34,7 @@
 		<string>fold</string>
 	</array>
 	<key>HasCustomIcon</key>
-	<false/>
+	<true/>
 	<key>Icon</key>
 	<data>
 	TU0AKgABAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
