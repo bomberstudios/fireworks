@@ -1,0 +1,10 @@
+// shortcut: CTRL + ALT + C
+
+try {
+  fw.runScript(fw.userJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
+};
+
+choice = fw.popupColorPickerOverMouse("#00000000", true, false);
+doc.setDocumentCanvasColor(choice);
