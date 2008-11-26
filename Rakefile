@@ -5,7 +5,7 @@ require "rake"
 require "rdiscount"
 require "erb"
 
-ORANGE_COMMANDS_VERSION = "0.9.9"
+ORANGE_COMMANDS_VERSION = "1.0.0-alpha"
 
 HOME = ENV["HOME"]
 CS3 = HOME + "/Library/Application Support/Adobe/Fireworks CS3/"
