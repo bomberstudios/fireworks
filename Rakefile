@@ -26,7 +26,7 @@ MXI = <<-XML
 <macromedia-extension name="Orange Commands <%= @version %>" version="<%= ORANGE_COMMANDS_VERSION %>" type="command" requires-restart="true">
   <author name="Ale Muñoz" />
   <products>
-    <product name="Fireworks" version="7" primary="true" />
+    <product name="Fireworks" version="8" primary="true" />
   </products>
   <description>
     <![CDATA[
@@ -39,15 +39,18 @@ MXI = <<-XML
     ]]>
   </ui-access>
   <files>
-<% @files.each do |filename| %>    <file source="<%= filename %>" destination="$fireworks/<%= filename %>" />
+<% @files.each do |filename| %>    <file source="<%= filename %>" destination="$fireworks/Configuration/<%= filename %>" />
 <% end %>
   </files>
 </macromedia-extension>
 XML
 
 desc "Build MXI file with Commands"
-task :mxi do
-  @documentation = RDiscount.new(File.read("README.markdown")).to_html.gsub(/^\n/,"")
+task :mxi => [:clean] do
+  # CS3 Extension Manager does not use HTML
+  # @documentation = File.read("README.markdown")
+  @documentation = RDiscount.new(File.read("README.markdown")).to_html.gsub(/<h(\d+)>/,"<b>").gsub(/<\/h(\d+)>/,"</b>")
+  # @documentation = RDiscount.new(File.read("README.markdown")).to_html.gsub(/^\n/,"").gsub(/<h(\d+)>/,"<b>").gsub(/<\/h(\d+)>/,"</b>")
   @files = Dir["Commands/**/**.jsf","Commands/**/**.js"].reject { |o| (o =~ /Development/) }
   open("OrangeCommands_#{ORANGE_COMMANDS_VERSION}.mxi","w") do |f|
     f << ERB.new(MXI).result
