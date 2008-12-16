@@ -6,7 +6,7 @@ require "rdiscount"
 require "erb"
 require 'fileutils'
 
-ORANGE_COMMANDS_VERSION = "0.9.9"
+ORANGE_COMMANDS_VERSION = "0.9.10"
 
 HOME = ENV["HOME"]
 CS3 = HOME + "/Library/Application Support/Adobe/Fireworks CS3/"
