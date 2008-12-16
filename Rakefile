@@ -4,8 +4,9 @@ require "rubygems"
 require "rake"
 require "rdiscount"
 require "erb"
+require 'fileutils'
 
-ORANGE_COMMANDS_VERSION = "1.0.0-alpha"
+ORANGE_COMMANDS_VERSION = "0.9.9"
 
 HOME = ENV["HOME"]
 CS3 = HOME + "/Library/Application Support/Adobe/Fireworks CS3/"
@@ -37,63 +38,33 @@ MXI = <<-XML
 <%= @documentation %>
     ]]>
   </ui-access>
-  <file-tokens>
-    <token name="user_folder" definition="$ExtensionSpecificEMStore/../../../../Fireworks <%= @version %>/" />
-  </file-tokens>
   <files>
-<% @files.each do |filename| %>    <file source="<%= filename %>" destination="$user_folder/<%= filename.gsub(@version + "/","") %>" />
+<% @files.each do |filename| %>    <file source="<%= filename %>" destination="$fireworks/<%= filename %>" />
 <% end %>
   </files>
 </macromedia-extension>
 XML
 
-desc "Install commands and extensions in Fireworks CS3 and CS4"
-task :install do
-  puts "Installing commands..."
-  destinations.each do |dest|
-    if File.directory?(dest)
-      %x(rsync -azv 'Commands' 'en' '#{dest}')
-    end
-  end
-end
-
 desc "Build MXI file with Commands"
-task :commands do
-  def build_mxi version
-    open("OrangeCommands_#{version}.mxi","w") do |f|
-      f << ERB.new(MXI).result
-    end
-  end
+task :mxi do
   @documentation = RDiscount.new(File.read("README.markdown")).to_html.gsub(/^\n/,"")
-  ["CS3","CS4"].each do |version|
-    @version = version
-    @files = Dir["Commands/**/**.jsf","Commands/**/**.js","en/**/#{@version}/**.xml"].reject { |o| (o =~ /Development/) }
-    build_mxi version
+  @files = Dir["Commands/**/**.jsf","Commands/**/**.js"].reject { |o| (o =~ /Development/) }
+  open("OrangeCommands_#{ORANGE_COMMANDS_VERSION}.mxi","w") do |f|
+    f << ERB.new(MXI).result
   end
 end
 
 desc "Build XML for keyboard shortcuts"
 task :shortcuts do
-
   running_folder = %x(pwd).chomp
-  if (running_folder == "#{HOME}/Library/Application Support/Adobe/Fireworks CS3" || running_folder == "#{HOME}/Library/Application Support/Adobe/Fireworks CS4")
-    version = running_folder.match(/CS(\d)/)[0]
-    xml_source_dirs = [
-      "/Applications/Adobe Fireworks #{version}/Adobe Fireworks #{version}.app/Contents/Resources/en.lproj/Keyboard Shortcuts/"
-    ]
-    xml_target_dirs = [
-      "en/Keyboard\ Shortcuts"
-    ]
-  else
-    xml_source_dirs = [
-      "/Applications/Adobe Fireworks CS4/Adobe Fireworks CS4.app/Contents/Resources/en.lproj/Keyboard Shortcuts/",
-      "/Applications/Adobe Fireworks CS3/Adobe Fireworks CS3.app/Contents/Resources/en.lproj/Keyboard Shortcuts/"
-    ]
-    xml_target_dirs = [
-      "en/Keyboard\ Shortcuts/CS3",
-      "en/Keyboard\ Shortcuts/CS4"
-    ]
-  end
+  xml_source_dirs = [
+    "/Applications/Adobe Fireworks CS3/Adobe Fireworks CS3.app/Contents/Resources/en.lproj/Keyboard Shortcuts/",
+    "/Applications/Adobe Fireworks CS4/Adobe Fireworks CS4.app/Contents/Resources/en.lproj/Keyboard Shortcuts/"
+  ]
+  xml_target_dirs = [
+    "en/Keyboard\ Shortcuts/CS3",
+    "en/Keyboard\ Shortcuts/CS4"
+  ]
 
   LINE_REGEXP = /<dynamic_commands \/>|<dynamic_commands >(.+)<\/dynamic_commands>/ # cr(ap|ee)py
 
@@ -181,7 +152,7 @@ task :shortcuts do
 
   xml_target_dirs.each do |dir|
     if !File.exist? dir
-      mkdir dir
+      FileUtils.mkdir_p dir
     end
   end
 
@@ -201,14 +172,13 @@ end
 
 desc "Build MXP files"
 task :mxp do
-  %x("/Applications/Adobe Extension Manager CS4/Adobe Extension Manager CS4.app/Contents/MacOS/Adobe Extension Manager CS4" -package mxi="OrangeCommands_CS3.mxi" mxp="OrangeCommands_CS3.mxp")
-  %x("/Applications/Adobe Extension Manager CS4/Adobe Extension Manager CS4.app/Contents/MacOS/Adobe Extension Manager CS4" -package mxi="OrangeCommands_CS4.mxi" mxp="OrangeCommands_CS4.mxp")
+  %x(open -a "/Applications/Adobe Extension Manager/Extension Manager.app" OrangeCommands_#{ORANGE_COMMANDS_VERSION}.mxi)
+  %x("/Applications/Adobe Extension Manager CS4/Adobe Extension Manager CS4.app/Contents/MacOS/Adobe Extension Manager CS4" -package mxi="OrangeCommands_#{ORANGE_COMMANDS_VERSION}.mxi" mxp="OrangeCommands_CS4.mxp")
 end
 
-task :platypus => [:shortcuts, :commands] do
-  %x(rm -Rf OrangeCommands-#{ORANGE_COMMANDS_VERSION}.app)
-  %x(platypus -P ./OrangeCommands.platypus ./OrangeCommands-#{ORANGE_COMMANDS_VERSION}.app)
-  %x(open OrangeCommands-#{ORANGE_COMMANDS_VERSION}.app)
+task :clean do
+  FileUtils.rm Dir.glob("*.mxi")
+  FileUtils.rm Dir.glob("*.mxp")
 end
 
-task :default => [:shortcuts,:commands,:mxp]
+task :default => [:clean, :shortcuts,:mxi,:mxp]
