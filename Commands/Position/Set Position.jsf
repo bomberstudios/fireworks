@@ -1,7 +1,7 @@
 // Modify object position
 // shortcut: CTRL + P
 try {
-  fw.runScript(fw.userJsCommandsDir + "/bs.js");
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
 } catch(e) {
   alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
 };
