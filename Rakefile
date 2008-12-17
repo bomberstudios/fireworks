@@ -7,11 +7,7 @@ require "erb"
 require 'fileutils'
 
 ORANGE_COMMANDS_VERSION = "0.9.10"
-
-HOME = ENV["HOME"]
-CS3 = HOME + "/Library/Application Support/Adobe/Fireworks CS3/"
-CS4 = HOME + "/Library/Application Support/Adobe/Fireworks CS4/"
-destinations = [CS3,CS4]
+@versions = ["CS3","CS4"]
 
 COMMANDS_TEMPLATE = <<-EOF
 <dynamic_commands><% @commands.each do |command| %>
@@ -47,13 +43,25 @@ XML
 
 desc "Build MXI file with Commands"
 task :mxi => [:clean] do
-  # CS3 Extension Manager does not use HTML
-  # @documentation = File.read("README.markdown")
-  @documentation = RDiscount.new(File.read("README.markdown")).to_html.gsub(/<h(\d+)>/,"<b>").gsub(/<\/h(\d+)>/,"</b>")
-  # @documentation = RDiscount.new(File.read("README.markdown")).to_html.gsub(/^\n/,"").gsub(/<h(\d+)>/,"<b>").gsub(/<\/h(\d+)>/,"</b>")
   @files = Dir["Commands/**/**.jsf","Commands/**/**.js"].reject { |o| (o =~ /Development/) }
-  open("OrangeCommands_#{ORANGE_COMMANDS_VERSION}.mxi","w") do |f|
-    f << ERB.new(MXI).result
+  @versions.each do |version|
+    case version
+    when "CS3"
+      @documentation = File.read("README.markdown").gsub('&#x2303;','CONTROL').gsub('&#x21E7;','SHIFT').gsub('&#x2325;','ALT').gsub(/^\n/,"\n\n")
+    when 'CS4'
+      @documentation = RDiscount.new(File.read("README.markdown")).to_html.gsub(/<h(\d+)>/,"<b>").gsub(/<\/h(\d+)>/,"</b>")
+    end
+    open("OrangeCommands_#{ORANGE_COMMANDS_VERSION}_#{version}.mxi","w") do |f|
+      f << ERB.new(MXI).result
+    end
+  end
+end
+
+task :pack_xml do
+  @versions.each do |version|
+    %x(cp "en/Keyboard\ Shortcuts/#{version}/"*.xml .)
+    %x(zip -9 keyboard_shortcuts_#{version}.zip *.xml)
+    %x(rm *.xml)
   end
 end
 
@@ -175,13 +183,18 @@ end
 
 desc "Build MXP files"
 task :mxp do
-  %x(open -a "/Applications/Adobe Extension Manager/Extension Manager.app" OrangeCommands_#{ORANGE_COMMANDS_VERSION}.mxi)
-  %x("/Applications/Adobe Extension Manager CS4/Adobe Extension Manager CS4.app/Contents/MacOS/Adobe Extension Manager CS4" -package mxi="OrangeCommands_#{ORANGE_COMMANDS_VERSION}.mxi" mxp="OrangeCommands_CS4.mxp")
+  %x(open -a "/Applications/Adobe Extension Manager/Extension Manager.app" OrangeCommands_#{ORANGE_COMMANDS_VERSION}_CS3.mxi)
+  %x("/Applications/Adobe Extension Manager CS4/Adobe Extension Manager CS4.app/Contents/MacOS/Adobe Extension Manager CS4" -package mxi="OrangeCommands_#{ORANGE_COMMANDS_VERSION}_CS4.mxi" mxp="OrangeCommands_#{ORANGE_COMMANDS_VERSION}_CS4.mxp")
 end
 
 task :clean do
-  FileUtils.rm Dir.glob("*.mxi")
-  FileUtils.rm Dir.glob("*.mxp")
+  FileUtils.rm Dir.glob(["*.mxi","*.mxp","*.zip"])
 end
 
-task :default => [:clean, :shortcuts,:mxi,:mxp]
+task :pack => [ :pack_xml ] do
+  @versions.each do |version|
+    %x(zip -9 OrangeCommands_#{ORANGE_COMMANDS_VERSION}_#{version}.zip OrangeCommands_#{ORANGE_COMMANDS_VERSION}_#{version}.mxp keyboard_shortcuts_#{version}.zip)
+  end
+end
+
+task :default => [:clean, :shortcuts,:mxi,:mxp, :pack]

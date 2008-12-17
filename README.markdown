@@ -25,6 +25,7 @@ Two commands to change an object's fill and stroke color.
 #### Shortcuts
 * &#x2303; + C — Set Fill Color
 * &#x2303; + &#x21E7; + C — Set Stroke Color
+* &#x2303; + &#x2325; + C — Set Canvas Color
 
 ### Effects
 Right now there's just one command: Reflection. It creates a "wet floor" reflection of the currently selected object(s).
