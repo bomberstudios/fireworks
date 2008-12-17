@@ -197,4 +197,10 @@ task :pack => [ :pack_xml ] do
   end
 end
 
-task :default => [:clean, :shortcuts,:mxi,:mxp, :pack]
+task :release => :default do
+  @versions.each do |version|
+    %x(scp OrangeCommands_#{ORANGE_COMMANDS_VERSION}_#{version}.zip sn:sofanaranja.com/dl/orangecommands_#{ORANGE_COMMANDS_VERSION.downcase}_#{version.downcase}.zip)
+  end
+end
+
+task :default => [ :clean, :shortcuts, :mxi, :mxp, :pack ]
