@@ -1,0 +1,20 @@
+// This command only makes sense for CS3, as CS4 lets you specify roundness in pixels
+// shortcut: CTRL + R
+var roundness_in_pixels = prompt("Set rectangle roundness in pixels:",0);
+try {
+  Selection.save();
+  Selection.clone().each(function(e){
+    fw.selection = e;
+    var w = Selection.width();
+    var h = Selection.height();
+    if(h < w){
+      w = h;
+    }
+    var percentage_of_total_width = roundness_in_pixels*100/w;
+    var roundness = percentage_of_total_width*2;
+    fw.getDocumentDOM().setRectRoundness(roundness/100);
+  });
+  Selection.restore();
+} catch (e) {
+  alert(e);
+}

@@ -58,6 +58,12 @@ Sets the selection position on stage.
 #### Shortcuts
 * &#x2303; + P — Set Position
 
+### Properties
+Changes to object properties.
+
+#### Shortcuts
+* &#x2303; + R — Set Rectangle Roundness in Pixels (supports multiple selections)
+
 ### Select
 Just one command that selects all Text objects in the page.
 
