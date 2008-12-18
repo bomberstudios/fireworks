@@ -68,13 +68,25 @@ Changes to object properties.
 Just one command that selects all Text objects in the page.
 
 ### Size
-A collection of commands to resize objects. I bind them to Control + Arrows for 1 pixel increments and Control + Shift + Arrows for 10 pixel increments.
-
-There's also three commands to set the size of the currently selected objects with numbers: **Size**, **Width** and **Height**. I bind them to Control + S, Control + W and Control + W.
+A collection of commands to resize objects.
 
 All Size commands support math operations, so you can quickly make an object 23 pixels wider, or half its height, or...
 
 Bonus points: if the selected object is a Text box, you can use a width of '0' to have it automatically resize to fit the content without wrapping.
+
+**Shortcuts**
+
+- &#x2303; + &#x2192; — Increment width by 1 pixel
+- &#x2303; + &#x21E7; + &#x2192; — Increment width by 10 pixels
+- &#x2303; + &#x2190; — Decrement width by 1 pixel
+- &#x2303; + &#x21E7; + &#x2190; — Decrement width by 10 pixels
+- &#x2303; + &#x2193; — Increment height by 1 pixel
+- &#x2303; + &#x21E7; + &#x2193; — Increment height by 10 pixels
+- &#x2303; + &#x2191; — Decrement height by 1 pixel
+- &#x2303; + &#x21E7; + &#x2191; — Decrement height by 10 pixels
+- &#x2303; + S — Set Size (width,height)
+- &#x2303; + W — Set Width
+- &#x2303; + H — Set Height
 
 
 ## Libraries
