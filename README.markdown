@@ -8,16 +8,16 @@ These are my commands and libraries for Adobe Fireworks.
 A collection of commands to change an object's alpha. They work on the currently selected object(s).
 
 #### Shortcuts
-  * &#x2303; + 1 — 10% Alpha
-  * &#x2303; + 2 — 20% Alpha
-  * &#x2303; + 3 — 30% Alpha
-  * &#x2303; + 4 — 40% Alpha
-  * &#x2303; + 5 — 50% Alpha
-  * &#x2303; + 6 — 60% Alpha
-  * &#x2303; + 7 — 70% Alpha
-  * &#x2303; + 8 — 80% Alpha
-  * &#x2303; + 9 — 90% Alpha
-  * &#x2303; + 0 — 100% Alpha
+* &#x2303; + 1 — 10% Alpha
+* &#x2303; + 2 — 20% Alpha
+* &#x2303; + 3 — 30% Alpha
+* &#x2303; + 4 — 40% Alpha
+* &#x2303; + 5 — 50% Alpha
+* &#x2303; + 6 — 60% Alpha
+* &#x2303; + 7 — 70% Alpha
+* &#x2303; + 8 — 80% Alpha
+* &#x2303; + 9 — 90% Alpha
+* &#x2303; + 0 — 100% Alpha
 
 ### Color
 Two commands to change an object's fill and stroke color.
