@@ -2,6 +2,12 @@
 // shortcut: CTRL + R
 var roundness_in_pixels = prompt("Set rectangle roundness in pixels:",0);
 try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
+};
+
+try {
   Selection.save();
   Selection.clone().each(function(e){
     fw.selection = e;
