@@ -1,5 +1,3 @@
-# TODO: Build MXP for CS3 and CS4, even if it has to be installed with CS4
-
 require "rubygems"
 require "rake"
 require "rdiscount"
