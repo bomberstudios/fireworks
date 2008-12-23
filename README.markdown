@@ -1,73 +1,85 @@
-# Fireworks
+# Adobe Fireworks Orange Commands
 
-These are my commands and libraries for Adobe Fireworks.
+Orange Commands is a collection of scripts for Adobe Fireworks CS3 and CS4 that make the life of a web designer easier (or at least allow him/her to work faster :)
 
-## Commands
-
-### Alpha
+## Alpha
 A collection of commands to change an object's alpha. They work on the currently selected object(s).
 
-#### Shortcuts
-* &#x2303; + 1 — 10% Alpha
-* &#x2303; + 2 — 20% Alpha
-* &#x2303; + 3 — 30% Alpha
-* &#x2303; + 4 — 40% Alpha
-* &#x2303; + 5 — 50% Alpha
-* &#x2303; + 6 — 60% Alpha
-* &#x2303; + 7 — 70% Alpha
-* &#x2303; + 8 — 80% Alpha
-* &#x2303; + 9 — 90% Alpha
-* &#x2303; + 0 — 100% Alpha
+**Shortcuts**
 
-### Color
-Two commands to change an object's fill and stroke color.
+- &#x2303; + 1 — 10% Alpha
+- &#x2303; + 2 — 20% Alpha
+- &#x2303; + 3 — 30% Alpha
+- &#x2303; + 4 — 40% Alpha
+- &#x2303; + 5 — 50% Alpha
+- &#x2303; + 6 — 60% Alpha
+- &#x2303; + 7 — 70% Alpha
+- &#x2303; + 8 — 80% Alpha
+- &#x2303; + 9 — 90% Alpha
+- &#x2303; + 0 — 100% Alpha
 
-#### Shortcuts
-* &#x2303; + C — Set Fill Color
-* &#x2303; + &#x21E7; + C — Set Stroke Color
-* &#x2303; + &#x2325; + C — Set Canvas Color
 
-### Effects
+## Color
+Commands to change an object's fill and stroke color.
+
+**Shortcuts**
+
+- &#x2303; + C — Set Fill Color
+- &#x2303; + &#x21E7; + C — Set Stroke Color
+- &#x2303; + &#x2325; + C — Set Canvas Color
+
+
+## Effects
 Right now there's just one command: Reflection. It creates a "wet floor" reflection of the currently selected object(s).
 
-### Export
-A command to export the current page as a PNG in 24 bits.
 
-#### Shortcuts
-* &#x2303; + &#x21E7; + X — Export Current Page as 24 bits PNG
+## Export
+A command to export the current page as a PNG in 24 bits (which is what you want to use when sending your designs to a client)
 
-### Export Settings
-A command to set the export format of all pages as PNG in 24 bits.
+**Shortcuts**
 
-### Grids
+- &#x2303; + &#x21E7; + X — Export Current Page as 24 bits PNG
+
+## Export Settings
+A command to set the export format of all pages as PNG in 24 bits (something that is currently *so* time consuming and convoluted that it makes you want to cry)
+
+## Grids
 Commands to create grids using guides (aka Reticulator)
 
-#### Shortcuts
-* &#x2303; + &#x21E7; + R — Create 951/16/9 Grid
+**Shortcuts**
 
-### Guides
+- &#x2303; + &#x21E7; + R — Create 951/16/9 Grid
+
+## Guides
 Commands to manage guides. The "Around Selection" creates four guides that frame the currently selected object.
 
-#### Shortcuts
-* &#x2303; + &#x21E7; + W — Create Guides Around Selection
+**Shortcuts**
+
+- &#x2303; + &#x21E7; + W — Create Guides Around Selection
 
 
-### Position
+## Position
 Sets the selection position on stage.
 
-#### Shortcuts
-* &#x2303; + P — Set Position
+**Shortcuts**
 
-### Properties
+- &#x2303; + P — Set Position
+
+  It asks for the new position in x,y coordinates.
+
+
+## Properties
 Changes to object properties.
 
-#### Shortcuts
-* &#x2303; + R — Set Rectangle Roundness in Pixels (supports multiple selections)
+**Shortcuts**
 
-### Select
-Just one command that selects all Text objects in the page.
+- &#x2303; + R — Set Rectangle Roundness in Pixels (supports multiple selections)
 
-### Size
+
+## Select
+Just one command that selects all Text objects in the page. It selects objects inside groups, so you can use it to change the font on *every* text box on a page.
+
+## Size
 A collection of commands to resize objects.
 
 All Size commands support math operations, so you can quickly make an object 23 pixels wider, or half its height, or...
@@ -87,8 +99,3 @@ Bonus points: if the selected object is a Text box, you can use a width of '0' t
 - &#x2303; + S — Set Size (width,height)
 - &#x2303; + W — Set Width
 - &#x2303; + H — Set Height
-
-
-## Libraries
-
-TBD
