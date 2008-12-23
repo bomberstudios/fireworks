@@ -19,6 +19,8 @@ Orange Commands is a collection of scripts for Adobe Fireworks CS3 and CS4 that 
 
     depending on your version of Fireworks.
 - Change the keyboard shortcuts in Fireworks in the "Fireworks » Keyboard Shortcuts..." menu, and pick one of the '+ Extras' sets.
+- Restart Fireworks
+- Enjoy!
 
 
 ## Alpha
