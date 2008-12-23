@@ -197,7 +197,7 @@ task :pack do
   end
 end
 
-task :release do
+task :release => :default do
   @versions.each do |version|
     %x(scp OrangeCommands_#{ORANGE_COMMANDS_VERSION}_#{version}.zip sn:sofanaranja.com/dl/orangecommands_#{ORANGE_COMMANDS_VERSION.downcase}_#{version.downcase}.zip)
     %x(echo "http://sofanaranja.com/dl/orangecommands_#{ORANGE_COMMANDS_VERSION.downcase}_#{version.downcase}.zip"|pbcopy)
