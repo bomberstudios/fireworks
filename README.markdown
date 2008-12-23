@@ -2,6 +2,25 @@
 
 Orange Commands is a collection of scripts for Adobe Fireworks CS3 and CS4 that make the life of a web designer easier (or at least allow him/her to work faster :)
 
+## Installation
+
+- Download the ZIP file for Orange Commands:
+  - [Orange Commands for CS3](http://sofanaranja.com/dl/orangecommands_1.0.3_cs3.zip)
+  - [Orange Commands for CS4](http://sofanaranja.com/dl/orangecommands_1.0.3_cs4.zip)
+- Expand the ZIP.
+- Double click the MXP file to install the commands.
+- To install the custom keyboard shortcuts, copy the XML files to:
+
+        /Users/you/Library/Application Support/Adobe/Fireworks CS3/yourlanguage/Keyboard Shortcuts/
+
+    or
+
+        /Users/you/Library/Application Support/Adobe/Fireworks CS4/yourlanguage/Keyboard Shortcuts/
+
+    depending on your version of Fireworks.
+- Change the keyboard shortcuts in Fireworks in the "Fireworks » Keyboard Shortcuts..." menu, and pick one of the '+ Extras' sets.
+
+
 ## Alpha
 A collection of commands to change an object's alpha. They work on the currently selected object(s).
 

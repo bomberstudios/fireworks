@@ -55,13 +55,13 @@ task :mxi => [:clean] do
   end
 end
 
-task :pack_xml do
-  @versions.each do |version|
-    %x(cp "en/Keyboard\ Shortcuts/#{version}/"*.xml .)
-    %x(zip -9 keyboard_shortcuts_#{version}.zip *.xml)
-    %x(rm *.xml)
-  end
-end
+# task :pack_xml do
+#   @versions.each do |version|
+#     %x(cp "en/Keyboard\ Shortcuts/#{version}/"*.xml .)
+#     %x(zip -9 keyboard_shortcuts_#{version}.zip *.xml)
+#     %x(rm *.xml)
+#   end
+# end
 
 desc "Build XML for keyboard shortcuts"
 task :shortcuts do
@@ -189,15 +189,18 @@ task :clean do
   FileUtils.rm Dir.glob(["*.mxi","*.mxp","*.zip"])
 end
 
-task :pack => [ :pack_xml ] do
+task :pack do
   @versions.each do |version|
-    %x(zip -9 OrangeCommands_#{ORANGE_COMMANDS_VERSION}_#{version}.zip OrangeCommands_#{ORANGE_COMMANDS_VERSION}_#{version}.mxp keyboard_shortcuts_#{version}.zip)
+    %x(cp "en/Keyboard\ Shortcuts/#{version}/"*.xml .)
+    %x(zip -9 OrangeCommands_#{ORANGE_COMMANDS_VERSION}_#{version}.zip OrangeCommands_#{ORANGE_COMMANDS_VERSION}_#{version}.mxp *.xml)
+    %x(rm *.xml)
   end
 end
 
-task :release => :default do
+task :release do
   @versions.each do |version|
     %x(scp OrangeCommands_#{ORANGE_COMMANDS_VERSION}_#{version}.zip sn:sofanaranja.com/dl/orangecommands_#{ORANGE_COMMANDS_VERSION.downcase}_#{version.downcase}.zip)
+    %x(echo "http://sofanaranja.com/dl/orangecommands_#{ORANGE_COMMANDS_VERSION.downcase}_#{version.downcase}.zip"|pbcopy)
   end
 end
 
