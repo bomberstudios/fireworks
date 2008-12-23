@@ -16,7 +16,7 @@ if (s) {
 
   Selection.save();
   Selection.clone().each(function(o) {
-    o.position(eval(x),eval(y));
+    o.set_position(eval(x),eval(y));
   });
   Selection.restore();
 };
