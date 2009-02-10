@@ -1,0 +1,2 @@
+// shortcut: CTRL + A
+fw.getDocumentDOM().applyFontMarkup("face", "Arial");
