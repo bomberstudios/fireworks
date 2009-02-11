@@ -198,6 +198,12 @@ task :pack do
   end
 end
 
+task :readme do
+  open("README.markdown","w") do |f|
+    f << ERB.new(File.read("README.erb")).result
+  end
+end
+
 desc "Release ZIP files to the world"
 task :release => :default do
   @versions.each do |version|
