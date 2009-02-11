@@ -4,7 +4,7 @@ require "rdiscount"
 require "erb"
 require 'fileutils'
 
-ORANGE_COMMANDS_VERSION = "1.0.3"
+ORANGE_COMMANDS_VERSION = "1.0.4"
 @versions = ["CS3","CS4"]
 
 COMMANDS_TEMPLATE = <<-EOF
@@ -189,6 +189,7 @@ task :clean do
   FileUtils.rm Dir.glob(["*.mxi","*.mxp","*.zip"])
 end
 
+desc "Pack OrangeCommands as ZIP files"
 task :pack do
   @versions.each do |version|
     %x(cp "en/Keyboard\ Shortcuts/#{version}/"*.xml .)
@@ -197,6 +198,7 @@ task :pack do
   end
 end
 
+desc "Release ZIP files to the world"
 task :release => :default do
   @versions.each do |version|
     %x(scp OrangeCommands_#{ORANGE_COMMANDS_VERSION}_#{version}.zip sn:sofanaranja.com/dl/orangecommands_#{ORANGE_COMMANDS_VERSION.downcase}_#{version.downcase}.zip)
