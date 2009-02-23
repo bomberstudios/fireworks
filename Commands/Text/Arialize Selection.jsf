@@ -1,2 +1,4 @@
 // shortcut: CTRL + A
 fw.getDocumentDOM().applyFontMarkup("face", "Arial");
+fw.getDocumentDOM().setTextAntiAliasing("smooth");
+fw.getDocumentDOM().enableTextAntiAliasing(true);
