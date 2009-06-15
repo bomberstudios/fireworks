@@ -21,7 +21,7 @@ Selection.each( function(el) {
   if (el.is_text()) {
     text_objects.push(el);
   }
-  el.each_in_group(function(i) {
+  el.each(function(i) {
     if(i.is_text()) {
       text_objects.push(i);
     }

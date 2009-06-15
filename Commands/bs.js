@@ -19,13 +19,52 @@ Array.prototype.clone = function(){
     tmp_array.push(this[i]);
   }
   return tmp_array;
-}
+};
 Array.prototype.each = function(callback){
   for (var s=0; s < this.length; s++){
     var el = this[s];
-    callback.call(this,el);
+    if (el.is_group()) {
+      for (var e=0; e < el.elements.length; e++){
+        if (el.elements[e].is_group()) {
+          el.elements[e].each(callback);
+        }
+        callback.call(this,el.elements[e]);
+      }
+    } else {
+      callback.call(this,el);
+    }
   };
 };
+Element.is_group = function(){
+  if (this.elements) { return true; }
+  return false;
+};
+Element.resize = function(w,h){
+  //if (this.__proto__ == Instance) {
+    // FIXME: Object is a symbol, and they sometimes get destroyed when resized below its minimum size
+  //};
+  if(isNaN(w) || isNaN(h)) return;
+  fw.selection = this;
+  fw.getDocumentDOM().setSelectionBounds({left:this.left,top:this.top,right:(this.left + w),bottom:(this.top + h)},"autoTrimImages transformAttributes");
+};
+Text.resize = function(w,h) {
+  if (w){
+    this.autoExpand = false;
+    this.rawWidth = w - 4; // amazingly stupid bug in Fireworks...
+    this.rawHeight = h;
+  } else this.autoExpand = true;
+};
+Element.set_position = function(x,y){
+  this.left = Math.round(x);
+  this.top = Math.round(y);
+};
+Element.is_symbol = function(){
+  return (this.__proto__ == Instance);
+};
+Element.is_text = function(){
+  return (this.__proto__ == Text.prototype);
+};
+
 
 User = {
   getLanguage: function(){
@@ -315,46 +354,3 @@ File = {
     return false;
   }
 };
-
-// RectanglePrimitive, Path, Image, Instance, Group
-Element.prototype.resize = function(w,h){
-  if (this.__proto__ == Instance) {
-    // FIXME: Object is a symbol, and they sometimes get destroyed when resized below its minimum size
-  };
-  if(isNaN(w) || isNaN(h)) return;
-  fw.selection = this;
-  fw.getDocumentDOM().setSelectionBounds({left:this.left,top:this.top,right:(this.left + w),bottom:(this.top + h)},"autoTrimImages transformAttributes");
-};
-Text.prototype.resize = function(w,h) {
-  if (w){
-    this.autoExpand = false;
-    this.rawWidth = w - 4; // amazingly stupid bug in Fireworks...
-    this.rawHeight = h;
-  } else this.autoExpand = true;
-};
-
-Object.prototype.set_position = function(x,y){
-  this.left = Math.round(x);
-  this.top = Math.round(y);
-};
-Object.prototype.is_symbol = function(){
-  return (this.__proto__ == Instance);
-};
-Object.prototype.is_text = function(){
-  return (this.__proto__ == Text.prototype);
-};
-Object.prototype.is_group = function(){
-  if (this.elements) { return true; }
-  return false;
-};
-Object.prototype.each_in_group = function(callback){
-  if (!this.is_group()) { return; }
-  for (var e=0; e < this.elements.length; e++){
-    if (this.elements[e].is_group()) {
-      this.elements[e].each_in_group(callback);
-    }
-    callback.call(this,this.elements[e]);
-  }
-};
-
-// TODO: Object.prototype.each
