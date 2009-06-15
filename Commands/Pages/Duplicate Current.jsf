@@ -1,2 +1,3 @@
+// shortcut: CTRL + SHIFT + D
 doc = fw.getDocumentDOM();
 doc.duplicatePage(doc.currentPageNum);
