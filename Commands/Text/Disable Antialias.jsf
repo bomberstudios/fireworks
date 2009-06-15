@@ -12,7 +12,7 @@ for(var i=0; i<doc.pagesCount; i++){
   doc.changeCurrentPage(i);
   doc.selectAll();
   sel = fw.selection;
-  sel.each_in_selection( function(el) {
+  Selection.each( function(el) {
     if (el.is_text()) {
       el.antiAliased = false;
     }

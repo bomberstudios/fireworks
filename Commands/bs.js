@@ -24,8 +24,8 @@ Array.prototype.each = function(callback){
   for (var s=0; s < this.length; s++){
     var el = this[s];
     callback.call(this,el);
-  }
-}
+  };
+};
 
 User = {
   getLanguage: function(){
@@ -124,10 +124,11 @@ Guides = {
 
     // Check if there's an object selected, and use its position as the starting position
     sel = doc.getSelectionBounds();
+    var start_position;
     if(sel){
-      var start_position = Math.floor(sel.left);
+      start_position = Math.floor(sel.left);
     } else {
-      var start_position = 0;
+      start_position = 0;
     }
     
     var guide_position = start_position;
@@ -157,10 +158,11 @@ Guides = {
     doc = fw.getDocumentDOM();
     // Check if there's an object selected, and use its position as the starting position
     sel = doc.getSelectionBounds();
+    var start_position;
     if(sel){
-      var start_position = sel.top;
+      start_position = sel.top;
     } else {
-      var start_position = 0;
+      start_position = 0;
     }
     var guide_position = start_position;
 
@@ -218,7 +220,7 @@ Selection = {
     for (var s=0; s < fw.selection.length; s++){
       var el = fw.selection[s];
       if (el.is_group()) {
-        el.each_in_group(function(e) { callback.call(this,e); })
+        el.each_in_group(function(e) { callback.call(this,e); });
       } else {
         callback.call(this,el);
       }
@@ -314,42 +316,37 @@ File = {
   }
 };
 
-Object.prototype.resize = function(w,h){
+// RectanglePrimitive, Path, Image, Instance, Group
+Element.prototype.resize = function(w,h){
   if (this.__proto__ == Instance) {
     // FIXME: Object is a symbol, and they sometimes get destroyed when resized below its minimum size
   };
   if(isNaN(w) || isNaN(h)) return;
-  if (this.__proto__ == Text.prototype) {
-    if (w){
-      this.autoExpand = false;
-      this.rawWidth = w - 4; // amazingly stupid bug in Fireworks...
-      this.rawHeight = h;
-    } else this.autoExpand = true;
-  } else {
-    fw.selection = this;
-    fw.getDocumentDOM().setSelectionBounds({left:this.left,top:this.top,right:(this.left + w),bottom:(this.top + h)},"autoTrimImages transformAttributes");
-  }
-}
+  fw.selection = this;
+  fw.getDocumentDOM().setSelectionBounds({left:this.left,top:this.top,right:(this.left + w),bottom:(this.top + h)},"autoTrimImages transformAttributes");
+};
+Text.prototype.resize = function(w,h) {
+  if (w){
+    this.autoExpand = false;
+    this.rawWidth = w - 4; // amazingly stupid bug in Fireworks...
+    this.rawHeight = h;
+  } else this.autoExpand = true;
+};
+
 Object.prototype.set_position = function(x,y){
-  this.left = x;
-  this.top = y;
-}
+  this.left = Math.round(x);
+  this.top = Math.round(y);
+};
 Object.prototype.is_symbol = function(){
   return (this.__proto__ == Instance);
-}
+};
 Object.prototype.is_text = function(){
   return (this.__proto__ == Text.prototype);
-}
+};
 Object.prototype.is_group = function(){
   if (this.elements) { return true; }
   return false;
 };
-Object.prototype.each_in_selection = function(callback){
-  for (var s=0; s < this.length; s++){
-    var el = this[s];
-    callback.call(this,el);
-  }
-}
 Object.prototype.each_in_group = function(callback){
   if (!this.is_group()) { return; }
   for (var e=0; e < this.elements.length; e++){
@@ -359,7 +356,5 @@ Object.prototype.each_in_group = function(callback){
     callback.call(this,this.elements[e]);
   }
 };
-Object.prototype.dump = function(){
-  alert(this);
-}
+
 // TODO: Object.prototype.each

@@ -17,7 +17,7 @@ sel = fw.selection;
 
 var text_objects = new Array();
 
-sel.each_in_selection( function(el) {
+Selection.each( function(el) {
   if (el.is_text()) {
     text_objects.push(el);
   }
