@@ -16,6 +16,8 @@ try {
 choice = fw.popupColorPickerOverMouse("#000000", true, false);
 
 Selection.each(function(sel) {
+  // make the object's fill a solid color
+  sel.pathAttributes.fill.category = 'fc_Solid';
   switch (choice) {
     case "#ffffff00":
       fw.getDocumentDOM().setFillNColor(null, "#ffffff00");
