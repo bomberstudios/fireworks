@@ -47,7 +47,7 @@ Element.resize = function(w,h){
   fw.selection = this;
   fw.getDocumentDOM().setSelectionBounds({left:this.left,top:this.top,right:(this.left + w),bottom:(this.top + h)},"autoTrimImages transformAttributes");
 };
-Text.resize = function(w,h) {
+Text.prototype.resize = function(w,h) {
   if (w){
     this.autoExpand = false;
     this.rawWidth = w - 4; // amazingly stupid bug in Fireworks...
