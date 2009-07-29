@@ -1,12 +1,12 @@
-# Adobe Fireworks Orange Commands v1.1
+# Adobe Fireworks Orange Commands v1.2.1
 
 Orange Commands is a collection of scripts for Adobe Fireworks CS3 and CS4 that make the life of a web designer easier (or at least allow him/her to work faster :)
 
 ## Installation
 
 - Download the ZIP file for Orange Commands:
-  - [Orange Commands for CS3 Mac](http://cloud.github.com/downloads/bomberstudios/fireworks/OrangeCommands_1.1_CS3.zip)
-  - [Orange Commands for CS4 Mac](http://cloud.github.com/downloads/bomberstudios/fireworks/OrangeCommands_1.1_CS4.zip)
+  - [Orange Commands for CS3 Mac](http://cloud.github.com/downloads/bomberstudios/fireworks/OrangeCommands_1.2.1_CS3.zip)
+  - [Orange Commands for CS4 Mac](http://cloud.github.com/downloads/bomberstudios/fireworks/OrangeCommands_1.2.1_CS4.zip)
 - Expand the ZIP.
 - Double click the MXP file to install the commands.
 - To install the custom keyboard shortcuts, copy the XML files to:
@@ -87,6 +87,10 @@ Sets the selection position on stage.
 - &#x2303; + P — Set Position
 
   It asks for the new position in x,y coordinates.
+
+- &#x2303; + F — Fix Position.
+
+  This command tries to fix a nasty bug where Fireworks will draw an item at a subpixel position. The command also tries to fix the width and height of the item.
 
 
 ## Properties
