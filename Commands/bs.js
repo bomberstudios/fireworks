@@ -20,16 +20,21 @@ Array.prototype.clone = function(){
   }
   return tmp_array;
 };
+Array.prototype.each_in_group = function(callback){
+  if (!this.is_group()) { return; }
+  for (var e=0; e < this.elements.length; e++){
+    if (this.elements[e].is_group()) {
+      this.elements[e].each_in_group(callback);
+    } else {
+      callback.call(this,this.elements[e]);
+    }
+  }
+};
 Array.prototype.each = function(callback){
   for (var s=0; s < this.length; s++){
     var el = this[s];
     if (el.is_group()) {
-      for (var e=0; e < el.elements.length; e++){
-        if (el.elements[e].is_group()) {
-          el.elements[e].each(callback);
-        }
-        callback.call(this,el.elements[e]);
-      }
+      el.each_in_group(callback);
     } else {
       callback.call(this,el);
     }
@@ -273,7 +278,7 @@ Selection = {
     for (var s=0; s < fw.selection.length; s++){
       var el = fw.selection[s];
       if (el.is_group()) {
-        el.each_in_group(function(e) { callback.call(this,e); });
+        el.each_in_group(callback);
       } else {
         callback.call(this,el);
       }
