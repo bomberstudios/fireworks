@@ -45,22 +45,31 @@ Element.resize = function(w,h){
   //};
   if(isNaN(w) || isNaN(h)) return;
   fw.selection = this;
-  fw.getDocumentDOM().setSelectionBounds({left:this.left,top:this.top,right:(this.left + w),bottom:(this.top + h)},"autoTrimImages transformAttributes");
+  // Round numbers, because half pixels suck big time
+  var x_pos = Math.round(this.left);
+  var y_pos = Math.round(this.top);
+  w = Math.round(w);
+  h = Math.round(h);
+  fw.getDocumentDOM().setSelectionBounds({left:x_pos,top:y_pos,right:(x_pos + w),bottom:(y_pos + h)},"autoTrimImages transformAttributes");
 };
 Text.prototype.resize = function(w,h) {
   if (w){
+    w = Math.round(w);
+    h = Math.round(h);
     this.autoExpand = false;
     this.rawWidth = w - 4; // amazingly stupid bug in Fireworks...
     this.rawHeight = h;
   } else this.autoExpand = true;
 };
 Element.set_position = function(x,y){
+  x = Math.round(x);
+  y = Math.round(y);
   if (this.is_text()){
-    this.rawLeft = Math.round(x) + 2;
-    this.rawTop = Math.round(y) + 2;
+    this.rawLeft = x + 2;
+    this.rawTop = y + 2;
   } else {
-    this.left = Math.round(x);
-    this.top = Math.round(y);
+    this.left = x;
+    this.top = y;
   }
 };
 Element.is_symbol = function(){
