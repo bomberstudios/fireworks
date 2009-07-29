@@ -9,5 +9,6 @@ try {
 Selection.save();
 Selection.clone().each(function(o) {
   o.set_position(o.left,o.top);
+  o.resize(o.width,o.height);
 });
 Selection.restore();
