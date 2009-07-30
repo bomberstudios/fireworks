@@ -14,9 +14,7 @@ if (s) {
   var x = s.split(",")[0];
   var y = s.split(",")[1];
 
-  Selection.save();
-  Selection.clone().each(function(o) {
+  Selection.each(function(o) {
     o.set_position(eval(x),eval(y));
   });
-  Selection.restore();
 };

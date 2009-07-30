@@ -1,19 +1,10 @@
 // bs.js Library
 // a collection of (hopefully) useful tools for Fireworks
-// 
-// Credits:
-// ----------------------------------------------
-// Selection Save & Restore Functions v1.1
-// ----------------------------------------------
-// Created by Matt Stow & Amos Robinson 2008
-// http://www.mattstow.com
-// http://www.amospheric.com
-// ----------------------------------------------
 
 var doc = fw.getDocumentDOM();
 
 // Utility methods
-Array.prototype.clone = function(){
+Array.clone = function(){
   var tmp_array = new Array();
   for(var i = 0; i < this.length; i++){
     tmp_array.push(this[i]);
@@ -49,6 +40,7 @@ Element.resize = function(w,h){
     // FIXME: Object is a symbol, and they sometimes get destroyed when resized below its minimum size
   //};
   if(isNaN(w) || isNaN(h)) return;
+  Selection.save();
   fw.selection = this;
   // Round numbers, because half pixels suck big time
   var x_pos = Math.round(this.left);
@@ -56,6 +48,7 @@ Element.resize = function(w,h){
   w = Math.round(w);
   h = Math.round(h);
   fw.getDocumentDOM().setSelectionBounds({left:x_pos,top:y_pos,right:(x_pos + w),bottom:(y_pos + h)},"autoTrimImages transformAttributes");
+  Selection.restore();
 };
 Text.prototype.resize = function(w,h) {
   if (w){
@@ -284,48 +277,26 @@ Selection = {
       }
     }
   },
-  clone: function(){
-    var tmp_array = new Array();
-    for(var i = 0; i < fw.selection.length; i++){
-      tmp_array.push(fw.selection[i]);
-    }
-    return tmp_array;
-  },
   save: function(){
-    this.is_sel_id = "is_sel_id_" + (Math.random() * 100000000000000000000);
     if (fw.selection != null && fw.selection.length > 0) {
-      for (var s in fw.selection) {
-        if (fw.selection[s].customData != null) {
-          fw.selection[s].customData[this.is_sel_id] = true;
-        }
-      }
+      Selection.each(function(e){
+        e.customData['is_selected'] = true;
+      })
     }
-  },
-  getObjects: function() {
-    var doc = fw.getDocumentDOM();
-    var objects = new Array();
-    for (var lay in doc.layers) {
-      for (var elem in doc.layers[lay].elems) {
-        if (doc.layers[lay].elems[elem].customData != null && doc.layers[lay].elems[elem].customData[this.is_sel_id]) {
-          objects.push(doc.layers[lay].elems[elem]);
-        }
-      }
-    }
-    return objects;
   },
   restore: function() {
-    fw.selection = this.getObjects();
-    this.destroy();
-  },
-  destroy: function() {
     var doc = fw.getDocumentDOM();
-    for (var lay in doc.layers) {
-      for (var elem in doc.layers[lay].elems) {
-        if (doc.layers[lay].elems[elem].customData != null) {
-          delete doc.layers[lay].elems[elem].customData[this.is_sel_id];
+    var objects = new Array();
+    for (var l=0; l < doc.layers.length; l++) {
+      doc.selectAllOnLayer(l,true);
+      Selection.each(function(e){
+        if(e.customData['is_selected']){
+          objects.push(e);
+          e.customData['is_selected'] = false;
         }
-      }
+      })
     }
+    fw.selection = objects;
   }
 };
 

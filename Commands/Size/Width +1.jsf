@@ -5,8 +5,6 @@ try {
   alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
 };
 
-Selection.save();
-Selection.clone().each(function(o) {
+Selection.each(function(o) {
   o.resize(o.width + 1,o.height);
 });
-Selection.restore();

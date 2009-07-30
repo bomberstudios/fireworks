@@ -19,8 +19,6 @@ var s = prompt("Object Size in Pixels",default_width+","+default_height);
 var w = s.split(",")[0];
 var h = s.split(",")[1];
 
-Selection.save();
-Selection.clone().each(function(o) {
+Selection.each(function(o) {
   o.resize(eval(w),eval(h));
 });
-Selection.restore();

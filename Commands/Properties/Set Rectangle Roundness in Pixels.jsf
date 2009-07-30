@@ -8,8 +8,8 @@ try {
 };
 
 try {
-  Selection.save();
-  Selection.clone().each(function(e){
+  Selection.each(function(e){
+    Selection.save();
     fw.selection = e;
     var w = Selection.width();
     var h = Selection.height();
@@ -19,8 +19,8 @@ try {
     var percentage_of_total_width = roundness_in_pixels*100/w;
     var roundness = percentage_of_total_width*2;
     fw.getDocumentDOM().setRectRoundness(roundness/100);
+    Selection.restore();
   });
-  Selection.restore();
 } catch (e) {
   alert(e);
 }

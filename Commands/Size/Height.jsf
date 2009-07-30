@@ -13,8 +13,7 @@ if (fw.selection.length == 1) {
 }
 
 var h = prompt("Object Height in Pixels",default_height);
-Selection.save();
-Selection.clone().each(function(o) {
+
+Selection.each(function(o) {
   o.resize(o.width,eval(h));
 });
-Selection.restore();
