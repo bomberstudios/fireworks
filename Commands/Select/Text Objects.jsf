@@ -21,11 +21,6 @@ Selection.each( function(el) {
   if (el.is_text()) {
     text_objects.push(el);
   }
-  el.each(function(i) {
-    if(i.is_text()) {
-      text_objects.push(i);
-    }
-  });
 });
 
 if (text_objects.length > 0) {
