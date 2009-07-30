@@ -1,12 +1,12 @@
-# Adobe Fireworks Orange Commands v1.2.2
+# Adobe Fireworks Orange Commands v1.3
 
 Orange Commands is a collection of scripts for Adobe Fireworks CS3 and CS4 that make the life of a web designer easier (or at least allow him/her to work faster :)
 
 ## Installation
 
 - Download the ZIP file for Orange Commands:
-  - [Orange Commands for CS3 Mac](http://cloud.github.com/downloads/bomberstudios/fireworks/OrangeCommands_1.2.2_CS3.zip)
-  - [Orange Commands for CS4 Mac](http://cloud.github.com/downloads/bomberstudios/fireworks/OrangeCommands_1.2.2_CS4.zip)
+  - [Orange Commands for CS3 Mac](http://cloud.github.com/downloads/bomberstudios/fireworks/OrangeCommands_1.3_CS3.zip)
+  - [Orange Commands for CS4 Mac](http://cloud.github.com/downloads/bomberstudios/fireworks/OrangeCommands_1.3_CS4.zip)
 - Expand the ZIP.
 - Double click the MXP file to install the commands.
 - To install the custom keyboard shortcuts, copy the XML files to:
