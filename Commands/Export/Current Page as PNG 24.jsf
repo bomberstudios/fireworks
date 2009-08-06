@@ -47,4 +47,7 @@ fw.getDocumentDOM().setExportOptions({
   xSize:0,
   ySize:0
 });
-fw.exportDocumentAs(null, null, null);
+
+var export_file_name = fw.getDocumentDOM().pageName;
+var export_file_path =  fw.getDocumentPath(null).split('.png')[0] + "_" + export_file_name + ".png";
+fw.exportDocumentAs(null, export_file_path, null);
