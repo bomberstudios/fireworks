@@ -281,9 +281,9 @@ Selection = {
       Selection.each(function(e){
         if(e.customData['is_selected']){
           objects.push(e);
-          e.customData['is_selected'] = false;
         }
-      })
+        e.customData['is_selected'] = false;
+      });
     }
     fw.selection = objects;
   }
