@@ -4,7 +4,7 @@
 var doc = fw.getDocumentDOM();
 
 // Utility methods
-Array.clone = function(){
+FwArray.prototype.clone = function(){
   var tmp_array = new Array();
   for(var i = 0; i < this.length; i++){
     tmp_array.push(this[i]);
