@@ -32,8 +32,7 @@ Array.prototype.each = function(callback){
   };
 };
 Element.is_group = function(){
-  if (this.elements) { return true; }
-  return false;
+  return (this == "[object Group]");
 };
 Element.resize = function(w,h){
   //if (this.__proto__ == Instance) {
