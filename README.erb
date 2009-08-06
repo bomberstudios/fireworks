@@ -78,6 +78,12 @@ Commands to manage guides. The "Around Selection" creates four guides that frame
 
 - &#x2303; + &#x21E7; + W — Create Guides Around Selection
 
+## Pages
+
+- Set Page Name ( Ctrl + Shift + P)
+  
+  Sets the current page name to whatever you write on the prompt window.
+
 
 ## Position
 Sets the selection position on stage.

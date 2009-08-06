@@ -1,0 +1,6 @@
+// shortcut: CTRL + SHIFT + P
+var page_name = prompt("Page Name:",fw.getDocumentDOM().pageName);
+
+if(page_name){
+  fw.getDocumentDOM().setPageName(fw.getDocumentDOM().currentPageNum,page_name);
+}
