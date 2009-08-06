@@ -16,9 +16,11 @@ if (fw.selection.length == 1) {
 }
 
 var s = prompt("Object Size in Pixels",default_width+","+default_height);
-var w = s.split(",")[0];
-var h = s.split(",")[1];
+if ( s ) {
+  var w = s.split(",")[0];
+  var h = s.split(",")[1];
 
-Selection.each(function(o) {
-  o.resize(eval(w),eval(h));
-});
+  Selection.each(function(o) {
+    o.resize(eval(w),eval(h));
+  });
+}
