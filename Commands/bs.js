@@ -12,7 +12,6 @@ FwArray.prototype.clone = function(){
   return tmp_array;
 };
 Element.each_in_group = function(callback){
-  if (!this.is_group()) { return; }
   for (var e=0; e < this.elements.length; e++){
     if (this.elements[e].is_group()) {
       this.elements[e].each_in_group(callback);
