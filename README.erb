@@ -24,52 +24,70 @@ Orange Commands is a collection of scripts for Adobe Fireworks CS3 and CS4 that 
 
 
 ## Alpha
-A collection of commands to change an object's alpha. They work on the currently selected object(s).
 
-**Shortcuts**
+A collection of commands to change an object's alpha. They work on the currently selected object(s). If the selection is a group, the transparency is changed for the whole group.
 
-- &#x2303; + 1 — 10% Alpha
-- &#x2303; + 2 — 20% Alpha
-- &#x2303; + 3 — 30% Alpha
-- &#x2303; + 4 — 40% Alpha
-- &#x2303; + 5 — 50% Alpha
-- &#x2303; + 6 — 60% Alpha
-- &#x2303; + 7 — 70% Alpha
-- &#x2303; + 8 — 80% Alpha
-- &#x2303; + 9 — 90% Alpha
-- &#x2303; + 0 — 100% Alpha
-
+<% (1..10).each do |alpha| %>
+- **Alpha <%= alpha * 10 %>** (Ctrl + <%= alpha < 10 ? alpha : 0 %>)
+  
+  Set the selected objects' alpha to <%= alpha * 10 %>%
+<% end %>
 
 ## Color
-Commands to change an object's fill and stroke color.
 
-**Shortcuts**
+Commands to change an object's fill and stroke color. When pressing the shortcut, a color picker will appear at the mouse pointer's position, allowing you to pick a color quite fast.
 
-- &#x2303; + C — Set Fill Color
-- &#x2303; + &#x21E7; + C — Set Stroke Color
-- &#x2303; + &#x2325; + C — Set Canvas Color
+- **Canvas Color** (Ctrl + Alt + C)
+  
+  Set Canvas Color
+
+- **Fill Color** (Ctrl + C)
+  
+  Set fill color. If the selection is a group, every object inside the group will be filled with the selected color. If the selected object has a gradient fill, it will be replaced with a solid fill.
+
+- **Stroke Color** (Ctrl + Shift + C)
+  
+  Set stroke color.
 
 
 ## Effects
-Right now there's just one command: Reflection. It creates a "wet floor" reflection of the currently selected object(s).
+
+- **Reflection**
+  
+  It creates a "wet floor" reflection of the currently selected object(s). The command asks for the reflection's height.
 
 
 ## Export
-A command to export the current page as a PNG in 24 bits (which is what you want to use when sending your designs to a client)
 
-**Shortcuts**
+- **Current Page as a PNG 24** (Ctrl + Shift + X)
+  
+  Exports the current page as a flattened (non editable) PNG file with a 24 bits color depth. The file is saved in the same folder as the current file, with the page name added to the current file name.
+  
+  I.e: if your file is called CoolDesign.png, and the current page is called 'Home', the command creates a file named CoolDesign_Home.png
 
-- &#x2303; + &#x21E7; + X — Export Current Page as 24 bits PNG
 
 ## Export Settings
-A command to set the export format of all pages as PNG in 24 bits (something that is currently *so* time consuming and convoluted that it makes you want to cry)
+
+- **Set PNG 24 for All Pages**
+
+  A command to set the export format of all pages as PNG in 24 bits (something that is currently *so* time consuming and convoluted that it makes you want to cry)
 
 ## Grids
+
 Commands to create grids using guides (aka Reticulator)
 
-**Shortcuts**
+- **Reticulator**
+  
+  Creates a grid using vertical guides. It asks for the layout width, the number of columns, and the gutter width. If you have a selected object, the command will use its current position as the starting position of the grid, and its width as the default layout width.
 
-- &#x2303; + &#x21E7; + R — Create 951/16/9 Grid
+- **Reticulator 950-12-10**
+  
+  Creates a 950 pixels wide layout, with 12 columns and a 10 px gutter.
+
+- **Reticulator 951-16-9** (Ctrl + Shift + R)
+  
+  Creates a 951 pixels wide layout, with 16 columns and a 9 px gutter.
+
 
 ## Guides
 Commands to manage guides. The "Around Selection" creates four guides that frame the currently selected object.
