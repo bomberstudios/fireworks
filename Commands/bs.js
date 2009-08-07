@@ -4,7 +4,7 @@
 var doc = fw.getDocumentDOM();
 
 // Utility methods
-Array.clone = function(){
+FwArray.prototype.clone = function(){
   var tmp_array = new Array();
   for(var i = 0; i < this.length; i++){
     tmp_array.push(this[i]);
@@ -12,7 +12,6 @@ Array.clone = function(){
   return tmp_array;
 };
 Element.each_in_group = function(callback){
-  if (!this.is_group()) { return; }
   for (var e=0; e < this.elements.length; e++){
     if (this.elements[e].is_group()) {
       this.elements[e].each_in_group(callback);
@@ -21,7 +20,7 @@ Element.each_in_group = function(callback){
     }
   }
 };
-Array.prototype.each = function(callback){
+FwArray.prototype.each = function(callback){
   for (var s=0; s < this.length; s++){
     var el = this[s];
     if (el.is_group()) {
@@ -32,8 +31,7 @@ Array.prototype.each = function(callback){
   };
 };
 Element.is_group = function(){
-  if (this.elements) { return true; }
-  return false;
+  return (this == "[object Group]");
 };
 Element.resize = function(w,h){
   //if (this.__proto__ == Instance) {
@@ -267,21 +265,12 @@ Selection = {
   bottom: function(){
     return Selection.get_bounds().bottom;
   },
-  each: function(callback){
-    for (var s=0; s < fw.selection.length; s++){
-      var el = fw.selection[s];
-      if (el.is_group()) {
-        el.each_in_group(callback);
-      } else {
-        callback.call(this,el);
-      }
-    }
-  },
+  each: function(callback){ fw.selection.each(callback); },
   save: function(){
     if (fw.selection != null && fw.selection.length > 0) {
       Selection.each(function(e){
         e.customData['is_selected'] = true;
-      })
+      });
     }
   },
   restore: function() {
@@ -292,9 +281,9 @@ Selection = {
       Selection.each(function(e){
         if(e.customData['is_selected']){
           objects.push(e);
-          e.customData['is_selected'] = false;
         }
-      })
+        e.customData['is_selected'] = false;
+      });
     }
     fw.selection = objects;
   }
