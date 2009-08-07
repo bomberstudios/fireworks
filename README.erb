@@ -88,71 +88,137 @@ Commands to create grids using guides (aka Reticulator)
   
   Creates a 951 pixels wide layout, with 16 columns and a 9 px gutter.
 
+- **Reticulator Horizontal**
+  
+  Creates a grid using horizontal guides.
+
 
 ## Guides
-Commands to manage guides. The "Around Selection" creates four guides that frame the currently selected object.
 
-**Shortcuts**
+Commands to manage guides.
 
-- &#x2303; + &#x21E7; + W — Create Guides Around Selection
+- **Around Selection** (Ctrl + Shift + W)
+  
+  Creates four guides that frame the currently selected objects.
+
+- **Clear All**
+  
+  Removes all guides from the current page.
+
+- **Clear Horizontal**
+  
+  Removes all horizontal guides from the current page.
+
+- **Clear Vertical**
+  
+  Removes all vertical guides from the current page.
+
+- **Copy from Page**
+  
+  Asks for a page number, and copies the guides from that page to the current one.
+
+- **Copy to Page**
+  
+  Asks for a page number, and copies the guides from the current page to that one.
+
 
 ## Pages
 
-- Set Page Name ( Ctrl + Shift + P)
+- **Duplicate Current** (Ctrl + Shift + D)
   
-  Sets the current page name to whatever you write on the prompt window.
+  Duplicates the current page at the end of the page list.
 
+- **Pages to Frames**
+  
+  Converts pages to frames.
+
+- **Set Page Name** (Ctrl + Shift + P)
+  
+  Asks for a new name for the current page. This command was born out of frustration with the way page names are edited in Fireworks CS3. If your page names have more than 10 characters, it's really hard not to get crazy editing names :)
 
 ## Position
-Sets the selection position on stage.
 
-**Shortcuts**
+- **Fix Position** (Ctrl + F)
 
-- &#x2303; + P — Set Position
+  This command tries to fix a nasty bug where Fireworks will draw an item at a subpixel position. The command also tries to fix the width and height of the item so that they become integer numbers. Why Adobe thought it would be useful to draw using half pixels is beyond me...
+
+- **Set Position** (Ctrl + P)
 
   It asks for the new position in x,y coordinates.
 
-- &#x2303; + F — Fix Position.
-
-  This command tries to fix a nasty bug where Fireworks will draw an item at a subpixel position. The command also tries to fix the width and height of the item.
 
 
 ## Properties
-Changes to object properties.
 
-**Shortcuts**
-
-- &#x2303; + R — Set Rectangle Roundness in Pixels (supports multiple selections)
+- Set Rectangle Roundness in Pixels (Ctrl + R)
+  
+  Sets the selection corner roundness in pixels (something that is not possible in CS3). Useful when you want to set the same roundness in a collection of rectangles with different sizes.
 
 
 ## Select
-Just one command that selects all Text objects in the page. It selects objects inside groups, so you can use it to change the font on *every* text box on a page.
+
+- **Text Objects**
+
+  Selects all Text objects in the page. It selects objects inside groups, so you can use it to change the font on *every* text box on a page.
+
 
 ## Size
+
 A collection of commands to resize objects.
+
+If multiple objects are selected, each one will be transformed independently.
 
 All Size commands support math operations, so you can quickly make an object 23 pixels wider, or half its height, or...
 
 Bonus points: if the selected object is a Text box, you can use a width of '0' to have it automatically resize to fit the content without wrapping.
 
-**Shortcuts**
+- **Height** (Ctrl + H)
+  
+  Sets the height of the selection.
 
-- &#x2303; + &#x2192; — Increment width by 1 pixel
-- &#x2303; + &#x21E7; + &#x2192; — Increment width by 10 pixels
-- &#x2303; + &#x2190; — Decrement width by 1 pixel
-- &#x2303; + &#x21E7; + &#x2190; — Decrement width by 10 pixels
-- &#x2303; + &#x2193; — Increment height by 1 pixel
-- &#x2303; + &#x21E7; + &#x2193; — Increment height by 10 pixels
-- &#x2303; + &#x2191; — Decrement height by 1 pixel
-- &#x2303; + &#x21E7; + &#x2191; — Decrement height by 10 pixels
-- &#x2303; + S — Set Size (width,height)
-- &#x2303; + W — Set Width
-- &#x2303; + H — Set Height
+- **Height + 1** (Ctrl + Arrow Down)
+  
+  Increment selected object's height by 1 pixel.
+
+- **Height + 10** (Ctrl + Shift + Arrow Down)
+  
+  Increment selected object's height by 10 pixels.
+
+- **Height - 1** (Ctrl + Arrow Up)
+  
+  Decrease selected object's height by 1 pixel.
+
+- **Height - 10** (Ctrl + Shift + Arrow Up)
+  
+  Decrease selected object's height by 10 pixels.
+
+- **Set Size** (Ctrl + S)
+  
+  Sets selected object's size. It asks for the width and height in w,h format.
+
+- **Width** (Ctrl + W)
+  
+  Sets the width of the selection.
+
+- **Width + 1** (Ctrl + Arrow Right)
+  
+  Increment selected object's width by 1 pixel.
+
+- **Width + 10** (Ctrl + Shift + Arrow Right)
+  
+  Increment selected object's width by 10 pixels.
+
+- **Width - 1** (Ctrl + Arrow Left)
+  
+  Decrease selected object's width by 1 pixel.
+
+- **Width - 10** (Ctrl + Shift + Arrow Left)
+  
+  Decrease selected object's width by 10 pixels.
 
 
 ## Text
-Text operations
 
-**Shortcuts**
-
-- &#x2303; + A — Arialize selection (sets currently selected text blocks to Arial)
+- **Arialize selection** (Ctrl + A)
+  
+  Sets currently selected text blocks to Arial with 'smooth' antialiasing.

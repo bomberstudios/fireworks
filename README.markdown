@@ -24,117 +24,237 @@ Orange Commands is a collection of scripts for Adobe Fireworks CS3 and CS4 that 
 
 
 ## Alpha
-A collection of commands to change an object's alpha. They work on the currently selected object(s).
 
-**Shortcuts**
+A collection of commands to change an object's alpha. They work on the currently selected object(s). If the selection is a group, the transparency is changed for the whole group.
 
-- &#x2303; + 1 — 10% Alpha
-- &#x2303; + 2 — 20% Alpha
-- &#x2303; + 3 — 30% Alpha
-- &#x2303; + 4 — 40% Alpha
-- &#x2303; + 5 — 50% Alpha
-- &#x2303; + 6 — 60% Alpha
-- &#x2303; + 7 — 70% Alpha
-- &#x2303; + 8 — 80% Alpha
-- &#x2303; + 9 — 90% Alpha
-- &#x2303; + 0 — 100% Alpha
+
+- **Alpha 10** (Ctrl + 1)
+  
+  Set the selected objects' alpha to 10%
+
+- **Alpha 20** (Ctrl + 2)
+  
+  Set the selected objects' alpha to 20%
+
+- **Alpha 30** (Ctrl + 3)
+  
+  Set the selected objects' alpha to 30%
+
+- **Alpha 40** (Ctrl + 4)
+  
+  Set the selected objects' alpha to 40%
+
+- **Alpha 50** (Ctrl + 5)
+  
+  Set the selected objects' alpha to 50%
+
+- **Alpha 60** (Ctrl + 6)
+  
+  Set the selected objects' alpha to 60%
+
+- **Alpha 70** (Ctrl + 7)
+  
+  Set the selected objects' alpha to 70%
+
+- **Alpha 80** (Ctrl + 8)
+  
+  Set the selected objects' alpha to 80%
+
+- **Alpha 90** (Ctrl + 9)
+  
+  Set the selected objects' alpha to 90%
+
+- **Alpha 100** (Ctrl + 0)
+  
+  Set the selected objects' alpha to 100%
 
 
 ## Color
-Commands to change an object's fill and stroke color.
 
-**Shortcuts**
+Commands to change an object's fill and stroke color. When pressing the shortcut, a color picker will appear at the mouse pointer's position, allowing you to pick a color quite fast.
 
-- &#x2303; + C — Set Fill Color
-- &#x2303; + &#x21E7; + C — Set Stroke Color
-- &#x2303; + &#x2325; + C — Set Canvas Color
+- **Canvas Color** (Ctrl + Alt + C)
+  
+  Set Canvas Color
+
+- **Fill Color** (Ctrl + C)
+  
+  Set fill color. If the selection is a group, every object inside the group will be filled with the selected color. If the selected object has a gradient fill, it will be replaced with a solid fill.
+
+- **Stroke Color** (Ctrl + Shift + C)
+  
+  Set stroke color.
 
 
 ## Effects
-Right now there's just one command: Reflection. It creates a "wet floor" reflection of the currently selected object(s).
+
+- **Reflection**
+  
+  It creates a "wet floor" reflection of the currently selected object(s). The command asks for the reflection's height.
 
 
 ## Export
-A command to export the current page as a PNG in 24 bits (which is what you want to use when sending your designs to a client)
 
-**Shortcuts**
+- **Current Page as a PNG 24** (Ctrl + Shift + X)
+  
+  Exports the current page as a flattened (non editable) PNG file with a 24 bits color depth. The file is saved in the same folder as the current file, with the page name added to the current file name.
+  
+  I.e: if your file is called CoolDesign.png, and the current page is called 'Home', the command creates a file named CoolDesign_Home.png
 
-- &#x2303; + &#x21E7; + X — Export Current Page as 24 bits PNG
 
 ## Export Settings
-A command to set the export format of all pages as PNG in 24 bits (something that is currently *so* time consuming and convoluted that it makes you want to cry)
+
+- **Set PNG 24 for All Pages**
+
+  A command to set the export format of all pages as PNG in 24 bits (something that is currently *so* time consuming and convoluted that it makes you want to cry)
 
 ## Grids
+
 Commands to create grids using guides (aka Reticulator)
 
-**Shortcuts**
+- **Reticulator**
+  
+  Creates a grid using vertical guides. It asks for the layout width, the number of columns, and the gutter width. If you have a selected object, the command will use its current position as the starting position of the grid, and its width as the default layout width.
 
-- &#x2303; + &#x21E7; + R — Create 951/16/9 Grid
+- **Reticulator 950-12-10**
+  
+  Creates a 950 pixels wide layout, with 12 columns and a 10 px gutter.
+
+- **Reticulator 951-16-9** (Ctrl + Shift + R)
+  
+  Creates a 951 pixels wide layout, with 16 columns and a 9 px gutter.
+
+- **Reticulator Horizontal**
+  
+  Creates a grid using horizontal guides.
+
 
 ## Guides
-Commands to manage guides. The "Around Selection" creates four guides that frame the currently selected object.
 
-**Shortcuts**
+Commands to manage guides.
 
-- &#x2303; + &#x21E7; + W — Create Guides Around Selection
+- **Around Selection** (Ctrl + Shift + W)
+  
+  Creates four guides that frame the currently selected objects.
+
+- **Clear All**
+  
+  Removes all guides from the current page.
+
+- **Clear Horizontal**
+  
+  Removes all horizontal guides from the current page.
+
+- **Clear Vertical**
+  
+  Removes all vertical guides from the current page.
+
+- **Copy from Page**
+  
+  Asks for a page number, and copies the guides from that page to the current one.
+
+- **Copy to Page**
+  
+  Asks for a page number, and copies the guides from the current page to that one.
+
 
 ## Pages
 
-- Set Page Name ( Ctrl + Shift + P)
+- **Duplicate Current** (Ctrl + Shift + D)
   
-  Sets the current page name to whatever you write on the prompt window.
+  Duplicates the current page at the end of the page list.
 
+- **Pages to Frames**
+  
+  Converts pages to frames.
+
+- **Set Page Name** (Ctrl + Shift + P)
+  
+  Asks for a new name for the current page. This command was born out of frustration with the way page names are edited in Fireworks CS3. If your page names have more than 10 characters, it's really hard not to get crazy editing names :)
 
 ## Position
-Sets the selection position on stage.
 
-**Shortcuts**
+- **Fix Position** (Ctrl + F)
 
-- &#x2303; + P — Set Position
+  This command tries to fix a nasty bug where Fireworks will draw an item at a subpixel position. The command also tries to fix the width and height of the item so that they become integer numbers. Why Adobe thought it would be useful to draw using half pixels is beyond me...
+
+- **Set Position** (Ctrl + P)
 
   It asks for the new position in x,y coordinates.
 
-- &#x2303; + F — Fix Position.
-
-  This command tries to fix a nasty bug where Fireworks will draw an item at a subpixel position. The command also tries to fix the width and height of the item.
 
 
 ## Properties
-Changes to object properties.
 
-**Shortcuts**
-
-- &#x2303; + R — Set Rectangle Roundness in Pixels (supports multiple selections)
+- Set Rectangle Roundness in Pixels (Ctrl + R)
+  
+  Sets the selection corner roundness in pixels (something that is not possible in CS3). Useful when you want to set the same roundness in a collection of rectangles with different sizes.
 
 
 ## Select
-Just one command that selects all Text objects in the page. It selects objects inside groups, so you can use it to change the font on *every* text box on a page.
+
+- **Text Objects**
+
+  Selects all Text objects in the page. It selects objects inside groups, so you can use it to change the font on *every* text box on a page.
+
 
 ## Size
+
 A collection of commands to resize objects.
+
+If multiple objects are selected, each one will be transformed independently.
 
 All Size commands support math operations, so you can quickly make an object 23 pixels wider, or half its height, or...
 
 Bonus points: if the selected object is a Text box, you can use a width of '0' to have it automatically resize to fit the content without wrapping.
 
-**Shortcuts**
+- **Height** (Ctrl + H)
+  
+  Sets the height of the selection.
 
-- &#x2303; + &#x2192; — Increment width by 1 pixel
-- &#x2303; + &#x21E7; + &#x2192; — Increment width by 10 pixels
-- &#x2303; + &#x2190; — Decrement width by 1 pixel
-- &#x2303; + &#x21E7; + &#x2190; — Decrement width by 10 pixels
-- &#x2303; + &#x2193; — Increment height by 1 pixel
-- &#x2303; + &#x21E7; + &#x2193; — Increment height by 10 pixels
-- &#x2303; + &#x2191; — Decrement height by 1 pixel
-- &#x2303; + &#x21E7; + &#x2191; — Decrement height by 10 pixels
-- &#x2303; + S — Set Size (width,height)
-- &#x2303; + W — Set Width
-- &#x2303; + H — Set Height
+- **Height + 1** (Ctrl + Arrow Down)
+  
+  Increment selected object's height by 1 pixel.
+
+- **Height + 10** (Ctrl + Shift + Arrow Down)
+  
+  Increment selected object's height by 10 pixels.
+
+- **Height - 1** (Ctrl + Arrow Up)
+  
+  Decrease selected object's height by 1 pixel.
+
+- **Height - 10** (Ctrl + Shift + Arrow Up)
+  
+  Decrease selected object's height by 10 pixels.
+
+- **Set Size** (Ctrl + S)
+  
+  Sets selected object's size. It asks for the width and height in w,h format.
+
+- **Width** (Ctrl + W)
+  
+  Sets the width of the selection.
+
+- **Width + 1** (Ctrl + Arrow Right)
+  
+  Increment selected object's width by 1 pixel.
+
+- **Width + 10** (Ctrl + Shift + Arrow Right)
+  
+  Increment selected object's width by 10 pixels.
+
+- **Width - 1** (Ctrl + Arrow Left)
+  
+  Decrease selected object's width by 1 pixel.
+
+- **Width - 10** (Ctrl + Shift + Arrow Left)
+  
+  Decrease selected object's width by 10 pixels.
 
 
 ## Text
-Text operations
 
-**Shortcuts**
-
-- &#x2303; + A — Arialize selection (sets currently selected text blocks to Arial)
+- **Arialize selection** (Ctrl + A)
+  
+  Sets currently selected text blocks to Arial with 'smooth' antialiasing.
