@@ -11,15 +11,6 @@ FwArray.prototype.clone = function(){
   }
   return tmp_array;
 };
-Element.each_in_group = function(callback){
-  for (var e=0; e < this.elements.length; e++){
-    if (this.elements[e].is_group()) {
-      this.elements[e].each_in_group(callback);
-    } else {
-      callback.call(this,this.elements[e]);
-    }
-  }
-};
 FwArray.prototype.each = function(callback){
   for (var s=0; s < this.length; s++){
     var el = this[s];
@@ -29,6 +20,24 @@ FwArray.prototype.each = function(callback){
       callback.call(this,el);
     }
   };
+};
+Element.each_in_group = function(callback){
+  for (var e=0; e < this.elements.length; e++){
+    if (this.elements[e].is_group()) {
+      this.elements[e].each_in_group(callback);
+    } else {
+      callback.call(this,this.elements[e]);
+    }
+  }
+};
+Text.prototype.resize = function(w,h) {
+  if (w){
+    w = Math.round(w);
+    h = Math.round(h);
+    this.autoExpand = false;
+    this.rawWidth = w - 4; // amazingly stupid bug in Fireworks...
+    this.rawHeight = h;
+  } else this.autoExpand = true;
 };
 Element.is_group = function(){
   return (this == "[object Group]");
@@ -48,15 +57,6 @@ Element.resize = function(w,h){
   fw.getDocumentDOM().setSelectionBounds({left:x_pos,top:y_pos,right:(x_pos + w),bottom:(y_pos + h)},"autoTrimImages transformAttributes");
   Selection.restore();
 };
-Text.prototype.resize = function(w,h) {
-  if (w){
-    w = Math.round(w);
-    h = Math.round(h);
-    this.autoExpand = false;
-    this.rawWidth = w - 4; // amazingly stupid bug in Fireworks...
-    this.rawHeight = h;
-  } else this.autoExpand = true;
-};
 Element.set_position = function(x,y){
   x = Math.round(x);
   y = Math.round(y);
@@ -74,7 +74,6 @@ Element.is_symbol = function(){
 Element.is_text = function(){
   return (this.__proto__ == Text.prototype);
 };
-
 
 User = {
   getLanguage: function(){
