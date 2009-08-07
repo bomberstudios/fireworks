@@ -212,4 +212,8 @@ task :release => :default do
   end
 end
 
-task :default => [ :clean, :shortcuts, :mxi, :mxp, :pack ]
+task :default => [ :clean, :shortcuts, :mxi, :mxp, :readme, :pack ]
+
+task :install do
+  system("rsync -azv Commands \"$HOME/Library/Application Support/Adobe/Fireworks CS3/\"")
+end
