@@ -176,6 +176,10 @@ Commands to manage guides.
   
   Asks for a new name for the current page. This command was born out of frustration with the way page names are edited in Fireworks CS3. If your page names have more than 10 characters, it's really hard not to get crazy editing names :)
 
+- **Vertical Trim**
+  
+  Trims the current page vertically, fitting the contents. It does not modify the width of the page.
+
 ## Position
 
 - **Fix Position** (Ctrl + F)
