@@ -87,6 +87,9 @@ User = {
 };
 
 Document = {
+  path: function(){
+    return fw.getDocumentPath(null).split(fw.getDocumentDOM().docTitleWithoutExtension)[0];
+  },
   dump: function(){
     var doc = fw.getDocumentDOM();
     var filePath = fw.userJsCommandsDir;
