@@ -335,3 +335,27 @@ File = {
     return false;
   }
 };
+
+Pages = {
+  each: function(callback){
+    var doc = fw.getDocumentDOM();
+
+    // Create page at the end of page list...
+    doc.addNewPage();
+
+    // Move it to the first position
+    last_page_index = doc.currentPageNum;
+    doc.reorderPages(last_page_index, 0);
+
+    // Change active page to first page
+    doc.changeCurrentPage(0);
+
+    // Remove it
+    doc.deletePageAt(0);
+
+    for(var i=0; i < last_page_index; i++){
+      doc.changeCurrentPage(i);
+      callback.call(this);
+    }
+  }
+};
