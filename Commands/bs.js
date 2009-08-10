@@ -88,7 +88,7 @@ User = {
 
 Document = {
   path: function(){
-    return fw.getDocumentPath(null).split(fw.getDocumentDOM().docTitleWithoutExtension)[0];
+    return fw.getDocumentPath(null).split(escape(fw.getDocumentDOM().docTitleWithoutExtension))[0];
   },
   dump: function(){
     var doc = fw.getDocumentDOM();
