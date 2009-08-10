@@ -21,6 +21,16 @@ FwArray.prototype.each = function(callback){
     }
   };
 };
+Array.prototype.each = function(callback){
+  for (var s=0; s < this.length; s++){
+    var el = this[s];
+    if (el.is_group()) {
+      el.each_in_group(callback);
+    } else {
+      callback.call(this,el);
+    }
+  };
+};
 Element.each_in_group = function(callback){
   for (var e=0; e < this.elements.length; e++){
     if (this.elements[e].is_group()) {
