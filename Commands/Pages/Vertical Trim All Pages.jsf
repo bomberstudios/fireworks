@@ -1,0 +1,34 @@
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
+};
+
+function vertical_trim_current_page(){
+  var doc = fw.getDocumentDOM();
+  for (var l=0; l < doc.layers.length; l++) {
+    doc.selectAllOnLayer(l,true);
+  }
+  var doc_height = Selection.bottom();
+  doc.setDocumentCanvasSize({left:0, top: 0, right: doc.width, bottom: doc_height}, true);
+}
+
+var doc = fw.getDocumentDOM();
+
+// Create page at the end of page list...
+doc.addNewPage();
+
+// Move it to the first position
+last_page_index = doc.currentPageNum;
+doc.reorderPages(last_page_index, 0);
+
+// Change active page to first page
+doc.changeCurrentPage(0);
+
+// Remove it
+doc.deletePageAt(0);
+
+for(var i=0; i < last_page_index; i++){
+  doc.changeCurrentPage(i);
+  vertical_trim_current_page();
+}
