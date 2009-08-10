@@ -1,0 +1,17 @@
+// shortcut: CTRL + SHIFT + T
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
+};
+
+function vertical_trim_current_page(){
+  var doc = fw.getDocumentDOM();
+  for (var l=0; l < doc.layers.length; l++) {
+    doc.selectAllOnLayer(l,true);
+  }
+  var doc_height = Selection.bottom();
+  doc.setDocumentCanvasSize({left:0, top: 0, right: doc.width, bottom: doc_height}, true);
+}
+
+Pages.each(vertical_trim_current_page);

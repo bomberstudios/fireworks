@@ -1,12 +1,12 @@
-# Adobe Fireworks Orange Commands v1.3.3
+# Adobe Fireworks Orange Commands v1.3.5
 
 Orange Commands is a collection of scripts for Adobe Fireworks CS3 and CS4 that make the life of a web designer easier (or at least allow him/her to work faster :)
 
 ## Installation
 
 - Download the ZIP file for Orange Commands:
-  - [Orange Commands for CS3 Mac](http://cloud.github.com/downloads/bomberstudios/fireworks/OrangeCommands_1.3.3_CS3.zip)
-  - [Orange Commands for CS4 Mac](http://cloud.github.com/downloads/bomberstudios/fireworks/OrangeCommands_1.3.3_CS4.zip)
+  - [Orange Commands for CS3 Mac](http://cloud.github.com/downloads/bomberstudios/fireworks/OrangeCommands_1.3.5_CS3.zip)
+  - [Orange Commands for CS4 Mac](http://cloud.github.com/downloads/bomberstudios/fireworks/OrangeCommands_1.3.5_CS4.zip)
 - Expand the ZIP.
 - Double click the MXP file to install the commands.
 - To install the custom keyboard shortcuts, copy the XML files to:
@@ -95,11 +95,15 @@ Commands to change an object's fill and stroke color. When pressing the shortcut
 
 ## Export
 
-- **Current Page as a PNG 24** (Ctrl + Shift + X)
+- **Current Page as PNG 24** (Ctrl + Shift + X)
   
   Exports the current page as a flattened (non editable) PNG file with a 24 bits color depth. The file is saved in the same folder as the current file, with the page name added to the current file name.
   
   I.e: if your file is called CoolDesign.png, and the current page is called 'Home', the command creates a file named CoolDesign_Home.png
+
+- **All Pages as PNG 24** (Ctrl + Alt + Shift + X)
+  
+  Exports all pages as flattened (non editable) PNG files with a 24 bits color depth. The files are saved in the same folder as the current file, with the page name added to the current file name.
 
 
 ## Export Settings
@@ -171,6 +175,15 @@ Commands to manage guides.
 - **Set Page Name** (Ctrl + Shift + P)
   
   Asks for a new name for the current page. This command was born out of frustration with the way page names are edited in Fireworks CS3. If your page names have more than 10 characters, it's really hard not to get crazy editing names :)
+
+- **Vertical Trim** (Ctrl + T)
+  
+  Trims the current page vertically, fitting the contents. It does not modify the width of the page.
+
+- **Vertical Trim All Pages** (Ctrl + Shift + T)
+  
+  Trims all pages vertically, fitting the contents. It does not modify the width of the pages.
+
 
 ## Position
 
@@ -258,3 +271,12 @@ Bonus points: if the selected object is a Text box, you can use a width of '0' t
 - **Arialize selection** (Ctrl + A)
   
   Sets currently selected text blocks to Arial with 'smooth' antialiasing.
+
+- **Join**
+  
+  Creates a new text object containing the selected text objects' content.
+  Each content is added on a new line.
+
+- **Join with…**
+  
+  Creates a new text object containing the selected text objects' content, joined by the desired character.

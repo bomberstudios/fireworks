@@ -1,0 +1,41 @@
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
+};
+var cadena = prompt("Join with: ", '');
+function extract_text_runs(text,target){
+  for ( var i = 0; i < text.textRuns.length; i++ ) {
+    var current_text_run = text.textRuns[i];
+    if (i == text.textRuns.length - 1) {
+      current_text_run.characters += cadena;
+    };
+    if (i == 0) {
+      current_text_run.changedAttrs = text.initialAttrs;
+    }
+    target.textRuns.push(text.textRuns[i]);
+  }
+}
+
+var text_fields = new Array();
+
+Selection.each(function(field){
+  if (field.is_text()) {
+    text_fields.push(field);
+  }
+});
+
+function sort_by_position(a,b){
+  return a.top - b.top;
+}
+
+var merged_text = {};
+merged_text.initialAttrs = text_fields[0].textRuns.initialAttrs;
+merged_text.textRuns = [];
+text_fields.sort(sort_by_position);
+text_fields.each(function(t){
+  extract_text_runs(t.textRuns,merged_text);
+});
+
+fw.getDocumentDOM().addNewText({left:100, top:100, right:350, bottom:350}, true);
+fw.getDocumentDOM().setTextRuns(merged_text);
