@@ -117,7 +117,6 @@ Document = {
     if (options == undefined) {
       Document.set_export_as_png_24();
     };
-    fw.getDocumentDOM().setExportOptions(options);
     fw.exportDocumentAs(null, path, null);
   },
   set_export_as_png_24: function(){
