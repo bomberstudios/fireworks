@@ -112,6 +112,15 @@ Document = {
     var my_file = Files.open(filePath + fileName,true); // Open file for writing
     my_file.write(doc.javascriptString);
     my_file.close();
+  },
+  export_in: function(path,options){
+    if (options == undefined) {
+      Document.set_export_as_png_24();
+    };
+    fw.exportDocumentAs(null, path, null);
+  },
+  set_export_as_png_24: function(){
+    fw.getDocumentDOM().setExportOptions({animAutoCrop:true,animAutoDifference:true,applyScale:false,colorMode:"24 bit",crop:false,cropBottom:0,cropLeft:0,cropRight:0,cropTop:0,ditherMode:"none",ditherPercent:100,exportFormat:"PNG",frameInfo:[  ],interlacedGIF:false,jpegQuality:80,jpegSelPreserveButtons:false,jpegSelPreserveText:true,jpegSelQuality:90,jpegSelQualityEnabled:false,jpegSmoothness:0,jpegSubsampling:0,localAdaptive:true,lossyGifAmount:0,macCreator:"",macFileType:"",name:"PNG 24",numCustomEntries:0,numEntriesRequested:0,numGridEntries:6,optimized:true,paletteEntries:null,paletteInfo:null,paletteMode:"adaptive",paletteTransparency:"none",percentScale:100,progressiveJPEG:false,savedAnimationRepeat:0,sorting:"none",useScale:true,webSnapAdaptive:false,webSnapTolerance:14,xSize:0,ySize:0});
   }
 };
 
@@ -298,6 +307,41 @@ Selection = {
       });
     }
     fw.selection = objects;
+  },
+  join: function(delimiter){
+    if (fw.selection.length < 2) {
+      return;
+    };
+    if (delimiter == undefined) {
+      delimiter = "\u000D";
+    };
+
+    var text_fields = new Array();
+
+    Selection.each(function(field){
+      if (field.is_text()) {
+        text_fields.push(field);
+      }
+    });
+
+    var merged_text = {};
+    merged_text.initialAttrs = text_fields[0].textRuns.initialAttrs;
+    merged_text.textRuns = [];
+    text_fields.sort(Sort.by_y);
+    text_fields.each(function(t){
+      for ( var i = 0; i < t.textRuns.textRuns.length; i++ ) {
+        var current_text_run = t.textRuns.textRuns[i];
+        if (i == t.textRuns.textRuns.length - 1) {
+          current_text_run.characters += delimiter;
+        };
+        if (i == 0) {
+          current_text_run.changedAttrs = t.textRuns.initialAttrs;
+        }
+        merged_text.textRuns.push(current_text_run);
+      }
+    });
+    fw.getDocumentDOM().addNewText({left:Selection.left(), top:Selection.top(), right:Selection.right(), bottom:Selection.bottom()}, true);
+    fw.getDocumentDOM().setTextRuns(merged_text);
   }
 };
 
@@ -369,3 +413,13 @@ Pages = {
     }
   }
 };
+
+Sort = {
+  by_y: function(a,b){
+    return a.top - b.top;
+  },
+  by_x: function(a,b){
+    return a.left - b.left;
+  }
+};
+

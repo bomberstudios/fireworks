@@ -4,7 +4,7 @@ require "rdiscount"
 require "erb"
 require 'fileutils'
 
-ORANGE_COMMANDS_VERSION = "1.3.4"
+ORANGE_COMMANDS_VERSION = "1.3.5"
 @versions = ["CS3","CS4"]
 
 COMMANDS_TEMPLATE = <<-EOF
@@ -215,5 +215,5 @@ end
 task :default => [ :clean, :shortcuts, :mxi, :mxp, :readme, :pack ]
 
 task :install do
-  system('cp -R Commands/* "/Applications/Adobe Fireworks CS3/Configuration/Commands/"')
+  system("rsync -azv Commands \"/Applications/Adobe\ Fireworks\ CS3/Configuration/\"")
 end
