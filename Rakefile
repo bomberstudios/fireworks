@@ -4,7 +4,7 @@ require "rdiscount"
 require "erb"
 require 'fileutils'
 
-ORANGE_COMMANDS_VERSION = "1.3.4"
+ORANGE_COMMANDS_VERSION = "1.3.5"
 @versions = ["CS3","CS4"]
 
 COMMANDS_TEMPLATE = <<-EOF
