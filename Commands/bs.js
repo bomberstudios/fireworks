@@ -298,6 +298,41 @@ Selection = {
       });
     }
     fw.selection = objects;
+  },
+  join: function(delimiter){
+    if (fw.selection.length < 2) {
+      return;
+    };
+    if (delimiter == undefined) {
+      delimiter = "\u000D";
+    };
+
+    var text_fields = new Array();
+
+    Selection.each(function(field){
+      if (field.is_text()) {
+        text_fields.push(field);
+      }
+    });
+
+    var merged_text = {};
+    merged_text.initialAttrs = text_fields[0].textRuns.initialAttrs;
+    merged_text.textRuns = [];
+    text_fields.sort(Sort.by_y);
+    text_fields.each(function(t){
+      for ( var i = 0; i < t.textRuns.textRuns.length; i++ ) {
+        var current_text_run = t.textRuns.textRuns[i];
+        if (i == t.textRuns.textRuns.length - 1) {
+          current_text_run.characters += delimiter;
+        };
+        if (i == 0) {
+          current_text_run.changedAttrs = t.textRuns.initialAttrs;
+        }
+        merged_text.textRuns.push(current_text_run);
+      }
+    });
+    fw.getDocumentDOM().addNewText({left:Selection.left(), top:Selection.top(), right:Selection.right(), bottom:Selection.bottom()}, true);
+    fw.getDocumentDOM().setTextRuns(merged_text);
   }
 };
 
@@ -369,3 +404,13 @@ Pages = {
     }
   }
 };
+
+Sort = {
+  by_y: function(a,b){
+    return a.top - b.top;
+  },
+  by_x: function(a,b){
+    return a.left - b.left;
+  }
+};
+
