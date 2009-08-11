@@ -112,6 +112,15 @@ Document = {
     var my_file = Files.open(filePath + fileName,true); // Open file for writing
     my_file.write(doc.javascriptString);
     my_file.close();
+  },
+  export_in: function(path,options){
+    if (options == undefined) {
+      options = {animAutoCrop:true,animAutoDifference:true,applyScale:false,colorMode:"24 bit",crop:false,cropBottom:0,cropLeft:0,cropRight:0,cropTop:0,ditherMode:"none",ditherPercent:100,exportFormat:"PNG",frameInfo:[  ],interlacedGIF:false,jpegQuality:80,jpegSelPreserveButtons:false,jpegSelPreserveText:true,jpegSelQuality:90,jpegSelQualityEnabled:false,jpegSmoothness:0,jpegSubsampling:0,localAdaptive:true,lossyGifAmount:0,macCreator:"",macFileType:"",name:"PNG 24",numCustomEntries:0,numEntriesRequested:0,numGridEntries:6,optimized:true,paletteEntries:null,paletteInfo:null,paletteMode:"adaptive",paletteTransparency:"none",percentScale:100,progressiveJPEG:false,savedAnimationRepeat:0,sorting:"none",useScale:true,webSnapAdaptive:false,webSnapTolerance:14,xSize:0,ySize:0};
+    };
+    fw.getDocumentDOM().setExportOptions(options);
+    //var export_file_name = fw.getDocumentDOM().pageName;
+    //var export_file_path =  fw.getDocumentPath(null).split('.png')[0] + "_" + export_file_name + ".png";
+    fw.exportDocumentAs(null, path, null);
   }
 };
 
