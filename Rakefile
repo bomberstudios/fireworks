@@ -215,5 +215,5 @@ end
 task :default => [ :clean, :shortcuts, :mxi, :mxp, :readme, :pack ]
 
 task :install do
-  system("rsync -azv Commands \"$HOME/Library/Application Support/Adobe/Fireworks CS3/\"")
+  system("rsync -azv Commands \"/Applications/Adobe\ Fireworks\ CS3/Configuration/\"")
 end
