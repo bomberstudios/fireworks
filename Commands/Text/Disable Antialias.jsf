@@ -5,23 +5,14 @@ try {
 };
 
 doc = fw.getDocumentDOM();
-
 var current_page = doc.currentPageNum;
 
-for(var i=0; i<doc.pagesCount; i++){
-  doc.changeCurrentPage(i);
+Pages.each(function(){
   doc.selectAll();
   sel = fw.selection;
   Selection.each( function(el) {
-    if (el.is_text()) {
-      el.antiAliased = false;
-    }
-    el.each_in_group(function(i) {
-      if(i.is_text()) {
-        i.antiAliased = false;
-      }
-    });
+    el.antiAliased = false;
   });
   doc.selectNone();
-}
+});
 doc.changeCurrentPage(current_page);
