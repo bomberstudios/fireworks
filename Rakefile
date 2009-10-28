@@ -4,7 +4,8 @@ require "rdiscount"
 require "erb"
 require 'fileutils'
 
-ORANGE_COMMANDS_VERSION = "1.3.5"
+ORANGE_COMMANDS_VERSION = "1.3.6-dev"
+DOWNLOAD_SERVER = "http://sofanaranja.com/dl/"
 @versions = ["CS3","CS4"]
 
 COMMANDS_TEMPLATE = <<-EOF
@@ -205,10 +206,10 @@ task :readme do
 end
 
 desc "Release ZIP files to the world"
-task :release => :default do
+task :release do
   @versions.each do |version|
-    %x(scp OrangeCommands_#{ORANGE_COMMANDS_VERSION}_#{version}.zip sn:sofanaranja.com/dl/orangecommands_#{ORANGE_COMMANDS_VERSION.downcase}_#{version.downcase}.zip)
-    %x(echo "http://sofanaranja.com/dl/orangecommands_#{ORANGE_COMMANDS_VERSION.downcase}_#{version.downcase}.zip"|pbcopy)
+    %x(scp OrangeCommands_#{ORANGE_COMMANDS_VERSION}_#{version}.zip sn:www/dl/)
+    %x(echo "http://sofanaranja.com/dl/OrangeCommands_#{ORANGE_COMMANDS_VERSION}_#{version}.zip"|pbcopy)
   end
 end
 
