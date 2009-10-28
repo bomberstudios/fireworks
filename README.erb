@@ -1,21 +1,23 @@
-# Adobe Fireworks Orange Commands v<%= ORANGE_COMMANDS_VERSION %>
+Title: Orange Commands v<%= ORANGE_COMMANDS_VERSION %> for Adobe Fireworks
+CSS: style.css
+
+# Orange Commands v<%= ORANGE_COMMANDS_VERSION %> for Adobe Fireworks
 
 Orange Commands is a collection of scripts for Adobe Fireworks CS3 and CS4 that make the life of a web designer easier (or at least allow him/her to work faster :)
 
+
 ## Installation
 
-- Download the ZIP file for Orange Commands:
-  - [Orange Commands for CS3 Mac](<%= DOWNLOAD_SERVER %>OrangeCommands_<%= ORANGE_COMMANDS_VERSION %>_CS3.zip)
-  - [Orange Commands for CS4 Mac](<%= DOWNLOAD_SERVER %>OrangeCommands_<%= ORANGE_COMMANDS_VERSION %>_CS4.zip)
+- Download Orange Commands [for Fireworks CS3](<%= DOWNLOAD_SERVER %>OrangeCommands_<%= ORANGE_COMMANDS_VERSION %>_CS3.zip) or [for Fireworks CS4](<%= DOWNLOAD_SERVER %>OrangeCommands_<%= ORANGE_COMMANDS_VERSION %>_CS4.zip)
 - Expand the ZIP.
 - Double click the MXP file to install the commands.
 - To install the custom keyboard shortcuts, copy the XML files to:
 
-        /Users/you/Library/Application Support/Adobe/Fireworks CS3/yourlanguage/Keyboard Shortcuts/
+      /Users/you/Library/Application Support/Adobe/Fireworks CS3/yourlanguage/Keyboard Shortcuts/
 
     or
 
-        /Users/you/Library/Application Support/Adobe/Fireworks CS4/yourlanguage/Keyboard Shortcuts/
+      /Users/you/Library/Application Support/Adobe/Fireworks CS4/yourlanguage/Keyboard Shortcuts/
 
     depending on your version of Fireworks.
 - Change the keyboard shortcuts in Fireworks in the "Fireworks » Keyboard Shortcuts..." menu, and pick one of the '+ Extras' sets.
@@ -23,7 +25,9 @@ Orange Commands is a collection of scripts for Adobe Fireworks CS3 and CS4 that 
 - Enjoy!
 
 
-## Alpha
+## Commands: What they do, and how to use them
+
+### Alpha
 
 A collection of commands to change an object's alpha. They work on the currently selected object(s). If the selection is a group, the transparency is changed for the whole group.
 
@@ -33,7 +37,7 @@ A collection of commands to change an object's alpha. They work on the currently
   Set the selected objects' alpha to <%= alpha * 10 %>%
 <% end %>
 
-## Color
+### Color
 
 Commands to change an object's fill and stroke color. When pressing the shortcut, a color picker will appear at the mouse pointer's position, allowing you to pick a color quite fast.
 
@@ -50,14 +54,14 @@ Commands to change an object's fill and stroke color. When pressing the shortcut
   Set stroke color.
 
 
-## Effects
+### Effects
 
 - **Reflection**
   
   It creates a "wet floor" reflection of the currently selected object(s). The command asks for the reflection's height.
 
 
-## Export
+### Export
 
 - **Current Page as PNG 24** (Ctrl + Shift + X)
   
@@ -67,16 +71,16 @@ Commands to change an object's fill and stroke color. When pressing the shortcut
 
 - **All Pages as PNG 24** (Ctrl + Alt + Shift + X)
   
-  Exports all pages as flattened (non editable) PNG files with a 24 bits color depth. The files are saved in the same folder as the current file, with the page name added to the current file name.
+  Exports all pages as flattened (non editable) PNG files with a 24 bits color depth. The files are saved in a folder named YYYYMMDDHHMMSS (i.e: <%= Time.now.strftime('%Y%m%d%H%M%S') %>) inside the current folder, with the page names as the file names.
 
 
-## Export Settings
+### Export Settings
 
 - **Set PNG 24 for All Pages**
 
   A command to set the export format of all pages as PNG in 24 bits (something that is currently *so* time consuming and convoluted that it makes you want to cry)
 
-## Grids
+### Grids
 
 Commands to create grids using guides (aka Reticulator)
 
@@ -97,7 +101,7 @@ Commands to create grids using guides (aka Reticulator)
   Creates a grid using horizontal guides.
 
 
-## Guides
+### Guides
 
 Commands to manage guides.
 
@@ -126,7 +130,7 @@ Commands to manage guides.
   Asks for a page number, and copies the guides from the current page to that one.
 
 
-## Pages
+### Pages
 
 - **Duplicate Current** (Ctrl + Shift + D)
   
@@ -149,7 +153,7 @@ Commands to manage guides.
   Trims all pages vertically, fitting the contents. It does not modify the width of the pages.
 
 
-## Position
+### Position
 
 - **Fix Position** (Ctrl + F)
 
@@ -161,21 +165,21 @@ Commands to manage guides.
 
 
 
-## Properties
+### Properties
 
 - Set Rectangle Roundness in Pixels (Ctrl + R)
   
   Sets the selection corner roundness in pixels (something that is not possible in CS3). Useful when you want to set the same roundness in a collection of rectangles with different sizes.
 
 
-## Select
+### Select
 
 - **Text Objects**
 
   Selects all Text objects in the page. It selects objects inside groups, so you can use it to change the font on *every* text box on a page.
 
 
-## Size
+### Size
 
 A collection of commands to resize objects.
 
@@ -230,11 +234,15 @@ Bonus points: if the selected object is a Text box, you can use a width of '0' t
   Decrease selected object's width by 10 pixels.
 
 
-## Text
+### Text
 
 - **Arialize selection** (Ctrl + A)
   
   Sets currently selected text blocks to Arial with 'smooth' antialiasing.
+
+- **Disable Antialias**
+  
+  Disable text antialiasing in all pages of the current document.
 
 - **Join** (Ctrl + J)
   
@@ -244,3 +252,7 @@ Bonus points: if the selected object is a Text box, you can use a width of '0' t
 - **Join with…** (Ctrl + Shift + J)
   
   Creates a new text object containing the selected text objects' content, joined by the desired character.
+
+
+---
+Orange Commands v<%= ORANGE_COMMANDS_VERSION %> — last updated <%= Time.now %>
