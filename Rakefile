@@ -3,6 +3,7 @@ require "rake"
 require "rdiscount"
 require "erb"
 require 'fileutils'
+require 'lib/library'
 
 ORANGE_COMMANDS_VERSION = "1.3.6"
 DOWNLOAD_SERVER = "http://sofanaranja.com/dl/"
@@ -218,4 +219,21 @@ task :default => [ :clean, :shortcuts, :mxi, :mxp, :readme, :pack ]
 
 task :install do
   system("rsync -azv Commands \"/Applications/Adobe\ Fireworks\ CS3/Configuration/\"")
+end
+
+desc "NEW: Build docs"
+task :docs do
+  orangecommands = FW::Library.new 'Commands'
+  orangecommands.categories.each do |category|
+    puts
+    puts
+    puts "*" * 80
+    puts category.name
+    puts "-" * 80
+    category.commands.each do |command|
+      puts "#{command.name} - #{command.shortcut}"
+      puts command.docs
+      puts "-" * 80
+    end
+  end
 end

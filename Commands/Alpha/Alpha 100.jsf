@@ -1,2 +1,7 @@
+/*
 // shortcut: CTRL + 0
+**DOC**
+Set the selected objects’ alpha to 100
+**DOC**
+*/
 fw.getDocumentDOM().setOpacity(100);

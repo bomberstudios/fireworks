@@ -6,6 +6,9 @@
   TODO: Add support for text selections
 
   shortcut: CTRL + C
+**DOC**
+Set fill color. If the selection is a group, every object inside the group will be filled with the selected color. If the selected object has a gradient fill, it will be replaced with a solid fill. If the selected object is a Symbol, a Color Effect will be applied to it.
+**DOC**
 */
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");
