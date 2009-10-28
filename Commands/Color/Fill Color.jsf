@@ -19,6 +19,8 @@ Selection.each(function(sel) {
   if (sel.is_symbol()) {
     Selection.save();
     fw.selection = sel;
+    // TODO: do not replace effects in symbol, just add the color fill effect
+    var original_effects = fw.selection[0].effectList;
     fw.getDocumentDOM().applyEffects({ category:"UNUSED", effects:[ { Blendmode:0, Color:choice, EffectIsVisible:true, EffectMoaID:"{dd54adc0-a279-11d3-b92a000502f3fdbe}", Opacity:100, category:"Adjust Color", name:"Color Fill" } ], name:"UNUSED" });
     Selection.restore();
   } else {
