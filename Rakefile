@@ -4,7 +4,7 @@ require "rdiscount"
 require "erb"
 require 'fileutils'
 
-ORANGE_COMMANDS_VERSION = "1.3.6-dev"
+ORANGE_COMMANDS_VERSION = "1.3.6"
 DOWNLOAD_SERVER = "http://sofanaranja.com/dl/"
 @versions = ["CS3","CS4"]
 
