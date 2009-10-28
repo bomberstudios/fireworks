@@ -5,7 +5,7 @@ module FW
     def initialize folder
       @path = folder
       @commands = Dir["#{path}/**/**.jsf"].map { |filename| FW::Command.new(filename)}
-      @categories = Dir["#{path}/**"].reject { |filename| !File.directory?(filename) }.map { |filename| FW::Category.new(filename) }
+      @categories = Dir["#{path}/**"].reject { |filename| !File.directory?(filename) || filename =~ /Development/ }.map { |filename| FW::Category.new(filename) }
       yield if block_given?
     end
   end
@@ -39,6 +39,9 @@ module FW
     end
     def commands
       Dir["#{path}/**/**.jsf"].map { |filename| FW::Command.new(filename)}
+    end
+    def description
+      File.read("#{path}/../#{name}.md").to_s if File.exist? "#{path}/../#{name}.md"
     end
   end
 end

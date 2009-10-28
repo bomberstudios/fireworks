@@ -1,4 +1,7 @@
 // shortcut: CTRL + DOWN
+/**DOC**
+Increment selected object’s height by 1 pixel.
+**DOC**/
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");
 } catch(e){

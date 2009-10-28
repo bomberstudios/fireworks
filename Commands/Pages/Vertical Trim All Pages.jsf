@@ -1,4 +1,7 @@
 // shortcut: CTRL + SHIFT + T
+/**DOC**
+Trims all pages vertically, fitting the contents. It does not modify the width of the pages.
+**DOC**/
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");
 } catch(e){

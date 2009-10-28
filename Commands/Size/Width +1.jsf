@@ -1,4 +1,7 @@
 // shortcut: CTRL + RIGHT
+/**DOC**
+Increment selected object’s width by 1 pixel.
+**DOC**/
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");
 } catch(e){

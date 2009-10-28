@@ -1,4 +1,7 @@
 // shortcut: CTRL + A
+/**DOC**
+Sets currently selected text blocks to Arial with 'smooth' antialiasing.
+**DOC**/
 fw.getDocumentDOM().applyFontMarkup("face", "Arial");
 fw.getDocumentDOM().setTextAntiAliasing("smooth");
 fw.getDocumentDOM().enableTextAntiAliasing(true);

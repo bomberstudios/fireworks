@@ -1,4 +1,7 @@
 // shortcut: CTRL + SHIFT + J
+/**DOC**
+Creates a new text object containing the selected text objects’ content, joined by the desired character.
+**DOC**/
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");
 } catch(e){

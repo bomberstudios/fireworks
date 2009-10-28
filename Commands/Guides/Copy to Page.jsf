@@ -1,3 +1,6 @@
+/**DOC**
+Asks for a page number, and copies the guides from the current page to that one.
+**DOC**/
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");
 } catch(e){

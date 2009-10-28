@@ -1,4 +1,7 @@
 // shortcut: CTRL + SHIFT + W
+/**DOC**
+Creates four guides that frame the currently selected objects.
+**DOC**/
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");
 } catch(e){

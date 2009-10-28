@@ -1,5 +1,8 @@
-// This command only makes sense for CS3, as CS4 lets you specify roundness in pixels
 // shortcut: CTRL + R
+/**DOC**
+Sets the selection corner roundness in pixels (something that is not possible in CS3). Useful when you want to set the same roundness in a collection of rectangles with different sizes.
+This command only makes sense for CS3, as CS4 lets you specify roundness in pixels.
+**DOC**/
 var roundness_in_pixels = prompt("Set rectangle roundness in pixels:",0);
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");

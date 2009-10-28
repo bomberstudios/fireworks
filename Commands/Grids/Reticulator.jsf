@@ -1,3 +1,8 @@
+/*
+**DOC**
+Creates a grid using vertical guides. It asks for the layout width, the number of columns, and the gutter width. If you have a selected object, the command will use its current position as the starting position of the grid, and its width as the default layout width.
+**DOC**
+*/
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");
 } catch(e){

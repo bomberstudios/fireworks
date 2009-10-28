@@ -1,5 +1,9 @@
 // shortcut: CTRL + ALT + C
-
+/*
+**DOC**
+Set Canvas Color
+**DOC**
+*/
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");
 } catch(e){

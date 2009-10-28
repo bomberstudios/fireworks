@@ -200,13 +200,6 @@ task :pack do
   end
 end
 
-task :readme do
-  open("README.markdown","w") do |f|
-    f << ERB.new(File.read("README.erb")).result
-  end
-  system('maruku README.markdown')
-end
-
 desc "Release ZIP files to the world"
 task :release do
   @versions.each do |version|
@@ -221,19 +214,11 @@ task :install do
   system("rsync -azv Commands \"/Applications/Adobe\ Fireworks\ CS3/Configuration/\"")
 end
 
-desc "NEW: Build docs"
-task :docs do
-  orangecommands = FW::Library.new 'Commands'
-  orangecommands.categories.each do |category|
-    puts
-    puts
-    puts "*" * 80
-    puts category.name
-    puts "-" * 80
-    category.commands.each do |command|
-      puts "#{command.name} - #{command.shortcut}"
-      puts command.docs
-      puts "-" * 80
-    end
+desc "Build docs"
+task :readme do
+  @orangecommands = FW::Library.new 'Commands'
+  open("README.markdown","w") do |f|
+    f << ERB.new(File.read("README.erb")).result
   end
+  system('maruku README.markdown')
 end

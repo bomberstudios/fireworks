@@ -1,8 +1,9 @@
 // Pages to Frames
 //
-// A command that copies all your pages to frames on a new scratch page
-// Specially built for limalimon.com.es
-// Uses an undocumented attribute of the DOM: currentPageNum
+/**DOC**
+A command that copies all your pages to frames on a new scratch page.
+Specially built for <http://limalimon.com.es>
+**DOC**/
 
 doc = fw.getDocumentDOM();
 

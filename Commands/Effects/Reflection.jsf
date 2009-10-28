@@ -1,6 +1,10 @@
 // Reflection Command 1.0
 // Ale Muñoz <ale@bomberstudios.com>
-
+/*
+**DOC**
+It creates a "wet floor" reflection of the currently selected object(s). The command asks for the reflection's height.
+**DOC**
+*/
 // Ask for shadow height:
 shadow_height = prompt("Reflection Height","50");
 

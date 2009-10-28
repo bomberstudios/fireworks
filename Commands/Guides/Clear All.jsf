@@ -1,6 +1,8 @@
 // Remove all guides
 // Ale Muñoz <ale@bomberstudios.com>
-
+/**DOC**
+Removes all guides from the current page.
+**DOC**/
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");
 } catch(e){

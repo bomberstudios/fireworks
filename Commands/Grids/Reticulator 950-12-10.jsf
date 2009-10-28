@@ -1,3 +1,8 @@
+/*
+**DOC**
+Creates a 950 pixels wide layout, with 12 columns and a 10 px gutter.
+**DOC**
+*/
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");
 } catch(e){

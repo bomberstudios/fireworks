@@ -1,5 +1,8 @@
 // Modify object position
 // shortcut: CTRL + P
+/**DOC**
+It asks for the new position in x,y coordinates.
+**DOC**/
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");
 } catch(e) {

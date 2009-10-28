@@ -1,5 +1,7 @@
-// Modify object height
 // shortcut: CTRL + H
+/**DOC**
+Sets the height of the selection.
+**DOC**/
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");
 } catch(e){

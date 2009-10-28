@@ -1,4 +1,8 @@
 // shortcut: CTRL + J
+/**DOC**
+Creates a new text object containing the selected text objects’ content.
+Each content is added on a new line.
+**DOC**/
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");
 } catch(e){

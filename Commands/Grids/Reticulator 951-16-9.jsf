@@ -1,4 +1,8 @@
 // shortcut: CTRL + SHIFT + R
+
+/**DOC**
+Creates a 951 pixels wide layout, with 16 columns and a 9 px gutter.
+**DOC**/
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");
 } catch(e){

@@ -3,6 +3,13 @@
 // Also changes the Optimize settings (I hate the "GIF as default format" :)
 // shortcut: CTRL + SHIFT + X
 
+/*
+**DOC**
+Exports the current page as a flattened (non editable) PNG file with a 24 bits color depth. The file is saved in the same folder as the current file, with the page name added to the current file name.
+
+  I.e: if your file is called CoolDesign.png, and the current page is called 'Home', the command creates a file named CoolDesign_Home.png
+**DOC**
+*/
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");
 } catch(e){

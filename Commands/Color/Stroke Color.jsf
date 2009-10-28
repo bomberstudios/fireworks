@@ -5,6 +5,11 @@
 
   TODO: Add support for text selections
   shortcut: CTRL + SHIFT + C
+
+**DOC**
+Set stroke color.
+**DOC**
+
 */
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");

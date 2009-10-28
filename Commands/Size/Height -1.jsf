@@ -1,4 +1,7 @@
 // shortcut: CTRL + UP
+/**DOC**
+Decrease selected object’s height by 1 pixel.
+**DOC**/
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");
 } catch(e){

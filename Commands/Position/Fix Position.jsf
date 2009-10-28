@@ -1,5 +1,8 @@
 // Fix object position
 // shortcut: CTRL + F
+/**DOC**
+This command tries to fix a nasty bug where Fireworks will draw an item at a subpixel position. The command also tries to fix the width and height of the item so that they become integer numbers. Why Adobe thought it would be useful to draw using half pixels is beyond me...
+**DOC**/
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");
 } catch(e) {

@@ -1,3 +1,6 @@
 // shortcut: CTRL + SHIFT + D
+/**DOC**
+Duplicates the current page at the end of the page list.
+**DOC**/
 doc = fw.getDocumentDOM();
 doc.duplicatePage(doc.currentPageNum);
