@@ -1,6 +1,3 @@
-Title: Orange Commands v1.3.6 for Adobe Fireworks
-CSS: style.css
-
 # Orange Commands v1.3.6 for Adobe Fireworks
 
 Orange Commands is a collection of scripts for Adobe Fireworks CS3 and CS4 that make the life of a web designer easier (or at least allow him/her to work faster :)
@@ -107,7 +104,7 @@ Commands to change an object's fill and stroke color. When pressing the shortcut
 
 - **All Pages as PNG 24** (Ctrl + Alt + Shift + X)
   
-  Exports all pages as flattened (non editable) PNG files with a 24 bits color depth. The files are saved in a folder named YYYYMMDDHHMMSS (i.e: 20091028133726) inside the current folder, with the page names as the file names.
+  Exports all pages as flattened (non editable) PNG files with a 24 bits color depth. The files are saved in a folder named YYYYMMDDHHMMSS (i.e: 20091028134240) inside the current folder, with the page names as the file names.
 
 
 ### Export Settings
@@ -291,4 +288,4 @@ Bonus points: if the selected object is a Text box, you can use a width of '0' t
 
 
 ---
-Orange Commands v1.3.6 — last updated Wed Oct 28 13:37:26 +0100 2009
+Orange Commands v1.3.6 — last updated Wed Oct 28 13:42:40 +0100 2009
