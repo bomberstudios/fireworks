@@ -3,6 +3,11 @@
   Ale Muñoz <ale@bomberstudios.com>
   
   As requested by Keko Ponte
+
+***DOC**
+Selects all text objects in the current page.
+Extremely useful when you need to change the font for all text in a page.
+**DOC**
 */
 
 try {
