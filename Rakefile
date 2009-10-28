@@ -5,7 +5,7 @@ require "erb"
 require 'fileutils'
 require 'lib/library'
 
-ORANGE_COMMANDS_VERSION = "1.3.6"
+ORANGE_COMMANDS_VERSION = "1.4.0"
 DOWNLOAD_SERVER = "http://sofanaranja.com/dl/"
 @versions = ["CS3","CS4"]
 
@@ -56,14 +56,6 @@ task :mxi => [:clean] do
     end
   end
 end
-
-# task :pack_xml do
-#   @versions.each do |version|
-#     %x(cp "en/Keyboard\ Shortcuts/#{version}/"*.xml .)
-#     %x(zip -9 keyboard_shortcuts_#{version}.zip *.xml)
-#     %x(rm *.xml)
-#   end
-# end
 
 desc "Build XML for keyboard shortcuts"
 task :shortcuts do

@@ -1,13 +1,13 @@
 CSS: style.css
 
-# Orange Commands v1.3.6 for Adobe Fireworks
+# Orange Commands v1.4.0 for Adobe Fireworks
 
 Orange Commands is a collection of scripts for Adobe Fireworks CS3 and CS4 that make the life of a web designer easier (or at least allow him/her to work faster :)
 
 
 ## Installation
 
-- Download Orange Commands [for Fireworks CS3](http://sofanaranja.com/dl/OrangeCommands_1.3.6_CS3.zip) or [for Fireworks CS4](http://sofanaranja.com/dl/OrangeCommands_1.3.6_CS4.zip)
+- Download Orange Commands [for Fireworks CS3](http://sofanaranja.com/dl/OrangeCommands_1.4.0_CS3.zip) or [for Fireworks CS4](http://sofanaranja.com/dl/OrangeCommands_1.4.0_CS4.zip)
 - Expand the ZIP.
 - Double click the MXP file to install the commands.
 - To install the custom keyboard shortcuts, copy the XML files to:
@@ -161,7 +161,7 @@ Commands to create grids using guides (the commands formerly known as "Reticulat
 
 - **Pages to Frames**  (No shortcut)
   
-  A command that copies all your pages to frames on a new scratch page
+  A command that copies all your pages to frames on a new scratch page.
 Specially built for <http://limalimon.com.es>
 
 - **Set Page Name**  (CTRL + SHIFT + P)
@@ -278,4 +278,4 @@ Each content is added on a new line.
 
 
 ---
-Orange Commands v1.3.6 — last updated Wed Oct 28 17:25:10 +0100 2009
+Orange Commands v1.4.0 — last updated Wed Oct 28 17:29:38 +0100 2009

@@ -1,6 +1,9 @@
 ## dev
 - nothing yet :)
 
+## 1.4.0
+- a64e4ed152 (Updated documentation system)
+
 ## 1.3.6
 - 0d6274cf62 (Added support for Symbol instances in Color » Fill Color command. Symbols are colored by using a Color Fill effect.)
 - 62d4226aba (FIXED: "Color » Fill Color" didn't work when the current selection's fill was set to 'None')
