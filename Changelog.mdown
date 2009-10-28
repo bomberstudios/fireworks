@@ -1,0 +1,38 @@
+## dev
+- nothing yet :)
+
+## 1.3.6
+- 0d6274cf62 (Added support for Symbol instances in Color » Fill Color command. Symbols are colored by using a Color Fill effect.)
+- 62d4226aba (FIXED: "Color » Fill Color" didn't work when the current selection's fill was set to 'None')
+- f63bc11cbd (Nicer docs: Documented the Text » Disable Antialias command and corrected the Export » All Pages as PNG 24 command)
+
+## 1.3.5
+- "Pages » Vertical Trim" command
+- "Pages » Vertical Trim All Pages" command
+- "Text » Join"
+- "Text » Join with..."
+- Fixed: "Export » All Pages..." now works when the document filename has spaces.
+- API:
+  - Added `Pages.each()` function
+  - Added `Document.path()` function
+  - Added `Document.export_in(path)` function
+  - Added `Array.each()`
+  - Added `Document.set_export_as_png_24()`
+
+## 1.3.4
+- Added "Export » All Pages as PNG 24" command
+
+## 1.3.3
+
+- Fixed a nasty bug with multiselection resizes.
+- Added "Set Page Name" command.
+- Files in "Export » Current Page as PNG 24" are saved in the same folder as the original PNG file, using the page name as suffix.
+- 32665a05cd (Fixes a weird bug that happened when resizing single objects after resizing groups. It's hard to explain it writing, but it sucked :P)
+
+## 1.3.1
+- 7631336efd (Bugfix: pressing 'Esc' to dismiss the Set Size prompt no longer throws an error.)
+- 0bdfbfc304 (Added 'Set Page Name' command, because I *hate* writing on the Pages panel.)
+- ed4d50c7cb (Store exported flat files in the same folder as the source PNG files.)
+
+## 1.3
+- Released in sofanaranja.com
