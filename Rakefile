@@ -187,14 +187,14 @@ task :mxp do
 end
 
 task :clean do
-  FileUtils.rm Dir.glob(["*.mxi","*.mxp","*.zip"])
+  FileUtils.rm Dir.glob(["*.mxi","*.mxp","*.zip","README.html"])
 end
 
 desc "Pack OrangeCommands as ZIP files"
 task :pack do
   @versions.each do |version|
     %x(cp "en/Keyboard\ Shortcuts/#{version}/"*.xml .)
-    %x(zip -9 OrangeCommands_#{ORANGE_COMMANDS_VERSION}_#{version}.zip OrangeCommands_#{ORANGE_COMMANDS_VERSION}_#{version}.mxp *.xml)
+    %x(zip -9 OrangeCommands_#{ORANGE_COMMANDS_VERSION}_#{version}.zip OrangeCommands_#{ORANGE_COMMANDS_VERSION}_#{version}.mxp *.xml README.html)
     %x(rm *.xml)
   end
 end
@@ -203,6 +203,7 @@ task :readme do
   open("README.markdown","w") do |f|
     f << ERB.new(File.read("README.erb")).result
   end
+  system('maruku README.markdown')
 end
 
 desc "Release ZIP files to the world"
