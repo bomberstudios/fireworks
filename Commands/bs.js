@@ -414,6 +414,15 @@ Pages = {
       doc.changeCurrentPage(i);
       callback.call(this);
     }
+  },
+  vertical_trim: function(){
+    var doc = fw.getDocumentDOM();
+    for (var l=0; l < doc.layers.length; l++) {
+      doc.selectAllOnLayer(l,true);
+      doc.setElementLocked(-1, -1, -1, false, true, false); // unlock everything
+    }
+    var doc_height = Selection.bottom();
+    doc.setDocumentCanvasSize({left:0, top: 0, right: doc.width, bottom: doc_height}, true);
   }
 };
 
@@ -425,4 +434,3 @@ Sort = {
     return a.left - b.left;
   }
 };
-
