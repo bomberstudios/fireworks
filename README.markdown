@@ -7,10 +7,10 @@ Orange Commands is a collection of scripts for Adobe Fireworks CS3 and CS4 that 
 
 ## Installation
 
-- Download Orange Commands [for Fireworks CS3](http://sofanaranja.com/dl/OrangeCommands_1.4.0_CS3.zip) or [for Fireworks CS4](http://sofanaranja.com/dl/OrangeCommands_1.4.0_CS4.zip)
-- Expand the ZIP.
-- Double click the MXP file to install the commands.
-- To install the custom keyboard shortcuts, copy the XML files to:
+1. Download Orange Commands [for Fireworks CS3](http://sofanaranja.com/dl/OrangeCommands_1.4.0_CS3.zip) or [for Fireworks CS4](http://sofanaranja.com/dl/OrangeCommands_1.4.0_CS4.zip)
+2. Expand the ZIP.
+3. Double click the MXP file to install the commands.
+4. To install the custom keyboard shortcuts, copy the XML files to:
 
       /Users/you/Library/Application Support/Adobe/Fireworks CS3/yourlanguage/Keyboard Shortcuts/
 
@@ -19,9 +19,9 @@ Orange Commands is a collection of scripts for Adobe Fireworks CS3 and CS4 that 
       /Users/you/Library/Application Support/Adobe/Fireworks CS4/yourlanguage/Keyboard Shortcuts/
 
     depending on your version of Fireworks.
-- Change the keyboard shortcuts in Fireworks in the "Fireworks » Keyboard Shortcuts..." menu, and pick one of the '+ Extras' sets.
-- Restart Fireworks
-- Enjoy!
+5. Change the keyboard shortcuts in Fireworks in the "Fireworks » Keyboard Shortcuts..." menu, and pick one of the '+ Extras' sets.
+6. Restart Fireworks
+7. Enjoy!
 
 
 ## Commands: What they do, and how to use them
@@ -33,36 +33,44 @@ A collection of commands to change an object's alpha. They work on the currently
 
 - **Alpha 10**  (CTRL + 1)
   
-  Set the selected objects’ alpha to 10
+  Set the selected objects’ alpha to 10%
 
 - **Alpha 100**  (CTRL + 0)
   
-  Set the selected objects’ alpha to 100
+  Set the selected objects’ alpha to 100%
 
 - **Alpha 20**  (CTRL + 2)
   
-  
+  Set the selected objects’ alpha to 20%
+
 - **Alpha 30**  (CTRL + 3)
   
-  
+  Set the selected objects’ alpha to 30%
+
 - **Alpha 40**  (CTRL + 4)
   
-  
+  Set the selected objects’ alpha to 40%
+
 - **Alpha 50**  (CTRL + 5)
   
-  
+  Set the selected objects’ alpha to 50%
+
 - **Alpha 60**  (CTRL + 6)
   
-  
+  Set the selected objects’ alpha to 60%
+
 - **Alpha 70**  (CTRL + 7)
   
-  
+  Set the selected objects’ alpha to 70%
+
 - **Alpha 80**  (CTRL + 8)
   
-  
+  Set the selected objects’ alpha to 80%
+
 - **Alpha 90**  (CTRL + 9)
   
-  
+  Set the selected objects’ alpha to 90%
+
 ### Color
 Commands to change an object's fill and stroke color. When pressing the shortcut, a color picker will appear at the mouse pointer's position, allowing you to pick a color quite fast.
 
@@ -96,8 +104,7 @@ Commands to change an object's fill and stroke color. When pressing the shortcut
 - **Current Page as PNG 24**  (CTRL + SHIFT + X)
   
   Exports the current page as a flattened (non editable) PNG file with a 24 bits color depth. The file is saved in the same folder as the current file, with the page name added to the current file name.
-
-  I.e: if your file is called CoolDesign.png, and the current page is called 'Home', the command creates a file named CoolDesign_Home.png
+I.e: if your file is called CoolDesign.png, and the current page is called 'Home', the command creates a file named CoolDesign_Home.png
 
 ### Export Settings
 
@@ -174,7 +181,8 @@ Specially built for <http://limalimon.com.es>
 
 - **Vertical Trim**  (CTRL + T)
   
-  Trims the current page vertically, fitting the contents. It does not modify the width of the page.
+  Trims the current page vertically, fitting the contents. It does not modify the width of the page.  
+**Bug beware:** if you have locked elements in your page, it will be trimmed to the wrong size. I’m working on a fix - 2009-10-29
 
 ### Position
 
@@ -210,7 +218,7 @@ If multiple objects are selected, each one will be transformed independently.
 
 All Size commands support math operations, so you can quickly make an object 23 pixels wider, or half its height, or...
 
-Bonus points: if the selected object is a Text box, you can use a width of '0' to have it automatically resize to fit the content without wrapping.
+**Bonus points:** if the selected object is a Text box, you can use a width of '0' to have it automatically resize to fit the content without wrapping.
 
 
 - **Height +1**  (CTRL + DOWN)
@@ -278,4 +286,4 @@ Each content is added on a new line.
 
 
 ---
-Orange Commands v1.4.0 — last updated Wed Oct 28 17:29:38 +0100 2009
+Orange Commands v1.4.0 — last updated Thu Oct 29 11:52:34 +0100 2009

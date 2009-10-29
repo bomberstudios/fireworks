@@ -1,6 +1,7 @@
 // shortcut: CTRL + T
 /**DOC**
-Trims the current page vertically, fitting the contents. It does not modify the width of the page.
+Trims the current page vertically, fitting the contents. It does not modify the width of the page.  
+**Bug beware:** if you have locked elements in your page, it will be trimmed to the wrong size. I’m working on a fix - 2009-10-29
 **DOC**/
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");

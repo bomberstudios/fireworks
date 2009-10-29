@@ -1,2 +1,6 @@
 // shortcut: CTRL + 3
+/**DOC**
+Set the selected objects’ alpha to 30%
+**DOC**/
+
 fw.getDocumentDOM().setOpacity(30);
