@@ -1,13 +1,13 @@
 CSS: style.css
 
-# Orange Commands v1.4.1 for Adobe Fireworks
+# Orange Commands v1.4.2-dev for Adobe Fireworks
 
 Orange Commands is a collection of scripts for Adobe Fireworks CS3 and CS4 that make the life of a web designer easier (or at least allow him/her to work faster :)
 
 
 ## Installation
 
-1. Download Orange Commands [for Fireworks CS3](http://sofanaranja.com/dl/OrangeCommands_1.4.1_CS3.zip) or [for Fireworks CS4](http://sofanaranja.com/dl/OrangeCommands_1.4.1_CS4.zip)
+1. Download Orange Commands [for Fireworks CS3](http://sofanaranja.com/dl/OrangeCommands_1.4.2-dev_CS3.zip) or [for Fireworks CS4](http://sofanaranja.com/dl/OrangeCommands_1.4.2-dev_CS4.zip)
 2. Expand the ZIP.
 3. Double click the MXP file to install the commands.
 4. To install the custom keyboard shortcuts, copy the XML files to:
@@ -89,6 +89,10 @@ Commands to change an object's fill and stroke color. When pressing the shortcut
 
 ### Effects
 
+
+- **Lightbox**  (No shortcut)
+  
+  Creates a Lightbox from the current page.
 
 - **Reflection**  (No shortcut)
   
@@ -175,6 +179,9 @@ Specially built for <http://limalimon.com.es>
   
   Asks for a new name for the current page. This command was born out of frustration with the way page names are edited in Fireworks CS3. If your page names have more than 10 characters, it's really hard not to get crazy editing names :)
 
+- **Sort**  (No shortcut)
+  
+  
 - **Vertical Trim All Pages**  (CTRL + SHIFT + T)
   
   Trims all pages vertically, fitting the contents. It does not modify the width of the pages.
@@ -285,4 +292,4 @@ Each content is added on a new line.
 
 
 ---
-Orange Commands v1.4.1 — last updated Thu Oct 29 13:39:50 +0100 2009
+Orange Commands v1.4.2-dev — last updated Thu Oct 29 19:14:14 +0100 2009
