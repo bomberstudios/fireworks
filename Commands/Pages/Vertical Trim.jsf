@@ -1,7 +1,6 @@
 // shortcut: CTRL + T
 /**DOC**
 Trims the current page vertically, fitting the contents. It does not modify the width of the page.  
-**Bug beware:** if you have locked elements in your page, it will be trimmed to the wrong size. I’m working on a fix - 2009-10-29
 **DOC**/
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");
@@ -9,17 +8,8 @@ try {
   alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
 };
 
-var doc = fw.getDocumentDOM();
-
-for (var l=0; l < doc.layers.length; l++) {
-  doc.selectAllOnLayer(l,true);
-}
-
 try {
-  var doc_height = Selection.bottom();
-  if (doc_height) {
-    doc.setDocumentCanvasSize({left:0, top: 0, right: doc.width, bottom: doc_height}, true);
-  };
+  Pages.vertical_trim();
 } catch(e){
   alert("There has to be *something* selectable...");
 }

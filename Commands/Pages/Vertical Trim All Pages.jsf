@@ -8,13 +8,8 @@ try {
   alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
 };
 
-function vertical_trim_current_page(){
-  var doc = fw.getDocumentDOM();
-  for (var l=0; l < doc.layers.length; l++) {
-    doc.selectAllOnLayer(l,true);
-  }
-  var doc_height = Selection.bottom();
-  doc.setDocumentCanvasSize({left:0, top: 0, right: doc.width, bottom: doc_height}, true);
+try {
+  Pages.each(Pages.vertical_trim);
+} catch(e){
+  alert("There has to be *something* selectable...");
 }
-
-Pages.each(vertical_trim_current_page);
