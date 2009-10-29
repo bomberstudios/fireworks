@@ -394,7 +394,7 @@ File = {
 };
 
 Pages = {
-  each: function(callback){
+  count: function(){
     var doc = fw.getDocumentDOM();
 
     // Create page at the end of page list...
@@ -409,8 +409,11 @@ Pages = {
 
     // Remove it
     doc.deletePageAt(0);
-
-    for(var i=0; i < last_page_index; i++){
+    
+    return last_page_index;
+  },
+  each: function(callback){
+    for(var i=0; i < Pages.count(); i++){
       doc.changeCurrentPage(i);
       callback.call(this);
     }
