@@ -1,0 +1,26 @@
+/**DOC**
+Creates a Lightbox from the current page.
+**DOC**/
+
+try {
+  var doc = fw.getDocumentDOM();
+  var original_name = doc.pageName;
+  doc.duplicatePage(doc.currentPageNum);
+  doc.addNewPage();
+  last_page_index = doc.currentPageNum;
+  doc.reorderPages(last_page_index, 0);
+  doc.changeCurrentPage(0);
+  doc.deletePageAt(0);
+  doc.changeCurrentPage(last_page_index - 1);
+  doc.setPageName(fw.getDocumentDOM().currentPageNum,original_name + " - Lightbox");
+  doc.selectAll();
+  doc.flattenSelection();
+  doc.lockSelection();
+  doc.addNewRectanglePrimitive({left:0, top:0, right:doc.width, bottom:doc.height}, 0);
+  doc.setOpacity(80);
+  doc.lockSelection();
+  doc.addNewRectanglePrimitive({left:100, top:100, right:doc.width - 100, bottom: doc.height / 2}, 0);
+
+} catch (exception) {
+  alert([exception, exception.lineNumber, exception.fileName].join("\n"));
+}
