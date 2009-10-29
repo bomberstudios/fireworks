@@ -1,6 +1,11 @@
 ## dev
 - nothing yet :)
 
+## 1.4.1 - 2009-10-29
+- 0b283de113 (Added missing documentation)
+- 3210ae8c3d (Fixed a small omission in the Export commands: the file need to be saved before exporting pages. Now, a friendly reminder is displayed when you try to run the commands on an unsaved document :))
+- 901c4e157e (Use Page.vertical_trim for Page trim commands. Fixes a bug when trimming pages with locked objects)
+
 ## 1.4.0
 - a64e4ed152 (Updated documentation system)
 

@@ -5,7 +5,7 @@ require "erb"
 require 'fileutils'
 require 'lib/library'
 
-ORANGE_COMMANDS_VERSION = "1.4.0"
+ORANGE_COMMANDS_VERSION = "1.4.1"
 DOWNLOAD_SERVER = "http://sofanaranja.com/dl/"
 @versions = ["CS3","CS4"]
 
@@ -200,7 +200,7 @@ task :release do
   end
 end
 
-task :default => [ :clean, :shortcuts, :mxi, :mxp, :readme, :pack ]
+task :default => [ :clean, :shortcuts, :readme, :mxi, :mxp, :pack ]
 
 task :install do
   system("rsync -azv Commands \"/Applications/Adobe\ Fireworks\ CS3/Configuration/\"")
