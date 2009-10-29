@@ -14,26 +14,31 @@ try {
   alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
 };
 
-function fix_date(num){
-  num = num.toString();
-  if (num.length < 2) {
-    num = "0" + num;
-  };
-  return num;
+
+if(Document.is_saved()) {
+  function fix_date(num){
+    num = num.toString();
+    if (num.length < 2) {
+      num = "0" + num;
+    };
+    return num;
+  }
+
+  var d = new Date();
+  var year = d.getFullYear();
+  var month = fix_date((d.getMonth() + 1));
+  var day = fix_date(d.getDate());
+  var hour = fix_date(d.getHours());
+  var minute = fix_date(d.getMinutes());
+  var folder_name = year + month + day + hour + minute;
+
+  Files.createDirectory(Document.path() + folder_name);
+
+  Pages.each(function(){
+    var export_file_name = fw.getDocumentDOM().pageName;
+    var export_file_path =  Document.path() + folder_name + "/" + export_file_name + ".png";
+    Document.export_in(export_file_path);
+  });
+} else {
+  alert("You need to save the document first!");
 }
-
-var d = new Date();
-var year = d.getFullYear();
-var month = fix_date((d.getMonth() + 1));
-var day = fix_date(d.getDate());
-var hour = fix_date(d.getHours());
-var minute = fix_date(d.getMinutes());
-var folder_name = year + month + day + hour + minute;
-
-Files.createDirectory(Document.path() + folder_name);
-
-Pages.each(function(){
-  var export_file_name = fw.getDocumentDOM().pageName;
-  var export_file_path =  Document.path() + folder_name + "/" + export_file_name + ".png";
-  Document.export_in(export_file_path);
-});

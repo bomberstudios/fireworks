@@ -1,21 +1,18 @@
-// Exports current page as a 24 bits PNG file,
-// regardless of what the Optimize settings are for that page.
-// Also changes the Optimize settings (I hate the "GIF as default format" :)
 // shortcut: CTRL + SHIFT + X
-
-/*
-**DOC**
+/**DOC**
 Exports the current page as a flattened (non editable) PNG file with a 24 bits color depth. The file is saved in the same folder as the current file, with the page name added to the current file name.
 I.e: if your file is called CoolDesign.png, and the current page is called 'Home', the command creates a file named CoolDesign_Home.png
-**DOC**
-*/
+**DOC**/
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");
 } catch(e){
   alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
 };
 
-var export_file_name = fw.getDocumentDOM().pageName;
-var export_file_path =  fw.getDocumentPath(null).split('.png')[0] + "_" + export_file_name + ".png";
-
-Document.export_in(export_file_path);
+if(Document.is_saved()) {
+  var export_file_name = fw.getDocumentDOM().pageName;
+  var export_file_path =  fw.getDocumentPath(null).split('.png')[0] + "_" + export_file_name + ".png";
+  Document.export_in(export_file_path);
+} else {
+  alert("You need to save the document first!");
+}
