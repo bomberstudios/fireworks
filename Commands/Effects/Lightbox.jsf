@@ -17,9 +17,17 @@ try {
   doc.flattenSelection();
   doc.lockSelection();
   doc.addNewRectanglePrimitive({left:0, top:0, right:doc.width, bottom:doc.height}, 0);
+  // if the current object's fill is set to none, we'll have to assign a default fill before we can change the color.
+  if(!fw.selection[0].pathAttributes.fill){
+    fw.getDocumentDOM().setFillNColor({ category:"fc_Solid", ditherColors:[ "#000000", "#000000" ], edgeType:"antialiased", feather:0, gradient:null, name:"fn_Normal", pattern:null, shape:"solid", stampingMode:"blend opaque", textureBlend:0, webDitherTransparent:false }, "#000000");
+  }
+  // make the object's fill a solid color
+  fw.selection[0].pathAttributes.fill.category = 'fc_Solid';
+  doc.setFillColor("#000000");
   doc.setOpacity(80);
   doc.lockSelection();
-  doc.addNewRectanglePrimitive({left:100, top:100, right:doc.width - 100, bottom: doc.height / 2}, 0);
+  doc.addNewRectanglePrimitive({left:100, top:100, right:doc.width - 100, bottom: Math.floor(doc.height / 2)}, 0);
+  doc.setFillColor("#ffffff");
 
 } catch (exception) {
   alert([exception, exception.lineNumber, exception.fileName].join("\n"));
