@@ -1,7 +1,7 @@
 ## dev
 - nothing yet :)
 
-## 1.4.2-dev
+## 1.4.2 - 2009-10-30
 - 5e6f548da1 (NEW: Lightbox effect (requested by @kekoponte))
 - 7bdaeb11b2 (NEW: Added two new commands to export current page and export all pages that ask you for the file location (requested by @plumilla))
 - 3177531edf (NEW: Command to add a number in front of the page name, according to its order in the page panel.)
