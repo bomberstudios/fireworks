@@ -1,0 +1,11 @@
+/**DOC**
+Exports the current page as a flattened (non editable) PNG file with a 24 bits color depth. This command will ask you for the filename and folder location, and is specially built for @plumilla.
+**DOC**/
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
+};
+
+Document.set_export_as_png_24();
+fw.exportDocumentAs(null, null, null);
