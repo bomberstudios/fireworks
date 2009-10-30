@@ -1,13 +1,9 @@
-// Exports all pages as 24 bits PNG files,
-// regardless of what the Optimize settings are for that page.
-// Also changes the Optimize settings (I hate the "GIF as default format" :)
 // shortcut: CTRL + ALT + SHIFT + X
-
-/*
-**DOC**
-Exports all pages as flattened (non editable) PNG files with a 24 bits color depth. The files are saved in a folder named YYYYMMDDHHMMSS (i.e: 20091028170642) inside the current folder, with the page names as the file names.
-**DOC**
-*/
+/**DOC**
+Exports all pages as flattened (non editable) PNG files with a 24 bits color depth.  
+The files are saved in a folder named YYYYMMDDHHMMSS (i.e: 20091028170642) inside the current folder, with the page names as the file names.  
+It also changes the Optimize settings for all pages, because I hate the "GIF as default format" :)
+**DOC**/
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");
 } catch(e){
