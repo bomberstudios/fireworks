@@ -182,6 +182,11 @@ Commands to create grids using guides (the commands formerly known as "Reticulat
   
   Duplicates the current page at the end of the page list.
 
+- **Numberize**  (No shortcut)
+  
+  Adds a number in front of the page name, according to its order in the page panel.  
+If you reorder your pages, run this command again to have them renumbered.
+
 - **Pages to Frames**  (No shortcut)
   
   A command that copies all your pages to frames on a new scratch page.
@@ -301,4 +306,4 @@ Each content is added on a new line.
 
 
 ---
-Orange Commands v1.4.2-dev — last updated Fri Oct 30 18:08:43 +0100 2009
+Orange Commands v1.4.2-dev — last updated Fri Oct 30 18:45:02 +0100 2009
