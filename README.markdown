@@ -101,9 +101,21 @@ Commands to change an object's fill and stroke color. When pressing the shortcut
 ### Export
 
 
+- **All Pages as PNG 24 in…**  (No shortcut)
+  
+  Exports all pages as flattened (non editable) PNG files with a 24 bits color depth.  
+The commands prompts you for a folder to export, and files are saved with the page names as the file names.  
+It also changes the Optimize settings for all pages, because I hate the "GIF as default format" :)
+
 - **All Pages as PNG 24**  (CTRL + ALT + SHIFT + X)
   
-  Exports all pages as flattened (non editable) PNG files with a 24 bits color depth. The files are saved in a folder named YYYYMMDDHHMMSS (i.e: 20091028170642) inside the current folder, with the page names as the file names.
+  Exports all pages as flattened (non editable) PNG files with a 24 bits color depth.  
+The files are saved in a folder named YYYYMMDDHHMMSS (i.e: 20091028170642) inside the current folder, with the page names as the file names.  
+It also changes the Optimize settings for all pages, because I hate the "GIF as default format" :)
+
+- **Current Page as PNG 24 in…**  (No shortcut)
+  
+  Exports the current page as a flattened (non editable) PNG file with a 24 bits color depth. This command will ask you for the filename and folder location, and is specially built for @plumilla.
 
 - **Current Page as PNG 24**  (CTRL + SHIFT + X)
   
@@ -179,9 +191,6 @@ Specially built for <http://limalimon.com.es>
   
   Asks for a new name for the current page. This command was born out of frustration with the way page names are edited in Fireworks CS3. If your page names have more than 10 characters, it's really hard not to get crazy editing names :)
 
-- **Sort**  (No shortcut)
-  
-  
 - **Vertical Trim All Pages**  (CTRL + SHIFT + T)
   
   Trims all pages vertically, fitting the contents. It does not modify the width of the pages.
@@ -292,4 +301,4 @@ Each content is added on a new line.
 
 
 ---
-Orange Commands v1.4.2-dev — last updated Thu Oct 29 19:14:14 +0100 2009
+Orange Commands v1.4.2-dev — last updated Fri Oct 30 18:08:43 +0100 2009

@@ -3,6 +3,7 @@
 
 ## 1.4.2-dev
 - 5e6f548da1 (NEW: Lightbox effect (requested by @kekoponte))
+- 7bdaeb11b2 (NEW: Added two new commands to export current page and export all pages that ask you for the file location (requested by @plumilla))
 
 ## 1.4.1 - 2009-10-29
 - 0b283de113 (Added missing documentation)
