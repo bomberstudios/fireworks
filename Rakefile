@@ -194,9 +194,10 @@ end
 
 desc "Release ZIP files to the world"
 task :release do
+  system("git push origin master")
   @versions.each do |version|
     %x(scp OrangeCommands_#{ORANGE_COMMANDS_VERSION}_#{version}.zip sn:www/dl/)
-    %x(echo "http://sofanaranja.com/dl/OrangeCommands_#{ORANGE_COMMANDS_VERSION}_#{version}.zip"|pbcopy)
+    %x(scp OrangeCommands_#{ORANGE_COMMANDS_VERSION}_#{version}.zip sn:www/dl/orangecommands_latest_#{version}.zip)
   end
 end
 
