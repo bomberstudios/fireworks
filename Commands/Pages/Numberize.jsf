@@ -1,0 +1,35 @@
+/**DOC**
+Adds a number in front of the page name, according to its order in the page panel.  
+If you reorder your pages, run this command again to have them renumbered.
+**DOC**/
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
+};
+
+function pad_number(n){
+  if ( n < 10 ) {
+    return "0" + n;
+  } else {
+    return n.toString();
+  }
+}
+
+try {
+  var i = 1;
+  Pages.each(function(){
+    var doc = fw.getDocumentDOM();
+    var current_pagename = doc.pageName;
+    var regex = /^(\d\d)_/;
+    if (regex.test(current_pagename)) {
+      var new_pagename = current_pagename.replace(regex,pad_number(i) + "_");
+      doc.setPageName(doc.currentPageNum, new_pagename);
+    } else {
+      doc.setPageName(doc.currentPageNum, pad_number(i) + "_" + current_pagename);
+    }
+    i++;
+  });
+} catch(e){
+  alert("Something went terribly wrong...");
+}
