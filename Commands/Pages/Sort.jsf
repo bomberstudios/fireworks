@@ -1,0 +1,24 @@
+/**DOC**
+Sorts the pages in alphabetical order.
+**DOC**/
+
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://github.com/bomberstudios/fireworks/");
+};
+
+function get_page_array(){
+  var page_array = [];
+  Pages.each(function(number){
+    page_array.push(fw.getDocumentDOM().pageName + "******" + fw.getDocumentDOM().currentPageNum);
+  });
+  return page_array;
+}
+
+(Pages.count()).times(function(i){
+  var pages_array = get_page_array().sort();
+  var page_to_sort = pages_array[i];
+  var original_order = page_to_sort.split("******")[1];
+  fw.getDocumentDOM().reorderPages(original_order, i);
+});
