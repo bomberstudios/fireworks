@@ -5,7 +5,7 @@ require "erb"
 require 'fileutils'
 require 'lib/library'
 
-ORANGE_COMMANDS_VERSION = "1.4.2"
+ORANGE_COMMANDS_VERSION = "1.4.3-dev"
 DOWNLOAD_SERVER = "http://sofanaranja.com/dl/"
 @versions = ["CS3","CS4"]
 

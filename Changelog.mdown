@@ -1,5 +1,7 @@
 ## dev
-- nothing yet :)
+- f5d96d8c8a (NEW: Pages » Sort Command)
+- 34495ef440 (API: Added page number parameter to Pages.each callback)
+- 438787d323 (API: Added Number.times() function.)
 
 ## 1.4.2 - 2009-10-30
 - 5e6f548da1 (NEW: Lightbox effect (requested by @kekoponte))
