@@ -197,7 +197,7 @@ task :release do
   system("git push origin master")
   @versions.each do |version|
     %x(scp OrangeCommands_#{ORANGE_COMMANDS_VERSION}_#{version}.zip sn:www/dl/)
-    %x(scp OrangeCommands_#{ORANGE_COMMANDS_VERSION}_#{version}.zip sn:www/dl/orangecommands_latest_#{version}.zip)
+    %x(scp OrangeCommands_#{ORANGE_COMMANDS_VERSION}_#{version}.zip sn:www/dl/orangecommands_latest_#{version.downcase}.zip)
   end
 end
 
