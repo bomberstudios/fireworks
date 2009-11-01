@@ -31,6 +31,11 @@ Array.prototype.each = function(callback){
     }
   };
 };
+Number.prototype.times = function(callback){
+  for (var s=0; s < this; s++){
+    callback.call(this,s);
+  };
+};
 Element.each_in_group = function(callback){
   for (var e=0; e < this.elements.length; e++){
     if (this.elements[e].is_group()) {
