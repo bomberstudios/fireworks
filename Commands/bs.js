@@ -420,7 +420,7 @@ Pages = {
   each: function(callback){
     for(var i=0; i < Pages.count(); i++){
       doc.changeCurrentPage(i);
-      callback.call(this);
+      callback.call(this,i);
     }
   },
   vertical_trim: function(){
