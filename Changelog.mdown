@@ -1,4 +1,6 @@
 ## dev
+
+## 1.4.3 - 2009-11-02
 - f5d96d8c8a (NEW: Pages » Sort Command)
 - 34495ef440 (API: Added page number parameter to Pages.each callback)
 - 438787d323 (API: Added Number.times() function.)
