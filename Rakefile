@@ -22,7 +22,7 @@ task :mxi => [:clean] do
       @documentation = RDiscount.new(File.read("README.markdown")).to_html.gsub(/<h(\d+)>/,"<b>").gsub(/<\/h(\d+)>/,"</b>")
     end
     open("OrangeCommands_#{ORANGE_COMMANDS_VERSION}_#{fw_version}.mxi","w") do |f|
-      f << ERB.new(File.read('OrangeCommands.rmxi')).result
+      f << ERB.new(File.read('tpl/OrangeCommands.rmxi')).result
     end
   end
 end
@@ -43,7 +43,7 @@ task :shortcuts do
 
   @commands = @orangecommands.commands
 
-  new_commands = ERB.new(File.read('OrangeCommands.rxml')).result(binding)
+  new_commands = ERB.new(File.read('tpl/OrangeCommands.rxml')).result(binding)
 
   xml_target_dirs.each do |dir|
     if !File.exist? dir
@@ -102,7 +102,7 @@ end
 desc "Build docs"
 task :readme do
   open("README.markdown","w") do |f|
-    f << ERB.new(File.read("README.erb")).result
+    f << ERB.new(File.read("tpl/README.erb")).result
   end
   system('maruku README.markdown')
 end
