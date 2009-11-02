@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<macromedia-extension name="Orange Commands " version="<%= ORANGE_COMMANDS_VERSION %>" type="command" requires-restart="true">
+<macromedia-extension name="Orange Commands" version="<%= ORANGE_COMMANDS_VERSION %>" type="command" requires-restart="true">
   <author name="Ale Muñoz" />
   <products>
     <product name="Fireworks" version="8" primary="true" />

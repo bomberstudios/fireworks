@@ -1,7 +1,6 @@
 module FW
   class Library
 
-
     attr_accessor :path, :categories, :commands
 
     def initialize folder
@@ -9,6 +8,10 @@ module FW
       @commands = Dir["#{path}/**/**.jsf"].map { |filename| FW::Command.new(filename)}
       @categories = Dir["#{path}/**"].reject { |filename| !File.directory?(filename) || filename =~ /Development/ }.map { |filename| FW::Category.new(filename) }
       yield if block_given?
+    end
+
+    def files
+      Dir["#{path}/**/**.jsf","#{path}/**/**.js"].reject { |o| (o =~ /Development/) }
     end
   end
   class Command

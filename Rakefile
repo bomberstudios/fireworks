@@ -8,12 +8,11 @@ require 'lib/library'
 ORANGE_COMMANDS_VERSION = "1.4.3"
 DOWNLOAD_SERVER = "http://sofanaranja.com/dl/"
 @fw_versions = ["CS3","CS4"]
-
 @orangecommands = FW::Library.new 'Commands'
 
 desc "Build MXI file with Commands"
 task :mxi => [:clean] do
-  @files = Dir["Commands/**/**.jsf","Commands/**/**.js"].reject { |o| (o =~ /Development/) }
+  @files = @orangecommands.files
   @fw_versions.each do |fw_version|
     case fw_version
     when "CS3"
@@ -73,6 +72,7 @@ end
 
 task :clean do
   FileUtils.rm Dir.glob(["*.mxi","*.mxp","*.zip","README.html"])
+  system("rm -Rf pkg")
 end
 
 desc "Pack OrangeCommands as ZIP files"
@@ -82,6 +82,8 @@ task :pack do
     %x(zip -9 OrangeCommands_#{ORANGE_COMMANDS_VERSION}_#{version}.zip OrangeCommands_#{ORANGE_COMMANDS_VERSION}_#{version}.mxp *.xml README.html)
     %x(rm *.xml)
   end
+  FileUtils.mkdir_p "pkg/#{ORANGE_COMMANDS_VERSION}"
+  system("mv *.zip *.mxi *.mxp pkg/#{ORANGE_COMMANDS_VERSION}/")
 end
 
 desc "Release ZIP files to the world"
