@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<macromedia-extension name="Orange Commands " version="<%= ORANGE_COMMANDS_VERSION %>" type="command" requires-restart="true">
+  <author name="Ale Muñoz" />
+  <products>
+    <product name="Fireworks" version="8" primary="true" />
+  </products>
+  <description>
+    <![CDATA[
+    An amazingly wonderful collection of Commands for Fireworks :)
+    ]]>
+  </description>
+  <ui-access>
+    <![CDATA[
+<%= @documentation %>
+    ]]>
+  </ui-access>
+  <files>
+<% @files.each do |filename| %>    <file source="<%= filename %>" destination="$fireworks/Configuration/<%= filename %>" />
+<% end %>
+  </files>
+</macromedia-extension>
