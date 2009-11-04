@@ -1,5 +1,11 @@
 /**DOC**
-Creates a Lightbox from the current page.
+Creates a Lightbox.  
+What the command does is this:  
+  - Duplicates the current page.
+  - Selects everything.
+  - Flattens the selection and locks the resulting bitmap image.
+  - Adds a black, semitransparent overlay and locks it.
+  - Creates a white rectangle on top of everything.
 **DOC**/
 
 try {
