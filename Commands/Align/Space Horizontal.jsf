@@ -1,6 +1,11 @@
 /**DOC**
 Distributes the selected elements horizontally, with the same distante beetween them.
 **DOC***/
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
+};
 if (fw.selection.length > 0) {
   var spacing = prompt("Horizontal spacing:");
   function sort_by_position(a,b){
@@ -10,7 +15,7 @@ if (fw.selection.length > 0) {
   sel = sel.concat(fw.selection).sort(sort_by_position);
   var position = sel[0].left;
   for(var i = 0 ; i < sel.length; i++ ){
-    sel[i].left = Math.floor(position);
+    sel[i].set_position(position, sel[i].top);
     position = sel[i].left + sel[i].width + spacing;
   }
 };

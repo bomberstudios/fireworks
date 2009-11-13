@@ -1,6 +1,11 @@
 /**DOC**
 Distributes the selected elements vertically, with the same distante beetween them.
 **DOC***/
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
+};
 if (fw.selection.length > 0) {
   var spacing = prompt("Vertical spacing:");
   function sort_by_vertical_position(a,b){
@@ -10,7 +15,7 @@ if (fw.selection.length > 0) {
   sel = sel.concat(fw.selection).sort(sort_by_vertical_position);
   var position = sel[0].top;
   for(var i = 0 ; i < sel.length; i++ ){
-    sel[i].top = Math.floor(position);
+    sel[i].set_position(sel[i].left, position);
     position = sel[i].top + sel[i].height + spacing;
   }
 };
