@@ -5,8 +5,8 @@ require "erb"
 require 'fileutils'
 require 'lib/library'
 
-ORANGE_COMMANDS_VERSION = "1.4.3"
-DOWNLOAD_SERVER = "http://sofanaranja.com/dl/"
+ORANGE_COMMANDS_VERSION = "1.4.4"
+DOWNLOAD_SERVER = "http://orangecommands.com/dl/"
 @fw_versions = ["CS3","CS4"]
 @orangecommands = FW::Library.new 'Commands'
 
@@ -79,7 +79,7 @@ desc "Pack OrangeCommands as ZIP files"
 task :pack do
   @fw_versions.each do |version|
     %x(cp "en/Keyboard\ Shortcuts/#{version}/"*.xml .)
-    %x(zip -9 OrangeCommands_#{ORANGE_COMMANDS_VERSION}_#{version}.zip OrangeCommands_#{ORANGE_COMMANDS_VERSION}_#{version}.mxp *.xml README.html)
+    %x(zip -9 "OrangeCommands_#{ORANGE_COMMANDS_VERSION}_#{version}.zip" OrangeCommands_#{ORANGE_COMMANDS_VERSION}_#{version}.mxp *.xml README.html)
     %x(rm *.xml)
   end
   FileUtils.mkdir_p "pkg/#{ORANGE_COMMANDS_VERSION}"
@@ -90,8 +90,8 @@ desc "Release ZIP files to the world"
 task :release do
   system("git push origin master")
   @fw_versions.each do |version|
-    %x(scp pkg/#{ORANGE_COMMANDS_VERSION}/OrangeCommands_#{ORANGE_COMMANDS_VERSION}_#{version}.zip sn:www/dl/)
-    %x(scp pkg/#{ORANGE_COMMANDS_VERSION}/OrangeCommands_#{ORANGE_COMMANDS_VERSION}_#{version}.zip sn:www/dl/orangecommands_latest_#{version.downcase}.zip)
+    %x(scp pkg/#{ORANGE_COMMANDS_VERSION}/OrangeCommands_#{ORANGE_COMMANDS_VERSION}_#{version}.zip oc:www/dl/)
+    %x(scp pkg/#{ORANGE_COMMANDS_VERSION}/OrangeCommands_#{ORANGE_COMMANDS_VERSION}_#{version}.zip oc:www/dl/orangecommands_latest_#{version.downcase}.zip)
   end
 end
 
