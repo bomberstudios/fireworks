@@ -1,11 +1,11 @@
-# Orange Commands v1.4.3 for Adobe Fireworks
+# Orange Commands v1.4.4 for Adobe Fireworks
 
 Orange Commands is a collection of scripts for Adobe Fireworks CS3 and CS4 that make the life of a web designer easier (or at least allow him/her to work faster :)
 
 
 ## Installation
 
-1. Download Orange Commands [for Fireworks CS3](http://sofanaranja.com/dl/OrangeCommands_1.4.3_CS3.zip) or [for Fireworks CS4](http://sofanaranja.com/dl/OrangeCommands_1.4.3_CS4.zip)
+1. Download Orange Commands [for Fireworks CS3](http://orangecommands.com/dl/OrangeCommands_1.4.4_CS3.zip) or [for Fireworks CS4](http://orangecommands.com/dl/OrangeCommands_1.4.4_CS4.zip)
 2. Expand the ZIP.
 3. Double click the MXP file to install the commands.
 4. To install the custom keyboard shortcuts, copy the XML files to:
@@ -24,6 +24,17 @@ Orange Commands is a collection of scripts for Adobe Fireworks CS3 and CS4 that 
 
 ## Commands: What they do, and how to use them
 
+
+### Align
+
+
+- **Space Horizontal**  (No shortcut)
+  
+  Distributes the selected elements horizontally, with the same distante beetween them.
+
+- **Space Vertical**  (No shortcut)
+  
+  Distributes the selected elements vertically, with the same distante beetween them.
 
 ### Alpha
 A collection of commands to change an object's alpha. They work on the currently selected object(s). If the selection is a group, the transparency is changed for the whole group.
@@ -90,7 +101,13 @@ Commands to change an object's fill and stroke color. When pressing the shortcut
 
 - **Lightbox**  (No shortcut)
   
-  Creates a Lightbox from the current page.
+  Creates a Lightbox.  
+What the command does is this:  
+  - Duplicates the current page.
+  - Selects everything.
+  - Flattens the selection and locks the resulting bitmap image.
+  - Adds a black, semitransparent overlay and locks it.
+  - Creates a white rectangle on top of everything.
 
 - **Reflection**  (No shortcut)
   
@@ -308,4 +325,4 @@ Each content is added on a new line.
 
 
 ---
-Orange Commands v1.4.3 — last updated Mon Nov 02 12:19:17 +0100 2009
+Orange Commands v1.4.4 — last updated Fri Nov 13 13:38:06 +0100 2009
