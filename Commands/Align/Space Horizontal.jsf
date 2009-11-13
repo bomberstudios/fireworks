@@ -10,7 +10,7 @@ if (fw.selection.length > 0) {
   sel = sel.concat(fw.selection).sort(sort_by_position);
   var position = sel[0].left;
   for(var i = 0 ; i < sel.length; i++ ){
-    sel[i].left = position;
+    sel[i].left = Math.floor(position);
     position = sel[i].left + sel[i].width + spacing;
   }
 };

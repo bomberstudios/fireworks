@@ -10,7 +10,7 @@ if (fw.selection.length > 0) {
   sel = sel.concat(fw.selection).sort(sort_by_vertical_position);
   var position = sel[0].top;
   for(var i = 0 ; i < sel.length; i++ ){
-    sel[i].top = position;
+    sel[i].top = Math.floor(position);
     position = sel[i].top + sel[i].height + spacing;
   }
 };
