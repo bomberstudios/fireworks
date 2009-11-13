@@ -1,14 +1,16 @@
 /**DOC**
 Distributes the selected elements horizontally, with the same distante beetween them.
 **DOC***/
-var spacing = prompt("Horizontal spacing:");
-function sort_by_position(a,b){
-  return a.left - b.left;
-}
-var sel = new Array();
-sel = sel.concat(fw.selection).sort(sort_by_position);
-var position = sel[0].left;
-for(var i = 0 ; i < sel.length; i++ ){
-  sel[i].left = position;
-  position = sel[i].left + sel[i].width + spacing;
-}
+if (fw.selection.length > 0) {
+  var spacing = prompt("Horizontal spacing:");
+  function sort_by_position(a,b){
+    return a.left - b.left;
+  }
+  var sel = new Array();
+  sel = sel.concat(fw.selection).sort(sort_by_position);
+  var position = sel[0].left;
+  for(var i = 0 ; i < sel.length; i++ ){
+    sel[i].left = position;
+    position = sel[i].left + sel[i].width + spacing;
+  }
+};
