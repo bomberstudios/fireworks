@@ -1,7 +1,7 @@
 /**DOC**
 Distributes the selected elements vertically, with the same distante beetween them.
 **DOC***/
-if (fw.selection.length < 0) {
+if (fw.selection.length > 0) {
   var spacing = prompt("Vertical spacing:");
   function sort_by_vertical_position(a,b){
     return a.top - b.top;
