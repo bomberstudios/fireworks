@@ -1,0 +1,14 @@
+/**DOC**
+Distributes the selected elements vertically, with the same distante beetween them.
+**DOC***/
+var spacing = prompt("Vertical spacing:");
+function sort_by_vertical_position(a,b){
+  return a.top - b.top;
+}
+var sel = new Array();
+sel = sel.concat(fw.selection).sort(sort_by_vertical_position);
+var position = sel[0].top;
+for(var i = 0 ; i < sel.length; i++ ){
+  sel[i].top = position;
+  position = sel[i].top + sel[i].height + spacing;
+}
