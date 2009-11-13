@@ -1,4 +1,5 @@
 ## dev
+- 240d7f05fe (NEW: Space Horizontal and Vertical commands, to distribute objects using a fixed distance.)
 
 ## 1.4.3 - 2009-11-02
 - f5d96d8c8a (NEW: Pages » Sort Command)
