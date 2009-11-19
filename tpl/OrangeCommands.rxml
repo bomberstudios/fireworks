@@ -1,5 +1,5 @@
 <dynamic_commands><% @commands.each do |command| %>
-  <jscommand name="<%= command.name %>" count="1" >
-    <shortcut text="<%= command.modifier %> <%= command.key %>" />
-  </jscommand><% end %>
-</dynamic_commands>
+		<jscommand name="<%= command.name %>" count="1" >
+			<shortcut text="<%= command.modifier %> <%= command.key %>" />
+		</jscommand><% end %>
+	</dynamic_commands>

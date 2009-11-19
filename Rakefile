@@ -40,7 +40,7 @@ task :shortcuts do
 
   LINE_REGEXP = /<dynamic_commands \/>|<dynamic_commands >(.+)<\/dynamic_commands>/ # cr(ap|ee)py
 
-  @commands = @orangecommands.commands
+  @commands = @orangecommands.commands.reject { |command| command.shortcut == "No shortcut" }
 
   new_commands = ERB.new(File.read('tpl/OrangeCommands.rxml')).result(binding)
 
