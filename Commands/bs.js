@@ -286,11 +286,17 @@ Selection = {
   },
   each: function(callback){ fw.selection.each(callback); },
   save: function(){
+    Selection.forget();
     if (fw.selection != null && fw.selection.length > 0) {
       Selection.each(function(e){
         e.customData['is_selected'] = true;
       });
     }
+  },
+  forget: function(){
+    Selection.each(function(e){
+      e.customData['is_selected'] = false;
+    });
   },
   restore: function() {
     var doc = fw.getDocumentDOM();
