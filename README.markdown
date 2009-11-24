@@ -308,7 +308,7 @@ All Size commands support math operations, so you can quickly make an object 23 
 
 - **Arialize Selection**  (CTRL + A)
   
-  Sets currently selected text blocks to Arial with 'smooth' antialiasing.
+  Sets currently selected text blocks to Arial.
 
 - **Disable Antialias**  (No shortcut)
   
@@ -325,4 +325,4 @@ Each content is added on a new line.
 
 
 ---
-Orange Commands v1.4.6 — last updated Tue Nov 24 19:05:28 +0100 2009
+Orange Commands v1.4.6 — last updated Tue Nov 24 19:12:25 +0100 2009
