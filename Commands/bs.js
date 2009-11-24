@@ -11,17 +11,7 @@ FwArray.prototype.clone = function(){
   }
   return tmp_array;
 };
-FwArray.prototype.each = function(callback){
-  for (var s=0; s < this.length; s++){
-    var el = this[s];
-    if (el.is_group()) {
-      el.each_in_group(callback);
-    } else {
-      callback.call(this,el);
-    }
-  };
-};
-Array.prototype.each = function(callback){
+FwArray.prototype.each = Array.prototype.each = function(callback){
   for (var s=0; s < this.length; s++){
     var el = this[s];
     if (el.is_group()) {
@@ -62,7 +52,7 @@ Element.resize = function(w,h){
     // FIXME: Object is a symbol, and they sometimes get destroyed when resized below its minimum size
   //};
   if(isNaN(w) || isNaN(h)) return;
-  Selection.save();
+  Selection.save(); // there's a bug here somewhere
   fw.selection = this;
   // Round numbers, because half pixels suck big time
   var x_pos = Math.round(this.left);
