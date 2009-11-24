@@ -5,7 +5,7 @@ require "erb"
 require 'fileutils'
 require 'lib/library'
 
-ORANGE_COMMANDS_VERSION = "1.4.5"
+ORANGE_COMMANDS_VERSION = "1.4.6"
 DOWNLOAD_SERVER = "http://orangecommands.com/dl/"
 @fw_versions = ["CS3","CS4"]
 @orangecommands = FW::Library.new 'Commands'
