@@ -72,7 +72,6 @@ end
 
 task :clean do
   FileUtils.rm Dir.glob(["*.mxi","*.mxp","*.zip","README.html"])
-  system("rm -Rf pkg")
 end
 
 desc "Pack OrangeCommands as ZIP files"
