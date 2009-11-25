@@ -1,3 +1,6 @@
+## 1.4.7 - 2009-11-25
+- 020fa0d31a (NEW: Repeat Vertical and Horizontal commands.)
+
 ## 1.4.6 - 2009-11-24
 - aed95b277d (This will hopefully fix a bug that occurs when resizing objects via keyboard, where random objects would be added to the selection (and thus resized).)
 - 5be6564c8a (Do not antialias text when Arializing)

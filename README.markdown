@@ -1,11 +1,11 @@
-# Orange Commands v1.4.6 for Adobe Fireworks
+# Orange Commands v1.4.7 for Adobe Fireworks
 
 Orange Commands is a collection of scripts for Adobe Fireworks CS3 and CS4 that make the life of a web designer easier (or at least allow him/her to work faster :)
 
 
 ## Installation
 
-1. Download Orange Commands [for Fireworks CS3](http://orangecommands.com/dl/OrangeCommands_1.4.6_CS3.zip) or [for Fireworks CS4](http://orangecommands.com/dl/OrangeCommands_1.4.6_CS4.zip)
+1. Download Orange Commands [for Fireworks CS3](http://orangecommands.com/dl/OrangeCommands_1.4.7_CS3.zip) or [for Fireworks CS4](http://orangecommands.com/dl/OrangeCommands_1.4.7_CS4.zip)
 2. Expand the ZIP.
 3. Double click the MXP file to install the commands.
 4. To install the custom keyboard shortcuts, copy the XML files to:
@@ -112,6 +112,14 @@ What the command does is this:
 - **Reflection**  (No shortcut)
   
   It creates a "wet floor" reflection of the currently selected object(s). The command asks for the reflection's height.
+
+- **Repeat Horizontal**  (No shortcut)
+  
+  Repeats the currently selected object(s) horizontally. It asks for the number of copies and the distance between them.
+
+- **Repeat Vertical**  (No shortcut)
+  
+  Repeats the currently selected object(s) vertically. It asks for the number of copies and the distance between them.
 
 ### Export
 
@@ -325,4 +333,4 @@ Each content is added on a new line.
 
 
 ---
-Orange Commands v1.4.6 — last updated Tue Nov 24 19:12:25 +0100 2009
+Orange Commands v1.4.7 — last updated Wed Nov 25 11:10:05 +0100 2009
