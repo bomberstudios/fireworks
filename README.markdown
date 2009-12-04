@@ -1,11 +1,11 @@
-# Orange Commands v1.4.7 for Adobe Fireworks
+# Orange Commands v1.4.8 for Adobe Fireworks
 
 Orange Commands is a collection of scripts for Adobe Fireworks CS3 and CS4 that make the life of a web designer easier (or at least allow him/her to work faster :)
 
 
 ## Installation
 
-1. Download Orange Commands [for Fireworks CS3](http://orangecommands.com/dl/OrangeCommands_1.4.7_CS3.zip) or [for Fireworks CS4](http://orangecommands.com/dl/OrangeCommands_1.4.7_CS4.zip)
+1. Download Orange Commands [for Fireworks CS3](http://orangecommands.com/dl/OrangeCommands_1.4.8_CS3.zip) or [for Fireworks CS4](http://orangecommands.com/dl/OrangeCommands_1.4.8_CS4.zip)
 2. Expand the ZIP.
 3. Double click the MXP file to install the commands.
 4. To install the custom keyboard shortcuts, copy the XML files to:
@@ -135,6 +135,7 @@ It also changes the Optimize settings for all pages, because I hate the "GIF as 
   Exports all pages as flattened (non editable) PNG files with a 24 bits color depth.  
 The files are saved in a folder named YYYYMMDDHHMMSS (i.e: 20091028170642) inside the current folder, with the page names as the file names.  
 It also changes the Optimize settings for all pages, because I hate the "GIF as default format" :)
+FIXME: CS5
 
 - **Current Page as PNG 24 in…**  (No shortcut)
   
@@ -197,6 +198,14 @@ Commands to create grids using guides (the commands formerly known as "Reticulat
 - **Copy to Page**  (No shortcut)
   
   Asks for a page number, and copies the guides from the current page to that one.
+
+- **Copy**  (No shortcut)
+  
+  Copies the guides from the current page.
+
+- **Paste**  (No shortcut)
+  
+  Pastes the guides copied with the "Guides » Copy" command (works accross documents!).
 
 ### Pages
 
@@ -333,4 +342,4 @@ Each content is added on a new line.
 
 
 ---
-Orange Commands v1.4.7 — last updated Wed Nov 25 11:10:05 +0100 2009
+Orange Commands v1.4.8 — last updated Fri Dec 04 12:42:02 +0100 2009

@@ -5,7 +5,7 @@ require "erb"
 require 'fileutils'
 require 'lib/library'
 
-ORANGE_COMMANDS_VERSION = "1.4.7"
+ORANGE_COMMANDS_VERSION = "1.4.8"
 DOWNLOAD_SERVER = "http://orangecommands.com/dl/"
 @fw_versions = ["CS3","CS4"]
 @orangecommands = FW::Library.new 'Commands'
@@ -29,14 +29,8 @@ end
 desc "Build XML for keyboard shortcuts"
 task :shortcuts do
   running_folder = %x(pwd).chomp
-  xml_source_dirs = [
-    "/Applications/Adobe Fireworks CS3/Adobe Fireworks CS3.app/Contents/Resources/en.lproj/Keyboard Shortcuts/",
-    "/Applications/Adobe Fireworks CS4/Adobe Fireworks CS4.app/Contents/Resources/en.lproj/Keyboard Shortcuts/"
-  ]
-  xml_target_dirs = [
-    "en/Keyboard\ Shortcuts/CS3",
-    "en/Keyboard\ Shortcuts/CS4"
-  ]
+  xml_source_dirs = @fw_versions.map { |v| "/Applications/Adobe Fireworks #{v}/Adobe Fireworks #{v}.app/Contents/Resources/en.lproj/Keyboard Shortcuts/" }
+  xml_target_dirs = @fw_versions.map { |v| "en/Keyboard\ Shortcuts/#{v}" }
 
   LINE_REGEXP = /<dynamic_commands \/>|<dynamic_commands >(.+)<\/dynamic_commands>/ # cr(ap|ee)py
 
