@@ -1,3 +1,6 @@
+## 1.4.8 - 2009-12-04
+- 5e1c0e02be (Added "Guide » Copy" and "Guide » Paste")
+
 ## 1.4.7 - 2009-11-25
 - 020fa0d31a (NEW: Repeat Vertical and Horizontal commands.)
 
