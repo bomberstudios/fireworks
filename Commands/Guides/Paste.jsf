@@ -1,0 +1,28 @@
+/**DOC**
+Pastes the guides copied with the "Guides » Copy" command (works accross documents!).
+**DOC**/
+
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://github.com/bomberstudios/fireworks/");
+};
+
+doc = fw.getDocumentDOM();
+fileURL = Files.makePathFromDirAndFile(fw.userJsCommandsDir,'guides.txt');
+
+file = Files.open(fileURL, false);
+
+if (file) {
+  vGuides = file.readline().split(',');
+  hGuides = file.readline().split(',');
+
+  for (var k = vGuides.length - 1; k >= 0; k--){
+    doc.addGuide(vGuides[k],"vertical");
+  };
+  for (var l = hGuides.length - 1; l >= 0; l--){
+    doc.addGuide(hGuides[l],"horizontal");
+  };
+
+  file.close();
+};

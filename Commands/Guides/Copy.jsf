@@ -1,0 +1,27 @@
+/**DOC**
+Copies the guides from the current page.
+**DOC**/
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
+};
+
+
+function file_create(contents){
+  fileURL = Files.makePathFromDirAndFile(fw.userJsCommandsDir,'guides.txt').toString();
+  if (!Files.exists(fileURL)){
+    Files.createFile(fileURL, ".txt", "TEXT");
+  }
+  var fileReference = Files.open(fileURL, true);
+  if (fileReference){
+    fileReference.write(contents);
+    fileReference.close();
+    return true;
+  }
+  return false;
+}
+
+doc = fw.getDocumentDOM();
+current_guides = Guides.get();
+file_create(current_guides.vGuides.toString() + "\n" + current_guides.hGuides.toString());
