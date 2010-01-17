@@ -1,0 +1,26 @@
+/**DOC**
+Adds a bullet sign (•) in front of every line in the selected text box(es).
+**DOC**/
+
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://github.com/bomberstudios/fireworks/");
+};
+Selection.each(function(t){
+  var merged_text = {};
+  merged_text.initialAttrs = t.textRuns.initialAttrs;
+  merged_text.textRuns = [];
+  for ( var i = 0; i < t.textRuns.textRuns.length; i++ ) {
+    var current_text_run = t.textRuns.textRuns[i];
+    var splitted_text = current_text_run.characters.split("\r");
+    for(var j=0; j < splitted_text.length; j++){
+      if(splitted_text[j] != ""){
+        splitted_text[j] = "\u2022 " + splitted_text[j];
+      }
+    }
+    current_text_run.characters = splitted_text.join("\r");
+    merged_text.textRuns.push(current_text_run);
+  }
+  fw.getDocumentDOM().setTextRuns(merged_text);
+});
