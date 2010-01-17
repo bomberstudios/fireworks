@@ -1,5 +1,5 @@
 /**DOC**
-Adds a number in front of the page name, according to its order in the page panel.  
+Adds a number in front of every page name (except the Master Page), according to its order in the page panel.  
 If you reorder your pages, run this command again to have them renumbered.
 **DOC**/
 try {
