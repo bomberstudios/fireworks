@@ -18,6 +18,9 @@ function pad_number(n){
 
 try {
   var i = 1;
+  if (fw.getDocumentDOM().hasMasterPage()) {
+    i = 0; // we don't want to number the master page...
+  };
   Pages.each(function(){
     var doc = fw.getDocumentDOM();
     var current_pagename = doc.pageName;
