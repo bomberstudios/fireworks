@@ -1,11 +1,11 @@
-# Orange Commands v1.4.8 for Adobe Fireworks
+# Orange Commands v1.4.9 for Adobe Fireworks
 
 Orange Commands is a collection of scripts for Adobe Fireworks CS3 and CS4 that make the life of a web designer easier (or at least allow him/her to work faster :)
 
 
 ## Installation
 
-1. Download Orange Commands [for Fireworks CS3](http://orangecommands.com/dl/OrangeCommands_1.4.8_CS3.zip) or [for Fireworks CS4](http://orangecommands.com/dl/OrangeCommands_1.4.8_CS4.zip)
+1. Download Orange Commands [for Fireworks CS3](http://orangecommands.com/dl/OrangeCommands_1.4.9_CS3.zip) or [for Fireworks CS4](http://orangecommands.com/dl/OrangeCommands_1.4.9_CS4.zip)
 2. Expand the ZIP.
 3. Double click the MXP file to install the commands.
 4. To install the custom keyboard shortcuts, copy the XML files to:
@@ -135,7 +135,6 @@ It also changes the Optimize settings for all pages, because I hate the "GIF as 
   Exports all pages as flattened (non editable) PNG files with a 24 bits color depth.  
 The files are saved in a folder named YYYYMMDDHHMMSS (i.e: 20091028170642) inside the current folder, with the page names as the file names.  
 It also changes the Optimize settings for all pages, because I hate the "GIF as default format" :)
-FIXME: CS5
 
 - **Current Page as PNG 24 in…**  (No shortcut)
   
@@ -216,7 +215,7 @@ Commands to create grids using guides (the commands formerly known as "Reticulat
 
 - **Numberize**  (No shortcut)
   
-  Adds a number in front of the page name, according to its order in the page panel.  
+  Adds a number in front of every page name (except the Master Page), according to its order in the page panel.  
 If you reorder your pages, run this command again to have them renumbered.
 
 - **Pages to Frames**  (No shortcut)
@@ -327,6 +326,14 @@ All Size commands support math operations, so you can quickly make an object 23 
   
   Sets currently selected text blocks to Arial.
 
+- **Bulletize with…**  (No shortcut)
+  
+  Adds a custom bullet sign in front of every line in the selected text box(es).
+
+- **Bulletize**  (No shortcut)
+  
+  Adds a bullet sign (•) in front of every line in the selected text box(es).
+
 - **Disable Antialias**  (No shortcut)
   
   Disable text antialiasing in all pages of the current document.
@@ -340,6 +347,10 @@ All Size commands support math operations, so you can quickly make an object 23 
   Creates a new text object containing the selected text objects’ content.
 Each content is added on a new line.
 
+- **Verdanize Selection**  (No shortcut)
+  
+  Sets currently selected text blocks to Verdana.
+
 
 ---
-Orange Commands v1.4.8 — last updated Fri Dec 04 12:42:02 +0100 2009
+Orange Commands v1.4.9 — last updated Sun Jan 17 20:12:31 +0100 2010
