@@ -19,8 +19,15 @@ def app_folder
   end
 end
 
+desc "Update About... command"
+task :about do
+  open("Commands/About\ Orange\ Commands.jsf","w") do |f|
+    f << ERB.new(File.read("tpl/About\ Orange\ Commands.jsf")).result
+  end
+end
+
 desc "Build MXI file with Commands"
-task :mxi => [:clean] do
+task :mxi => [:clean, :about] do
   @files = @orangecommands.files
   @fw_versions.each do |fw_version|
     case fw_version

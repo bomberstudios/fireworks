@@ -1,0 +1,1 @@
+alert('Orange Commands v<%= ORANGE_COMMANDS_VERSION %>');
