@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require "rubygems"
 require "rake"
 require "rdiscount"
@@ -9,6 +11,13 @@ ORANGE_COMMANDS_VERSION = "1.4.9"
 DOWNLOAD_SERVER = "http://orangecommands.com/dl/"
 @fw_versions = ["CS3","CS4"]
 @orangecommands = FW::Library.new 'Commands'
+
+def app_folder
+  os = RUBY_PLATFORM
+  if os =~"darwin"
+    "/Applications/"
+  end
+end
 
 desc "Build MXI file with Commands"
 task :mxi => [:clean] do
