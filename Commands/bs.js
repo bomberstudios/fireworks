@@ -442,3 +442,10 @@ Sort = {
     return a.left - b.left;
   }
 };
+
+UI = {
+  prompt: function(txt,default_value){
+    setTimeout('quit()',10000);
+    return prompt(txt,default_value);
+  }
+};
