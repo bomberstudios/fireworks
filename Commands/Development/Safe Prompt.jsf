@@ -1,0 +1,14 @@
+// Rationale: Fireworks gets crazy every now and then, and locks you out of clicking on any window (the infamous "floating panel of hell")
+// This script will try to add a timeout to any script that opens a prompt, and exit the script if it hasn't received text input in a reasonable amount of time.
+
+// UI = {
+//   prompt: function(txt,default_value){
+//     //setTimeout('quit()',10000);
+//     return prompt(txt,default_value);
+//   }
+// };
+
+// var foo = UI.prompt("foo?","bar");
+// alert(foo);
+
+alert(document);

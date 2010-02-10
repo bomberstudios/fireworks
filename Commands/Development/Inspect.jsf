@@ -1,0 +1,16 @@
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
+};
+
+function inspect(o){
+  var debug = '';
+  for (var item in o){
+    debug += item + ": " + o[item] + "\n";
+  }
+  alert(debug);
+  File.create(debug);
+}
+// var what = prompt("What do you want to inspect today?");
+inspect(fw.selection[0]);

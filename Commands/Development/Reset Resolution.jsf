@@ -1,0 +1,10 @@
+/**DOC**
+Rationale:  
+Fireworks has a rounding bug where if you change the resolution units on your document it will fail to remem
+This command resets all open documents' resolution to 72 pixels per inch, as god intended.
+**DOC**/
+
+for (var i=0; i < fw.documents.length; i++) {
+  fw.documents[i].resolution = 72;
+  fw.documents[i].resolutionUnits = 'inch';
+};

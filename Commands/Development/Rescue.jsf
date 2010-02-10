@@ -1,0 +1,18 @@
+function fix_date(num){
+  num = num.toString();
+  if (num.length < 2) {
+    num = "0" + num;
+  };
+  return num;
+}
+
+var d = new Date();
+var year = d.getFullYear();
+var month = fix_date((d.getMonth() + 1));
+var day = fix_date(d.getDate());
+var hour = fix_date(d.getHours());
+var minute = fix_date(d.getMinutes());
+var seconds = fix_date(d.getSeconds());
+var file_name = year + month + day + hour + minute + seconds;
+
+fw.saveDocumentCopyAs(null, fw.userSymbolLibrariesDir + '/../../../../../Desktop/rescued_document_' + file_name + '.png', false);
