@@ -252,9 +252,7 @@ Guides = {
 
 Selection = {
   get_bounds: function(){
-    doc = fw.getDocumentDOM();
-    sel = doc.getSelectionBounds();
-    return sel;
+    return fw.getDocumentDOM().getSelectionBounds();
   },
   width: function(){
     sel = Selection.get_bounds();
