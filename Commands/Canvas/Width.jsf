@@ -1,0 +1,15 @@
+// shortcut: CTRL + ALT + W
+/**DOC**
+Sets the width of the canvas.
+**DOC**/
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
+};
+
+var default_width = fw.getDocumentDOM().width;
+
+var w = prompt("Object Height in Pixels",default_width);
+
+fw.getDocumentDOM().setDocumentCanvasSize({left:0, top:0, right:eval(w), bottom: fw.getDocumentDOM().height}, false);

@@ -1,5 +1,6 @@
 ## 1.4.10 - 2010-01-21
 - e6b9f81487 (Fixed a fantabulous bug with the Page » Vertical Trim commands. Feel free to check the diff for some deep insight on the issue.)
+- afbee6d615 (Added Canvas commands for http://intemperie.me)
 
 ## 1.4.9 - 2010-01-17
 - 126c536259 (Don't add a number to the Master Page, as it is not needed 99% of the time.)

@@ -80,6 +80,21 @@ A collection of commands to change an object's alpha. They work on the currently
   
   Set the selected objects’ alpha to 90%
 
+### Canvas
+
+
+- **Height**  (CTRL + ALT + H)
+  
+  Sets the height of the canvas.
+
+- **Size**  (CTRL + ALT + S)
+  
+  Sets the size of the canvas.
+
+- **Width**  (CTRL + ALT + W)
+  
+  Sets the width of the canvas.
+
 ### Color
 Commands to change an object's fill and stroke color. When pressing the shortcut, a color picker will appear at the mouse pointer's position, allowing you to pick a color quite fast.
 
@@ -353,4 +368,4 @@ Each content is added on a new line.
 
 
 ---
-Orange Commands v1.4.10 — last updated Thu Jan 21 19:42:19 +0100 2010
+Orange Commands v1.4.10 — last updated Fri Feb 12 14:03:25 +0100 2010

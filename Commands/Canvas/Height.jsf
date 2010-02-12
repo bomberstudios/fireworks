@@ -1,0 +1,15 @@
+// shortcut: CTRL + ALT + H
+/**DOC**
+Sets the height of the canvas.
+**DOC**/
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
+};
+
+var default_height = fw.getDocumentDOM().height;
+
+var h = prompt("Object Height in Pixels",default_height);
+
+fw.getDocumentDOM().setDocumentCanvasSize({left:0, top:0, right:fw.getDocumentDOM().width, bottom:eval(h)}, false);
