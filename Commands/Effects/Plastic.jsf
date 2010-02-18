@@ -1,0 +1,70 @@
+/**DOC**
+Fills the selected object with a vertical gradient based on the current color, giving it a 'Plastic' effect.
+**DOC**/
+/* colorscale function created by: Joseph Myers | http://www.codelib.net/ */
+
+function colorscale(hexstr, scalefactor) {
+  var r = scalefactor;
+  var a, i;
+  if (r < 0 || typeof(hexstr) != 'string') {
+    return hexstr;
+  }
+  hexstr = hexstr.replace(/[^0-9a-f]+/ig, '');
+  if (hexstr.length == 3) {
+    a = hexstr.split('');
+  } else if (hexstr.length == 6) {
+    a = hexstr.match(/(\w{2})/g);
+  } else {
+    return hexstr;
+  }
+  for (i=0; i<a.length; i++) {
+    if (a[i].length == 2) {
+      a[i] = parseInt(a[i], 16);
+    } else {
+      a[i] = parseInt(a[i], 16);
+      a[i] = a[i]*16 + a[i];
+    }
+  }
+
+  var maxColor = parseInt('ff', 16);
+
+  function relsize(a) {
+    if (a == maxColor)
+    return Infinity;
+    return a/(maxColor-a);
+  }
+
+  function relsizeinv(y) {
+    if (y == Infinity)
+    return maxColor;
+    return maxColor*y/(1+y);
+  }
+
+  for (i=0; i<a.length; i++) {
+    a[i] = relsizeinv(relsize(a[i])*r);
+    a[i] = Math.floor(a[i]).toString(16);
+    if (a[i].length == 1)
+    a[i] = '0' + a[i];
+  }
+  return a.join('');
+}
+
+var original_color = fw.selection[0].pathAttributes.fillColor;
+var lighter_color = "#" + colorscale(original_color,2.5);
+
+fw.getDocumentDOM().setFill(
+  {
+    category:"fc_Linear",
+    ditherColors:[ "#000000", "#000000" ],
+    edgeType:"antialiased",
+    feather:0,
+    gradient:{ name:"cn_Custom", nodes:[ { color: lighter_color, isOpacityNode:false, position:0 }, { color: original_color, isOpacityNode:false, position:1 } ],
+    opacityNodes:[ { color:"#000000", isOpacityNode:true, position:0 }, { color:"#000000", isOpacityNode:true, position:1 } ] },
+    name:"Linear Smooth",
+    pattern:null,
+    shape:"linear",
+    stampingMode:"blend",
+    textureBlend:0,
+    webDitherTransparent:false
+  }
+);
