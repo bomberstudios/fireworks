@@ -10,6 +10,6 @@ try {
 
 var default_width = fw.getDocumentDOM().width;
 
-var w = prompt("Object Height in Pixels",default_width);
+var w = prompt("Canvas width in pixels",default_width);
 
 fw.getDocumentDOM().setDocumentCanvasSize({left:0, top:0, right:eval(w), bottom: fw.getDocumentDOM().height}, false);
