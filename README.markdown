@@ -1,11 +1,11 @@
-# Orange Commands v1.4.10 for Adobe Fireworks
+# Orange Commands v1.4.11 for Adobe Fireworks
 
 Orange Commands is a collection of scripts for Adobe Fireworks CS3 and CS4 that make the life of a web designer easier (or at least allow him/her to work faster :)
 
 
 ## Installation
 
-1. Download Orange Commands [for Fireworks CS3](http://orangecommands.com/dl/OrangeCommands_1.4.10_CS3.zip) or [for Fireworks CS4](http://orangecommands.com/dl/OrangeCommands_1.4.10_CS4.zip)
+1. Download Orange Commands [for Fireworks CS3](http://orangecommands.com/dl/OrangeCommands_1.4.11_CS3.zip) or [for Fireworks CS4](http://orangecommands.com/dl/OrangeCommands_1.4.11_CS4.zip)
 2. Expand the ZIP.
 3. Double click the MXP file to install the commands.
 4. To install the custom keyboard shortcuts, copy the XML files to:
@@ -83,15 +83,15 @@ A collection of commands to change an object's alpha. They work on the currently
 ### Canvas
 
 
-- **Height**  (CTRL + ALT + H)
+- **Canvas Height**  (CTRL + ALT + H)
   
   Sets the height of the canvas.
 
-- **Size**  (CTRL + ALT + S)
+- **Canvas Size**  (CTRL + ALT + S)
   
   Sets the size of the canvas.
 
-- **Width**  (CTRL + ALT + W)
+- **Canvas Width**  (CTRL + ALT + W)
   
   Sets the width of the canvas.
 
@@ -123,6 +123,10 @@ What the command does is this:
   - Flattens the selection and locks the resulting bitmap image.
   - Adds a black, semitransparent overlay and locks it.
   - Creates a white rectangle on top of everything.
+
+- **Plastic**  (No shortcut)
+  
+  Fills the selected object with a vertical gradient based on the current color, giving it a 'Plastic' effect.
 
 - **Reflection**  (No shortcut)
   
@@ -368,4 +372,4 @@ Each content is added on a new line.
 
 
 ---
-Orange Commands v1.4.10 — last updated Fri Feb 12 14:03:25 +0100 2010
+Orange Commands v1.4.11 — last updated Fri Feb 19 11:57:08 +0100 2010
