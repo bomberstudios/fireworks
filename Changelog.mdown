@@ -1,3 +1,6 @@
+## 1.4.12 - 2010-02-22
+- 056f1fbd0b (Added 'Align » Center on Canvas...' commands.)
+
 ## 1.4.11 - 2010-02-19
 - afbee6d615 (Added Canvas commands for http://intemperie.me)
 - 40b7aa91d7 (Added Effects » Plastic command)
