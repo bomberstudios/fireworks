@@ -46,7 +46,9 @@ desc "Build XML for keyboard shortcuts"
 task :shortcuts do
   running_folder = %x(pwd).chomp
   xml_source_dirs = @fw_versions.map { |v| "/Applications/Adobe Fireworks #{v}/Adobe Fireworks #{v}.app/Contents/Resources/en.lproj/Keyboard Shortcuts/" }
+  xml_source_dirs << 'tpl'
   xml_target_dirs = @fw_versions.map { |v| "en/Keyboard\ Shortcuts/#{v}" }
+  xml_target_dirs << "en/Keyboard\ Shortcuts/Orange"
 
   LINE_REGEXP = /<dynamic_commands \/>|<dynamic_commands >(.+)<\/dynamic_commands>/ # cr(ap|ee)py
 
