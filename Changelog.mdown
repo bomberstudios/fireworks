@@ -1,5 +1,6 @@
 ## 1.4.12 - 2010-02-22
 - 056f1fbd0b (Added 'Align » Center on Canvas...' commands.)
+- API: Selection.each now accepts a second parameter to specify if groups should be traversed (Orange Commands default) or should be treated as one object (Fireworks default).
 
 ## 1.4.11 - 2010-02-19
 - afbee6d615 (Added Canvas commands for http://intemperie.me)
