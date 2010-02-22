@@ -11,10 +11,13 @@ FwArray.prototype.clone = function(){
   }
   return tmp_array;
 };
-FwArray.prototype.each = Array.prototype.each = function(callback){
+FwArray.prototype.each = Array.prototype.each = function(callback, traverse_groups){
+  if(traverse_groups == undefined) {
+    traverse_groups = true;
+  }
   for (var s=0; s < this.length; s++){
     var el = this[s];
-    if (el.is_group()) {
+    if (el.is_group() && traverse_groups) {
       el.each_in_group(callback);
     } else {
       callback.call(this,el);
@@ -282,7 +285,7 @@ Selection = {
   bottom: function(){
     return Selection.get_bounds().bottom;
   },
-  each: function(callback){ fw.selection.each(callback); },
+  each: function(callback,traverse_groups){ fw.selection.each(callback,traverse_groups); },
   save: function(){
     Selection.forget();
     if (fw.selection != null && fw.selection.length > 0) {

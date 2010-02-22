@@ -1,0 +1,12 @@
+/**DOC**
+Centers the selected object(s) on the canvas, vertically.
+**DOC**/
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://github.com/bomberstudios/fireworks/");
+};
+
+Selection.each(function(e){
+  e.top = Math.floor(fw.getDocumentDOM().height/2 - e.height/2);
+},false);

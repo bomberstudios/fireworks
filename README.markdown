@@ -1,11 +1,13 @@
-# Orange Commands v1.4.11 for Adobe Fireworks
+# Orange Commands v1.4.12 for Adobe Fireworks
 
 Orange Commands is a collection of scripts for Adobe Fireworks CS3 and CS4 that make the life of a web designer easier (or at least allow him/her to work faster :)
 
 
 ## Installation
 
-1. Download Orange Commands [for Fireworks CS3](http://orangecommands.com/dl/OrangeCommands_1.4.11_CS3.zip) or [for Fireworks CS4](http://orangecommands.com/dl/OrangeCommands_1.4.11_CS4.zip)
+1. Download:
+  - [Orange Commands 1.4.12 for Fireworks CS3](http://orangecommands.com/dl/OrangeCommands_1.4.12_CS3.zip)
+  - [Orange Commands 1.4.12 for Fireworks CS4](http://orangecommands.com/dl/OrangeCommands_1.4.12_CS4.zip)
 2. Expand the ZIP.
 3. Double click the MXP file to install the commands.
 4. To install the custom keyboard shortcuts, copy the XML files to:
@@ -27,6 +29,18 @@ Orange Commands is a collection of scripts for Adobe Fireworks CS3 and CS4 that 
 
 ### Align
 
+
+- **Center on Canvas - Both**  (No shortcut)
+  
+  Centers the selected object(s) on the canvas, both horizontally and vertically.
+
+- **Center on Canvas - Horizontal**  (No shortcut)
+  
+  Centers the selected object(s) on the canvas, horizontally.
+
+- **Center on Canvas - Vertical**  (No shortcut)
+  
+  Centers the selected object(s) on the canvas, vertically.
 
 - **Space Horizontal**  (No shortcut)
   
@@ -372,4 +386,4 @@ Each content is added on a new line.
 
 
 ---
-Orange Commands v1.4.11 — last updated Fri Feb 19 11:57:08 +0100 2010
+Orange Commands v1.4.12 — last updated Mon Feb 22 10:43:07 +0100 2010
