@@ -33,7 +33,11 @@ if(Document.is_saved()) {
   Pages.each(function(){
     var export_file_name = fw.getDocumentDOM().pageName;
     var export_file_path =  Document.path() + folder_name + "/" + export_file_name + ".png";
-    Document.export_in(export_file_path);
+    if (fw.getDocumentDOM().hasMasterPage() && fw.getDocumentDOM().currentPageNum == 0) {
+      // don't export master page
+    } else {
+      Document.export_in(export_file_path);
+    }
   });
 } else {
   alert("You need to save the document first!");
