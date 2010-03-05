@@ -385,5 +385,3 @@ Each content is added on a new line.
   Sets currently selected text blocks to Verdana.
 
 
----
-Orange Commands v1.4.12 — last updated Mon Feb 22 10:43:07 +0100 2010
