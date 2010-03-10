@@ -16,4 +16,4 @@ var s = prompt("Canvas size in pixels",default_width + "," + default_height);
 var w = s.split(",")[0];
 var h = s.split(",")[1];
 
-fw.getDocumentDOM().setDocumentCanvasSize({left:0, top:0, right:eval(w), bottom: eval(h)}, false);
+fw.getDocumentDOM().setDocumentCanvasSize({left:0, top:0, right:eval(w), bottom: eval(h)}, true);
