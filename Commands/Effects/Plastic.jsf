@@ -1,3 +1,4 @@
+// shortcut: CTRL + G
 /**DOC**
 Fills the selected object with a vertical gradient based on the current color, giving it a 'Plastic' effect.
 **DOC**/
