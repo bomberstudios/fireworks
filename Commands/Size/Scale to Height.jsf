@@ -1,0 +1,18 @@
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://github.com/bomberstudios/fireworks/");
+};
+
+if (fw.selection.length == 1) {
+  default_height = fw.selection[0].height;
+} else {
+  default_height = 0;
+}
+var h = prompt("Scale to Height",default_height);
+
+Selection.each(function(o) {
+  var new_height  = eval(h);
+  var new_width = (new_height / o.height ) * o.width;
+  o.resize(new_width,new_height);
+});
