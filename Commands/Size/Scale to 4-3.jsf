@@ -1,0 +1,10 @@
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://github.com/bomberstudios/fireworks/");
+};
+
+Selection.each(function(o) {
+  var new_height = o.width / (4/3);
+  o.resize(o.width,new_height);
+});
