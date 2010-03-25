@@ -1,3 +1,7 @@
+// shortcut: CTRL + SHIFT + ALT + W
+/**DOC**
+This command scales the selected object(s) proportionally so that they have the specified width while maintaining their aspect ratio.
+**DOC**/
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");
 } catch(e){

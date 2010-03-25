@@ -1,3 +1,8 @@
+// shortcut: CTRL + SHIFT + ALT + H
+/**DOC**
+This command scales the selected object(s) proportionally so that they have the specified height while maintaining their aspect ratio.
+**DOC**/
+
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");
 } catch(e){
