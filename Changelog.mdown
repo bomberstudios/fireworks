@@ -1,4 +1,4 @@
-## next
+## 1.4.13 - 2010-03-25
 - 1505f2ab9e (Don't export master page when running "Export » All Pages as..." commands)
 - c1289f8909 (New commands: Scale to Height and Scale to Width, to resize objects proportionally.)
 - fb60e8247a (New commands: Scale to 16/9 and Scale to 4/3. They change the selected object(s) height to make then have a 16:9 or 4:3 aspect ratio.)
