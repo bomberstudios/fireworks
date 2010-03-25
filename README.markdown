@@ -1,4 +1,4 @@
-# Orange Commands v1.4.12 for Adobe Fireworks
+# Orange Commands v1.4.13 for Adobe Fireworks
 
 Orange Commands is a collection of scripts for Adobe Fireworks CS3 and CS4 that make the life of a web designer easier (or at least allow him/her to work faster :)
 
@@ -6,8 +6,8 @@ Orange Commands is a collection of scripts for Adobe Fireworks CS3 and CS4 that 
 ## Installation
 
 1. Download:
-  - [Orange Commands 1.4.12 for Fireworks CS3](http://orangecommands.com/dl/OrangeCommands_1.4.12_CS3.zip)
-  - [Orange Commands 1.4.12 for Fireworks CS4](http://orangecommands.com/dl/OrangeCommands_1.4.12_CS4.zip)
+  - [Orange Commands 1.4.13 for Fireworks CS3](http://orangecommands.com/dl/OrangeCommands_1.4.13_CS3.zip)
+  - [Orange Commands 1.4.13 for Fireworks CS4](http://orangecommands.com/dl/OrangeCommands_1.4.13_CS4.zip)
 2. Expand the ZIP.
 3. Double click the MXP file to install the commands.
 4. To install the custom keyboard shortcuts, copy the XML files to:
@@ -138,7 +138,7 @@ What the command does is this:
   - Adds a black, semitransparent overlay and locks it.
   - Creates a white rectangle on top of everything.
 
-- **Plastic**  (No shortcut)
+- **Plastic**  (CTRL + G)
   
   Fills the selected object with a vertical gradient based on the current color, giving it a 'Plastic' effect.
 
@@ -242,6 +242,9 @@ Commands to create grids using guides (the commands formerly known as "Reticulat
 ### Pages
 
 
+- **Add Page**  (CTRL + SHIFT + N)
+  
+  
 - **Duplicate Current**  (CTRL + SHIFT + D)
   
   Duplicates the current page at the end of the page list.
@@ -327,6 +330,22 @@ All Size commands support math operations, so you can quickly make an object 23 
 - **Height**  (CTRL + H)
   
   Sets the height of the selection.
+
+- **Scale to 16-9**  (No shortcut)
+  
+  This command scales the selected object(s) so that they have a 16:9 aspect ratio.
+
+- **Scale to 4-3**  (No shortcut)
+  
+  This command scales the selected object(s) so that they have a 4:3 aspect ratio.
+
+- **Scale to Height**  (CTRL + SHIFT + ALT + H)
+  
+  This command scales the selected object(s) proportionally so that they have the specified height while maintaining their aspect ratio.
+
+- **Scale to Width**  (CTRL + SHIFT + ALT + W)
+  
+  This command scales the selected object(s) proportionally so that they have the specified width while maintaining their aspect ratio.
 
 - **Set Size**  (CTRL + S)
   
