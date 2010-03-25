@@ -1,3 +1,8 @@
+## next
+- 1505f2ab9e (Don't export master page when running "Export » All Pages as..." commands)
+- c1289f8909 (New commands: Scale to Height and Scale to Width, to resize objects proportionally.)
+- fb60e8247a (New commands: Scale to 16/9 and Scale to 4/3. They change the selected object(s) height to make then have a 16:9 or 4:3 aspect ratio.)
+
 ## 1.4.12 - 2010-02-22
 - 056f1fbd0b (Added 'Align » Center on Canvas...' commands.)
 - API: Selection.each now accepts a second parameter to specify if groups should be traversed (Orange Commands default) or should be treated as one object (Fireworks default).
