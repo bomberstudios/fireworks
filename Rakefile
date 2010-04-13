@@ -7,9 +7,9 @@ require "erb"
 require 'fileutils'
 require 'lib/library'
 
-ORANGE_COMMANDS_VERSION = "1.4.13"
+ORANGE_COMMANDS_VERSION = "1.5-dev"
 DOWNLOAD_SERVER = "http://orangecommands.com/dl/"
-@fw_versions = ["CS3","CS4"]
+@fw_versions = ["CS3","CS4","CS5"]
 @orangecommands = FW::Library.new 'Commands'
 
 def app_folder
@@ -80,6 +80,7 @@ desc "Build MXP files"
 task :mxp do
   %x(open -a "/Applications/Adobe Extension Manager/Extension Manager.app" OrangeCommands_#{ORANGE_COMMANDS_VERSION}_CS3.mxi)
   %x("/Applications/Adobe Extension Manager CS4/Adobe Extension Manager CS4.app/Contents/MacOS/Adobe Extension Manager CS4" -package mxi="OrangeCommands_#{ORANGE_COMMANDS_VERSION}_CS4.mxi" mxp="OrangeCommands_#{ORANGE_COMMANDS_VERSION}_CS4.mxp")
+  %x("/Applications/Adobe Extension Manager CS5/Adobe Extension Manager CS5.app/Contents/MacOS/Adobe Extension Manager CS5" -package mxi="OrangeCommands_#{ORANGE_COMMANDS_VERSION}_CS5.mxi" mxp="OrangeCommands_#{ORANGE_COMMANDS_VERSION}_CS5.mxp")
 end
 
 task :clean do
