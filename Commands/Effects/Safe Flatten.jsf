@@ -1,0 +1,17 @@
+// shortcut: CTRL + SHIFT + ALT + Z
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://github.com/bomberstudios/fireworks/");
+};
+
+Selection.save();
+
+fw.getDocumentDOM().cloneSelection();
+fw.getDocumentDOM().flattenSelection();
+var new_object = fw.selection;
+
+Selection.restore();
+fw.getDocumentDOM().hideSelection();
+
+fw.selection = new_object;
