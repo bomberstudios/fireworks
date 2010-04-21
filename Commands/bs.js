@@ -332,6 +332,7 @@ Selection = {
     var merged_text = {};
     merged_text.initialAttrs = text_fields[0].textRuns.initialAttrs;
     merged_text.textRuns = [];
+    text_fields.sort(Sort.by_x);
     text_fields.sort(Sort.by_y);
     text_fields.each(function(t){
       for ( var i = 0; i < t.textRuns.textRuns.length; i++ ) {
