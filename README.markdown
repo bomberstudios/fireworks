@@ -6,9 +6,11 @@ Orange Commands is a collection of scripts for Adobe Fireworks that make the lif
 ## Installation
 
 1. Download:
+
   - [Orange Commands 1.5 for Fireworks CS3](http://orangecommands.com/dl/OrangeCommands_1.5_CS3.zip)
   - [Orange Commands 1.5 for Fireworks CS4](http://orangecommands.com/dl/OrangeCommands_1.5_CS4.zip)
   - [Orange Commands 1.5 for Fireworks CS5](http://orangecommands.com/dl/OrangeCommands_1.5_CS5.zip)
+
 
 2. Expand the ZIP.
 3. Double click the MXP file to install the commands.
