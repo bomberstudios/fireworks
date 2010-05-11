@@ -1,3 +1,7 @@
+## 1.5 - 2010-05-11
+- 88ba03453c (New command: Effects » Safe Flatten.)
+- bcd5c60404 (Initial support for Fireworks CS5)
+
 ## 1.4.13 - 2010-03-25
 - 1505f2ab9e (Don't export master page when running "Export » All Pages as..." commands)
 - c1289f8909 (New commands: Scale to Height and Scale to Width, to resize objects proportionally.)
