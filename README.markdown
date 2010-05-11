@@ -1,24 +1,21 @@
-# Orange Commands v1.4.13 for Adobe Fireworks
+# Orange Commands v1.5 for Adobe Fireworks
 
-Orange Commands is a collection of scripts for Adobe Fireworks CS3 and CS4 that make the life of a web designer easier (or at least allow him/her to work faster :)
+Orange Commands is a collection of scripts for Adobe Fireworks that make the life of a web designer easier (or at least allow him/her to work faster :)
 
 
 ## Installation
 
 1. Download:
-  - [Orange Commands 1.4.13 for Fireworks CS3](http://orangecommands.com/dl/OrangeCommands_1.4.13_CS3.zip)
-  - [Orange Commands 1.4.13 for Fireworks CS4](http://orangecommands.com/dl/OrangeCommands_1.4.13_CS4.zip)
+  - [Orange Commands 1.5 for Fireworks CS3](http://orangecommands.com/dl/OrangeCommands_1.5_CS3.zip)
+  - [Orange Commands 1.5 for Fireworks CS4](http://orangecommands.com/dl/OrangeCommands_1.5_CS4.zip)
+  - [Orange Commands 1.5 for Fireworks CS5](http://orangecommands.com/dl/OrangeCommands_1.5_CS5.zip)
+
 2. Expand the ZIP.
 3. Double click the MXP file to install the commands.
 4. To install the custom keyboard shortcuts, copy the XML files to:
 
-      /Users/you/Library/Application Support/Adobe/Fireworks CS3/yourlanguage/Keyboard Shortcuts/
+      /Users/you/Library/Application Support/Adobe/Fireworks CSX/yourlanguage/Keyboard Shortcuts/
 
-    or
-
-      /Users/you/Library/Application Support/Adobe/Fireworks CS4/yourlanguage/Keyboard Shortcuts/
-
-    depending on your version of Fireworks.
 5. Change the keyboard shortcuts in Fireworks in the "Fireworks » Keyboard Shortcuts..." menu, and pick one of the '+ Extras' sets.
 6. Restart Fireworks
 7. Enjoy!
@@ -154,6 +151,9 @@ What the command does is this:
   
   Repeats the currently selected object(s) vertically. It asks for the number of copies and the distance between them.
 
+- **Safe Flatten**  (CTRL + SHIFT + ALT + Z)
+  
+  
 ### Export
 
 
