@@ -153,7 +153,8 @@ What the command does is this:
 
 - **Safe Flatten**  (CTRL + SHIFT + ALT + Z)
   
-  
+  This command duplicates the current selection, flattens it, and hides the original. Super usefull if you want your symbols to remain sharp.
+
 ### Export
 
 

@@ -1,4 +1,8 @@
 // shortcut: CTRL + SHIFT + ALT + Z
+/**DOC**
+This command duplicates the current selection, flattens it, and hides the original. Super usefull if you want your symbols to remain sharp.
+**DOC**/
+
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");
 } catch(e){
