@@ -19,9 +19,13 @@ try {
     if(h < w){
       w = h;
     }
-    var percentage_of_total_width = roundness_in_pixels*100/w;
-    var roundness = percentage_of_total_width*2;
-    fw.getDocumentDOM().setRectRoundness(roundness/100);
+    if(fw.appName.indexOf('CS5') != -1) {
+      fw.getDocumentDOM().setRectRoundness(roundness_in_pixels, 'exact');
+    } else {
+      var percentage_of_total_width = roundness_in_pixels*100/w;
+      var roundness = percentage_of_total_width*2;
+      fw.getDocumentDOM().setRectRoundness(roundness/100);
+    }
     Selection.restore();
   });
 } catch (e) {
