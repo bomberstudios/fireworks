@@ -11,6 +11,9 @@ try {
 
 var slices_array = new Array();
 
+// show slice layer
+fw.getDocumentDOM().setWebObjectsVisibility(true);
+
 // Select all
 doc.selectAll();
 
