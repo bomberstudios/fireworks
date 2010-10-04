@@ -82,6 +82,13 @@ Element.is_symbol = function(){
 Element.is_text = function(){
   return (this.__proto__ == Text.prototype);
 };
+function dump(obj) {
+  var output = "Dumping " + obj + "\n\n";
+  for ( var i in obj ){
+    output += obj + '.'+ i + " (" + typeof(obj[i]) + ") = " + obj[i] + "\n";
+  }
+  alert(output);
+}
 
 User = {
   getLanguage: function(){
