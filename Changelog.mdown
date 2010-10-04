@@ -1,3 +1,6 @@
+## 1.6 - 2010-10-04
+- 9ea3e0e654 (New command: Export » Slices as CSS Sprite.)
+
 ## 1.5 - 2010-05-11
 - 88ba03453c (New command: Effects » Safe Flatten.)
 - bcd5c60404 (Initial support for Fireworks CS5)

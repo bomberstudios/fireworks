@@ -1,4 +1,4 @@
-# Orange Commands v1.5 for Adobe Fireworks
+# Orange Commands v1.6 for Adobe Fireworks
 
 Orange Commands is a collection of scripts for Adobe Fireworks that make the life of a web designer easier (or at least allow him/her to work faster :)
 
@@ -7,9 +7,9 @@ Orange Commands is a collection of scripts for Adobe Fireworks that make the lif
 
 1. Download:
 
-  - [Orange Commands 1.5 for Fireworks CS3](http://orangecommands.com/dl/OrangeCommands_1.5_CS3.zip)
-  - [Orange Commands 1.5 for Fireworks CS4](http://orangecommands.com/dl/OrangeCommands_1.5_CS4.zip)
-  - [Orange Commands 1.5 for Fireworks CS5](http://orangecommands.com/dl/OrangeCommands_1.5_CS5.zip)
+  - [Orange Commands 1.6 for Fireworks CS3](http://orangecommands.com/dl/OrangeCommands_1.6_CS3.zip)
+  - [Orange Commands 1.6 for Fireworks CS4](http://orangecommands.com/dl/OrangeCommands_1.6_CS4.zip)
+  - [Orange Commands 1.6 for Fireworks CS5](http://orangecommands.com/dl/OrangeCommands_1.6_CS5.zip)
 
 
 2. Expand the ZIP.
@@ -180,6 +180,11 @@ It also changes the Optimize settings for all pages, because I hate the "GIF as 
   
   Exports the current page as a flattened (non editable) PNG file with a 24 bits color depth. The file is saved in the same folder as the current file, with the page name added to the current file name.
 I.e: if your file is called CoolDesign.png, and the current page is called 'Home', the command creates a file named CoolDesign_Home.png
+
+- **Slices as CSS Sprite**  (No shortcut)
+  
+  Exports the slices in the current document as a .css file.  
+This way, you can use your PNG file as a sprite.
 
 ### Export Settings
 
