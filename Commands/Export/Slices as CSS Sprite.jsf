@@ -1,5 +1,7 @@
-// Sprite Maker v0.0
-// Add some slices, give them a name, and run this command to get the CSS for the sprite copied to the clipboard
+/**DOC**
+Exports the slices in the current document as a .css file.  
+This way, you can use your PNG file as a sprite.
+**DOC**/
 
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");
