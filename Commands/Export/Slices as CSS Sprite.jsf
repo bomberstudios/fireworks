@@ -22,9 +22,7 @@ if(!Document.path()) {
   fw.getDocumentDOM().setWebObjectsVisibility(true);
 
   // Select all
-  doc.selectAll();
-
-  Selection.each(function(e){
+  Selection.all().each(function(e){
     if (e.__proto__ == SliceHotspot) {
       slices_array.push(e);
     }
