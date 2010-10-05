@@ -261,6 +261,10 @@ Guides = {
 };
 
 Selection = {
+  all: function(){
+    fw.getDocumentDOM().selectAll();
+    return fw.selection;
+  },
   get_bounds: function(){
     return fw.getDocumentDOM().getSelectionBounds();
   },
