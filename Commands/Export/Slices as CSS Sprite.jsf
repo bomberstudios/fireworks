@@ -3,6 +3,13 @@ Exports the slices in the current document as a .css file.
 This way, you can use your PNG file as a sprite.
 **DOC**/
 
+/*
+  TODO:
+  - build PNG sprite in new document
+  - add more CSS sprite strategies
+  - ask the user for className of icons, and PNG sprite name
+*/
+
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");
 } catch(e){
@@ -33,8 +40,9 @@ if(!Document.path()) {
     return 0;
   }
   slices_array.sort(by_name).each(function(slice){
-    css += ".icon."+(slice.baseName || slice.sliceID) + " { background-position: -"+slice.left+"px -"+slice.top+"px; width: "+slice.width+"px; height: "+slice.height+"px; }\n";
-    demo_html += "    <span class='icon "+ (slice.baseName || slice.sliceID) +"'>" + (slice.baseName || slice.sliceID) + "</span>\n";
+    var name = slice.baseName || slice.sliceID || slice.name;
+    css += ".icon." + name + " { background-position: -"+slice.left+"px -"+slice.top+"px; width: "+slice.width+"px; height: "+slice.height+"px; }\n";
+    demo_html += "    <span class='icon "+ name +"'>" + name + "</span>\n";
   });
 
   demo_html += "  </body>\n</html>";
