@@ -40,9 +40,9 @@ if(!Document.path()) {
   demo_html += "  </body>\n</html>";
 
   Files.createFile(doc.filePathForSave.split(sprite_name)[0] + sprite_name + ".css",".txt","FWMX");
-  var my_file = Files.open(doc.filePathForSave.split(sprite_name)[0] + sprite_name + ".css",true);
-  my_file.write(css);
-  my_file.close();
+  var css_file = Files.open(doc.filePathForSave.split(sprite_name)[0] + sprite_name + ".css",true);
+  css_file.write(css);
+  css_file.close();
 
   Files.createFile(doc.filePathForSave.split(sprite_name)[0] + sprite_name + ".html",".txt","FWMX");
   var html_file = Files.open(doc.filePathForSave.split(sprite_name)[0] + sprite_name + ".html",true);
