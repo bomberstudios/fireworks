@@ -1,3 +1,15 @@
+/*
+
+  TODO:
+  - multiple shadows
+  - multicolor gradients
+  - alpha in gradients
+  - non-vertical gradients
+  - support something other than rectangles
+  - inset shadows
+
+*/
+
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");
 } catch(e){
@@ -55,6 +67,7 @@ if(sel.__proto__ != RectanglePrimitive) {
   fxs.each(function(fx){
     if (fx.category == "Shadow and Glow") {
       shadows.push({
+        type: (fx.name == "Inner Shadow") ? 'inset' : '',
         color: Color.hex_to_rgba(fx.ShadowColor),
         blur: fx.ShadowBlur,
         x: Math.abs(Math.cos(fx.ShadowAngle * radians)) < 0.00000001 ? 0 : fx.ShadowDistance * Math.cos(fx.ShadowAngle*(radians)),
@@ -92,8 +105,12 @@ if(sel.__proto__ != RectanglePrimitive) {
     css += "  border-radius: " + corner_radius + "px;\n";
   };
   if (shadows.length > 0) {
-    var shadow = shadows[0];
-    css += "  -webkit-box-shadow: " + shadow.color + " " + shadow.x + "px "+shadow.y+"px "+shadow.blur+"px;\n";
+    var tmp_shadows = [];
+    shadows.each(function(shadow){
+      tmp_shadows.push(shadow.type + " " + shadow.color + " " + shadow.x + "px "+shadow.y+"px "+shadow.blur+"px");
+    });
+    css += "  -webkit-box-shadow: " + tmp_shadows.join(',') + ";\n";
+    css += "  -moz-box-shadow: " + tmp_shadows.join(',') + ";\n";
   };
   css += "  background: "+background_color+";\n"; // old browsers
   if (gradient) {
