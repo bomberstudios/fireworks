@@ -468,6 +468,40 @@ Sort = {
   }
 };
 
+Color = {
+  hex_to_rgba: function(hexstr){
+    var a, i, r, g, b, alpha;
+    hexstr = hexstr.replace(/[^0-9a-f]+/ig, '');
+    if (hexstr.length == 3) {
+      a = hexstr.split('');
+    } else if (hexstr.length == 6 || hexstr.length == 8) {
+      a = hexstr.match(/(\w{2})/g);
+    }
+    for (i=0; i<a.length; i++) {
+      if (a[i].length == 2) {
+        a[i] = parseInt(a[i], 16);
+      } else {
+        a[i] = parseInt(a[i], 16);
+        a[i] = a[i]*16 + a[i];
+      }
+    }
+    // RGB
+    r = a[0];
+    g = a[1];
+    b = a[2];
+
+    // Alpha
+    if (a.length == 3) {
+      alpha = 1;
+    } else if (a[3] == 0) {
+      alpha = 0;
+    } else {
+      alpha =  Math.round((a[3] / parseInt('ff',16))*100) / 100;
+    }
+    return 'rgba('+r+','+g+','+b+','+alpha+')';
+  }
+};
+
 UI = {
   prompt: function(txt,default_value){
     setTimeout('quit()',10000);
