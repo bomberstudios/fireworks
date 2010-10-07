@@ -91,11 +91,13 @@ if(sel.__proto__ != RectanglePrimitive) {
   css += "  margin: 0; padding: 0;\n";
   css += "  width: " + w + "px;\n";
   css += "  height: " + h + "px;\n";
-  css += "  opacity: "+opacity+";\n";
+  if (opacity < 1) {
+    css += "  opacity: "+opacity+";\n";
+  };
   if (border) {
     css += "  border: " + border.size + "px solid " + border.color + ";\n";
   };
-  if (corner_radius != NaN) {
+  if (corner_radius > 0) {
     css += "  -webkit-border-radius: " + corner_radius + "px;\n";
     css += "  -moz-border-radius: " + corner_radius + "px;\n";
     css += "  border-radius: " + corner_radius + "px;\n";
