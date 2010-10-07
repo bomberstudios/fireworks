@@ -1,13 +1,9 @@
 /*
-
   TODO:
-  - multiple shadows
   - multicolor gradients
   - alpha in gradients
   - non-vertical gradients
   - support something other than rectangles
-  - inset shadows
-
 */
 
 try {
