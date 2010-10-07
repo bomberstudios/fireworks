@@ -51,7 +51,7 @@ Text.prototype.resize = function(w,h) {
     this.rawHeight = h;
   } else this.autoExpand = true;
 };
-Element.is_group = function(){
+Object.prototype.is_group = function(){
   return (this == "[object Group]");
 };
 Element.resize = function(w,h){
