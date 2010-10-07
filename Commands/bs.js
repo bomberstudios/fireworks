@@ -15,6 +15,10 @@ FwArray.prototype.each = Array.prototype.each = function(callback, traverse_grou
   if(traverse_groups == undefined) {
     traverse_groups = true;
   }
+  if (this.length == 1) {
+    callback.call(this,this[0]);
+    return;
+  };
   for (var s=0; s < this.length; s++){
     var el = this[s];
     if (el.is_group() && traverse_groups) {
