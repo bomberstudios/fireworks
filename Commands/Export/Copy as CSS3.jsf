@@ -1,0 +1,107 @@
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://github.com/bomberstudios/fireworks/");
+};
+
+var sel = fw.selection[0];
+
+if(sel.__proto__ != RectanglePrimitive) {
+  alert('This command only works with rectangles right now...');
+} else {
+
+  var attr = sel.pathAttributes;
+  var name = sel.name || 'item';
+
+  // fill
+  var fill = attr.fill;
+  if (fill) {
+    var background_color;
+    if (fill.gradient) {
+      var gradient = {
+        colors: fill.gradient.nodes,
+        alphas: fill.gradient.opacityNodes
+      };
+      background_color = gradient.colors[0].color;
+      var top_color = background_color;
+      var bottom_color = gradient.colors[gradient.colors.length-1].color;
+    } else {
+      background_color = attr.fillColor;
+    }
+  } else {
+    background_color = 'transparent';
+  }
+
+  // border
+  var brush = attr.brush;
+  if (brush) {
+    var border = {
+      size: brush.diameter,
+      color: Color.hex_to_rgba(attr.brushColor)
+    };
+  };
+
+  // opacity
+  var opacity = sel.opacity / 100;
+
+  // border-radius
+  var corner_radius = (sel.roundness * sel.height) / 2;
+
+  // Shadows
+  var fxs = [].concat(sel.effectList.effects);
+  var shadows = new Array();
+  var radians=Math.PI/180;
+
+  fxs.each(function(fx){
+    if (fx.category == "Shadow and Glow") {
+      shadows.push({
+        color: Color.hex_to_rgba(fx.ShadowColor),
+        blur: fx.ShadowBlur,
+        x: Math.abs(Math.cos(fx.ShadowAngle * radians)) < 0.00000001 ? 0 : fx.ShadowDistance * Math.cos(fx.ShadowAngle*(radians)),
+        y: -fx.ShadowDistance * Math.sin(fx.ShadowAngle*(radians))
+      });
+    };
+  });
+
+  // size
+  var w = sel.width;
+  var h = sel.height;
+  if (border) {
+    w -= (border.size-1)*2;
+    h -= (border.size-1)*2;
+  }
+
+  // color & gradient
+  // border size & color
+  // corner-radius
+  // see if it is a circle, then use border-radius: 9999px;
+  // shadows (inner, outer...)
+  // transforms (rotation...)
+
+  var css = "." + name + " {\n";
+  css += "  margin: 0; padding: 0;\n";
+  css += "  width: " + w + "px;\n";
+  css += "  height: " + h + "px;\n";
+  css += "  opacity: "+opacity+";\n";
+  if (border) {
+    css += "  border: " + border.size + "px solid " + border.color + ";\n";
+  };
+  if (corner_radius != NaN) {
+    css += "  -webkit-border-radius: " + corner_radius + "px;\n";
+    css += "  -moz-border-radius: " + corner_radius + "px;\n";
+    css += "  border-radius: " + corner_radius + "px;\n";
+  };
+  if (shadows.length > 0) {
+    var shadow = shadows[0];
+    css += "  -webkit-box-shadow: " + shadow.color + " " + shadow.x + "px "+shadow.y+"px "+shadow.blur+"px;\n";
+  };
+  css += "  background: "+background_color+";\n"; // old browsers
+  if (gradient) {
+    css += "  background: -moz-linear-gradient(top, "+top_color+" 0%, "+bottom_color+" 100%);\n"; /* firefox */
+    css += "  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,"+top_color+"), color-stop(100%,"+bottom_color+"));\n"; /* webkit */
+    css += "  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='"+top_color+"', endColorstr='"+bottom_color+"',GradientType=0 );\n"; /* ie */
+  };
+  css += "}\n";
+
+  fw.getDocumentDOM().clipCopyJsToExecute(css);
+}
