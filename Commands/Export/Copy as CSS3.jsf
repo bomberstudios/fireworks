@@ -12,6 +12,8 @@ This command does its best and try to copy the currently selected object's attri
     - Group (Autoshapes are Groups...?)
     - Text
     - Instance (Symbols) (does it make sense?)
+  - HSLA
+  - ems instead of pixels?
 */
 
 try {
@@ -132,9 +134,9 @@ if (fw.selection.length == 0 || fw.selection.length > 1) {
     css += "  -moz-box-shadow: " + tmp_shadows.join(',') + ";\n";
   };
   css += "  background: "+background_color+";\n"; // old browsers
-  if (gradient) {
-    css += "  background: -moz-linear-gradient(top, "+top_color+" 0%, "+bottom_color+" 100%);\n";
-    css += "  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,"+top_color+"), color-stop(100%,"+bottom_color+"));\n";
+  if (gradient.colors) {
+    css += "  background-image: -moz-linear-gradient(top, "+top_color+" 0%, "+bottom_color+" 100%);\n";
+    css += "  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,"+top_color+"), color-stop(100%,"+bottom_color+"));\n";
     css += "  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='"+top_color+"', endColorstr='"+bottom_color+"',GradientType=0 );\n";
   };
   css += "}\n";
