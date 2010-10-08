@@ -3,7 +3,11 @@
   - multicolor gradients
   - alpha in gradients
   - non-vertical gradients
-  - support something other than rectangles
+    - attr.fillHandle1, 2 and 3
+  - support things other than Rectangles and Paths:
+    - Group (Autoshapes are Groups...?)
+    - Text
+    - Instance (Symbols) (does it make sense?)
 */
 
 try {
@@ -12,21 +16,24 @@ try {
   alert("This command requires the bs.js library\rGet it at http://github.com/bomberstudios/fireworks/");
 };
 
-var sel = fw.selection[0];
-
-if(sel.__proto__ != RectanglePrimitive) {
-  alert('This command only works with rectangles right now...');
+if (fw.selection.length == 0) {
+  alert('You need to select something, mate...');
 } else {
+  var sel = fw.selection[0];
 
   var attr = sel.pathAttributes;
+  //dump(attr.fillHandle1); // gradient start
+  //dump(attr.fillHandle2); // gradient end
+  //dump(attr.fillHandle3); // gradient size?
   var name = sel.name || 'item';
 
   // fill
   var fill = attr.fill;
+  var gradient = {};
   if (fill) {
     var background_color;
     if (fill.gradient) {
-      var gradient = {
+      gradient = {
         colors: fill.gradient.nodes,
         alphas: fill.gradient.opacityNodes
       };
@@ -37,40 +44,50 @@ if(sel.__proto__ != RectanglePrimitive) {
       background_color = attr.fillColor;
     }
   } else {
+    gradient = undefined;
     background_color = 'transparent';
   }
 
   // border
   var brush = attr.brush;
+  var border;
   if (brush) {
-    var border = {
+    border = {
       size: brush.diameter,
       color: Color.hex_to_rgba(attr.brushColor)
     };
-  };
+  } else {
+    border = undefined;
+  }
 
   // opacity
   var opacity = sel.opacity / 100;
 
   // border-radius
-  var corner_radius = (sel.roundness * sel.height) / 2;
+  if (sel.roundness) {
+    var border_radius = (sel.roundness * sel.height) / 2;
+  };
 
   // Shadows
-  var fxs = [].concat(sel.effectList.effects);
-  var shadows = new Array();
-  var radians=Math.PI/180;
+  var shadows;
+  if (sel.effectList) {
+    var fxs = [].concat(sel.effectList.effects);
+    var radians=Math.PI/180;
+    fxs.each(function(fx){
+      if (fx.category == "Shadow and Glow") {
+        shadows.push({
+          type: (fx.name == "Inner Shadow") ? 'inset' : '',
+          color: Color.hex_to_rgba(fx.ShadowColor),
+          blur: fx.ShadowBlur,
+          x: Math.abs(Math.cos(fx.ShadowAngle * radians)) < 0.00000001 ? 0 : fx.ShadowDistance * Math.cos(fx.ShadowAngle*(radians)),
+          y: -fx.ShadowDistance * Math.sin(fx.ShadowAngle*(radians))
+        });
+      };
+    });
+  } else {
+    shadows = [];
+  }
 
-  fxs.each(function(fx){
-    if (fx.category == "Shadow and Glow") {
-      shadows.push({
-        type: (fx.name == "Inner Shadow") ? 'inset' : '',
-        color: Color.hex_to_rgba(fx.ShadowColor),
-        blur: fx.ShadowBlur,
-        x: Math.abs(Math.cos(fx.ShadowAngle * radians)) < 0.00000001 ? 0 : fx.ShadowDistance * Math.cos(fx.ShadowAngle*(radians)),
-        y: -fx.ShadowDistance * Math.sin(fx.ShadowAngle*(radians))
-      });
-    };
-  });
 
   // size
   var w = sel.width;
@@ -82,7 +99,7 @@ if(sel.__proto__ != RectanglePrimitive) {
 
   // color & gradient
   // border size & color
-  // corner-radius
+  // border-radius
   // see if it is a circle, then use border-radius: 9999px;
   // shadows (inner, outer...)
   // transforms (rotation...)
@@ -97,10 +114,10 @@ if(sel.__proto__ != RectanglePrimitive) {
   if (border) {
     css += "  border: " + border.size + "px solid " + border.color + ";\n";
   };
-  if (corner_radius > 0) {
-    css += "  -webkit-border-radius: " + corner_radius + "px;\n";
-    css += "  -moz-border-radius: " + corner_radius + "px;\n";
-    css += "  border-radius: " + corner_radius + "px;\n";
+  if (border_radius > 0) {
+    css += "  -webkit-border-radius: " + border_radius + "px;\n";
+    css += "  -moz-border-radius: " + border_radius + "px;\n";
+    css += "  border-radius: " + border_radius + "px;\n";
   };
   if (shadows.length > 0) {
     var tmp_shadows = [];
@@ -112,9 +129,9 @@ if(sel.__proto__ != RectanglePrimitive) {
   };
   css += "  background: "+background_color+";\n"; // old browsers
   if (gradient) {
-    css += "  background: -moz-linear-gradient(top, "+top_color+" 0%, "+bottom_color+" 100%);\n"; /* firefox */
-    css += "  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,"+top_color+"), color-stop(100%,"+bottom_color+"));\n"; /* webkit */
-    css += "  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='"+top_color+"', endColorstr='"+bottom_color+"',GradientType=0 );\n"; /* ie */
+    css += "  background: -moz-linear-gradient(top, "+top_color+" 0%, "+bottom_color+" 100%);\n";
+    css += "  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,"+top_color+"), color-stop(100%,"+bottom_color+"));\n";
+    css += "  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='"+top_color+"', endColorstr='"+bottom_color+"',GradientType=0 );\n";
   };
   css += "}\n";
 
