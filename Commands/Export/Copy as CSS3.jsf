@@ -1,3 +1,7 @@
+/**DOC**
+This command does its best and try to copy the currently selected object's attributes as CSS3 styles.
+**DOC**/
+
 /*
   TODO:
   - multicolor gradients
@@ -16,8 +20,8 @@ try {
   alert("This command requires the bs.js library\rGet it at http://github.com/bomberstudios/fireworks/");
 };
 
-if (fw.selection.length == 0) {
-  alert('You need to select something, mate...');
+if (fw.selection.length == 0 || fw.selection.length > 1) {
+  alert('You need to select ONE object');
 } else {
   var sel = fw.selection[0];
 
