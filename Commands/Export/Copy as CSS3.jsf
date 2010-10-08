@@ -4,9 +4,12 @@ This command does its best and try to copy the currently selected object's attri
 
 /*
   DONE:
-  - non-vertical gradients (not supported in Firefox)
+  - non-vertical gradients (not supported in Firefox, that uses a -moz-linear-gradient(19% 75% 196deg,#C9C9C9 0%, #C7C7C7 100%) syntax)
 
   TODO:
+  - radial gradients:
+    -webkit-gradient(radial, start_x start_y, start_radius, end_x end_y, end_radius, from(#fcfcfc), to(#cf0c13), color-stop(.6,#e88787))
+    -moz-radial-gradient(19% 75% 90deg,ellipse closest-side, #ababab, #c9c9c9, #c7c7c7 100%)
   - alpha in gradients
   - support things other than Rectangles and Paths:
     - Group (Autoshapes are Groups...?)
