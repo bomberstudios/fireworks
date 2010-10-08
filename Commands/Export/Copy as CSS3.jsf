@@ -3,11 +3,11 @@ This command does its best and try to copy the currently selected object's attri
 **DOC**/
 
 /*
+  DONE:
+  - non-vertical gradients (not supported in Firefox)
+
   TODO:
-  - multicolor gradients
   - alpha in gradients
-  - non-vertical gradients
-    - attr.fillHandle1, 2 and 3
   - support things other than Rectangles and Paths:
     - Group (Autoshapes are Groups...?)
     - Text
@@ -31,9 +31,6 @@ if (fw.selection.length == 0 || fw.selection.length > 1) {
   var sel = fw.selection[0];
 
   var attr = sel.pathAttributes;
-  //dump(attr.fillHandle1); // gradient start
-  //dump(attr.fillHandle2); // gradient end
-  //dump(attr.fillHandle3); // gradient size?
   var name = sel.name || 'item';
 
   // fill
@@ -42,10 +39,18 @@ if (fw.selection.length == 0 || fw.selection.length > 1) {
   if (fill) {
     var background_color;
     if (fill.gradient) {
+      var gradient_start = {
+        x: attr.fillHandle1.x - sel.left,
+        y: attr.fillHandle1.y - sel.top
+      };
+      var gradient_end = {
+        x: attr.fillHandle2.x - sel.left,
+        y: attr.fillHandle2.y - sel.top
+      };
       gradient = {
         type: 'linear',
-        from: 'left top',
-        to: 'left bottom',
+        from: gradient_start.x + ' ' + gradient_start.y,
+        to: gradient_end.x + ' ' + gradient_end.y,
         colors: [].concat(fill.gradient.nodes),
         alphas: [].concat(fill.gradient.opacityNodes)
       };
@@ -145,17 +150,17 @@ if (fw.selection.length == 0 || fw.selection.length > 1) {
     var webkit_gradient = sprintf("  background-image: -webkit-gradient(%(type)s, %(from)s, %(to)s,", gradient);
     var color_stops = [];
     gradient.colors.each(function(color){
-      css_color_stop = sprintf("color-stop(%.2f,%s)",color.position, color.color);
+      css_color_stop = sprintf("color-stop(%.2f,%s)",color.position, Color.hex_to_rgba(color.color));
       color_stops.push(css_color_stop);
     });
     webkit_gradient += color_stops.join(', ');
     webkit_gradient += ");\n";
 
     // Moz gradient
-    var moz_gradient = sprintf("  background-image: -moz-linear-gradient(top, ", gradient);
+    var moz_gradient = sprintf("  background-image: -moz-linear-gradient(%(from)1s, ", gradient);
     color_stops = [];
     gradient.colors.each(function(color){
-      css_color_stop = sprintf("%s %.2f%%",color.color, color.position * 100);
+      css_color_stop = sprintf("%s %.2f%%",Color.hex_to_rgba(color.color), color.position * 100);
       color_stops.push(css_color_stop);
     });
     moz_gradient += color_stops.join(', ');
