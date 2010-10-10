@@ -1,4 +1,4 @@
-# Orange Commands v1.6 for Adobe Fireworks
+# Orange Commands v1.6.1 for Adobe Fireworks
 
 Orange Commands is a collection of scripts for Adobe Fireworks that make the life of a web designer easier (or at least allow him/her to work faster :)
 
@@ -7,9 +7,8 @@ Orange Commands is a collection of scripts for Adobe Fireworks that make the lif
 
 1. Download:
 
-  - [Orange Commands 1.6 for Fireworks CS3](http://orangecommands.com/dl/OrangeCommands_1.6_CS3.zip)
-  - [Orange Commands 1.6 for Fireworks CS4](http://orangecommands.com/dl/OrangeCommands_1.6_CS4.zip)
-  - [Orange Commands 1.6 for Fireworks CS5](http://orangecommands.com/dl/OrangeCommands_1.6_CS5.zip)
+  - [Orange Commands 1.6.1 for Fireworks CS3](http://orangecommands.com/dl/OrangeCommands_1.6.1_CS3.zip)
+  - [Orange Commands 1.6.1 for Fireworks CS5](http://orangecommands.com/dl/OrangeCommands_1.6.1_CS5.zip)
 
 
 2. Expand the ZIP.
@@ -172,6 +171,10 @@ It also changes the Optimize settings for all pages, because I hate the "GIF as 
 The files are saved in a folder named YYYYMMDDHHMMSS (i.e: 20091028170642) inside the current folder, with the page names as the file names.  
 It also changes the Optimize settings for all pages, because I hate the "GIF as default format" :)
 
+- **Copy as CSS3**  (No shortcut)
+  
+  This command does its best and try to copy the currently selected object's attributes as CSS3 styles.
+
 - **Current Page as PNG 24 in…**  (No shortcut)
   
   Exports the current page as a flattened (non editable) PNG file with a 24 bits color depth. This command will ask you for the filename and folder location, and is specially built for @plumilla.
@@ -181,11 +184,17 @@ It also changes the Optimize settings for all pages, because I hate the "GIF as 
   Exports the current page as a flattened (non editable) PNG file with a 24 bits color depth. The file is saved in the same folder as the current file, with the page name added to the current file name.
 I.e: if your file is called CoolDesign.png, and the current page is called 'Home', the command creates a file named CoolDesign_Home.png
 
+- **Export Image Sprites**  (No shortcut)
+  
+  
 - **Slices as CSS Sprite**  (No shortcut)
   
   Exports the slices in the current document as a .css file.  
 This way, you can use your PNG file as a sprite.
 
+- **Slices to Image**  (No shortcut)
+  
+  
 ### Export Settings
 
 
