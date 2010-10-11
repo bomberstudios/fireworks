@@ -85,7 +85,13 @@ if (fw.selection.length == 0 || fw.selection.length > 1) {
 
   // border-radius
   if (sel.roundness) {
-    var border_radius = (sel.roundness * sel.height) / 2;
+    var border_radius;
+    if(sel.mode == 'exact') {
+      border_radius = sel.roundness;
+    } else {
+      border_radius = (sel.roundness * sel.height) / 2;
+    }
+    border_radius = Math.floor(border_radius); // because Fireworks uses float numbers
   };
 
   // Shadows
@@ -126,6 +132,7 @@ if (fw.selection.length == 0 || fw.selection.length > 1) {
 
   var css = "." + name + " {\n";
   css += "  margin: 0; padding: 0;\n";
+  css += "  display: block;\n";
   css += "  width: " + w + "px;\n";
   css += "  height: " + h + "px;\n";
   if (opacity < 1) {
