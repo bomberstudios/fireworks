@@ -3,7 +3,18 @@
 Sets the selection corner roundness in pixels (something that is not possible in CS3). Useful when you want to set the same roundness in a collection of rectangles with different sizes.
 This command only makes sense for CS3, as CS4 lets you specify roundness in pixels.
 **DOC**/
-var roundness_in_pixels = prompt("Set rectangle roundness in pixels:",0);
+var sel = fw.selection[0];
+var border_radius = 0;
+if (sel.roundness) {
+  var border_radius;
+  if(sel.mode == 'exact') {
+    border_radius = sel.roundness;
+  } else {
+    border_radius = (sel.roundness * sel.height) / 2;
+  }
+};
+
+var roundness_in_pixels = prompt("Set rectangle roundness in pixels:",border_radius);
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");
 } catch(e){
