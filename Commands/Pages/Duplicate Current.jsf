@@ -2,5 +2,13 @@
 /**DOC**
 Duplicates the current page at the end of the page list.
 **DOC**/
-doc = fw.getDocumentDOM();
-doc.duplicatePage(doc.currentPageNum);
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://github.com/bomberstudios/fireworks/");
+};
+
+original_name = fw.getDocumentDOM().pageName;
+fw.getDocumentDOM().duplicatePage(fw.getDocumentDOM().currentPageNum);
+fw.getDocumentDOM().changeCurrentPage(Pages.count() - 1);
+fw.getDocumentDOM().setPageName(fw.getDocumentDOM().currentPageNum, original_name + ' (copy)');

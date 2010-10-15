@@ -418,20 +418,18 @@ Pages = {
     try {
       return fw.getDocumentDOM().pagesCount;
     } catch (exception) {
-      var doc = fw.getDocumentDOM();
-
       // Create page at the end of page list...
-      doc.addNewPage();
+      fw.getDocumentDOM().addNewPage();
 
       // Move it to the first position
-      last_page_index = doc.currentPageNum;
-      doc.reorderPages(last_page_index, 0);
+      last_page_index = fw.getDocumentDOM().currentPageNum;
+      fw.getDocumentDOM().reorderPages(last_page_index, 0);
 
       // Change active page to first page
-      doc.changeCurrentPage(0);
+      fw.getDocumentDOM().changeCurrentPage(0);
 
       // Remove it
-      doc.deletePageAt(0);
+      fw.getDocumentDOM().deletePageAt(0);
     
       return last_page_index;
     }
