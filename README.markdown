@@ -1,4 +1,4 @@
-# Orange Commands v1.6.1 for Adobe Fireworks
+# Orange Commands v1.6.2 for Adobe Fireworks
 
 Orange Commands is a collection of scripts for Adobe Fireworks that make the life of a web designer easier (or at least allow him/her to work faster :)
 
@@ -7,8 +7,8 @@ Orange Commands is a collection of scripts for Adobe Fireworks that make the lif
 
 1. Download:
 
-  - [Orange Commands 1.6.1 for Fireworks CS3](http://orangecommands.com/dl/OrangeCommands_1.6.1_CS3.zip)
-  - [Orange Commands 1.6.1 for Fireworks CS5](http://orangecommands.com/dl/OrangeCommands_1.6.1_CS5.zip)
+  - [Orange Commands 1.6.2 for Fireworks CS3](http://orangecommands.com/dl/OrangeCommands_1.6.2_CS3.zip)
+  - [Orange Commands 1.6.2 for Fireworks CS5](http://orangecommands.com/dl/OrangeCommands_1.6.2_CS5.zip)
 
 
 2. Expand the ZIP.
@@ -158,6 +158,12 @@ What the command does is this:
 
 ### Export
 
+
+- **All Documents as JPG in…**  (No shortcut)
+  
+  Exports all pages as JPG with the highest quality (100).  
+The commands prompts you for a folder to export, and files are saved with the document's name plus '_page_X' as the file names.  
+It also changes the Optimize settings for all pages, because I hate the "GIF as default format" :)
 
 - **All Pages as PNG 24 in…**  (No shortcut)
   
