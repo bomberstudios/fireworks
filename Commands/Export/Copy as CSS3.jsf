@@ -95,7 +95,7 @@ if (fw.selection.length == 0 || fw.selection.length > 1) {
   };
 
   // Shadows
-  var shadows;
+  var shadows = [];
   if (sel.effectList) {
     var fxs = [].concat(sel.effectList.effects);
     var radians=Math.PI/180;
@@ -113,7 +113,6 @@ if (fw.selection.length == 0 || fw.selection.length > 1) {
   } else {
     shadows = [];
   }
-
 
   // size
   var w = sel.width;
