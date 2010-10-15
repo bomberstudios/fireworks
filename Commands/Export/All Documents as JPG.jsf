@@ -1,5 +1,5 @@
 /**DOC**
-Exports all pages as JPG with a reasonable quality (80).  
+Exports all pages as JPG with the highest quality (100).  
 The files are saved in a folder named YYYYMMDDHHMMSS (i.e: 20091028170642) inside the current folder, with the page names as the file names.  
 It also changes the Optimize settings for all pages, because I hate the "GIF as default format" :)
 **DOC**/
@@ -35,7 +35,7 @@ if(Document.is_saved()) {
     if (fw.getDocumentDOM().hasMasterPage() && fw.getDocumentDOM().currentPageNum == 0) {
       // don't export master page
     } else {
-      Document.export_in(export_file_path,{ animAutoCrop:true, animAutoDifference:true, applyScale:false, colorMode:"24 bit", crop:false, cropBottom:0, cropLeft:0, cropRight:0, cropTop:0, ditherMode:"none", ditherPercent:100, exportFormat:"JPEG", frameInfo:[  ], interlacedGIF:false, jpegQuality:80, jpegSelPreserveButtons:false, jpegSelPreserveText:true, jpegSelQuality:90, jpegSelQualityEnabled:false, jpegSmoothness:0, jpegSubsampling:0, localAdaptive:true, lossyGifAmount:0, macCreator:"????", macFileType:"????", name:null, numCustomEntries:0, numEntriesRequested:0, numGridEntries:6, optimized:true, paletteEntries:null, paletteInfo:null, paletteMode:"adaptive", paletteTransparency:"none", percentScale:100, progressiveJPEG:false, savedAnimationRepeat:0, sorting:"none", useScale:true, webSnapAdaptive:false, webSnapTolerance:14, xSize:1100, ySize:1000 });
+      Document.export_in(export_file_path,{ animAutoCrop:true, animAutoDifference:true, applyScale:false, colorMode:"24 bit", crop:false, cropBottom:0, cropLeft:0, cropRight:0, cropTop:0, ditherMode:"none", ditherPercent:100, exportFormat:"JPEG", frameInfo:[  ], interlacedGIF:false, jpegQuality:100, jpegSelPreserveButtons:false, jpegSelPreserveText:true, jpegSelQuality:90, jpegSelQualityEnabled:false, jpegSmoothness:0, jpegSubsampling:0, localAdaptive:true, lossyGifAmount:0, macCreator:"????", macFileType:"????", name:null, numCustomEntries:0, numEntriesRequested:0, numGridEntries:6, optimized:true, paletteEntries:null, paletteInfo:null, paletteMode:"adaptive", paletteTransparency:"none", percentScale:100, progressiveJPEG:false, savedAnimationRepeat:0, sorting:"none", useScale:true, webSnapAdaptive:false, webSnapTolerance:14 });
     }
   });
 } else {

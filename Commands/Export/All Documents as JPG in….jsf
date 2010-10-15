@@ -1,0 +1,23 @@
+/**DOC**
+Exports all pages as JPG files with a reasonable quality (80).  
+The commands prompts you for a folder to export, and files are saved with the page names as the file names.  
+It also changes the Optimize settings for all pages, because I hate the "GIF as default format" :)
+**DOC**/
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
+};
+
+
+var folder_name = fw.browseForFolderURL("Choose an export folder",null);
+
+Pages.each(function(){
+  var export_file_name = fw.getDocumentDOM().pageName;
+  var export_file_path =  folder_name + "/" + export_file_name + ".png";
+  if (fw.getDocumentDOM().hasMasterPage() && fw.getDocumentDOM().currentPageNum == 0) {
+    // don't export master page
+  } else {
+    Document.export_in(export_file_path,{ animAutoCrop:true, animAutoDifference:true, applyScale:false, colorMode:"24 bit", crop:false, cropBottom:0, cropLeft:0, cropRight:0, cropTop:0, ditherMode:"none", ditherPercent:100, exportFormat:"JPEG", frameInfo:[  ], interlacedGIF:false, jpegQuality:100, jpegSelPreserveButtons:false, jpegSelPreserveText:true, jpegSelQuality:90, jpegSelQualityEnabled:false, jpegSmoothness:0, jpegSubsampling:0, localAdaptive:true, lossyGifAmount:0, macCreator:"????", macFileType:"????", name:null, numCustomEntries:0, numEntriesRequested:0, numGridEntries:6, optimized:true, paletteEntries:null, paletteInfo:null, paletteMode:"adaptive", paletteTransparency:"none", percentScale:100, progressiveJPEG:false, savedAnimationRepeat:0, sorting:"none", useScale:true, webSnapAdaptive:false, webSnapTolerance:14 });
+  }
+});
