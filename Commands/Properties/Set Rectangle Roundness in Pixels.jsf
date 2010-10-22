@@ -6,7 +6,6 @@ This command only makes sense for CS3, as CS4 lets you specify roundness in pixe
 var sel = fw.selection[0];
 var border_radius = 0;
 if (sel.roundness) {
-  var border_radius;
   if(sel.mode == 'exact') {
     border_radius = sel.roundness;
   } else {
@@ -14,7 +13,7 @@ if (sel.roundness) {
   }
 };
 
-var roundness_in_pixels = prompt("Set rectangle roundness in pixels:",border_radius);
+var roundness_in_pixels = prompt("Set rectangle roundness in pixels:",Math.round(border_radius));
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");
 } catch(e){
@@ -22,23 +21,24 @@ try {
 };
 
 try {
-  Selection.each(function(e){
+  fw.selection.each_with_index(function(e,index){
     Selection.save();
     fw.selection = e;
-    var w = Selection.width();
-    var h = Selection.height();
-    if(h < w){
-      w = h;
-    }
     if(fw.appName.indexOf('CS5') != -1) {
       fw.getDocumentDOM().setRectRoundness(roundness_in_pixels, 'exact');
     } else {
+      var w = Selection.width();
+      var h = Selection.height();
+      if(h < w){
+        w = h;
+      }
       var percentage_of_total_width = roundness_in_pixels*100/w;
       var roundness = percentage_of_total_width*2;
       fw.getDocumentDOM().setRectRoundness(roundness/100);
     }
-    Selection.restore();
+    Selection.stored_selection[index] = fw.selection[0];
   });
+  Selection.restore();
 } catch (e) {
   alert(e);
 }
