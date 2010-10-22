@@ -11,10 +11,13 @@ FwArray.prototype.clone = function(){
   }
   return tmp_array;
 };
-FwArray.prototype.each = Array.prototype.each = function(callback){
+FwArray.prototype.each = Array.prototype.each = function(callback,traverse_groups){
+  if (traverse_groups == undefined) {
+    traverse_groups = true;
+  };
   for (var i = this.length - 1; i >= 0; i--){
     el = this[i];
-    if (el.is_group()) {
+    if (el.is_group() && traverse_groups) {
       el.each_in_group(callback);
     } else {
       callback.call(this,this[i]);
@@ -22,10 +25,13 @@ FwArray.prototype.each = Array.prototype.each = function(callback){
   };
 };
 FwArray.prototype.each_with_index = Array.prototype.each_with_index = function(callback){
+  if (traverse_groups == undefined) {
+    traverse_groups = true;
+  };
   var count = 0;
   for (var i = this.length - 1; i >= 0; i--){
     el = this[i];
-    if (el.is_group()) {
+    if (el.is_group() && traverse_groups) {
       el.each_in_group(callback);
     } else {
       callback.call(this,this[i],count);
