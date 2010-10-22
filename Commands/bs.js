@@ -66,11 +66,12 @@ Element.resize = function(w,h){
   if(isNaN(w) || isNaN(h)) return;
   fw.selection = this;
   // Round numbers, because half pixels suck big time
-  var x_pos = Math.round(this.left);
-  var y_pos = Math.round(this.top);
+  //var x_pos = Math.round(this.left);
+  //var y_pos = Math.round(this.top);
   w = Math.round(w);
   h = Math.round(h);
-  fw.getDocumentDOM().setSelectionBounds({left:x_pos,top:y_pos,right:(x_pos + w),bottom:(y_pos + h)},"autoTrimImages transformAttributes");
+  //fw.getDocumentDOM().setSelectionBounds({left:x_pos,top:y_pos,right:(x_pos + w),bottom:(y_pos + h)},"autoTrimImages transformAttributes");
+  fw.getDocumentDOM().resizeSelection(w,h);
 };
 Element.set_position = function(x,y){
   x = Math.round(x);
