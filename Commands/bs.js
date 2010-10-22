@@ -17,7 +17,7 @@ FwArray.prototype.each = Array.prototype.each = function(callback){
     if (el.is_group()) {
       el.each_in_group(callback);
     } else {
-      callback.call(this,this[i],count);
+      callback.call(this,this[i]);
     }
   };
 };

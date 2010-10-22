@@ -21,7 +21,10 @@ if ( s ) {
   var w = s.split(",")[0];
   var h = s.split(",")[1];
 
-  Selection.each(function(o) {
+  Selection.save();
+  fw.selection.each_with_index(function(o,i) {
     o.resize(eval(w),eval(h));
+    Selection.stored_selection[i] = fw.selection[0];
   });
+  Selection.restore();
 }
