@@ -11,21 +11,26 @@ FwArray.prototype.clone = function(){
   }
   return tmp_array;
 };
-FwArray.prototype.each = Array.prototype.each = function(callback, traverse_groups){
-  if(traverse_groups == undefined) {
-    traverse_groups = true;
-  }
-  if (this.length == 1) {
-    callback.call(this,this[0]);
-    return;
-  };
-  for (var s=0; s < this.length; s++){
-    var el = this[s];
-    if (el.is_group() && traverse_groups) {
+FwArray.prototype.each = Array.prototype.each = function(callback){
+  for (var i = this.length - 1; i >= 0; i--){
+    el = this[i];
+    if (el.is_group()) {
       el.each_in_group(callback);
     } else {
-      callback.call(this,el);
+      callback.call(this,this[i],count);
     }
+  };
+};
+FwArray.prototype.each_with_index = Array.prototype.each_with_index = function(callback){
+  var count = 0;
+  for (var i = this.length - 1; i >= 0; i--){
+    el = this[i];
+    if (el.is_group()) {
+      el.each_in_group(callback);
+    } else {
+      callback.call(this,this[i],count);
+    }
+    count++;
   };
 };
 Number.prototype.times = function(callback){
@@ -59,7 +64,6 @@ Element.resize = function(w,h){
     // FIXME: Object is a symbol, and they sometimes get destroyed when resized below its minimum size
   //};
   if(isNaN(w) || isNaN(h)) return;
-  Selection.save(); // there's a bug here somewhere
   fw.selection = this;
   // Round numbers, because half pixels suck big time
   var x_pos = Math.round(this.left);
@@ -67,7 +71,6 @@ Element.resize = function(w,h){
   w = Math.round(w);
   h = Math.round(h);
   fw.getDocumentDOM().setSelectionBounds({left:x_pos,top:y_pos,right:(x_pos + w),bottom:(y_pos + h)},"autoTrimImages transformAttributes");
-  Selection.restore();
 };
 Element.set_position = function(x,y){
   x = Math.round(x);
@@ -267,6 +270,7 @@ Guides = {
 };
 
 Selection = {
+  stored_selection: [],
   all: function(){
     fw.getDocumentDOM().selectAll();
     return fw.selection;
@@ -302,33 +306,17 @@ Selection = {
   bottom: function(){
     return Selection.get_bounds().bottom;
   },
-  each: function(callback,traverse_groups){ fw.selection.each(callback,traverse_groups); },
+  each: function(callback){
+    fw.selection.each(callback);
+  },
   save: function(){
-    Selection.forget();
-    if (fw.selection != null && fw.selection.length > 0) {
-      Selection.each(function(e){
-        e.customData['is_selected'] = true;
-      });
-    }
+    this.stored_selection = fw.selection.clone();
   },
   forget: function(){
-    Selection.each(function(e){
-      e.customData['is_selected'] = false;
-    });
+    this.stored_selection = [];
   },
   restore: function() {
-    var doc = fw.getDocumentDOM();
-    var objects = new Array();
-    for (var l=0; l < doc.layers.length; l++) {
-      doc.selectAllOnLayer(l,true);
-      Selection.each(function(e){
-        if(e.customData['is_selected']){
-          objects.push(e);
-        }
-        e.customData['is_selected'] = false;
-      });
-    }
-    fw.selection = objects;
+    fw.selection = this.stored_selection;
   },
   join: function(delimiter){
     if (fw.selection.length < 2) {
