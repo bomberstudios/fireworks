@@ -6,7 +6,7 @@ var doc = fw.getDocumentDOM();
 // Utility methods
 FwArray.prototype.clone = function(){
   var tmp_array = new Array();
-  for(var i = 0; i < this.length; i++){
+  for (var i = this.length - 1; i >= 0; i--){
     tmp_array.push(this[i]);
   }
   return tmp_array;
@@ -29,12 +29,12 @@ FwArray.prototype.each = Array.prototype.each = function(callback, traverse_grou
   };
 };
 Number.prototype.times = function(callback){
-  for (var s=0; s < this; s++){
+  for (var s = this - 1; s >= 0; s--){
     callback.call(this,s);
   };
 };
 Element.each_in_group = function(callback){
-  for (var e=0; e < this.elements.length; e++){
+  for (var e = this.elements.length - 1; e >= 0; e--){
     if (this.elements[e].is_group()) {
       this.elements[e].each_in_group(callback);
     } else {
@@ -162,10 +162,10 @@ Guides = {
       vGuides: [],
       hGuides: []
     };
-    for(var i = 0; i< current_v_guides.length; i++){
+    for (var i = current_v_guides.length - 1; i >= 0; i--){
       current_guides.vGuides.push(current_v_guides[i]);
     }
-    for(var j = 0; j< current_h_guides.length; j++){
+    for (var j = current_h_guides.length - 1; j >= 0; j--){
       current_guides.hGuides.push(current_h_guides[j]);
     }
     return current_guides;
@@ -182,14 +182,14 @@ Guides = {
     var current_guides = Guides.get();
     if (direction == "horizontal") {
       Guides.clear('horizontal');
-      for(var i=0; i < current_guides.hGuides.length; i++){
+      for (var i = current_guides.hGuides.length - 1; i >= 0; i--){
         if(current_guides.hGuides[i] != where){
           Guides.addHorizontal(current_guides.hGuides[i]);
         }
       }
     } else {
       Guides.clear('vertical');
-      for(var j=0; j < current_guides.vGuides.length; j++){
+      for (var j = current_guides.vGuides.length - 1; j >= 0; j--){
         if(current_guides.vGuides[j] != where){
           Guides.addVertical(current_guides.vGuides[j]);
         }
@@ -224,7 +224,7 @@ Guides = {
     // Make sure the guides are visible
     doc.setShowGuides(true);
 
-    for(i=0; i < number_of_columns; i++){
+    for (var i = number_of_columns - 1; i >= 0; i--){
       Guides.add(guide_position,"vertical");
       guide_position += column_width;
       last_guide_position = guide_position;
@@ -256,7 +256,7 @@ Guides = {
     // Make sure the guides are visible
     doc.setShowGuides(true);
 
-    for(i=0; i < number_of_columns; i++){
+    for (var i = number_of_columns - 1; i >= 0; i--){
       Guides.add(guide_position,"horizontal");
       guide_position += column_width;
       Guides.add(guide_position,"horizontal");
@@ -352,7 +352,7 @@ Selection = {
     text_fields.sort(Sort.by_x);
     text_fields.sort(Sort.by_y);
     text_fields.each(function(t){
-      for ( var i = 0; i < t.textRuns.textRuns.length; i++ ) {
+      for (var i = t.textRuns.textRuns.length - 1; i >= 0; i--){
         var current_text_run = t.textRuns.textRuns[i];
         if (i == t.textRuns.textRuns.length - 1) {
           current_text_run.characters += delimiter;
@@ -435,14 +435,16 @@ Pages = {
     }
   },
   each: function(callback){
-    for(var i=0; i < Pages.count(); i++){
-      doc.changeCurrentPage(i);
+    var i = Pages.count() - 1;
+    for (i; i >= 0; i--){
+      fw.getDocumentDOM().changeCurrentPage(i);
       callback.call(this,i);
     }
   },
   vertical_trim: function(){
     var doc = fw.getDocumentDOM();
-    for (var l=0; l < doc.layers.length; l++) {
+    var l = doc.layers.length - 1;
+    for (l; l >= 0; l--){
       doc.selectAllOnLayer(l,true,false);
       // Here be dragons.
       // Now, *this* is a perfect example of why Fireworks seems to be
@@ -477,7 +479,7 @@ Color = {
     } else if (hexstr.length == 6 || hexstr.length == 8) {
       a = hexstr.match(/(\w{2})/g);
     }
-    for (i=0; i<a.length; i++) {
+    for (i = a.length - 1; i >= 0; i--){
       if (a[i].length == 2) {
         a[i] = parseInt(a[i], 16);
       } else {
