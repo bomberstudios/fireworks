@@ -7,10 +7,10 @@ require "erb"
 require 'fileutils'
 require 'lib/library'
 
-ORANGE_COMMANDS_VERSION = "1.6.2"
+ORANGE_COMMANDS_VERSION = "1.6.3"
 DOWNLOAD_SERVER = "http://orangecommands.com/dl/"
-# @fw_versions = ["CS3","CS4","CS5"]
-@fw_versions = ["CS3","CS5"]
+@fw_versions = ["CS3","CS4","CS5"]
+# @fw_versions = ["CS3","CS5"]
 @orangecommands = FW::Library.new 'Commands'
 
 def app_folder
@@ -80,7 +80,7 @@ end
 desc "Build MXP files"
 task :mxp do
   %x(open -a "/Applications/Adobe Extension Manager/Extension Manager.app" OrangeCommands_#{ORANGE_COMMANDS_VERSION}_CS3.mxi)
-  #%x("/Applications/Adobe Extension Manager CS4/Adobe Extension Manager CS4.app/Contents/MacOS/Adobe Extension Manager CS4" -package mxi="OrangeCommands_#{ORANGE_COMMANDS_VERSION}_CS4.mxi" mxp="OrangeCommands_#{ORANGE_COMMANDS_VERSION}_CS4.mxp")
+  %x("/Applications/Adobe Extension Manager CS4/Adobe Extension Manager CS4.app/Contents/MacOS/Adobe Extension Manager CS4" -package mxi="OrangeCommands_#{ORANGE_COMMANDS_VERSION}_CS4.mxi" mxp="OrangeCommands_#{ORANGE_COMMANDS_VERSION}_CS4.mxp")
   %x("/Applications/Adobe Extension Manager CS5/Adobe Extension Manager CS5.app/Contents/MacOS/Adobe Extension Manager CS5" -package mxi="OrangeCommands_#{ORANGE_COMMANDS_VERSION}_CS5.mxi" mxp="OrangeCommands_#{ORANGE_COMMANDS_VERSION}_CS5.mxp")
 end
 
@@ -112,6 +112,8 @@ task :default => [ :clean, :shortcuts, :readme, :mxi, :mxp, :pack ]
 
 task :install do
   system("rsync -azv Commands \"/Applications/Adobe\ Fireworks\ CS3/Configuration/\"")
+  system("rsync -azv Commands \"/Applications/Adobe\ Fireworks\ CS4/Configuration/\"")
+  system("rsync -azv Commands \"/Applications/Adobe\ Fireworks\ CS5/Configuration/\"")
 end
 
 desc "Build docs"
@@ -120,4 +122,9 @@ task :readme do
     f << ERB.new(File.read("tpl/README.erb")).result
   end
   system('maruku README.markdown')
+end
+
+desc 'Run Test Suite'
+task :test do
+  %x(open -a "/Applications/Adobe\ Fireworks\ CS3/Adobe\ Fireworks\ CS3.app" Commands/Development/Testing/TestSuite.jsf)
 end
