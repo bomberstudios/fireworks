@@ -4,7 +4,9 @@
 
   TODO:
   - open a blank document before we start
+    - newdoc = fw.createFireworksDocument(size, res, backgroundColor);
   - use test files for heavyweight stuff (400 elements resize, 6000x6000 canvas...)
+    - fw.openDocument(fileURL string or array);
   - test all commands
 
 */
