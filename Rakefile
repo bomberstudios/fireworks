@@ -125,6 +125,9 @@ task :readme do
 end
 
 desc 'Run Test Suite'
-task :test do
-  %x(open -a "/Applications/Adobe\ Fireworks\ CS3/Adobe\ Fireworks\ CS3.app" Commands/Development/Testing/TestSuite.jsf)
+task :test => [:install] do
+  %x(open -a "/Applications/Adobe\ Fireworks\ CS3/Adobe\ Fireworks\ CS3.app" Commands/Development/Testing/TestSuite.jsf && open -a "/Applications/Adobe\ Fireworks\ CS4/Adobe\ Fireworks\ CS4.app" Commands/Development/Testing/TestSuite.jsf && open -a "/Applications/Adobe\ Fireworks\ CS5/Adobe\ Fireworks\ CS5.app" Commands/Development/Testing/TestSuite.jsf)
+  puts File.readlines("/Users/ale/Desktop/test_output_Fireworks CS3.txt","\r").last
+  puts File.readlines("/Users/ale/Desktop/test_output_Fireworks CS4.txt","\r").last
+  puts File.readlines("/Users/ale/Desktop/test_output_Fireworks CS5.txt","\r").last
 end
