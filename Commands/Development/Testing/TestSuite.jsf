@@ -1,0 +1,182 @@
+/*
+  TODO:
+  - output test log to file
+*/
+try {
+  //if (bs_loaded == undefined) {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+  //};
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://github.com/bomberstudios/fireworks/");
+};
+
+// General setup
+var asserts = 0;
+var ok = 0;
+var fail = 0;
+var test_output = "";
+
+// Test init
+function assert(desc, thing, expected) {
+  test_output += "- " + desc + ": ";
+  asserts++;
+  if (thing === expected) {
+    ok++;
+    test_output += "OK.\n";
+  } else {
+    fail++;
+    test_output += 'FAIL. Got ' + thing + ' and expected ' + expected.toString() + '\n';
+  }
+}
+function setup() {
+  a = new Array(10);
+  for (var i=0; i < a.length; i++) {
+    a[i] = i;
+  };
+  fw.getDocumentDOM().addNewRectanglePrimitive({left:0, top:0, right:100, bottom:100}, 0);
+  // redefine prompt() function so that we can specify the value(s) it returns.
+  // This way, we can run tests on commands that ask the user for values.
+  prompt = function(){
+    if (prompt_return) {
+      return prompt_return;
+    } else {
+      return 110;
+    }
+  };
+  // redefine alert();
+  alert = function(msg){
+    test_output += 'Alert: ' + msg + '\n';
+  };
+}
+function teardown() {
+  fw.getDocumentDOM().selectAll();
+  fw.deleteSelection();
+  delete(a);
+}
+function run_command(kind, command){
+  try {
+    f = fw.appJsCommandsDir + "/" + kind + "/" + encodeURIComponent(command) + ".jsf";
+    fw.runScript(f);
+  } catch (exception) {
+    alert("Error running command " + kind + "/" + command + ".\n" + [exception, exception.lineNumber, exception.fileName].join("\n"));
+  }
+}
+function test(what,f) {
+  scenario = what;
+  test_output += '\n' + what + '\n';
+  setup();
+  f.call();
+  teardown();
+}
+function xtest(what,f){
+  //alert(f.toSource());
+}
+
+alert('Running test - ' + new Date());
+
+// Test that tests are working (talk about trust...)
+test( 'test suite runs setup', function(){
+  assert( 'there is one item created and selected', fw.selection.length, 1);
+});
+assert('setup runs teardown', fw.selection.length,0);
+
+
+// API
+test( 'Array extensions are defined', function(){
+  assert( 'Array.clone is defined', typeof(fw.selection.clone), "function" );
+  assert( 'Array.each is defined', typeof(a.each), "function" );
+  assert( 'Array.each_with_index is defined', typeof(a.each_with_index), "function" );
+  assert( 'Array.is_group is defined', typeof(a.is_group), "function" );
+  assert( 'Number.times is defined', typeof((5).times), "function" );
+  assert( 'Array.each_in_group is defined', typeof(fw.selection[0].each_in_group), 'function');
+});
+
+test('Array.each works', function(){
+  count = 0;
+  a.each(function(p){
+    count++;
+  });
+  assert( 'Array.each works', count, a.length );
+  count = 0;
+  a.each_with_index(function(p,index){
+    count += index;
+  });
+  assert( 'Array.each_with_index works', count, 9+8+7+6+5+4+3+2+1 );
+});
+
+// Align
+test( 'Align commands work properly', function(){
+  //
+});
+
+// Alpha
+test( 'Alpha commands', function(){
+  run_command("Alpha","Alpha 10");
+  // This is a *very* bad test, but that's just because Fireworks does some funky stuff with opacity...
+  assert( 'Alpha 10 works', Math.round(fw.selection[0].opacity),10);
+});
+
+// Canvas
+test( 'Canvas', function(){
+  prompt_return = 110;
+  run_command("Canvas","Canvas Width");
+  assert('Canvas Width is 110', dom().width, 110);
+});
+
+// Color
+
+// Effects
+test('Effects',function(){
+  run_command('Effects','Plastic');
+});
+
+// Export
+test('Export',function(){
+  //
+});
+// Export Settings
+
+// Grids
+
+// Guides
+
+// Pages
+
+// Position
+
+// Properties
+
+// Select
+test( 'Select text objects', function(){});
+
+// Size
+test( 'Size command, single object', function(){
+  assert('An item is selected and its width is 100', fw.selection[0].width, 100);
+  // error -2147216361
+  run_command("Size","Width +10");
+  assert('Selected item is 10 pixels wider', fw.selection[0].width, 110);
+  run_command("Size","Height +10");
+  assert('Selected item is 10 pixels taller', fw.selection[0].height, 110);
+});
+
+test( 'Size command, multiple objects', function(){
+  assert('One item is selected', fw.selection.length,1);
+  (30).times(function(){
+    fw.getDocumentDOM().addNewRectanglePrimitive({left:0, top:0, right:100, bottom:100}, 0);
+  });
+  fw.getDocumentDOM().selectAll();
+  assert('Multiple items are selected', fw.selection.length, 31);
+  run_command("Size","Width +10");
+  //Selection.each(function(o){
+  //  o.resize(110,100);
+  //});
+  //fw.getDocumentDOM().selectAll();
+  assert('Multiple items are 10 pixels wider', Selection.get_bounds().right,110);
+});
+
+test( 'Size command, multiple groups', function(){});
+
+// Text
+test_output += '\n' + asserts + ' asserts, ' + ok + ' ok, ' + fail + ' failed.\n';
+
+File.create(test_output,'file:///P128/Users/ale/Desktop/test_output.txt');
