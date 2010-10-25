@@ -26,9 +26,9 @@ var test_output = "";
 function log(msg){
   test_output += msg + ' (' + new Date() + ')\n';
 }
-function sel(){
-  return fw.selection[0];
-};
+function add_rectangle(){
+  fw.getDocumentDOM().addNewRectanglePrimitive({left:0, top:0, right:100, bottom:100}, 0);
+}
 
 // Test init
 function assert(desc, thing, expected) {
@@ -47,7 +47,7 @@ function setup() {
   for (var i=0; i < a.length; i++) {
     a[i] = i;
   };
-  fw.getDocumentDOM().addNewRectanglePrimitive({left:0, top:0, right:100, bottom:100}, 0);
+  add_rectangle();
   // redefine prompt() function so that we can specify the value(s) it returns.
   // This way, we can run tests on commands that ask the user for values.
   prompt = function(){
@@ -58,7 +58,7 @@ function setup() {
     }
   };
   // redefine alert();
-  alert = log;
+  // alert = log;
   // redefine fw.popupColorPickerOverMouse
   fw.popupColorPickerOverMouse = function(){
     return prompt_return;
@@ -104,7 +104,7 @@ test('Array extensions are defined', function(){
   assert( 'Array.each_with_index is defined', typeof(a.each_with_index), "function" );
   assert( 'Array.is_group is defined', typeof(a.is_group), "function" );
   assert( 'Number.times is defined', typeof((5).times), "function" );
-  assert( 'Array.each_in_group is defined', typeof(sel().each_in_group), 'function');
+  assert( 'Array.each_in_group is defined', typeof(fw.selection[0].each_in_group), 'function');
 });
 test('Array extensions work', function(){
   count = 0;
@@ -123,18 +123,24 @@ test('Array extensions work', function(){
 
 
 // Align
-test( 'Align commands work properly', function(){
-  //
+test( 'Align commands', function(){
+  (3).times(add_rectangle);
+  prompt_return = 10;
+  fw.getDocumentDOM().selectAll();
+  run_command('Align','Space Horizontal');
+  assert('Elements are spaced horizontally',Selection.width(),430);
 });
+
 
 // Alpha
 test( 'Alpha commands', function(){
   [10,20,30,40,50,60,70,80,90,100].each(function(alpha){
     run_command("Alpha","Alpha "+alpha);
     // This is a *very* bad test, but that's just because Fireworks does some funky stuff with opacity...
-    assert( 'Alpha ' + alpha + ' works', Math.round(sel().opacity),alpha);
+    assert( 'Alpha ' + alpha + ' works', Math.round(fw.selection[0].opacity),alpha);
   });
 });
+
 
 // Canvas
 test( 'Canvas', function(){
@@ -149,16 +155,18 @@ test( 'Canvas', function(){
   assert('Canvas Size sets Height', dom().height, 100);
 });
 
+
 // Color
 test('Color',function(){
   prompt_return = '#00ff00';
   run_command('Color','Canvas Color');
   assert('Canvas Color sets color', dom().backgroundColor,'#00ff00');
   run_command('Color','Fill Color');
-  assert('Fill Color sets Color', sel().pathAttributes.fillColor,'#00ff00');
+  assert('Fill Color sets Color', fw.selection[0].pathAttributes.fillColor,'#00ff00');
   run_command('Color','Stroke Color');
-  assert('Fill Color sets Stroke', sel().pathAttributes.brushColor,'#00ff00');
+  assert('Fill Color sets Stroke', fw.selection[0].pathAttributes.brushColor,'#00ff00');
 });
+
 
 // Effects
 test('Effects',function(){
@@ -178,12 +186,13 @@ test('Export',function(){
 
 // Pages
 
+
 // Position
 test('Position',function(){
   prompt_return = '100,100';
   run_command('Position','Set Position');
-  assert('Element is moved to x position', sel().left, 100);
-  assert('Element is moved to y position', sel().top, 100);
+  assert('Element is moved to x position', fw.selection[0].left, 100);
+  assert('Element is moved to y position', fw.selection[0].top, 100);
 });
 
 // Properties
@@ -191,17 +200,18 @@ test('Position',function(){
 // Select
 test( 'Select text objects', function(){});
 
+
 // Size
 test( 'Size command, single object', function(){
-  assert('An item is selected and its width is 100', sel().width, 100);
+  assert('An item is selected and its width is 100', fw.selection[0].width, 100);
   // error -2147216361
   run_command("Size","Width +10");
-  assert('Selected item is 10 pixels wider', sel().width, 110);
+  assert('Selected item is 10 pixels wider', fw.selection[0].width, 110);
   run_command("Size","Height +10");
-  assert('Selected item is 10 pixels taller', sel().height, 110);
+  assert('Selected item is 10 pixels taller', fw.selection[0].height, 110);
 });
 
-test( 'Size command, multiple objects', function(){
+xtest( 'Size command, multiple objects', function(){
   assert('One item is selected', fw.selection.length,1);
   (30).times(function(){
     fw.getDocumentDOM().addNewRectanglePrimitive({left:0, top:0, right:100, bottom:100}, 0);
