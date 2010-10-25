@@ -2,15 +2,15 @@
 // a collection of (hopefully) useful tools for Fireworks
 
 var doc = fw.getDocumentDOM();
+function dom(){
+  return fw.getDocumentDOM();
+};
 
 // Utility methods
-FwArray.prototype.clone = function(){
-  var tmp_array = new Array();
-  for (var i = this.length - 1; i >= 0; i--){
-    tmp_array.push(this[i]);
-  }
-  return tmp_array;
+FwArray.prototype.clone = Array.prototype.clone = function(){
+  return [].concat(this);
 };
+
 FwArray.prototype.each = Array.prototype.each = function(callback,traverse_groups){
   if (traverse_groups == undefined) {
     traverse_groups = true;
@@ -24,7 +24,8 @@ FwArray.prototype.each = Array.prototype.each = function(callback,traverse_group
     }
   };
 };
-FwArray.prototype.each_with_index = Array.prototype.each_with_index = function(callback){
+
+FwArray.prototype.each_with_index = Array.prototype.each_with_index = function(callback,traverse_groups){
   if (traverse_groups == undefined) {
     traverse_groups = true;
   };
@@ -39,6 +40,7 @@ FwArray.prototype.each_with_index = Array.prototype.each_with_index = function(c
     count++;
   };
 };
+
 Number.prototype.times = function(callback){
   for (var s = this - 1; s >= 0; s--){
     callback.call(this,s);
@@ -96,12 +98,45 @@ Element.is_symbol = function(){
 Element.is_text = function(){
   return (this.__proto__ == Text.prototype);
 };
+
 function dump(obj) {
   var output = "Dumping " + obj + "\n\n";
   for ( var i in obj ){
     output += obj + '.'+ i + " (" + typeof(obj[i]) + ") = " + obj[i] + "\n";
   }
   alert(output);
+}
+
+function benchmark(func){
+  // CS3: 1000x1000 canvas, transparent bg
+  // object is a simple rectangle with plain fill
+  // objects are not grouped
+  // 
+  // resize v2: inverse loop
+  // resize v3: don't remember selections
+  // resize v4: remember selections, traverse groups
+  // resize v5: remember selections, traverse groups, resizeSelection
+  // 
+  // Objects      Operation       Time (ms), CS3      Time (ms), CS5
+  // ===============================================================
+  //   1          resize                 2
+  //   2          resize                 3
+  //   4          resize                 8
+  //   8          resize                21
+  //  16          resize                65
+  //  32          resize               245
+  // 100          resize              3644                  4075
+  // 200          resize             16633                 23910
+  // 400          resize             94193                146241 (crash)
+  //              resize v2          80439
+  //              resize v3           1402
+  //              resize v4           1856
+  //              resize v5           1473                  1652
+
+  start = new Date();
+  func.call();
+  end = new Date();
+  alert(end - start);
 }
 
 User = {
@@ -224,7 +259,7 @@ Guides = {
     } else {
       start_position = 0;
     }
-    
+  
     var guide_position = start_position;
     var last_guide_position = 0;
 
@@ -370,14 +405,17 @@ FW = {
 };
 
 File = {
-  create: function(contents){
+  create: function(contents,url){
     // Delete any existing file with the same name. If
     // you do not, and then open the file for rewriting,
     // saved text will be written over the existing file
     // which could leave remnants of the old file behind
-
-    fileURL = fw.browseForFileURL("select", "", "");
-    //alert(fileURL);
+    if (!url) {
+      fileURL = fw.browseForFileURL("select", "", "");
+    } else {
+      fileURL = url;
+    }
+    alert(fileURL);
 
     //fileURL = "file:///HD/Users/ale/Desktop/fw_cs3_api.jsf";
 
@@ -425,7 +463,7 @@ Pages = {
 
       // Remove it
       fw.getDocumentDOM().deletePageAt(0);
-    
+  
       return last_page_index;
     }
   },
