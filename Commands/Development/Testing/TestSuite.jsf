@@ -1,6 +1,12 @@
 /*
-  TODO:
+  DONE:
   - output test log to file
+
+  TODO:
+  - open a blank document before we start
+  - use test files for heavyweight stuff (400 elements resize, 6000x6000 canvas...)
+  - test all commands
+
 */
 try {
   //if (bs_loaded == undefined) {
