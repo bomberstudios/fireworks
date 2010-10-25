@@ -15,6 +15,9 @@ var asserts = 0;
 var ok = 0;
 var fail = 0;
 var test_output = "";
+function log(msg){
+  test_output += msg + ' (' + new Date() + ')\n';
+}
 
 // Test init
 function assert(desc, thing, expected) {
@@ -44,9 +47,7 @@ function setup() {
     }
   };
   // redefine alert();
-  alert = function(msg){
-    test_output += 'Alert: ' + msg + '\n';
-  };
+  alert = log;
 }
 function teardown() {
   fw.getDocumentDOM().selectAll();
@@ -72,17 +73,17 @@ function xtest(what,f){
   //alert(f.toSource());
 }
 
-alert('Running test - ' + new Date());
+log('Running TestSuite in ' + fw.appName);
 
 // Test that tests are working (talk about trust...)
-test( 'test suite runs setup', function(){
-  assert( 'there is one item created and selected', fw.selection.length, 1);
+test('Test Suite runs setup', function(){
+  assert( 'There is one item created and selected', fw.selection.length, 1);
 });
-assert('setup runs teardown', fw.selection.length,0);
+assert('Test Suite runs teardown', fw.selection.length,0);
 
 
 // API
-test( 'Array extensions are defined', function(){
+test('Array extensions are defined', function(){
   assert( 'Array.clone is defined', typeof(fw.selection.clone), "function" );
   assert( 'Array.each is defined', typeof(a.each), "function" );
   assert( 'Array.each_with_index is defined', typeof(a.each_with_index), "function" );
@@ -91,7 +92,7 @@ test( 'Array extensions are defined', function(){
   assert( 'Array.each_in_group is defined', typeof(fw.selection[0].each_in_group), 'function');
 });
 
-test('Array.each works', function(){
+test('Array extensions work', function(){
   count = 0;
   a.each(function(p){
     count++;
@@ -102,7 +103,10 @@ test('Array.each works', function(){
     count += index;
   });
   assert( 'Array.each_with_index works', count, 9+8+7+6+5+4+3+2+1 );
+  //b = a.clone();
+  //assert('Array.clone works',b[4],4);
 });
+
 
 // Align
 test( 'Align commands work properly', function(){
@@ -177,6 +181,6 @@ test( 'Size command, multiple objects', function(){
 test( 'Size command, multiple groups', function(){});
 
 // Text
-test_output += '\n' + asserts + ' asserts, ' + ok + ' ok, ' + fail + ' failed.\n';
+test_output += '\n' + asserts + ' asserts, ' + ok + ' ok, ' + fail + ' failed.';
 
-File.create(test_output,'file:///P128/Users/ale/Desktop/test_output.txt');
+File.create(test_output,'file:///P128/Users/ale/Desktop/test_output_' + fw.appName + '.txt');
