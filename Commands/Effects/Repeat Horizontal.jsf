@@ -1,7 +1,6 @@
 /**DOC**
 Repeats the currently selected object(s) horizontally. It asks for the number of copies and the distance between them.
 **DOC**/
-
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");
 } catch(e){
