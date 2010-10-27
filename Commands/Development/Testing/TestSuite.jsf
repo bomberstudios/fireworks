@@ -10,13 +10,6 @@
   - test all commands
 
 */
-try {
-  //if (bs_loaded == undefined) {
-  fw.runScript(fw.appJsCommandsDir + "/bs.js");
-  //};
-} catch(e){
-  alert("This command requires the bs.js library\rGet it at http://github.com/bomberstudios/fireworks/");
-};
 
 // General setup
 var asserts = 0;
@@ -24,6 +17,7 @@ var ok = 0;
 var fail = 0;
 var test_output = "";
 function log(msg){
+  alert(msg);
   test_output += msg + ' (' + new Date() + ')\n';
 }
 function add_rectangle(){
@@ -84,13 +78,22 @@ function test(what,f) {
   f.call();
   teardown();
 }
-function xtest(what,f){
-  //alert(f.toSource());
-}
+function xtest(what,f){ };
 
+// Start test
 log('Running TestSuite in ' + fw.appName);
+test_document = fw.createFireworksDocument({x:400,y:400}, {pixelsPerUnit:72, units:"inch"}, '#ffffff00');
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://github.com/bomberstudios/fireworks/");
+};
+
 
 // Test that tests are working (talk about trust...)
+test('bs is loaded', function(){
+  assert('dom() is defined',typeof(dom),"function");
+});
 test('Test Suite runs setup', function(){
   assert( 'There is one item created and selected', fw.selection.length, 1);
 });
@@ -129,6 +132,9 @@ test( 'Align commands', function(){
   fw.getDocumentDOM().selectAll();
   run_command('Align','Space Horizontal');
   assert('Elements are spaced horizontally',Selection.width(),430);
+  fw.getDocumentDOM().selectAll();
+  run_command('Align','Space Vertical');
+  assert('Elements are spaced vertically',Selection.height(),430);
 });
 
 
@@ -211,24 +217,29 @@ test( 'Size command, single object', function(){
   assert('Selected item is 10 pixels taller', fw.selection[0].height, 110);
 });
 
-xtest( 'Size command, multiple objects', function(){
+test( 'Size command, multiple objects', function(){
   assert('One item is selected', fw.selection.length,1);
-  (30).times(function(){
-    fw.getDocumentDOM().addNewRectanglePrimitive({left:0, top:0, right:100, bottom:100}, 0);
-  });
+  (30).times(add_rectangle);
   fw.getDocumentDOM().selectAll();
   assert('Multiple items are selected', fw.selection.length, 31);
   run_command("Size","Width +10");
-  //Selection.each(function(o){
-  //  o.resize(110,100);
-  //});
-  //fw.getDocumentDOM().selectAll();
   assert('Multiple items are 10 pixels wider', Selection.get_bounds().right,110);
+  run_command("Size","Height +10");
+  assert('Multiple items are 10 pixels taller', Selection.get_bounds().bottom,110);
 });
 
-test( 'Size command, multiple groups', function(){});
+test( 'Size command, groups', function(){
+  (30).times(add_rectangle);
+  fw.getDocumentDOM().selectAll();
+  fw.getDocumentDOM().group("normal");
+  run_command('Size','Width +10');
+  assert('Group is resized',Selection.get_bounds().right,110);
+});
 
-// Text
-test_output += '\n' + asserts + ' asserts, ' + ok + ' ok, ' + fail + ' failed.';
+// Close test document
+fw.closeDocument(test_document,false);
+
+// End test
+log('\n' + asserts + ' asserts, ' + ok + ' ok, ' + fail + ' failed.');
 
 File.create(test_output,'file:///P128/Users/ale/Desktop/test_output_' + fw.appName.replace(' ','_') + '.txt');
