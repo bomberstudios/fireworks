@@ -8,5 +8,5 @@ try {
 };
 
 fw.selection.each(function(e){
-  e.top = Math.floor(fw.getDocumentDOM().height/2 - e.height/2);
+  e.top = Math.round(fw.getDocumentDOM().height/2 - e.height/2);
 },false);

@@ -8,6 +8,6 @@ try {
 };
 
 fw.selection.each(function(e){
-  e.top = Math.floor(fw.getDocumentDOM().height/2 - e.height/2);
-  e.left = Math.floor(fw.getDocumentDOM().width/2 - e.width/2);
+  e.top = Math.round(fw.getDocumentDOM().height/2 - e.height/2);
+  e.left = Math.round(fw.getDocumentDOM().width/2 - e.width/2);
 },false);
