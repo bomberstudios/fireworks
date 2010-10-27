@@ -126,7 +126,30 @@ test('Array extensions work', function(){
 
 
 // Align
-test( 'Align commands', function(){
+test( 'Align commands: Center', function(){
+
+  fw.getDocumentDOM().selectAll();
+  fw.selection[0].left = 100 * Math.random();
+  fw.selection[0].top = 100 * Math.random();
+  run_command('Align', 'Center on Canvas - Horizontal');
+  assert('Object is centered horizontally', fw.selection[0].left, 150);
+
+  fw.getDocumentDOM().selectAll();
+  fw.selection[0].left = 100 * Math.random();
+  fw.selection[0].top = 100 * Math.random();
+  run_command('Align', 'Center on Canvas - Vertical');
+  assert('Object is centered vertically', fw.selection[0].top, 150);
+
+  fw.getDocumentDOM().selectAll();
+  fw.selection[0].left = 100 * Math.random();
+  fw.selection[0].top = 100 * Math.random();
+  run_command('Align', 'Center on Canvas - Both');
+  assert('Object is centered horizontally', fw.selection[0].left, 150);
+  assert('Object is centered vertically', fw.selection[0].top, 150);
+
+});
+
+test( 'Align commands: Space', function(){
   (3).times(add_rectangle);
   prompt_return = 10;
   fw.getDocumentDOM().selectAll();
