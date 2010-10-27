@@ -1,10 +1,10 @@
 /*
   DONE:
   - output test log to file
-
-  TODO:
   - open a blank document before we start
     - newdoc = fw.createFireworksDocument(size, res, backgroundColor);
+
+  TODO:
   - use test files for heavyweight stuff (400 elements resize, 6000x6000 canvas...)
     - fw.openDocument(fileURL string or array);
   - test all commands
@@ -89,6 +89,7 @@ try {
   alert("This command requires the bs.js library\rGet it at http://github.com/bomberstudios/fireworks/");
 };
 
+start_time = new Date();
 
 // Test that tests are working (talk about trust...)
 test('bs is loaded', function(){
@@ -263,6 +264,6 @@ test( 'Size command, groups', function(){
 fw.closeDocument(test_document,false);
 
 // End test
-log('\n' + asserts + ' asserts, ' + ok + ' ok, ' + fail + ' failed.');
+log('\n' + asserts + ' asserts, ' + ok + ' ok, ' + fail + ' failed. Test run in ' + (new Date() - start_time) + ' ms.');
 
 File.create(test_output,'file:///P128/Users/ale/Desktop/test_output_' + fw.appName.replace(' ','_') + '.txt');
