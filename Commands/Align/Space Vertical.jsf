@@ -6,16 +6,17 @@ try {
 } catch(e){
   alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
 };
+
 if (fw.selection.length > 0) {
-  var spacing = prompt("Vertical spacing:");
+  var spacing = prompt("Vertical spacing:",10);
   function sort_by_vertical_position(a,b){
     return a.top - b.top;
   }
-  var sel = new Array();
-  sel = sel.concat(fw.selection).sort(sort_by_vertical_position);
-  var position = sel[0].top;
-  for(var i = 0 ; i < sel.length; i++ ){
-    sel[i].set_position(sel[i].left, position);
-    position = sel[i].top + sel[i].height + spacing;
-  }
+
+  var position = Selection.top();
+
+  fw.selection.clone().sort(sort_by_vertical_position).reverse().each(function(item){
+    item.set_position(item.left, position);
+    position = item.top + item.height + spacing;
+  });
 };

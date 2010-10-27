@@ -415,7 +415,6 @@ File = {
     } else {
       fileURL = url;
     }
-    alert(fileURL);
 
     //fileURL = "file:///HD/Users/ale/Desktop/fw_cs3_api.jsf";
 
