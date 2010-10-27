@@ -44,11 +44,11 @@ function setup() {
   add_rectangle();
   // redefine prompt() function so that we can specify the value(s) it returns.
   // This way, we can run tests on commands that ask the user for values.
-  prompt = function(){
+  prompt = function(msg,default_value){
     if (prompt_return) {
       return prompt_return;
     } else {
-      return 110;
+      return default_value;
     }
   };
   // redefine alert();
@@ -126,7 +126,7 @@ test('Array extensions work', function(){
 });
 
 
-// Align
+// Align: DONE
 test( 'Align commands: Center', function(){
 
   fw.getDocumentDOM().selectAll();
@@ -149,7 +149,6 @@ test( 'Align commands: Center', function(){
   assert('Object is centered vertically', fw.selection[0].top, 150);
 
 });
-
 test( 'Align commands: Space', function(){
   (3).times(add_rectangle);
   prompt_return = 10;
@@ -162,7 +161,7 @@ test( 'Align commands: Space', function(){
 });
 
 
-// Alpha
+// Alpha: DONE
 test( 'Alpha commands', function(){
   [10,20,30,40,50,60,70,80,90,100].each(function(alpha){
     run_command("Alpha","Alpha "+alpha);
@@ -172,7 +171,7 @@ test( 'Alpha commands', function(){
 });
 
 
-// Canvas
+// Canvas: DONE
 test( 'Canvas', function(){
   prompt_return = 110;
   run_command("Canvas","Canvas Width");
@@ -186,7 +185,7 @@ test( 'Canvas', function(){
 });
 
 
-// Color
+// Color: DONE
 test('Color',function(){
   prompt_return = '#00ff00';
   run_command('Color','Canvas Color');
@@ -199,9 +198,29 @@ test('Color',function(){
 
 
 // Effects
-test('Effects',function(){
+// No idea how I should test these, so I just basically run them all and expect Fireworks not to explode
+test('Effects: Graphic',function(){
+  run_command('Effects','Lightbox');
   run_command('Effects','Plastic');
+  prompt_return = 50;
+  run_command('Effects','Reflection');
 });
+// Repeat commands can be tested properly
+test('Effects: Repeat Horizontal', function(){
+  prompt_return = 10;
+  run_command('Effects', 'Repeat Horizontal');
+  fw.getDocumentDOM().selectAll();
+  assert('Item is repeated 10 times', fw.selection.length, 11);
+  assert('Item is spaced properly', Selection.width(), ((11 * 100) + (10 * 10)));
+});
+test('Effects: Repeat Vertical', function(){
+  prompt_return = 10;
+  run_command('Effects', 'Repeat Vertical');
+  fw.getDocumentDOM().selectAll();
+  assert('Item is repeated 10 times', fw.selection.length, 11);
+  assert('Item is spaced properly', Selection.height(), ((11 * 100) + (10 * 10)));
+});
+
 
 // Export
 test('Export',function(){
