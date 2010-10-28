@@ -163,6 +163,7 @@ test('Export',function(){
 
 // Export Settings
 test('Export Settings',function(){
+  // TODO: check all pages in multipage document
   run_command('Export Settings','Set PNG 24 for All Pages');
   assert('PNG is set as export setting for all pages', dom().exportOptions.exportFormat, 'PNG');
 });
@@ -262,6 +263,13 @@ test( 'Size command, groups', function(){
   run_command('Size','Width +10');
   assert('Group is resized',Selection.get_bounds().right,110);
 });
+
+
+// Text
+test('Text commands', function(){
+  
+});
+
 
 // Close test document
 fw.closeDocument(test_document,false);
