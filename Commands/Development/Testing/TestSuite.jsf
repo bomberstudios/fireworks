@@ -10,75 +10,7 @@
   - test all commands
 
 */
-
-// General setup
-var asserts = 0;
-var ok = 0;
-var fail = 0;
-var test_output = "";
-function log(msg){
-  alert(msg);
-  test_output += msg + ' (' + new Date() + ')\n';
-}
-function add_rectangle(){
-  fw.getDocumentDOM().addNewRectanglePrimitive({left:0, top:0, right:100, bottom:100}, 0);
-}
-
-// Test init
-function assert(desc, thing, expected) {
-  test_output += "- " + desc + ": ";
-  asserts++;
-  if (thing === expected) {
-    ok++;
-    test_output += "OK.\n";
-  } else {
-    fail++;
-    test_output += 'FAIL. Got ' + thing + ' and expected ' + expected.toString() + '\n';
-  }
-}
-function setup() {
-  a = new Array(10);
-  for (var i=0; i < a.length; i++) {
-    a[i] = i;
-  };
-  add_rectangle();
-  // redefine prompt() function so that we can specify the value(s) it returns.
-  // This way, we can run tests on commands that ask the user for values.
-  prompt = function(msg,default_value){
-    if (prompt_return) {
-      return prompt_return;
-    } else {
-      return default_value;
-    }
-  };
-  // redefine alert();
-  // alert = log;
-  // redefine fw.popupColorPickerOverMouse
-  fw.popupColorPickerOverMouse = function(){
-    return prompt_return;
-  };
-}
-function teardown() {
-  fw.getDocumentDOM().selectAll();
-  fw.deleteSelection();
-  delete(a);
-}
-function run_command(kind, command){
-  try {
-    f = fw.appJsCommandsDir + "/" + kind + "/" + encodeURIComponent(command) + ".jsf";
-    fw.runScript(f);
-  } catch (exception) {
-    alert("Error running command " + kind + "/" + command + ".\n" + [exception, exception.lineNumber, exception.fileName].join("\n"));
-  }
-}
-function test(what,f) {
-  scenario = what;
-  test_output += '\n' + what + '\n';
-  setup();
-  f.call();
-  teardown();
-}
-function xtest(what,f){ };
+fw.runScript(fw.currentScriptDir + '/bstest.js');
 
 // Start test
 log('Running TestSuite in ' + fw.appName);
@@ -204,6 +136,7 @@ test('Effects: Graphic',function(){
   run_command('Effects','Plastic');
   prompt_return = 50;
   run_command('Effects','Reflection');
+  run_command('Effects','Safe Flatten');
 });
 // Repeat commands can be tested properly
 test('Effects: Repeat Horizontal', function(){
@@ -223,28 +156,56 @@ test('Effects: Repeat Vertical', function(){
 
 
 // Export
+// These are tricky to test, so the test does nothing right now...
 test('Export',function(){
   //
 });
 
 // Export Settings
+test('Export Settings',function(){
+  run_command('Export Settings','Set PNG 24 for All Pages');
+  assert('PNG is set as export setting for all pages', dom().exportOptions.exportFormat, 'PNG');
+});
 
 // Grids
 
+
 // Guides
+
 
 // Pages
 
 
-// Position
+// Position: DONE
 test('Position',function(){
+  fw.selection[0].left = 100.2;
+  fw.selection[0].top = 100.2;
+  run_command('Position','Fix Position');
+  assert('Element x position is rounded', fw.selection[0].left, 100);
+  assert('Element y position is rounded', fw.selection[0].top, 100);
+
   prompt_return = '100,100';
   run_command('Position','Set Position');
   assert('Element is moved to x position', fw.selection[0].left, 100);
   assert('Element is moved to y position', fw.selection[0].top, 100);
 });
 
-// Properties
+
+// Properties: DONE
+test('Properties',function(){
+  prompt_return = 10;
+  run_command('Properties','Set Rectangle Roundness in Pixels');
+  var sel = fw.selection[0];
+  var border_radius = 0;
+  if (sel.roundness) {
+    if(sel.mode == 'exact') {
+      border_radius = sel.roundness;
+    } else {
+      border_radius = (sel.roundness * sel.height) / 2;
+    }
+  };
+  assert('Rectangle roundness is set properly', border_radius, 10);
+});
 
 // Select
 test( 'Select text objects', function(){});
@@ -253,11 +214,22 @@ test( 'Select text objects', function(){});
 // Size
 test( 'Size command, single object', function(){
   assert('An item is selected and its width is 100', fw.selection[0].width, 100);
-  // error -2147216361
+  run_command("Size","Width +1");
+  assert('Selected item is 1 pixel wider', fw.selection[0].width, 101);
   run_command("Size","Width +10");
-  assert('Selected item is 10 pixels wider', fw.selection[0].width, 110);
+  assert('Selected item is 10 pixels wider', fw.selection[0].width, 111);
+  run_command("Size","Height +1");
+  assert('Selected item is 1 pixel taller', fw.selection[0].height, 101);
   run_command("Size","Height +10");
-  assert('Selected item is 10 pixels taller', fw.selection[0].height, 110);
+  assert('Selected item is 10 pixels taller', fw.selection[0].height, 111);
+  run_command("Size","Width -1");
+  assert('Selected item is 1 pixel narrower', fw.selection[0].width, 110);
+  run_command("Size","Width -10");
+  assert('Selected item is 10 pixels narrower', fw.selection[0].width, 100);
+  run_command("Size","Height -1");
+  assert('Selected item is 1 pixel shorter', fw.selection[0].height, 110);
+  run_command("Size","Height -10");
+  assert('Selected item is 10 pixels shorter', fw.selection[0].height, 100);
 });
 
 test( 'Size command, multiple objects', function(){
@@ -265,6 +237,18 @@ test( 'Size command, multiple objects', function(){
   (30).times(add_rectangle);
   fw.getDocumentDOM().selectAll();
   assert('Multiple items are selected', fw.selection.length, 31);
+  run_command("Size","Width +10");
+  assert('Multiple items are 10 pixels wider', Selection.get_bounds().right,110);
+  run_command("Size","Height +10");
+  assert('Multiple items are 10 pixels taller', Selection.get_bounds().bottom,110);
+});
+
+xtest( 'Size command, multiple objects [STRESS TEST]', function(){
+  var max_rects = 599; // 599 work (9205ms), 600 rectangles crash CS5
+  assert('One item is selected', fw.selection.length,1);
+  (max_rects - 1).times(add_rectangle);
+  fw.getDocumentDOM().selectAll();
+  assert('Multiple items are selected', fw.selection.length, max_rects);
   run_command("Size","Width +10");
   assert('Multiple items are 10 pixels wider', Selection.get_bounds().right,110);
   run_command("Size","Height +10");
