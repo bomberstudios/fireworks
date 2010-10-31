@@ -16,7 +16,7 @@ try {
   alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
 };
 
-var choice = fw.popupColorPickerOverMouse("#000000", true, false);
+var choice = fw.popupColorPickerOverMouse(fw.selection[0].pathAttributes.fillColor, true, false);
 
 Selection.each(function(sel) {
   if (sel.is_symbol()) {
