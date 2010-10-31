@@ -10,27 +10,32 @@
   - test all commands
 
 */
-fw.runScript(fw.currentScriptDir + '/bstest.js');
+
+var test_document = fw.createFireworksDocument({x:400,y:400}, {pixelsPerUnit:72, units:"inch"}, '#ffffff00');
+
+try {
+  fw.runScript(fw.currentScriptDir + '/bstest.js');
+} catch(e) {
+  alert(e);
+}
+
 
 // Start test
 log('Running TestSuite in ' + fw.appName);
-test_document = fw.createFireworksDocument({x:400,y:400}, {pixelsPerUnit:72, units:"inch"}, '#ffffff00');
-try {
-  fw.runScript(fw.appJsCommandsDir + "/bs.js");
-} catch(e){
-  alert("This command requires the bs.js library\rGet it at http://github.com/bomberstudios/fireworks/");
-};
 
 start_time = new Date();
+
 
 // Test that tests are working (talk about trust...)
 test('bs is loaded', function(){
   assert('dom() is defined',typeof(dom),"function");
 });
+
 test('Test Suite runs setup', function(){
   assert( 'There is one item created and selected', fw.selection.length, 1);
 });
 assert('Test Suite runs teardown', fw.selection.length,0);
+
 
 
 // API

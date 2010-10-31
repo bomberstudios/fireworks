@@ -1,9 +1,15 @@
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://github.com/bomberstudios/fireworks/");
+};
+
 var asserts = 0;
 var ok = 0;
 var fail = 0;
 var test_output = "";
 function log(msg){
-  alert(msg);
+  //alert(msg);
   test_output += msg + ' (' + new Date() + ')\n';
 }
 // General setup
