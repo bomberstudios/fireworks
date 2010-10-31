@@ -1,0 +1,149 @@
+// Fireworks JavaScript Command
+// Exports slices as sprite sheets
+// Install by copying to Fireworks/Configuration/Commands/ and accessing in Fireworks from the Commands menu
+// Aaron Beall 2010 - http://abeall.com
+
+var dom =  fw.getDocumentDOM(); // document object
+var sel = [].concat(fw.selection); // saved selection
+
+function ExportSprite() {
+	if (!dom)
+		return false;
+	
+	// User selected slices
+	var slices = [];
+	var i = sel.length;
+	while(i--)
+		if(sel[i] == "[object SliceHotspot]")
+			slices.push(sel[i])
+	
+	// If no slices selected, offer to export all slices in document
+	if(!slices.length){
+		if(confirm("No slices selected; export all document slices?")){
+			for(var i = 0; i < dom.layers.length; i++){
+				if(dom.layers[i].layerType == "web"){
+					var e = dom.layers[i].frames[0].elements.length;
+					while(e--){
+						if(dom.layers[i].frames[0].elements[e] == "[object SliceHotspot]")
+							slices.push(dom.layers[i].frames[0].elements[e])
+					}
+				}
+			}
+		}else{
+			return false;
+		}
+	}
+	
+	// No slices in document
+	if(!slices.length)
+		return alert("No slices in this document, cannot continue. This command is used to export the frames/states of a slice into a single \"sprite\" image.");
+	
+	// Multiple slices or multiple frames required
+	if(slices.length == 1 && dom.frames.length == 1)
+		return alert("There is only one slice and one frame/state for this document, cannot continue. This command is used to export multiple frames/states of a slice or multiple slices to a single \"sprite\" image. You must select more than one slice or have multiple frames/states in the document.");
+	
+	// Multiple slices selected, choose to export as single sprite sheet or multiple sprite sheets for each slice
+	var multiSliceSpriteSheet = false;
+	if(slices.length > 1 && dom.frames.length > 1)
+		multiSliceSpriteSheet = fw.yesNoDialog("Multiple slices are selected. Press YES to export all slices to a single sprite sheet image, press NO to export each slice as a separate sprite image.");
+	
+	// Select save location
+	var dir, filePath;
+	if(multiSliceSpriteSheet)
+		filePath = fw.browseForFileURL("save");
+	else
+		dir = fw.browseForFolderURL("Select export directory for sprite images", Files.getDirectory(dom.lastExportFile));
+	if(!dir && !filePath)
+		return false;
+	
+	// Save app state
+	var oldFrameNum = dom.currentFrameNum;
+	
+	// Export all slices and frames to temp dir
+	var sliceFiles = [];
+	for(var i = 0; i < slices.length; i++){
+		var file = sliceFiles[i] = {};
+		file.width = slices[i].width;
+		file.height = slices[i].height;
+		file.exportOptions = slices[i].exportOptions || dom.exportOptions;
+		file.name = slices[i].baseName;
+		file.frames = [];
+		
+		var opts = {};//new ExportOptions();
+		opts.exportFormat = "PNG";
+		opts.colorMode = "32 bit";
+		opts.crop = true;	
+		opts.cropLeft = slices[i].left - dom.left;
+		opts.cropRight = slices[i].left + slices[i].width - dom.left;
+		opts.cropTop = slices[i].top - dom.top;
+		opts.cropBottom = slices[i].top + slices[i].height - dom.top;
+		
+		for(var f = 0; f < dom.frames.length; f++){
+			dom.currentFrameNum = f;
+			//fw.selection = [slices[i]];
+			var tmp = Files.getTempFilePath(null) + "_" + i + "_" + f;
+			file.frames[f] = tmp + "." + opts.exportFormat;
+			fw.exportDocumentAs(dom, tmp, opts);
+		}
+	}
+	
+	// Create combined sprite images and export them
+	if(!multiSliceSpriteSheet){
+		
+		// Export each slice as separate image file
+		for(var i = 0; i < sliceFiles.length; i++){
+			var file = sliceFiles[i];
+			fw.createFireworksDocument({x:file.width, y:file.height * file.frames.length}, {pixelsPerUnit:72, units:"inch"}, dom.backgroundColor);
+			for(var f = 0; f < sliceFiles[i].frames.length; f++){
+				//alert(sliceFiles[i].frames[f])
+				fw.getDocumentDOM().importFile(sliceFiles[i].frames[f], {left:0, top:file.height * f, right:file.width, bottom:file.height * f + file.height}, false);
+			}
+			
+			fw.exportDocumentAs(fw.getDocumentDOM(), dir + "\\" + file.name, file.exportOptions);
+			
+			fw.getDocumentDOM().close(false);
+		}
+		
+	}else{
+		
+		// Exporting multiple slices as single image file
+		var totalWidth = 0, totalHeight = 0;
+		for(var i in sliceFiles){
+			totalWidth += sliceFiles[i].width;
+			totalHeight = Math.max(sliceFiles[i].height * sliceFiles[i].frames.length, totalHeight);
+		}
+		
+		fw.createFireworksDocument({x:totalWidth, y:totalHeight}, {pixelsPerUnit:72, units:"inch"}, dom.backgroundColor);
+		
+		var currX = 0;
+		for(var i = 0; i < sliceFiles.length; i++){
+			var file = sliceFiles[i];
+			for(var f = 0; f < sliceFiles[i].frames.length; f++){
+				fw.getDocumentDOM().importFile(sliceFiles[i].frames[f], {left:currX, top:file.height * f, right:currX + file.width, bottom:file.height * f + file.height}, false);
+			}
+			currX += file.width;
+		}
+		
+		fw.exportDocumentAs(fw.getDocumentDOM(), filePath, sliceFiles[0].exportOptions);
+		fw.getDocumentDOM().close(false);
+	}
+	
+	// Delete temp files (good boy!)
+	for(var i = 0; i < sliceFiles.length; i++){
+		for(var f = 0; f < sliceFiles[i].frames.length; f++){
+			Files.deleteFile(sliceFiles[i].frames[f]);
+		}
+	}
+	
+	// Save export paths
+	if(filePath)
+		dom.lastExportFile = Files.getFilename(filePath);
+	else if(dir)
+		dom.lastExportDirectory = dir;
+	
+	// Restore app state
+	fw.setActiveWindow(dom);
+	dom.currentFrameNum = oldFrameNum;
+}
+
+ExportSprite();

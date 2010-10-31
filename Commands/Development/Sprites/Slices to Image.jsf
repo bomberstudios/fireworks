@@ -1,0 +1,31 @@
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://github.com/bomberstudios/fireworks/");
+};
+
+var sprite_name = doc.docTitleWithoutExtension;
+var sprite_file = sprite_name + ".png";
+
+var slices_array = new Array();
+
+// show slice layer
+fw.getDocumentDOM().setWebObjectsVisibility(true);
+
+// Select all
+Selection.all().each(function(e){
+  if (e.__proto__ == SliceHotspot) {
+    slices_array.push(e);
+  }
+});
+
+var max_width = 0;
+var max_height = 0;
+for (var i=0; i < slices_array.length; i++) {
+  max_width = Math.max(max_width,slices_array[i].width);
+  max_height += slices_array[i].height;
+};
+
+max_height += 10 * ( slices_array.length - 1 );
+
+fw.createFireworksDocument({x:max_width, y:max_height}, {pixelsPerUnit:72, units:"inch"}, '#fff');
