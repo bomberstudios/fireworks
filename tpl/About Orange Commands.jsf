@@ -1,1 +1,0 @@
-alert('Orange Commands v<%= ORANGE_COMMANDS_VERSION %>\n\nVisit orangecommands.com for documentation and help.');

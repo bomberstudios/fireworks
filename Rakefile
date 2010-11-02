@@ -22,9 +22,7 @@ end
 
 desc "Update About... command"
 task :about do
-  open("Commands/About\ Orange\ Commands.jsf","w") do |f|
-    f << ERB.new(File.read("tpl/About\ Orange\ Commands.jsf")).result
-  end
+  cp '../OrangeCommandsAbout/deploy/OrangeCommandsAbout.swf', './Commands/About Orange Commands.swf'
 end
 
 desc "Build MXI file with Commands"
