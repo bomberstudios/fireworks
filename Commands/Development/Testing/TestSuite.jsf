@@ -162,7 +162,10 @@ test('Effects: Repeat Vertical', function(){
 // Export
 // These are tricky to test, so the test does nothing right now...
 test('Export',function(){
-  //
+  // create document
+  // add pages
+  // run export command
+  // check if files are created, using Files.enumFiles(docOrDir) of Files.exists(docOrDir)
 });
 
 // Export Settings
@@ -211,6 +214,7 @@ test('Properties',function(){
   };
   assert('Rectangle roundness is set properly', border_radius, 10);
 });
+
 
 // Select
 test( 'Select text objects', function(){});
