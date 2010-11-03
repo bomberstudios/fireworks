@@ -11,7 +11,7 @@ module FW
     end
 
     def files
-      Dir["#{path}/**/**.jsf","#{path}/**/**.js"].reject { |o| (o =~ /Development/) }
+      Dir["#{path}/**/**.jsf","#{path}/**/**.js","#{path}/**/**.swf"].reject { |o| (o =~ /Development/) }
     end
   end
   class Command
