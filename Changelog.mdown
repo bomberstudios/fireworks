@@ -1,4 +1,4 @@
-## 1.6.4
+## 1.6.4 - 2010-11-04
 - Massive rewrite, with focus on performance (keyboard resize commands are much faster now)
 - eba55c4f95 (FIX: Support CS5's 'exact' roundness in Properties » Set Rectangle Roundness in Pixels)
 - 15ec6bcee1 (Use current roundness in Set Rectangle Roundness prompt.)
