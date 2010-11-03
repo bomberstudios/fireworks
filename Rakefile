@@ -77,9 +77,9 @@ end
 
 desc "Build MXP files"
 task :mxp do
-  %x(open -a "/Applications/Adobe Extension Manager/Extension Manager.app" OrangeCommands_#{ORANGE_COMMANDS_VERSION}_CS3.mxi)
-  %x("/Applications/Adobe Extension Manager CS4/Adobe Extension Manager CS4.app/Contents/MacOS/Adobe Extension Manager CS4" -package mxi="OrangeCommands_#{ORANGE_COMMANDS_VERSION}_CS4.mxi" mxp="OrangeCommands_#{ORANGE_COMMANDS_VERSION}_CS4.mxp")
-  %x("/Applications/Adobe Extension Manager CS5/Adobe Extension Manager CS5.app/Contents/MacOS/Adobe Extension Manager CS5" -package mxi="OrangeCommands_#{ORANGE_COMMANDS_VERSION}_CS5.mxi" mxp="OrangeCommands_#{ORANGE_COMMANDS_VERSION}_CS5.mxp")
+  system("'/Applications/Adobe Extension Manager CS4/Adobe Extension Manager CS4.app/Contents/MacOS/Adobe Extension Manager CS4' -suppress -package mxi=OrangeCommands_#{ORANGE_COMMANDS_VERSION}_CS3.mxi mxp=OrangeCommands_#{ORANGE_COMMANDS_VERSION}_CS3.mxp")
+  system("'/Applications/Adobe Extension Manager CS4/Adobe Extension Manager CS4.app/Contents/MacOS/Adobe Extension Manager CS4' -suppress -package mxi=OrangeCommands_#{ORANGE_COMMANDS_VERSION}_CS4.mxi mxp=OrangeCommands_#{ORANGE_COMMANDS_VERSION}_CS4.mxp")
+  system("'/Applications/Adobe Extension Manager CS5/Adobe Extension Manager CS5.app/Contents/MacOS/Adobe Extension Manager CS5' -suppress -package mxi=OrangeCommands_#{ORANGE_COMMANDS_VERSION}_CS5.mxi mxp=OrangeCommands_#{ORANGE_COMMANDS_VERSION}_CS5.mxp")
 end
 
 task :clean do
