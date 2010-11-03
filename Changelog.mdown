@@ -1,3 +1,11 @@
+## 1.6.4
+- Massive rewrite, with focus on performance (keyboard resize commands are much faster now)
+- eba55c4f95 (FIX: Support CS5's 'exact' roundness in Properties » Set Rectangle Roundness in Pixels)
+- 15ec6bcee1 (Use current roundness in Set Rectangle Roundness prompt.)
+- bafac75f39 (NEW: Export » All Documents as JPG in…)
+- f51f054b81 (Add '(copy)' to duplicated pages via Pages » Duplicate Current command. Also, make the duplicated page current, as that is the most probable thing you'd want to do after duplicating a page.)
+- 43f124410a (New About box)
+
 ## 1.6 - 2010-10-04
 - 9ea3e0e654 (New command: Export » Slices as CSS Sprite.)
 
