@@ -16,9 +16,9 @@ try {
   alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
 };
 
-var choice = fw.popupColorPickerOverMouse(fw.selection[0].pathAttributes.fillColor, true, false);
+var choice = fw.popupColorPickerOverMouse("#00000000", true, false);
 
-fw.selection.each(function(sel) {
+Selection.each(function(sel) {
   fw.selection = sel;
   if (sel.is_symbol()) {
     // TODO: do not replace effects in symbol, just add the color fill effect
