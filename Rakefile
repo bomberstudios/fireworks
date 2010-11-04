@@ -109,9 +109,9 @@ end
 task :default => [ :clean, :shortcuts, :readme, :mxi, :mxp, :pack ]
 
 task :install do
-  system("rsync -azv Commands \"/Applications/Adobe\ Fireworks\ CS3/Configuration/\"")
-  system("rsync -azv Commands \"/Applications/Adobe\ Fireworks\ CS4/Configuration/\"")
-  system("rsync -azv Commands \"/Applications/Adobe\ Fireworks\ CS5/Configuration/\"")
+  system("rsync -azv Commands \"/Applications/Adobe\ Fireworks\ CS3/Configuration/\" --exclude='Development' --exclude='*.md'")
+  system("rsync -azv Commands \"/Applications/Adobe\ Fireworks\ CS4/Configuration/\" --exclude='Development' --exclude='*.md'")
+  system("rsync -azv Commands \"/Applications/Adobe\ Fireworks\ CS5/Configuration/\" --exclude='Development' --exclude='*.md'")
 end
 
 desc "Build docs"
