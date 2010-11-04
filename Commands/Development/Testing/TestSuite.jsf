@@ -28,37 +28,37 @@ start_time = new Date();
 
 // Test that tests are working (talk about trust...)
 test('bs is loaded', function(){
-  assert('dom() is defined',typeof(dom),"function");
+  assert_equal('dom() is defined',typeof(dom),"function");
 });
 
 test('Test Suite runs setup', function(){
-  assert( 'There is one item created and selected', fw.selection.length, 1);
+  assert_equal( 'There is one item created and selected', fw.selection.length, 1);
 });
-assert('Test Suite runs teardown', fw.selection.length,0);
+assert_equal('Test Suite runs teardown', fw.selection.length,0);
 
 
 // API
 test('Array extensions are defined', function(){
-  assert( 'Array.clone is defined', typeof(fw.selection.clone), "function" );
-  assert( 'Array.each is defined', typeof(a.each), "function" );
-  assert( 'Array.each_with_index is defined', typeof(a.each_with_index), "function" );
-  assert( 'Array.is_group is defined', typeof(a.is_group), "function" );
-  assert( 'Number.times is defined', typeof((5).times), "function" );
-  assert( 'Array.each_in_group is defined', typeof(fw.selection[0].each_in_group), 'function');
+  assert_equal( 'Array.clone is defined', typeof(fw.selection.clone), "function" );
+  assert_equal( 'Array.each is defined', typeof(a.each), "function" );
+  assert_equal( 'Array.each_with_index is defined', typeof(a.each_with_index), "function" );
+  assert_equal( 'Array.is_group is defined', typeof(a.is_group), "function" );
+  assert_equal( 'Number.times is defined', typeof((5).times), "function" );
+  assert_equal( 'Array.each_in_group is defined', typeof(fw.selection[0].each_in_group), 'function');
 });
 test('Array extensions work', function(){
   count = 0;
   a.each(function(p){
     count++;
   });
-  assert( 'Array.each works', count, a.length );
+  assert_equal( 'Array.each works', count, a.length );
   count = 0;
   a.each_with_index(function(p,index){
     count += index;
   });
-  assert( 'Array.each_with_index works', count, 9+8+7+6+5+4+3+2+1 );
+  assert_equal( 'Array.each_with_index works', count, 9+8+7+6+5+4+3+2+1 );
   b = a.clone();
-  assert('Array.clone works',b[4],4);
+  assert_equal('Array.clone works',b[4],4);
 });
 
 
@@ -69,20 +69,20 @@ test( 'Align commands: Center', function(){
   fw.selection[0].left = 100 * Math.random();
   fw.selection[0].top = 100 * Math.random();
   run_command('Align', 'Center on Canvas - Horizontal');
-  assert('Object is centered horizontally', fw.selection[0].left, 150);
+  assert_equal('Object is centered horizontally', fw.selection[0].left, 150);
 
   fw.getDocumentDOM().selectAll();
   fw.selection[0].left = 100 * Math.random();
   fw.selection[0].top = 100 * Math.random();
   run_command('Align', 'Center on Canvas - Vertical');
-  assert('Object is centered vertically', fw.selection[0].top, 150);
+  assert_equal('Object is centered vertically', fw.selection[0].top, 150);
 
   fw.getDocumentDOM().selectAll();
   fw.selection[0].left = 100 * Math.random();
   fw.selection[0].top = 100 * Math.random();
   run_command('Align', 'Center on Canvas - Both');
-  assert('Object is centered horizontally', fw.selection[0].left, 150);
-  assert('Object is centered vertically', fw.selection[0].top, 150);
+  assert_equal('Object is centered horizontally', fw.selection[0].left, 150);
+  assert_equal('Object is centered vertically', fw.selection[0].top, 150);
 
 });
 test( 'Align commands: Space', function(){
@@ -90,10 +90,10 @@ test( 'Align commands: Space', function(){
   prompt_return = 10;
   fw.getDocumentDOM().selectAll();
   run_command('Align','Space Horizontal');
-  assert('Elements are spaced horizontally',Selection.width(),430);
+  assert_equal('Elements are spaced horizontally',Selection.width(),430);
   fw.getDocumentDOM().selectAll();
   run_command('Align','Space Vertical');
-  assert('Elements are spaced vertically',Selection.height(),430);
+  assert_equal('Elements are spaced vertically',Selection.height(),430);
 });
 
 
@@ -102,7 +102,7 @@ test( 'Alpha commands', function(){
   [10,20,30,40,50,60,70,80,90,100].each(function(alpha){
     run_command("Alpha","Alpha "+alpha);
     // This is a *very* bad test, but that's just because Fireworks does some funky stuff with opacity...
-    assert( 'Alpha ' + alpha + ' works', Math.round(fw.selection[0].opacity),alpha);
+    assert_equal( 'Alpha ' + alpha + ' works', Math.round(fw.selection[0].opacity),alpha);
   });
 });
 
@@ -111,13 +111,13 @@ test( 'Alpha commands', function(){
 test( 'Canvas', function(){
   prompt_return = 110;
   run_command("Canvas","Canvas Width");
-  assert('Canvas Width is 110', dom().width, 110);
+  assert_equal('Canvas Width is 110', dom().width, 110);
   run_command("Canvas","Canvas Height");
-  assert('Canvas Height is 110', dom().height, 110);
+  assert_equal('Canvas Height is 110', dom().height, 110);
   prompt_return = '100,100';
   run_command("Canvas","Canvas Size");
-  assert('Canvas Size sets Width', dom().width, 100);
-  assert('Canvas Size sets Height', dom().height, 100);
+  assert_equal('Canvas Size sets Width', dom().width, 100);
+  assert_equal('Canvas Size sets Height', dom().height, 100);
 });
 
 
@@ -125,11 +125,11 @@ test( 'Canvas', function(){
 test('Color',function(){
   prompt_return = '#00ff00';
   run_command('Color','Canvas Color');
-  assert('Canvas Color sets color', dom().backgroundColor,'#00ff00');
+  assert_equal('Canvas Color sets color', dom().backgroundColor,'#00ff00');
   run_command('Color','Fill Color');
-  assert('Fill Color sets Color', fw.selection[0].pathAttributes.fillColor,'#00ff00');
+  assert_equal('Fill Color sets Color', fw.selection[0].pathAttributes.fillColor,'#00ff00');
   run_command('Color','Stroke Color');
-  assert('Fill Color sets Stroke', fw.selection[0].pathAttributes.brushColor,'#00ff00');
+  assert_equal('Fill Color sets Stroke', fw.selection[0].pathAttributes.brushColor,'#00ff00');
 });
 
 
@@ -147,15 +147,15 @@ test('Effects: Repeat Horizontal', function(){
   prompt_return = 10;
   run_command('Effects', 'Repeat Horizontal');
   fw.getDocumentDOM().selectAll();
-  assert('Item is repeated 10 times', fw.selection.length, 11);
-  assert('Item is spaced properly', Selection.width(), ((11 * 100) + (10 * 10)));
+  assert_equal('Item is repeated 10 times', fw.selection.length, 11);
+  assert_equal('Item is spaced properly', Selection.width(), ((11 * 100) + (10 * 10)));
 });
 test('Effects: Repeat Vertical', function(){
   prompt_return = 10;
   run_command('Effects', 'Repeat Vertical');
   fw.getDocumentDOM().selectAll();
-  assert('Item is repeated 10 times', fw.selection.length, 11);
-  assert('Item is spaced properly', Selection.height(), ((11 * 100) + (10 * 10)));
+  assert_equal('Item is repeated 10 times', fw.selection.length, 11);
+  assert_equal('Item is spaced properly', Selection.height(), ((11 * 100) + (10 * 10)));
 });
 
 
@@ -172,7 +172,7 @@ test('Export',function(){
 test('Export Settings',function(){
   // TODO: check all pages in multipage document
   run_command('Export Settings','Set PNG 24 for All Pages');
-  assert('PNG is set as export setting for all pages', dom().exportOptions.exportFormat, 'PNG');
+  assert_equal('PNG is set as export setting for all pages', dom().exportOptions.exportFormat, 'PNG');
 });
 
 // Grids
@@ -189,13 +189,13 @@ test('Position',function(){
   fw.selection[0].left = 100.2;
   fw.selection[0].top = 100.2;
   run_command('Position','Fix Position');
-  assert('Element x position is rounded', fw.selection[0].left, 100);
-  assert('Element y position is rounded', fw.selection[0].top, 100);
+  assert_equal('Element x position is rounded', fw.selection[0].left, 100);
+  assert_equal('Element y position is rounded', fw.selection[0].top, 100);
 
   prompt_return = '100,100';
   run_command('Position','Set Position');
-  assert('Element is moved to x position', fw.selection[0].left, 100);
-  assert('Element is moved to y position', fw.selection[0].top, 100);
+  assert_equal('Element is moved to x position', fw.selection[0].left, 100);
+  assert_equal('Element is moved to y position', fw.selection[0].top, 100);
 });
 
 
@@ -212,7 +212,7 @@ test('Properties',function(){
       border_radius = (sel.roundness * sel.height) / 2;
     }
   };
-  assert('Rectangle roundness is set properly', border_radius, 10);
+  assert_equal('Rectangle roundness is set properly', border_radius, 10);
 });
 
 
@@ -222,46 +222,46 @@ test( 'Select text objects', function(){});
 
 // Size
 test( 'Size command, single object', function(){
-  assert('An item is selected and its width is 100', fw.selection[0].width, 100);
+  assert_equal('An item is selected and its width is 100', fw.selection[0].width, 100);
   run_command("Size","Width +1");
-  assert('Selected item is 1 pixel wider', fw.selection[0].width, 101);
+  assert_equal('Selected item is 1 pixel wider', fw.selection[0].width, 101);
   run_command("Size","Width +10");
-  assert('Selected item is 10 pixels wider', fw.selection[0].width, 111);
+  assert_equal('Selected item is 10 pixels wider', fw.selection[0].width, 111);
   run_command("Size","Height +1");
-  assert('Selected item is 1 pixel taller', fw.selection[0].height, 101);
+  assert_equal('Selected item is 1 pixel taller', fw.selection[0].height, 101);
   run_command("Size","Height +10");
-  assert('Selected item is 10 pixels taller', fw.selection[0].height, 111);
+  assert_equal('Selected item is 10 pixels taller', fw.selection[0].height, 111);
   run_command("Size","Width -1");
-  assert('Selected item is 1 pixel narrower', fw.selection[0].width, 110);
+  assert_equal('Selected item is 1 pixel narrower', fw.selection[0].width, 110);
   run_command("Size","Width -10");
-  assert('Selected item is 10 pixels narrower', fw.selection[0].width, 100);
+  assert_equal('Selected item is 10 pixels narrower', fw.selection[0].width, 100);
   run_command("Size","Height -1");
-  assert('Selected item is 1 pixel shorter', fw.selection[0].height, 110);
+  assert_equal('Selected item is 1 pixel shorter', fw.selection[0].height, 110);
   run_command("Size","Height -10");
-  assert('Selected item is 10 pixels shorter', fw.selection[0].height, 100);
+  assert_equal('Selected item is 10 pixels shorter', fw.selection[0].height, 100);
 });
 
 test( 'Size command, multiple objects', function(){
-  assert('One item is selected', fw.selection.length,1);
+  assert_equal('One item is selected', fw.selection.length,1);
   (30).times(add_rectangle);
   fw.getDocumentDOM().selectAll();
-  assert('Multiple items are selected', fw.selection.length, 31);
+  assert_equal('Multiple items are selected', fw.selection.length, 31);
   run_command("Size","Width +10");
-  assert('Multiple items are 10 pixels wider', Selection.get_bounds().right,110);
+  assert_equal('Multiple items are 10 pixels wider', Selection.get_bounds().right,110);
   run_command("Size","Height +10");
-  assert('Multiple items are 10 pixels taller', Selection.get_bounds().bottom,110);
+  assert_equal('Multiple items are 10 pixels taller', Selection.get_bounds().bottom,110);
 });
 
 xtest( 'Size command, multiple objects [STRESS TEST]', function(){
   var max_rects = 599; // 599 work (9205ms), 600 rectangles crash CS5
-  assert('One item is selected', fw.selection.length,1);
+  assert_equal('One item is selected', fw.selection.length,1);
   (max_rects - 1).times(add_rectangle);
   fw.getDocumentDOM().selectAll();
-  assert('Multiple items are selected', fw.selection.length, max_rects);
+  assert_equal('Multiple items are selected', fw.selection.length, max_rects);
   run_command("Size","Width +10");
-  assert('Multiple items are 10 pixels wider', Selection.get_bounds().right,110);
+  assert_equal('Multiple items are 10 pixels wider', Selection.get_bounds().right,110);
   run_command("Size","Height +10");
-  assert('Multiple items are 10 pixels taller', Selection.get_bounds().bottom,110);
+  assert_equal('Multiple items are 10 pixels taller', Selection.get_bounds().bottom,110);
 });
 
 test( 'Size command, groups', function(){
@@ -269,7 +269,7 @@ test( 'Size command, groups', function(){
   fw.getDocumentDOM().selectAll();
   fw.getDocumentDOM().group("normal");
   run_command('Size','Width +10');
-  assert('Group is resized',Selection.get_bounds().right,110);
+  assert_equal('Group is resized',Selection.get_bounds().right,110);
 });
 
 test('Text boxes are resized properly', function(){
@@ -280,17 +280,17 @@ test('Text boxes are resized properly', function(){
   dom().setTextRuns({ initialAttrs:{ alignment:"center", antiAliasSharpness:192, antiAliasStrength:64, baselineShift:0, bold:false, face:"Arial", fillColor:"#666666", horizontalScale:1, italic:false, leading:1, leadingMode:"percentage", overSample:8, paragraphIndent:0, paragraphSpacingAfter:0, paragraphSpacingBefore:0, rangeKerning:0, size:"10pt", underline:false }, textRuns:[ { changedAttrs:{  }, characters:"fafdsfadsfasdfads" } ] });
 
   run_command('Select','Text Objects');
-  assert('Two text boxes exist', fw.selection.length, 2);
+  assert_equal('Two text boxes exist', fw.selection.length, 2);
 
   fw.selection.each_with_index(function(textbox,index){
-    assert('Text box ' + index + ' is 100 pixels wide', textbox.width, 104); // stupid Fireworks
+    assert_equal('Text box ' + index + ' is 100 pixels wide', textbox.width, 104); // stupid Fireworks
   });
 
   // Resize ungrouped
   run_command('Select','Text Objects');
   run_command('Size', 'Width +10');
   fw.selection.each_with_index(function(textbox,index){
-    assert('Text box ' + index + ' is resized when not grouped', textbox.width, 114); // stupid Fireworks
+    assert_equal('Text box ' + index + ' is resized when not grouped', textbox.width, 114); // stupid Fireworks
   });
 
   // Create a group
@@ -300,7 +300,7 @@ test('Text boxes are resized properly', function(){
   run_command('Select','Text Objects');
   run_command('Size', 'Width +10');
   fw.selection.each_with_index(function(textbox,index){
-    assert('Text box ' + index + ' is resized when grouped', textbox.width, 124); // stupid Fireworks
+    assert_equal('Text box ' + index + ' is resized when grouped', textbox.width, 124); // stupid Fireworks
   });
 });
 

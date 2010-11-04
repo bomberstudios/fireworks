@@ -18,17 +18,42 @@ function add_rectangle(){
 }
 
 // Test init
-function assert(desc, thing, expected) {
+
+function assert(desc, expression, thing, expected) {
   test_output += "- " + desc + ": ";
   asserts++;
-  if (thing === expected) {
+  if ((expression)) {
     ok++;
     test_output += "OK.\n";
   } else {
     fail++;
-    test_output += 'FAIL. Got ' + thing + ' and expected ' + expected.toString() + '\n';
+    test_output += 'FAIL.';
+    if (thing) {
+      test_output += ' Got ' + thing + ', expected ' + expected;
+    };
+    test_output += '\n';
   }
 }
+function assert_equal(desc,thing,expected){
+  assert(desc, thing === expected, thing, expected);
+}
+function assert_not_equal(desc,first,second){
+  // special check for arrays
+  if (second !== undefined) {
+    if ((first.constructor == [].constructor) && (second.constructor == [].constructor)) {
+      first = first.toString();
+      second = second.toString();
+    };
+  }
+  assert(desc, first !== second);
+}
+function assert_is_defined(desc, thing) {
+  assert_not_equal(desc, thing, undefined);
+}
+function assert_is_number(desc, thing) {
+  assert(desc, thing.constructor === new Number().constructor );
+}
+
 function setup() {
   a = new Array(10);
   for (var i=0; i < a.length; i++) {
