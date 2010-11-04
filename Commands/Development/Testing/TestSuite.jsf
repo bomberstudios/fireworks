@@ -121,7 +121,7 @@ test( 'Canvas', function(){
 });
 
 
-// Color: DONE
+// Color
 test('Color',function(){
   prompt_return = '#00ff00';
   run_command('Color','Canvas Color');
@@ -130,6 +130,12 @@ test('Color',function(){
   assert_equal('Fill Color sets Color', fw.selection[0].pathAttributes.fillColor,'#00ff00');
   run_command('Color','Stroke Color');
   assert_equal('Fill Color sets Stroke', fw.selection[0].pathAttributes.brushColor,'#00ff00');
+  dom().selectAll();
+  dom().group("normal");
+  run_command('Color','Fill Color');
+  Selection.each(function(e){
+    assert_equal('Fill Color sets color of elements inside groups', e.pathAttributes.fillColor, '#00ff00');
+  });
 });
 
 
