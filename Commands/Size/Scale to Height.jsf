@@ -16,11 +16,8 @@ if (fw.selection.length == 1) {
 }
 var h = prompt("Scale to Height",default_height);
 
-Selection.save();
 fw.selection.each_with_index(function(o,i) {
   var new_height  = eval(h);
   var new_width = (new_height / o.height ) * o.width;
   o.resize(new_width,new_height);
-  Selection.stored_selection[i] = fw.selection[0];
 });
-Selection.restore();

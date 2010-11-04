@@ -20,12 +20,13 @@ try {
 choice = fw.popupColorPickerOverMouse("#00000000", true, false);
 
 Selection.each(function(sel) {
+  fw.selection = sel;
   switch (choice) {
     case "#ffffff00":
-      doc.setBrushNColor(null, "#ffffff00");
+      dom().setBrushNColor(null, "#ffffff00");
       break;
     default:
-      doc.setBrushColor(choice);
+      dom().setBrushColor(choice);
       break;
   }
 });

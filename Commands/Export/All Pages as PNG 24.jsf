@@ -4,6 +4,7 @@ Exports all pages as flattened (non editable) PNG files with a 24 bits color dep
 The files are saved in a folder named YYYYMMDDHHMMSS (i.e: 20091028170642) inside the current folder, with the page names as the file names.  
 It also changes the Optimize settings for all pages, because I hate the "GIF as default format" :)
 **DOC**/
+// TODO: use fw.exportPages() in FW CS5
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");
 } catch(e){

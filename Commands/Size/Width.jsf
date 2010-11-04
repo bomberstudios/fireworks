@@ -15,9 +15,6 @@ if (fw.selection.length == 1) {
 }
 var w = prompt("Object Width (pixels; 0 for auto)",default_width);
 
-Selection.save();
 fw.selection.each_with_index(function(o,i) {
   o.resize(eval(w),o.height);
-  Selection.stored_selection[i] = fw.selection[0];
 });
-Selection.restore();

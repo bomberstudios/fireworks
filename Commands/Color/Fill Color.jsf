@@ -18,14 +18,12 @@ try {
 
 var choice = fw.popupColorPickerOverMouse(fw.selection[0].pathAttributes.fillColor, true, false);
 
-Selection.each(function(sel) {
+fw.selection.each(function(sel) {
+  fw.selection = sel;
   if (sel.is_symbol()) {
-    Selection.save();
-    fw.selection = sel;
     // TODO: do not replace effects in symbol, just add the color fill effect
     var original_effects = fw.selection[0].effectList;
     fw.getDocumentDOM().applyEffects({ category:"UNUSED", effects:[ { Blendmode:0, Color:choice, EffectIsVisible:true, EffectMoaID:"{dd54adc0-a279-11d3-b92a000502f3fdbe}", Opacity:100, category:"Adjust Color", name:"Color Fill" } ], name:"UNUSED" });
-    Selection.restore();
   } else {
     // if the current object's fill is set to none, we'll have to assign a default fill before we can change the color.
     if(!sel.pathAttributes.fill){

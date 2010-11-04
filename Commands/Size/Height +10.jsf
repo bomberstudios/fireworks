@@ -8,9 +8,6 @@ try {
   alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
 };
 
-Selection.save();
 fw.selection.each_with_index(function(o,i) {
   o.resize(o.width,o.height + 10);
-  Selection.stored_selection[i] = fw.selection[0];
 });
-Selection.restore();

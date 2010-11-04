@@ -1,10 +1,10 @@
 // bs.js Library
 // a collection of (hopefully) useful tools for Fireworks
 
-var doc = fw.getDocumentDOM();
 function dom(){
   return fw.getDocumentDOM();
 };
+var doc = dom();
 
 // Utility methods
 FwArray.prototype.clone = Array.prototype.clone = function(){
@@ -12,6 +12,7 @@ FwArray.prototype.clone = Array.prototype.clone = function(){
 };
 
 FwArray.prototype.each = Array.prototype.each = function(callback,traverse_groups){
+  Selection.forget();
   if (traverse_groups == undefined) {
     traverse_groups = true;
   };
@@ -21,11 +22,14 @@ FwArray.prototype.each = Array.prototype.each = function(callback,traverse_group
       el.each_in_group(callback);
     } else {
       callback.call(this,this[i]);
+      Selection.stored_selection.push(fw.selection[0]);
     }
   };
+  Selection.restore();
 };
 
 FwArray.prototype.each_with_index = Array.prototype.each_with_index = function(callback,traverse_groups){
+  Selection.forget();
   if (traverse_groups == undefined) {
     traverse_groups = true;
   };
@@ -36,9 +40,11 @@ FwArray.prototype.each_with_index = Array.prototype.each_with_index = function(c
       el.each_in_group(callback);
     } else {
       callback.call(this,this[i],count);
+      Selection.stored_selection.push(fw.selection[0]);
     }
     count++;
   };
+  Selection.restore();
 };
 
 Number.prototype.times = function(callback){
@@ -52,10 +58,12 @@ Element.each_in_group = function(callback){
       this.elements[e].each_in_group(callback);
     } else {
       callback.call(this,this.elements[e]);
+      Selection.stored_selection.push(fw.selection[0]);
     }
   }
 };
 Text.prototype.resize = function(w,h) {
+  fw.selection = this;
   if (w){
     w = Math.round(w);
     h = Math.round(h);
@@ -82,6 +90,7 @@ Element.resize = function(w,h){
   fw.getDocumentDOM().resizeSelection(w,h);
 };
 Element.set_position = function(x,y){
+  fw.selection = this;
   x = Math.round(x);
   y = Math.round(y);
   if (this.is_text()){
