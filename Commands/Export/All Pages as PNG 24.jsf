@@ -13,6 +13,7 @@ try {
 
 
 if(Document.is_saved()) {
+
   function fix_date(num){
     num = num.toString();
     if (num.length < 2) {
@@ -32,9 +33,9 @@ if(Document.is_saved()) {
   Files.createDirectory(Document.path() + folder_name);
 
   Pages.each(function(){
-    var export_file_name = fw.getDocumentDOM().pageName;
+    var export_file_name = dom().pageName;
     var export_file_path =  Document.path() + folder_name + "/" + export_file_name + ".png";
-    if (fw.getDocumentDOM().hasMasterPage() && fw.getDocumentDOM().currentPageNum == 0) {
+    if (dom().hasMasterPage() && dom().currentPageNum == 0) {
       // don't export master page
     } else {
       Document.export_in(export_file_path);

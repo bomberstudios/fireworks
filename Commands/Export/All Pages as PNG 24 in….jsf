@@ -13,9 +13,9 @@ try {
 var folder_name = fw.browseForFolderURL("Choose an export folder",null);
 
 Pages.each(function(){
-  var export_file_name = fw.getDocumentDOM().pageName;
+  var export_file_name = dom().pageName;
   var export_file_path =  folder_name + "/" + export_file_name + ".png";
-  if (fw.getDocumentDOM().hasMasterPage() && fw.getDocumentDOM().currentPageNum == 0) {
+  if (dom().hasMasterPage() && dom().currentPageNum == 0) {
     // don't export master page
   } else {
     Document.export_in(export_file_path);

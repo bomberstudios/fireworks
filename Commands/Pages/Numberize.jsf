@@ -18,11 +18,11 @@ function pad_number(n){
 
 try {
   var i = 1;
-  if (fw.getDocumentDOM().hasMasterPage()) {
+  if (dom().hasMasterPage()) {
     i = 0; // we don't want to number the master page...
   };
   Pages.each(function(){
-    var doc = fw.getDocumentDOM();
+    var doc = dom();
     var current_pagename = doc.pageName;
     var regex = /^(\d\d)_/;
     if (regex.test(current_pagename)) {

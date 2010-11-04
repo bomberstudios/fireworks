@@ -16,7 +16,7 @@ try {
   alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
 };
 
-fw.getDocumentDOM().selectAll();
+dom().selectAll();
 
 sel = fw.selection;
 

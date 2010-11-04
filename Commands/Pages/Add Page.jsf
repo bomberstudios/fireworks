@@ -1,2 +1,2 @@
 // shortcut: CTRL + SHIFT + N
-fw.getDocumentDOM().addNewPage();
+dom().addNewPage();

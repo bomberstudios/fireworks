@@ -24,7 +24,7 @@ try {
   fw.selection.each_with_index(function(e,index){
     fw.selection = e;
     if(fw.appName.indexOf('CS5') != -1) {
-      fw.getDocumentDOM().setRectRoundness(roundness_in_pixels, 'exact');
+      dom().setRectRoundness(roundness_in_pixels, 'exact');
     } else {
       var w = Selection.width();
       var h = Selection.height();
@@ -33,7 +33,7 @@ try {
       }
       var percentage_of_total_width = roundness_in_pixels*100/w;
       var roundness = percentage_of_total_width*2;
-      fw.getDocumentDOM().setRectRoundness(roundness/100);
+      dom().setRectRoundness(roundness/100);
     }
   });
 } catch (e) {

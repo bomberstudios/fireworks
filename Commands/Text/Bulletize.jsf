@@ -22,5 +22,5 @@ Selection.each(function(t){
     current_text_run.characters = splitted_text.join("\r");
     merged_text.textRuns.push(current_text_run);
   }
-  fw.getDocumentDOM().setTextRuns(merged_text);
+  dom().setTextRuns(merged_text);
 });

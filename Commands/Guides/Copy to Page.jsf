@@ -7,7 +7,7 @@ try {
   alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
 };
 
-doc = fw.getDocumentDOM();
+doc = dom();
 
 old_guides = Guides.get();
 

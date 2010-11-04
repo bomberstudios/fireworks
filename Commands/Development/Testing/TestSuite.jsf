@@ -65,19 +65,19 @@ test('Array extensions work', function(){
 // Align: DONE
 test( 'Align commands: Center', function(){
 
-  fw.getDocumentDOM().selectAll();
+  dom().selectAll();
   fw.selection[0].left = 100 * Math.random();
   fw.selection[0].top = 100 * Math.random();
   run_command('Align', 'Center on Canvas - Horizontal');
   assert_equal('Object is centered horizontally', fw.selection[0].left, 150);
 
-  fw.getDocumentDOM().selectAll();
+  dom().selectAll();
   fw.selection[0].left = 100 * Math.random();
   fw.selection[0].top = 100 * Math.random();
   run_command('Align', 'Center on Canvas - Vertical');
   assert_equal('Object is centered vertically', fw.selection[0].top, 150);
 
-  fw.getDocumentDOM().selectAll();
+  dom().selectAll();
   fw.selection[0].left = 100 * Math.random();
   fw.selection[0].top = 100 * Math.random();
   run_command('Align', 'Center on Canvas - Both');
@@ -88,10 +88,10 @@ test( 'Align commands: Center', function(){
 test( 'Align commands: Space', function(){
   (3).times(add_rectangle);
   prompt_return = 10;
-  fw.getDocumentDOM().selectAll();
+  dom().selectAll();
   run_command('Align','Space Horizontal');
   assert_equal('Elements are spaced horizontally',Selection.width(),430);
-  fw.getDocumentDOM().selectAll();
+  dom().selectAll();
   run_command('Align','Space Vertical');
   assert_equal('Elements are spaced vertically',Selection.height(),430);
 });
@@ -146,14 +146,14 @@ test('Effects: Graphic',function(){
 test('Effects: Repeat Horizontal', function(){
   prompt_return = 10;
   run_command('Effects', 'Repeat Horizontal');
-  fw.getDocumentDOM().selectAll();
+  dom().selectAll();
   assert_equal('Item is repeated 10 times', fw.selection.length, 11);
   assert_equal('Item is spaced properly', Selection.width(), ((11 * 100) + (10 * 10)));
 });
 test('Effects: Repeat Vertical', function(){
   prompt_return = 10;
   run_command('Effects', 'Repeat Vertical');
-  fw.getDocumentDOM().selectAll();
+  dom().selectAll();
   assert_equal('Item is repeated 10 times', fw.selection.length, 11);
   assert_equal('Item is spaced properly', Selection.height(), ((11 * 100) + (10 * 10)));
 });
@@ -244,7 +244,7 @@ test( 'Size command, single object', function(){
 test( 'Size command, multiple objects', function(){
   assert_equal('One item is selected', fw.selection.length,1);
   (30).times(add_rectangle);
-  fw.getDocumentDOM().selectAll();
+  dom().selectAll();
   assert_equal('Multiple items are selected', fw.selection.length, 31);
   run_command("Size","Width +10");
   assert_equal('Multiple items are 10 pixels wider', Selection.get_bounds().right,110);
@@ -256,7 +256,7 @@ xtest( 'Size command, multiple objects [STRESS TEST]', function(){
   var max_rects = 599; // 599 work (9205ms), 600 rectangles crash CS5
   assert_equal('One item is selected', fw.selection.length,1);
   (max_rects - 1).times(add_rectangle);
-  fw.getDocumentDOM().selectAll();
+  dom().selectAll();
   assert_equal('Multiple items are selected', fw.selection.length, max_rects);
   run_command("Size","Width +10");
   assert_equal('Multiple items are 10 pixels wider', Selection.get_bounds().right,110);
@@ -266,8 +266,8 @@ xtest( 'Size command, multiple objects [STRESS TEST]', function(){
 
 test( 'Size command, groups', function(){
   (30).times(add_rectangle);
-  fw.getDocumentDOM().selectAll();
-  fw.getDocumentDOM().group("normal");
+  dom().selectAll();
+  dom().group("normal");
   run_command('Size','Width +10');
   assert_equal('Group is resized',Selection.get_bounds().right,110);
 });

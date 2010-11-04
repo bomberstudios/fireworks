@@ -10,7 +10,7 @@ var sprite_file = sprite_name + ".png";
 var slices_array = new Array();
 
 // show slice layer
-fw.getDocumentDOM().setWebObjectsVisibility(true);
+dom().setWebObjectsVisibility(true);
 
 // Select all
 Selection.all().each(function(e){

@@ -86,8 +86,8 @@ Element.resize = function(w,h){
   //var y_pos = Math.round(this.top);
   w = Math.round(w);
   h = Math.round(h);
-  //fw.getDocumentDOM().setSelectionBounds({left:x_pos,top:y_pos,right:(x_pos + w),bottom:(y_pos + h)},"autoTrimImages transformAttributes");
-  fw.getDocumentDOM().resizeSelection(w,h);
+  //dom().setSelectionBounds({left:x_pos,top:y_pos,right:(x_pos + w),bottom:(y_pos + h)},"autoTrimImages transformAttributes");
+  dom().resizeSelection(w,h);
 };
 Element.set_position = function(x,y){
   fw.selection = this;
@@ -161,10 +161,10 @@ User = {
 
 Document = {
   path: function(){
-    return fw.getDocumentPath(null).split(escape(fw.getDocumentDOM().docTitleWithoutExtension))[0];
+    return fw.getDocumentPath(null).split(escape(dom().docTitleWithoutExtension))[0];
   },
   dump: function(){
-    var doc = fw.getDocumentDOM();
+    var doc = dom();
     var filePath = fw.userJsCommandsDir;
     var fileName = doc.docTitleWithoutExtension;
     if(fileName == ""){
@@ -180,12 +180,12 @@ Document = {
     if (options == undefined) {
       Document.set_export_as_png_24();
     } else {
-      fw.getDocumentDOM().setExportOptions(options);
+      dom().setExportOptions(options);
     }
     fw.exportDocumentAs(null, path, null);
   },
   set_export_as_png_24: function(){
-    fw.getDocumentDOM().setExportOptions({animAutoCrop:true,animAutoDifference:true,applyScale:false,colorMode:"24 bit",crop:false,cropBottom:0,cropLeft:0,cropRight:0,cropTop:0,ditherMode:"none",ditherPercent:100,exportFormat:"PNG",frameInfo:[  ],interlacedGIF:false,jpegQuality:80,jpegSelPreserveButtons:false,jpegSelPreserveText:true,jpegSelQuality:90,jpegSelQualityEnabled:false,jpegSmoothness:0,jpegSubsampling:0,localAdaptive:true,lossyGifAmount:0,macCreator:"",macFileType:"",name:"PNG 24",numCustomEntries:0,numEntriesRequested:0,numGridEntries:6,optimized:true,paletteEntries:null,paletteInfo:null,paletteMode:"adaptive",paletteTransparency:"none",percentScale:100,progressiveJPEG:false,savedAnimationRepeat:0,sorting:"none",useScale:true,webSnapAdaptive:false,webSnapTolerance:14,xSize:0,ySize:0});
+    dom().setExportOptions({animAutoCrop:true,animAutoDifference:true,applyScale:false,colorMode:"24 bit",crop:false,cropBottom:0,cropLeft:0,cropRight:0,cropTop:0,ditherMode:"none",ditherPercent:100,exportFormat:"PNG",frameInfo:[  ],interlacedGIF:false,jpegQuality:80,jpegSelPreserveButtons:false,jpegSelPreserveText:true,jpegSelQuality:90,jpegSelQualityEnabled:false,jpegSmoothness:0,jpegSubsampling:0,localAdaptive:true,lossyGifAmount:0,macCreator:"",macFileType:"",name:"PNG 24",numCustomEntries:0,numEntriesRequested:0,numGridEntries:6,optimized:true,paletteEntries:null,paletteInfo:null,paletteMode:"adaptive",paletteTransparency:"none",percentScale:100,progressiveJPEG:false,savedAnimationRepeat:0,sorting:"none",useScale:true,webSnapAdaptive:false,webSnapTolerance:14,xSize:0,ySize:0});
   },
   is_saved: function(){
     return (fw.getDocumentPath(null) != "");
@@ -194,7 +194,7 @@ Document = {
 
 Guides = {
   clear: function(direction){
-    var dom = fw.getDocumentDOM();
+    var dom = dom();
     if(!direction){
       dom.removeAllGuides('horizontal');
       dom.removeAllGuides('vertical');
@@ -203,15 +203,15 @@ Guides = {
     }
   },
   get: function(){
-    // We don't return the fw.getDocumentDOM().guides object
+    // We don't return the dom().guides object
     // Instead, we clone the contents of the vGuides and hGuides arrays,
     // so we have a 'snapshot' of the guides. Extremely useful for
     // guide manipulation like that on the Document.guide.remove()
     // function (where we delete a guide by clearing all guides and
     // then re-creating all the original guides except the one we
     // wanted to delete...)
-    var current_v_guides = fw.getDocumentDOM().guides.vGuides;
-    var current_h_guides = fw.getDocumentDOM().guides.hGuides;
+    var current_v_guides = dom().guides.vGuides;
+    var current_h_guides = dom().guides.hGuides;
     var current_guides = {
       vGuides: [],
       hGuides: []
@@ -251,14 +251,14 @@ Guides = {
     }
   },
   addVertical: function(where){
-    fw.getDocumentDOM().addGuide(where,"vertical");
+    dom().addGuide(where,"vertical");
   },
   addHorizontal: function(where){
-    fw.getDocumentDOM().addGuide(where,"horizontal");
+    dom().addGuide(where,"horizontal");
   },
   vertical_grid: function(grid_width,number_of_columns,gutter_width){
 
-    doc = fw.getDocumentDOM();
+    doc = dom();
 
     // Check if there's an object selected, and use its position as the starting position
     sel = doc.getSelectionBounds();
@@ -293,7 +293,7 @@ Guides = {
     }
   },
   horizontal_grid: function(grid_width,number_of_columns,gutter_width){
-    doc = fw.getDocumentDOM();
+    doc = dom();
     // Check if there's an object selected, and use its position as the starting position
     sel = doc.getSelectionBounds();
     var start_position;
@@ -323,11 +323,11 @@ Guides = {
 Selection = {
   stored_selection: [],
   all: function(){
-    fw.getDocumentDOM().selectAll();
+    dom().selectAll();
     return fw.selection;
   },
   get_bounds: function(){
-    return fw.getDocumentDOM().getSelectionBounds();
+    return dom().getSelectionBounds();
   },
   width: function(){
     sel = Selection.get_bounds();
@@ -402,8 +402,8 @@ Selection = {
         merged_text.textRuns.push(current_text_run);
       }
     });
-    fw.getDocumentDOM().addNewText({left:Selection.left(), top:Selection.top(), right:Selection.right(), bottom:Selection.bottom()}, true);
-    fw.getDocumentDOM().setTextRuns(merged_text);
+    dom().addNewText({left:Selection.left(), top:Selection.top(), right:Selection.right(), bottom:Selection.bottom()}, true);
+    dom().setTextRuns(merged_text);
   }
 };
 
@@ -457,20 +457,20 @@ File = {
 Pages = {
   count: function(){
     try {
-      return fw.getDocumentDOM().pagesCount;
+      return dom().pagesCount;
     } catch (exception) {
       // Create page at the end of page list...
-      fw.getDocumentDOM().addNewPage();
+      dom().addNewPage();
 
       // Move it to the first position
-      last_page_index = fw.getDocumentDOM().currentPageNum;
-      fw.getDocumentDOM().reorderPages(last_page_index, 0);
+      last_page_index = dom().currentPageNum;
+      dom().reorderPages(last_page_index, 0);
 
       // Change active page to first page
-      fw.getDocumentDOM().changeCurrentPage(0);
+      dom().changeCurrentPage(0);
 
       // Remove it
-      fw.getDocumentDOM().deletePageAt(0);
+      dom().deletePageAt(0);
   
       return last_page_index;
     }
@@ -478,12 +478,12 @@ Pages = {
   each: function(callback){
     var i = Pages.count() - 1;
     for (i; i >= 0; i--){
-      fw.getDocumentDOM().changeCurrentPage(i);
+      dom().changeCurrentPage(i);
       callback.call(this,i);
     }
   },
   vertical_trim: function(){
-    var doc = fw.getDocumentDOM();
+    var doc = dom();
     var l = doc.layers.length - 1;
     for (l; l >= 0; l--){
       doc.selectAllOnLayer(l,true,false);

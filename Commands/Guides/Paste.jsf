@@ -8,7 +8,7 @@ try {
   alert("This command requires the bs.js library\rGet it at http://github.com/bomberstudios/fireworks/");
 };
 
-doc = fw.getDocumentDOM();
+doc = dom();
 fileURL = Files.makePathFromDirAndFile(fw.userJsCommandsDir,'guides.txt');
 
 file = Files.open(fileURL, false);

@@ -8,7 +8,7 @@ try {
   alert("This command requires the bs.js library\rGet it at http://github.com/bomberstudios/fireworks/");
 };
 
-original_name = fw.getDocumentDOM().pageName;
-fw.getDocumentDOM().duplicatePage(fw.getDocumentDOM().currentPageNum);
-fw.getDocumentDOM().changeCurrentPage(Pages.count() - 1);
-fw.getDocumentDOM().setPageName(fw.getDocumentDOM().currentPageNum, original_name + ' (copy)');
+original_name = dom().pageName;
+dom().duplicatePage(dom().currentPageNum);
+dom().changeCurrentPage(Pages.count() - 1);
+dom().setPageName(dom().currentPageNum, original_name + ' (copy)');

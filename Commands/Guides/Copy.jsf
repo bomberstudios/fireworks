@@ -22,6 +22,6 @@ function file_create(contents){
   return false;
 }
 
-doc = fw.getDocumentDOM();
+doc = dom();
 current_guides = Guides.get();
 file_create(current_guides.vGuides.toString() + "\n" + current_guides.hGuides.toString());

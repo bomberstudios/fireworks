@@ -181,5 +181,5 @@ if (fw.selection.length == 0 || fw.selection.length > 1) {
   };
   css += "}\n";
 
-  fw.getDocumentDOM().clipCopyJsToExecute(css);
+  dom().clipCopyJsToExecute(css);
 }

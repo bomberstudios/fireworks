@@ -3,4 +3,4 @@
 Set the selected objects’ alpha to 80%
 **DOC**/
 
-fw.getDocumentDOM().setOpacity(80);
+dom().setOpacity(80);

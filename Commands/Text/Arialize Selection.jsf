@@ -2,4 +2,4 @@
 /**DOC**
 Sets currently selected text blocks to Arial.
 **DOC**/
-fw.getDocumentDOM().applyFontMarkup("face", "Arial");
+dom().applyFontMarkup("face", "Arial");

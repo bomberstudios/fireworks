@@ -8,8 +8,8 @@ try {
   alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
 };
 
-var default_height = fw.getDocumentDOM().height;
+var default_height = dom().height;
 
 var h = prompt("Canvas height in pixels",default_height);
 
-fw.getDocumentDOM().setDocumentCanvasSize({left:0, top:0, right:fw.getDocumentDOM().width, bottom:eval(h)}, true);
+dom().setDocumentCanvasSize({left:0, top:0, right:dom().width, bottom:eval(h)}, true);

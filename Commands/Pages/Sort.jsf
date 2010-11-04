@@ -11,7 +11,7 @@ try {
 function get_page_array(){
   var page_array = [];
   Pages.each(function(number){
-    page_array.push(fw.getDocumentDOM().pageName + "******" + fw.getDocumentDOM().currentPageNum);
+    page_array.push(dom().pageName + "******" + dom().currentPageNum);
   });
   return page_array;
 }
@@ -20,5 +20,5 @@ function get_page_array(){
   var pages_array = get_page_array().sort();
   var page_to_sort = pages_array[i];
   var original_order = page_to_sort.split("******")[1];
-  fw.getDocumentDOM().reorderPages(original_order, i);
+  dom().reorderPages(original_order, i);
 });

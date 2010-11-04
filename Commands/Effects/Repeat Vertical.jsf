@@ -10,5 +10,5 @@ try {
 var copies = prompt("Number of copies",10);
 var spacing = prompt("Distance",10);
 (copies).times(function(){
-  fw.getDocumentDOM().moveSelectionBy({x:0, y:Selection.height() + spacing}, true, false);
+  dom().moveSelectionBy({x:0, y:Selection.height() + spacing}, true, false);
 });

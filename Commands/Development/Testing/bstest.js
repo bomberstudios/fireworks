@@ -14,7 +14,7 @@ function log(msg){
 }
 // General setup
 function add_rectangle(){
-  fw.getDocumentDOM().addNewRectanglePrimitive({left:0, top:0, right:100, bottom:100}, 0);
+  dom().addNewRectanglePrimitive({left:0, top:0, right:100, bottom:100}, 0);
 }
 
 // Test init
@@ -77,7 +77,7 @@ function setup() {
   };
 }
 function teardown() {
-  fw.getDocumentDOM().selectAll();
+  dom().selectAll();
   fw.deleteSelection();
   delete(a);
 }

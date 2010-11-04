@@ -7,19 +7,19 @@ try {
   alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
 };
 
-doc = fw.getDocumentDOM();
+doc = dom();
 start_page = doc.currentPageNum;
 
 new_page = prompt("Copy guides from Page number:");
 
 doc.changeCurrentPage(new_page-1);
 // Needed to refresh display, apparently...
-doc = fw.getDocumentDOM();
+doc = dom();
 
 old_guides = Guides.get();
 
 doc.changeCurrentPage(start_page);
-doc = fw.getDocumentDOM();
+doc = dom();
 for (var k = old_guides.vGuides.length - 1; k >= 0; k--){
   doc.addGuide(old_guides.vGuides[k],"vertical");
 };
