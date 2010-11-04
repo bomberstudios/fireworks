@@ -272,6 +272,38 @@ test( 'Size command, groups', function(){
   assert('Group is resized',Selection.get_bounds().right,110);
 });
 
+test('Text boxes are resized properly', function(){
+  // add text boxes
+  dom().addNewText({left:0, top:0, right:100, bottom:20}, true);
+  dom().setTextRuns({ initialAttrs:{ alignment:"center", antiAliasSharpness:192, antiAliasStrength:64, baselineShift:0, bold:false, face:"Arial", fillColor:"#666666", horizontalScale:1, italic:false, leading:1, leadingMode:"percentage", overSample:8, paragraphIndent:0, paragraphSpacingAfter:0, paragraphSpacingBefore:0, rangeKerning:0, size:"10pt", underline:false }, textRuns:[ { changedAttrs:{  }, characters:"fafdsfadsfasdfads" } ] });
+  dom().addNewText({left:0, top:20, right:100, bottom:20}, true);
+  dom().setTextRuns({ initialAttrs:{ alignment:"center", antiAliasSharpness:192, antiAliasStrength:64, baselineShift:0, bold:false, face:"Arial", fillColor:"#666666", horizontalScale:1, italic:false, leading:1, leadingMode:"percentage", overSample:8, paragraphIndent:0, paragraphSpacingAfter:0, paragraphSpacingBefore:0, rangeKerning:0, size:"10pt", underline:false }, textRuns:[ { changedAttrs:{  }, characters:"fafdsfadsfasdfads" } ] });
+
+  run_command('Select','Text Objects');
+  assert('Two text boxes exist', fw.selection.length, 2);
+
+  fw.selection.each_with_index(function(textbox,index){
+    assert('Text box ' + index + ' is 100 pixels wide', textbox.width, 104); // stupid Fireworks
+  });
+
+  // Resize ungrouped
+  run_command('Select','Text Objects');
+  run_command('Size', 'Width +10');
+  fw.selection.each_with_index(function(textbox,index){
+    assert('Text box ' + index + ' is resized when not grouped', textbox.width, 114); // stupid Fireworks
+  });
+
+  // Create a group
+  dom().selectAll();
+  dom().group("normal");
+
+  run_command('Select','Text Objects');
+  run_command('Size', 'Width +10');
+  fw.selection.each_with_index(function(textbox,index){
+    assert('Text box ' + index + ' is resized when grouped', textbox.width, 124); // stupid Fireworks
+  });
+});
+
 
 // Text
 test('Text commands', function(){
