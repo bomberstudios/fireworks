@@ -219,7 +219,6 @@ test('Properties',function(){
 // Select
 test( 'Select text objects', function(){});
 
-
 // Size
 test( 'Size command, single object', function(){
   assert_equal('An item is selected and its width is 100', fw.selection[0].width, 100);
@@ -318,5 +317,3 @@ fw.closeDocument(test_document,false);
 log('\n' + fw.appName + ": " + asserts + ' asserts, ' + ok + ' ok, ' + fail + ' failed. Test run in ' + (new Date() - start_time) + ' ms.');
 
 File.create(test_output,'file:///P128/Users/ale/Desktop/test_output_' + fw.appName.replace(' ','_') + '.txt');
-
-fw.quit();

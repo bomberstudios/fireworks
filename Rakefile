@@ -132,9 +132,9 @@ task :test => [:install] do
   output_files.each do |file|
     rm file if File.exist? file
   end
-  %x(open -W -a "/Applications/Adobe\ Fireworks\ CS3/Adobe\ Fireworks\ CS3.app" Commands/Development/Testing/TestSuite.jsf)
-  %x(open -W -a "/Applications/Adobe\ Fireworks\ CS4/Adobe\ Fireworks\ CS4.app" Commands/Development/Testing/TestSuite.jsf)
-  %x(open -W -a "/Applications/Adobe\ Fireworks\ CS5/Adobe\ Fireworks\ CS5.app" Commands/Development/Testing/TestSuite.jsf)
+  %x(open -W -a "/Applications/Adobe\ Fireworks\ CS3/Adobe\ Fireworks\ CS3.app" Commands/Development/Testing/TestSuite.jsf Commands/Development/Testing/Quit.jsf)
+  %x(open -W -a "/Applications/Adobe\ Fireworks\ CS4/Adobe\ Fireworks\ CS4.app" Commands/Development/Testing/TestSuite.jsf Commands/Development/Testing/Quit.jsf)
+  %x(open -W -a "/Applications/Adobe\ Fireworks\ CS5/Adobe\ Fireworks\ CS5.app" Commands/Development/Testing/TestSuite.jsf Commands/Development/Testing/Quit.jsf)
   output_files.each do |file|
     puts File.readlines(file).last if File.exist? file
   end
