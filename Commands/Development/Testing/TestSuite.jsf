@@ -88,9 +88,9 @@ test( 'Align commands: Center', function(){
   dom().setTextRuns({ initialAttrs:{ alignment:"center", antiAliasSharpness:192, antiAliasStrength:64, baselineShift:0, bold:false, face:"Arial", fillColor:"#666666", horizontalScale:1, italic:false, leading:1, leadingMode:"percentage", overSample:8, paragraphIndent:0, paragraphSpacingAfter:0, paragraphSpacingBefore:0, rangeKerning:0, size:"10pt", underline:false }, textRuns:[ { changedAttrs:{  }, characters:"fafdsfadsfasdfads" } ] });
   run_command('Select','Text Objects');
   run_command('Align', 'Center on Canvas - Horizontal');
-  assert_equal('Text box is centered horizontally', fw.selection[0].rawLeft, 150);
+  assert_equal('Text box is centered horizontally', Selection.left(), dom().width/2 - Selection.width()/2);
   run_command('Align', 'Center on Canvas - Vertical');
-  assert_equal('Text box is centered vertically', fw.selection[0].top, 180);
+  assert_equal('Text box is centered vertically', Selection.top(), dom().height/2 - Selection.height()/2);
 
 });
 
