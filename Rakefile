@@ -122,20 +122,30 @@ task :readme do
   system('maruku README.markdown')
 end
 
-desc 'Run Test Suite'
-task :test => [:install] do
-  output_files = %w(
-    /Users/ale/Desktop/test_output_Fireworks_CS3.txt
-    /Users/ale/Desktop/test_output_Fireworks_CS4.txt
-    /Users/ale/Desktop/test_output_Fireworks_CS5.txt
-  )
-  output_files.each do |file|
-    rm file if File.exist? file
-  end
-  %x(open -W -a "/Applications/Adobe\ Fireworks\ CS3/Adobe\ Fireworks\ CS3.app" Commands/Development/Testing/TestSuite.jsf Commands/Development/Testing/Quit.jsf)
-  %x(open -W -a "/Applications/Adobe\ Fireworks\ CS4/Adobe\ Fireworks\ CS4.app" Commands/Development/Testing/TestSuite.jsf Commands/Development/Testing/Quit.jsf)
-  %x(open -W -a "/Applications/Adobe\ Fireworks\ CS5/Adobe\ Fireworks\ CS5.app" Commands/Development/Testing/TestSuite.jsf Commands/Development/Testing/Quit.jsf)
-  output_files.each do |file|
-    puts File.readlines(file).last if File.exist? file
-  end
+def run_test version
+  rm "/Users/ale/Desktop/test_output_Fireworks_#{version}.txt" if File.exist? "/Users/ale/Desktop/test_output_Fireworks_#{version}.txt"
+  %x(open -W -a "/Applications/Adobe\ Fireworks\ #{version}/Adobe\ Fireworks\ #{version}.app" Commands/Development/Testing/TestSuite.jsf Commands/Development/Testing/Quit.jsf)
+  puts File.readlines("/Users/ale/Desktop/test_output_Fireworks_#{version}.txt").last if File.exist? "/Users/ale/Desktop/test_output_Fireworks_#{version}.txt"
 end
+
+namespace :test do
+  desc 'Test in Fireworks CS3 only'
+  task :cs3 => :install do
+    run_test 'CS3'
+  end
+
+  desc 'Test in Fireworks CS4 only'
+  task :cs4 do
+    run_test 'CS4'
+  end
+
+  desc 'Test in Fireworks CS5 only'
+  task :cs5 do
+    run_test 'CS5'
+  end
+
+  task :all => [:install, :cs3, :cs4, :cs5]
+end
+
+desc 'Run Test Suite'
+task :test => :"test:all"
