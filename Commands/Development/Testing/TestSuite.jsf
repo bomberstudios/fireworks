@@ -89,6 +89,8 @@ test( 'Align commands: Center', function(){
   run_command('Select','Text Objects');
   run_command('Align', 'Center on Canvas - Horizontal');
   assert_equal('Text box is centered horizontally', fw.selection[0].rawLeft, 150);
+  run_command('Align', 'Center on Canvas - Vertical');
+  assert_equal('Text box is centered vertically', fw.selection[0].top, 180);
 
 });
 
