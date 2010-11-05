@@ -8,5 +8,5 @@ try {
 };
 
 Selection.each(function(e){
-  e.set_position(Math.round(dom().width/2 - e.width/2),Selection.top());
+  e.set_position(dom().width/2 - e.width/2,Selection.top());
 }, false);

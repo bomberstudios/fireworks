@@ -8,6 +8,6 @@ try {
 };
 
 Selection.each(function(e){
-  e.set_position(Math.round(dom().width/2 - e.width/2),Selection.top());
-  e.set_position(Selection.left(), Math.round(dom().height/2 - Selection.height()/2));
+  e.set_position(dom().width/2 - e.width/2,Selection.top());
+  e.set_position(Selection.left(), dom().height/2 - Selection.height()/2);
 }, false);
