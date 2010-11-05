@@ -203,7 +203,7 @@ test('Export Settings',function(){
 // Pages
 
 
-// Position: DONE
+// Position
 test('Position',function(){
   fw.selection[0].left = 100.2;
   fw.selection[0].top = 100.2;
@@ -215,6 +215,11 @@ test('Position',function(){
   run_command('Position','Set Position');
   assert_equal('Element is moved to x position', fw.selection[0].left, 100);
   assert_equal('Element is moved to y position', fw.selection[0].top, 100);
+
+  // Math operations
+  prompt_return = '100*2,100';
+  run_command('Position','Set Position');
+  assert_equal('set_position works with maths operations', fw.selection[0].left, 200);
 });
 
 
