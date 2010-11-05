@@ -223,7 +223,15 @@ test('Properties',function(){
 
 
 // Select
-test( 'Select text objects', function(){});
+test( 'Select text objects', function(){
+  dom().addNewText({left:0, top:0, right:100, bottom:20}, true);
+  dom().setTextRuns({ initialAttrs:{ alignment:"center", antiAliasSharpness:192, antiAliasStrength:64, baselineShift:0, bold:false, face:"Arial", fillColor:"#666666", horizontalScale:1, italic:false, leading:1, leadingMode:"percentage", overSample:8, paragraphIndent:0, paragraphSpacingAfter:0, paragraphSpacingBefore:0, rangeKerning:0, size:"10pt", underline:false }, textRuns:[ { changedAttrs:{  }, characters:"fafdsfadsfasdfads" } ] });
+  dom().addNewText({left:0, top:20, right:100, bottom:20}, true);
+  dom().setTextRuns({ initialAttrs:{ alignment:"center", antiAliasSharpness:192, antiAliasStrength:64, baselineShift:0, bold:false, face:"Arial", fillColor:"#666666", horizontalScale:1, italic:false, leading:1, leadingMode:"percentage", overSample:8, paragraphIndent:0, paragraphSpacingAfter:0, paragraphSpacingBefore:0, rangeKerning:0, size:"10pt", underline:false }, textRuns:[ { changedAttrs:{  }, characters:"fafdsfadsfasdfads" } ] });
+
+  run_command('Select','Text Objects');
+  assert_equal('Two text boxes are selected', fw.selection.length, 2);
+});
 
 // Size
 test( 'Size command, single object', function(){
