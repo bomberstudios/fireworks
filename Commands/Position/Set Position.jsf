@@ -9,8 +9,8 @@ try {
   alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
 };
 
-default_x = fw.selection[0].left;
-default_y = fw.selection[0].top;
+default_x = Math.round(fw.selection[0].left);
+default_y = Math.round(fw.selection[0].top);
 
 var s = prompt("New position:",default_x+","+default_y);
 if (s) {
