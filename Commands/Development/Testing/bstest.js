@@ -4,6 +4,7 @@ try {
   alert("This command requires the bs.js library\rGet it at http://github.com/bomberstudios/fireworks/");
 };
 
+var test_document;
 var asserts = 0;
 var ok = 0;
 var fail = 0;
@@ -28,7 +29,7 @@ function assert(desc, expression, thing, expected) {
   } else {
     fail++;
     test_output += 'FAIL.';
-    if (thing) {
+    if (thing != null) {
       test_output += ' Got ' + thing + ', expected ' + expected;
     };
     test_output += '\n';
@@ -54,31 +55,38 @@ function assert_is_number(desc, thing) {
   assert(desc, thing.constructor === new Number().constructor );
 }
 
+// redefine prompt() function so that we can specify the value(s) it returns.
+// This way, we can run tests on commands that ask the user for values.
+prompt = function(msg,default_value){
+  if (prompt_return) {
+    return prompt_return;
+  } else {
+    return default_value;
+  }
+};
+// redefine alert();
+// alert = log;
+
+// redefine fw.popupColorPickerOverMouse
+fw.popupColorPickerOverMouse = function(){
+  return prompt_return;
+};
+
+// redefine fw.browseForFolderURL
+fw.browseForFolderURL = function(){
+  return prompt_folder;
+};
+
 function setup() {
+  test_document = fw.createFireworksDocument({x:400,y:400}, {pixelsPerUnit:72, units:"inch"}, '#ffffff00');
   a = new Array(10);
   for (var i=0; i < a.length; i++) {
     a[i] = i;
   };
   add_rectangle();
-  // redefine prompt() function so that we can specify the value(s) it returns.
-  // This way, we can run tests on commands that ask the user for values.
-  prompt = function(msg,default_value){
-    if (prompt_return) {
-      return prompt_return;
-    } else {
-      return default_value;
-    }
-  };
-  // redefine alert();
-  // alert = log;
-  // redefine fw.popupColorPickerOverMouse
-  fw.popupColorPickerOverMouse = function(){
-    return prompt_return;
-  };
 }
 function teardown() {
-  dom().selectAll();
-  fw.deleteSelection();
+  fw.closeDocument(test_document,false);
   delete(a);
 }
 function run_command(kind, command){

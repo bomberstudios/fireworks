@@ -11,7 +11,9 @@
 
 */
 
-var test_document = fw.createFireworksDocument({x:400,y:400}, {pixelsPerUnit:72, units:"inch"}, '#ffffff00');
+// we need an empty document to start running tests
+var empty_doc = fw.createFireworksDocument({x:400,y:400}, {pixelsPerUnit:72, units:"inch"}, '#ffffff00');
+var oc_folder = 'file:///P128/Users/ale/Documents/Code/Fireworks';
 
 try {
   fw.runScript(fw.currentScriptDir + '/bstest.js');
@@ -24,7 +26,6 @@ try {
 log('Running TestSuite in ' + fw.appName);
 
 start_time = new Date();
-
 
 // Test that tests are working (talk about trust...)
 test('bs is loaded', function(){
@@ -179,13 +180,17 @@ test('Effects: Repeat Vertical', function(){
 
 
 // Export
-// These are tricky to test, so the test does nothing right now...
 test('Export',function(){
-  // create document
-  // add pages
-  // run export command
-  // check if files are created, using Files.enumFiles(docOrDir) of Files.exists(docOrDir)
+  run_command('Pages','Add Page');
+
+  prompt_folder = oc_folder + '/tmp';
+  Files.deleteFileIfExisting(prompt_folder);
+  Files.createDirectory(prompt_folder);
+
+  run_command('Export','All Pages as PNG 24 in');
+  assert_equal('All pages are exported', Files.enumFiles(prompt_folder).length, 2);
 });
+
 
 // Export Settings
 test('Export Settings',function(){
@@ -201,7 +206,12 @@ test('Export Settings',function(){
 
 
 // Pages
-
+// tests: numbers are added in the correct order (actually fixed in 51a672b5d4 (FIXED: Pages » Numberize was numbering in reverse order, due to the changes in ad324885b5 (Use inverse loops everywhere). Fix by @inefable))
+test('Page commands', function(){
+  assert_equal('Document has one page',dom().pagesCount,1);
+  run_command('Pages', 'Add Page');
+  assert_equal('A page is added when running the Add Page command',dom().pagesCount,2);
+});
 
 // Position
 test('Position',function(){
@@ -341,11 +351,30 @@ test('Text commands', function(){
   
 });
 
-
-// Close test document
-fw.closeDocument(test_document,false);
-
 // End test
-log('\n' + fw.appName + ": " + asserts + ' asserts, ' + ok + ' ok, ' + fail + ' failed. Test run in ' + (new Date() - start_time) + ' ms.');
+msg = '\n' + fw.appName + ": " + asserts + ' asserts, ' + ok + ' ok, ' + fail + ' failed. Test run in ' + (new Date() - start_time) + ' ms.';
+log(msg);
 
-File.create(test_output,'file:///P128/Users/ale/Desktop/test_output_' + fw.appName.replace(' ','_') + '.txt');
+function fix_date(num){
+  num = num.toString();
+  if (num.length < 2) {
+    num = "0" + num;
+  };
+  return num;
+}
+
+var d = new Date();
+var year = d.getFullYear();
+var month = fix_date((d.getMonth() + 1));
+var day = fix_date(d.getDate());
+var hour = fix_date(d.getHours());
+var minute = fix_date(d.getMinutes());
+var seconds = fix_date(d.getSeconds());
+var milliseconds = fix_date(d.getMilliseconds());
+var folder_name = year + month + day + hour + minute + seconds + milliseconds;
+
+File.create(test_output, oc_folder + '/logs/test_' + folder_name + '_' + fw.appName.replace(' ','_') + '.txt');
+
+// File.create(test_output,'file:///P128/Users/ale/Desktop/test_output_' + fw.appName.replace(' ','_') + '.txt');
+
+fw.closeDocument(empty_doc,false);
