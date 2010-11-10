@@ -1,4 +1,4 @@
-# Orange Commands v1.6.4 for Adobe Fireworks
+# Orange Commands v1.6.5 for Adobe Fireworks
 
 Orange Commands is a collection of scripts for Adobe Fireworks that make the life of a web designer easier (or at least allow him/her to work faster :)
 
@@ -6,9 +6,9 @@ Orange Commands is a collection of scripts for Adobe Fireworks that make the lif
 ## Installation
 
 1. Download:
-    - [Orange Commands 1.6.4 for Fireworks CS3](http://orangecommands.com/dl/OrangeCommands_1.6.4_CS3.zip)
-    - [Orange Commands 1.6.4 for Fireworks CS4](http://orangecommands.com/dl/OrangeCommands_1.6.4_CS4.zip)
-    - [Orange Commands 1.6.4 for Fireworks CS5](http://orangecommands.com/dl/OrangeCommands_1.6.4_CS5.zip)
+    - [Orange Commands 1.6.5 for Fireworks CS3](http://orangecommands.com/dl/OrangeCommands_1.6.5_CS3.zip)
+    - [Orange Commands 1.6.5 for Fireworks CS4](http://orangecommands.com/dl/OrangeCommands_1.6.5_CS4.zip)
+    - [Orange Commands 1.6.5 for Fireworks CS5](http://orangecommands.com/dl/OrangeCommands_1.6.5_CS5.zip)
 
 2. Expand the ZIP.
 3. Double click the MXP file to install the commands.

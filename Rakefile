@@ -7,7 +7,7 @@ require "erb"
 require 'fileutils'
 require 'lib/library'
 
-ORANGE_COMMANDS_VERSION = "1.6.4"
+ORANGE_COMMANDS_VERSION = "1.6.5"
 DOWNLOAD_SERVER = "http://orangecommands.com/dl/"
 @fw_versions = ["CS3","CS4","CS5"]
 # @fw_versions = ["CS3","CS5"]
