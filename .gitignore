@@ -16,4 +16,7 @@ Web_Log.htm
 *.zip
 README.html
 Commands/About Orange Commands.jsf
+Commands/About Orange Commands.swf
 pkg
+logs
+tmp
