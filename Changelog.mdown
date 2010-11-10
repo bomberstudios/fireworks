@@ -1,3 +1,8 @@
+## 1.6.5 - 2010-11-10
+- 62300167fe (Fixed a nasty bug, reported by @nachogil that happened when resizing items inside groups.)
+- 51a672b5d4 (FIXED: Pages » Numberize was numbering in reverse order. Fix by @inefable)
+- Better tests, so things won't break so much in the future
+
 ## 1.6.4 - 2010-11-04
 - Massive rewrite, with focus on performance (keyboard resize commands are much faster now)
 - eba55c4f95 (FIX: Support CS5's 'exact' roundness in Properties » Set Rectangle Roundness in Pixels)
