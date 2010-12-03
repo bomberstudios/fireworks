@@ -15,7 +15,7 @@ function log(msg){
 }
 // General setup
 function add_rectangle(){
-  dom().addNewRectanglePrimitive({left:0, top:0, right:100, bottom:100}, 0);
+  fw.getDocumentDOM().addNewRectanglePrimitive({left:0, top:0, right:100, bottom:100}, 0);
 }
 
 // Test init

@@ -7,9 +7,8 @@ What the command does is this:
   - Adds a black, semitransparent overlay and locks it.
   - Creates a white rectangle on top of everything.
 **DOC**/
-
 try {
-  var doc = dom();
+  var doc = fw.getDocumentDOM();
   var original_name = doc.pageName;
   doc.duplicatePage(doc.currentPageNum);
   doc.addNewPage();
@@ -18,14 +17,14 @@ try {
   doc.changeCurrentPage(0);
   doc.deletePageAt(0);
   doc.changeCurrentPage(last_page_index - 1);
-  doc.setPageName(dom().currentPageNum,original_name + " - Lightbox");
+  doc.setPageName(fw.getDocumentDOM().currentPageNum,original_name + " - Lightbox");
   doc.selectAll();
   doc.flattenSelection();
   doc.lockSelection();
   doc.addNewRectanglePrimitive({left:0, top:0, right:doc.width, bottom:doc.height}, 0);
   // if the current object's fill is set to none, we'll have to assign a default fill before we can change the color.
   if(!fw.selection[0].pathAttributes.fill){
-    dom().setFillNColor({ category:"fc_Solid", ditherColors:[ "#000000", "#000000" ], edgeType:"antialiased", feather:0, gradient:null, name:"fn_Normal", pattern:null, shape:"solid", stampingMode:"blend opaque", textureBlend:0, webDitherTransparent:false }, "#000000");
+    fw.getDocumentDOM().setFillNColor({ category:"fc_Solid", ditherColors:[ "#000000", "#000000" ], edgeType:"antialiased", feather:0, gradient:null, name:"fn_Normal", pattern:null, shape:"solid", stampingMode:"blend opaque", textureBlend:0, webDitherTransparent:false }, "#000000");
   }
   // make the object's fill a solid color
   fw.selection[0].pathAttributes.fill.category = 'fc_Solid';

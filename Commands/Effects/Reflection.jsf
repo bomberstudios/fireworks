@@ -13,31 +13,31 @@ original = fw.selection[0];
 original.name = "original";
 
 // Clone, reflect and move original
-dom().cloneSelection();
-dom().reflectSelection(false, true, "autoTrimImages transformAttributes");
-dom().moveSelectionBy({x:0, y:original.height + 5}, false, false);
+fw.getDocumentDOM().cloneSelection();
+fw.getDocumentDOM().reflectSelection(false, true, "autoTrimImages transformAttributes");
+fw.getDocumentDOM().moveSelectionBy({x:0, y:original.height + 5}, false, false);
 
 // Get the cloned object
 copy = fw.selection[0]; // Current selection is now the copy
 copy.name = "copy";
 
 // Create the mask
-dom().addNewRectanglePrimitive({left:copy.left - 2, top:copy.top - 2, right:copy.width + copy.left + 2, bottom:copy.height + copy.top + 2}, 0);
+fw.getDocumentDOM().addNewRectanglePrimitive({left:copy.left - 2, top:copy.top - 2, right:copy.width + copy.left + 2, bottom:copy.height + copy.top + 2}, 0);
 // White to black gradient
-dom().setFill({ category:"fc_Linear", ditherColors:[ "#000000", "#000000" ], edgeType:"antialiased", feather:0, gradient:{ name:"cn_Custom", nodes:[ { color:"#ffffff", isOpacityNode:false, position:0 }, { color:"#000000", isOpacityNode:false, position:1 } ], opacityNodes:[ { color:"#000000", isOpacityNode:true, position:0 }, { color:"#000000", isOpacityNode:true, position:1 } ] }, name:"Linear Smooth", pattern:null, shape:"linear", stampingMode:"blend", textureBlend:0, webDitherTransparent:false });
+fw.getDocumentDOM().setFill({ category:"fc_Linear", ditherColors:[ "#000000", "#000000" ], edgeType:"antialiased", feather:0, gradient:{ name:"cn_Custom", nodes:[ { color:"#ffffff", isOpacityNode:false, position:0 }, { color:"#000000", isOpacityNode:false, position:1 } ], opacityNodes:[ { color:"#000000", isOpacityNode:true, position:0 }, { color:"#000000", isOpacityNode:true, position:1 } ] }, name:"Linear Smooth", pattern:null, shape:"linear", stampingMode:"blend", textureBlend:0, webDitherTransparent:false });
 // Reposition gradient
-dom().moveFillVectorHandleBy({x:0, y:shadow_height}, "end1", true, false);
+fw.getDocumentDOM().moveFillVectorHandleBy({x:0, y:shadow_height}, "end1", true, false);
 
 // Get the mask
 mask = fw.selection[0];
 mask.name = "mask";
 
 // Remove mask's stroke
-dom().removeBrush();
+fw.getDocumentDOM().removeBrush();
 
 // Apply the mask to the cloned object
 fw.selection = [copy, mask];
-dom().group("mask to image");
+fw.getDocumentDOM().group("mask to image");
 
 // Finally, set opacity to 30 so it looks like a reflection
-dom().setOpacity(30);
+fw.getDocumentDOM().setOpacity(30);

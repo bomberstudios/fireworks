@@ -11,11 +11,11 @@ try {
 
 Selection.save();
 
-dom().cloneSelection();
-dom().flattenSelection();
+fw.getDocumentDOM().cloneSelection();
+fw.getDocumentDOM().flattenSelection();
 var new_object = fw.selection;
 
 Selection.restore();
-dom().hideSelection();
+fw.getDocumentDOM().hideSelection();
 
 fw.selection = new_object;

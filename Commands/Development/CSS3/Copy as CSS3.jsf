@@ -130,7 +130,8 @@ if (fw.selection.length == 0 || fw.selection.length > 1) {
   // transforms (rotation...)
 
   var css = "." + name + " {\n";
-  css += "  margin: 0; padding: 0;\n";
+  css += "  margin: 0;\n";
+  css += "  padding: 0;\n";
   css += "  display: block;\n";
   css += "  width: " + w + "px;\n";
   css += "  height: " + h + "px;\n";
@@ -181,5 +182,5 @@ if (fw.selection.length == 0 || fw.selection.length > 1) {
   };
   css += "}\n";
 
-  dom().clipCopyJsToExecute(css);
+  fw.getDocumentDOM().clipCopyJsToExecute(css);
 }

@@ -3,7 +3,7 @@
 // Install by copying to Fireworks/Configuration/Commands/ and accessing in Fireworks from the Commands menu
 // Aaron Beall 2010 - http://abeall.com
 
-var dom =  dom(); // document object
+var dom =  fw.getDocumentDOM(); // document object
 var sel = [].concat(fw.selection); // saved selection
 
 function ExportSprite() {
@@ -96,12 +96,12 @@ function ExportSprite() {
 			fw.createFireworksDocument({x:file.width, y:file.height * file.frames.length}, {pixelsPerUnit:72, units:"inch"}, dom.backgroundColor);
 			for(var f = 0; f < sliceFiles[i].frames.length; f++){
 				//alert(sliceFiles[i].frames[f])
-				dom().importFile(sliceFiles[i].frames[f], {left:0, top:file.height * f, right:file.width, bottom:file.height * f + file.height}, false);
+				fw.getDocumentDOM().importFile(sliceFiles[i].frames[f], {left:0, top:file.height * f, right:file.width, bottom:file.height * f + file.height}, false);
 			}
 			
-			fw.exportDocumentAs(dom(), dir + "\\" + file.name, file.exportOptions);
+			fw.exportDocumentAs(fw.getDocumentDOM(), dir + "\\" + file.name, file.exportOptions);
 			
-			dom().close(false);
+			fw.getDocumentDOM().close(false);
 		}
 		
 	}else{
@@ -119,13 +119,13 @@ function ExportSprite() {
 		for(var i = 0; i < sliceFiles.length; i++){
 			var file = sliceFiles[i];
 			for(var f = 0; f < sliceFiles[i].frames.length; f++){
-				dom().importFile(sliceFiles[i].frames[f], {left:currX, top:file.height * f, right:currX + file.width, bottom:file.height * f + file.height}, false);
+				fw.getDocumentDOM().importFile(sliceFiles[i].frames[f], {left:currX, top:file.height * f, right:currX + file.width, bottom:file.height * f + file.height}, false);
 			}
 			currX += file.width;
 		}
 		
-		fw.exportDocumentAs(dom(), filePath, sliceFiles[0].exportOptions);
-		dom().close(false);
+		fw.exportDocumentAs(fw.getDocumentDOM(), filePath, sliceFiles[0].exportOptions);
+		fw.getDocumentDOM().close(false);
 	}
 	
 	// Delete temp files (good boy!)

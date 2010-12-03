@@ -8,7 +8,6 @@
   - use test files for heavyweight stuff (400 elements resize, 6000x6000 canvas...)
     - fw.openDocument(fileURL string or array);
   - test all commands
-
 */
 
 // we need an empty document to start running tests
@@ -26,11 +25,6 @@ try {
 log('Running TestSuite in ' + fw.appName);
 
 start_time = new Date();
-
-// Test that tests are working (talk about trust...)
-test('bs is loaded', function(){
-  assert_equal('dom() is defined',typeof(dom),"function");
-});
 
 test('Test Suite runs setup', function(){
   assert_equal( 'There is one item created and selected', fw.selection.length, 1);
@@ -66,46 +60,45 @@ test('Array extensions work', function(){
 // Align: DONE
 test( 'Align commands: Center', function(){
 
-  dom().selectAll();
+  fw.getDocumentDOM().selectAll();
   fw.selection[0].left = 100 * Math.random();
   fw.selection[0].top = 100 * Math.random();
   run_command('Align', 'Center on Canvas - Horizontal');
   assert_equal('Object is centered horizontally', fw.selection[0].left, 150);
 
-  dom().selectAll();
+  fw.getDocumentDOM().selectAll();
   fw.selection[0].left = 100 * Math.random();
   fw.selection[0].top = 100 * Math.random();
   run_command('Align', 'Center on Canvas - Vertical');
   assert_equal('Object is centered vertically', fw.selection[0].top, 150);
 
-  dom().selectAll();
+  fw.getDocumentDOM().selectAll();
   fw.selection[0].left = 100 * Math.random();
   fw.selection[0].top = 100 * Math.random();
   run_command('Align', 'Center on Canvas - Both');
   assert_equal('Object is centered horizontally', fw.selection[0].left, 150);
   assert_equal('Object is centered vertically', fw.selection[0].top, 150);
 
-  dom().addNewText({left:0, top:0, right:100, bottom:20}, true);
-  dom().setTextRuns({ initialAttrs:{ alignment:"center", antiAliasSharpness:192, antiAliasStrength:64, baselineShift:0, bold:false, face:"Arial", fillColor:"#666666", horizontalScale:1, italic:false, leading:1, leadingMode:"percentage", overSample:8, paragraphIndent:0, paragraphSpacingAfter:0, paragraphSpacingBefore:0, rangeKerning:0, size:"10pt", underline:false }, textRuns:[ { changedAttrs:{  }, characters:"fafdsfadsfasdfads" } ] });
+  fw.getDocumentDOM().addNewText({left:0, top:0, right:100, bottom:20}, true);
+  fw.getDocumentDOM().setTextRuns({ initialAttrs:{ alignment:"center", antiAliasSharpness:192, antiAliasStrength:64, baselineShift:0, bold:false, face:"Arial", fillColor:"#666666", horizontalScale:1, italic:false, leading:1, leadingMode:"percentage", overSample:8, paragraphIndent:0, paragraphSpacingAfter:0, paragraphSpacingBefore:0, rangeKerning:0, size:"10pt", underline:false }, textRuns:[ { changedAttrs:{  }, characters:"fafdsfadsfasdfads" } ] });
   run_command('Select','Text Objects');
   run_command('Align', 'Center on Canvas - Horizontal');
-  assert_equal('Text box is centered horizontally', Selection.left(), Math.round(dom().width/2 - Selection.width()/2));
+  assert_equal('Text box is centered horizontally', Selection.left(), Math.round(fw.getDocumentDOM().width/2 - Selection.width()/2));
   run_command('Align', 'Center on Canvas - Vertical');
-  assert_equal('Text box is centered vertically', Selection.top(), Math.round(dom().height/2 - Selection.height()/2));
+  assert_equal('Text box is centered vertically', Selection.top(), Math.round(fw.getDocumentDOM().height/2 - Selection.height()/2));
   fw.selection[0].left = 100 * Math.random();
   fw.selection[0].top = 100 * Math.random();
   run_command('Align', 'Center on Canvas - Both');
-  assert('Text box is centered in both directions', (Selection.left() == Math.round(dom().width/2 - Selection.width()/2)) && (Selection.top() == Math.round(dom().height/2 - Selection.height()/2)));
+  assert('Text box is centered in both directions', (Selection.left() == Math.round(fw.getDocumentDOM().width/2 - Selection.width()/2)) && (Selection.top() == Math.round(fw.getDocumentDOM().height/2 - Selection.height()/2)));
 
 });
-
 test( 'Align commands: Space', function(){
   (3).times(add_rectangle);
   prompt_return = 10;
-  dom().selectAll();
+  fw.getDocumentDOM().selectAll();
   run_command('Align','Space Horizontal');
   assert_equal('Elements are spaced horizontally',Selection.width(),430);
-  dom().selectAll();
+  fw.getDocumentDOM().selectAll();
   run_command('Align','Space Vertical');
   assert_equal('Elements are spaced vertically',Selection.height(),430);
 });
@@ -125,13 +118,13 @@ test( 'Alpha commands', function(){
 test( 'Canvas', function(){
   prompt_return = 110;
   run_command("Canvas","Canvas Width");
-  assert_equal('Canvas Width is 110', dom().width, 110);
+  assert_equal('Canvas Width is 110', fw.getDocumentDOM().width, 110);
   run_command("Canvas","Canvas Height");
-  assert_equal('Canvas Height is 110', dom().height, 110);
+  assert_equal('Canvas Height is 110', fw.getDocumentDOM().height, 110);
   prompt_return = '100,100';
   run_command("Canvas","Canvas Size");
-  assert_equal('Canvas Size sets Width', dom().width, 100);
-  assert_equal('Canvas Size sets Height', dom().height, 100);
+  assert_equal('Canvas Size sets Width', fw.getDocumentDOM().width, 100);
+  assert_equal('Canvas Size sets Height', fw.getDocumentDOM().height, 100);
 });
 
 
@@ -139,13 +132,13 @@ test( 'Canvas', function(){
 test('Color',function(){
   prompt_return = '#00ff00';
   run_command('Color','Canvas Color');
-  assert_equal('Canvas Color sets color', dom().backgroundColor,'#00ff00');
+  assert_equal('Canvas Color sets color', fw.getDocumentDOM().backgroundColor,'#00ff00');
   run_command('Color','Fill Color');
   assert_equal('Fill Color sets Color', fw.selection[0].pathAttributes.fillColor,'#00ff00');
   run_command('Color','Stroke Color');
   assert_equal('Fill Color sets Stroke', fw.selection[0].pathAttributes.brushColor,'#00ff00');
-  dom().selectAll();
-  dom().group("normal");
+  fw.getDocumentDOM().selectAll();
+  fw.getDocumentDOM().group("normal");
   run_command('Color','Fill Color');
   Selection.each(function(e){
     assert_equal('Fill Color sets color of elements inside groups', e.pathAttributes.fillColor, '#00ff00');
@@ -162,18 +155,21 @@ test('Effects: Graphic',function(){
   run_command('Effects','Reflection');
   run_command('Effects','Safe Flatten');
 });
+
 // Repeat commands can be tested properly
 test('Effects: Repeat Horizontal', function(){
   prompt_return = 10;
   run_command('Effects', 'Repeat Horizontal');
-  dom().selectAll();
+  fw.getDocumentDOM().selectAll();
   assert_equal('Item is repeated 10 times', fw.selection.length, 11);
   assert_equal('Item is spaced properly', Selection.width(), ((11 * 100) + (10 * 10)));
 });
+
+
 test('Effects: Repeat Vertical', function(){
   prompt_return = 10;
   run_command('Effects', 'Repeat Vertical');
-  dom().selectAll();
+  fw.getDocumentDOM().selectAll();
   assert_equal('Item is repeated 10 times', fw.selection.length, 11);
   assert_equal('Item is spaced properly', Selection.height(), ((11 * 100) + (10 * 10)));
 });
@@ -196,7 +192,7 @@ test('Export',function(){
 test('Export Settings',function(){
   // TODO: check all pages in multipage document
   run_command('Export Settings','Set PNG 24 for All Pages');
-  assert_equal('PNG is set as export setting for all pages', dom().exportOptions.exportFormat, 'PNG');
+  assert_equal('PNG is set as export setting for all pages', fw.getDocumentDOM().exportOptions.exportFormat, 'PNG');
 });
 
 // Grids
@@ -208,9 +204,9 @@ test('Export Settings',function(){
 // Pages
 // tests: numbers are added in the correct order (actually fixed in 51a672b5d4 (FIXED: Pages » Numberize was numbering in reverse order, due to the changes in ad324885b5 (Use inverse loops everywhere). Fix by @inefable))
 test('Page commands', function(){
-  assert_equal('Document has one page',dom().pagesCount,1);
+  assert_equal('Document has one page',fw.getDocumentDOM().pagesCount,1);
   run_command('Pages', 'Add Page');
-  assert_equal('A page is added when running the Add Page command',dom().pagesCount,2);
+  assert_equal('A page is added when running the Add Page command',fw.getDocumentDOM().pagesCount,2);
 });
 
 // Position
@@ -232,7 +228,6 @@ test('Position',function(){
   assert_equal('set_position works with maths operations', fw.selection[0].left, 200);
 });
 
-
 // Properties: DONE
 test('Properties',function(){
   prompt_return = 10;
@@ -249,13 +244,12 @@ test('Properties',function(){
   assert_equal('Rectangle roundness is set properly', border_radius, 10);
 });
 
-
 // Select
 test( 'Select text objects', function(){
-  dom().addNewText({left:0, top:0, right:100, bottom:20}, true);
-  dom().setTextRuns({ initialAttrs:{ alignment:"center", antiAliasSharpness:192, antiAliasStrength:64, baselineShift:0, bold:false, face:"Arial", fillColor:"#666666", horizontalScale:1, italic:false, leading:1, leadingMode:"percentage", overSample:8, paragraphIndent:0, paragraphSpacingAfter:0, paragraphSpacingBefore:0, rangeKerning:0, size:"10pt", underline:false }, textRuns:[ { changedAttrs:{  }, characters:"fafdsfadsfasdfads" } ] });
-  dom().addNewText({left:0, top:20, right:100, bottom:20}, true);
-  dom().setTextRuns({ initialAttrs:{ alignment:"center", antiAliasSharpness:192, antiAliasStrength:64, baselineShift:0, bold:false, face:"Arial", fillColor:"#666666", horizontalScale:1, italic:false, leading:1, leadingMode:"percentage", overSample:8, paragraphIndent:0, paragraphSpacingAfter:0, paragraphSpacingBefore:0, rangeKerning:0, size:"10pt", underline:false }, textRuns:[ { changedAttrs:{  }, characters:"fafdsfadsfasdfads" } ] });
+  fw.getDocumentDOM().addNewText({left:0, top:0, right:100, bottom:20}, true);
+  fw.getDocumentDOM().setTextRuns({ initialAttrs:{ alignment:"center", antiAliasSharpness:192, antiAliasStrength:64, baselineShift:0, bold:false, face:"Arial", fillColor:"#666666", horizontalScale:1, italic:false, leading:1, leadingMode:"percentage", overSample:8, paragraphIndent:0, paragraphSpacingAfter:0, paragraphSpacingBefore:0, rangeKerning:0, size:"10pt", underline:false }, textRuns:[ { changedAttrs:{  }, characters:"fafdsfadsfasdfads" } ] });
+  fw.getDocumentDOM().addNewText({left:0, top:20, right:100, bottom:20}, true);
+  fw.getDocumentDOM().setTextRuns({ initialAttrs:{ alignment:"center", antiAliasSharpness:192, antiAliasStrength:64, baselineShift:0, bold:false, face:"Arial", fillColor:"#666666", horizontalScale:1, italic:false, leading:1, leadingMode:"percentage", overSample:8, paragraphIndent:0, paragraphSpacingAfter:0, paragraphSpacingBefore:0, rangeKerning:0, size:"10pt", underline:false }, textRuns:[ { changedAttrs:{  }, characters:"fafdsfadsfasdfads" } ] });
 
   run_command('Select','Text Objects');
   assert_equal('Two text boxes are selected', fw.selection.length, 2);
@@ -285,7 +279,7 @@ test( 'Size command, single object', function(){
 test( 'Size command, multiple objects', function(){
   assert_equal('One item is selected', fw.selection.length,1);
   (30).times(add_rectangle);
-  dom().selectAll();
+  fw.getDocumentDOM().selectAll();
   assert_equal('Multiple items are selected', fw.selection.length, 31);
   run_command("Size","Width +10");
   assert_equal('Multiple items are 10 pixels wider', Selection.get_bounds().right,110);
@@ -297,7 +291,7 @@ xtest( 'Size command, multiple objects [STRESS TEST]', function(){
   var max_rects = 599; // 599 work (9205ms), 600 rectangles crash CS5
   assert_equal('One item is selected', fw.selection.length,1);
   (max_rects - 1).times(add_rectangle);
-  dom().selectAll();
+  fw.getDocumentDOM().selectAll();
   assert_equal('Multiple items are selected', fw.selection.length, max_rects);
   run_command("Size","Width +10");
   assert_equal('Multiple items are 10 pixels wider', Selection.get_bounds().right,110);
@@ -307,18 +301,18 @@ xtest( 'Size command, multiple objects [STRESS TEST]', function(){
 
 test( 'Size command, groups', function(){
   (30).times(add_rectangle);
-  dom().selectAll();
-  dom().group("normal");
+  fw.getDocumentDOM().selectAll();
+  fw.getDocumentDOM().group("normal");
   run_command('Size','Width +10');
   assert_equal('Group is resized',Selection.get_bounds().right,110);
 });
 
 test('Text boxes are resized properly', function(){
   // add text boxes
-  dom().addNewText({left:0, top:0, right:100, bottom:20}, true);
-  dom().setTextRuns({ initialAttrs:{ alignment:"center", antiAliasSharpness:192, antiAliasStrength:64, baselineShift:0, bold:false, face:"Arial", fillColor:"#666666", horizontalScale:1, italic:false, leading:1, leadingMode:"percentage", overSample:8, paragraphIndent:0, paragraphSpacingAfter:0, paragraphSpacingBefore:0, rangeKerning:0, size:"10pt", underline:false }, textRuns:[ { changedAttrs:{  }, characters:"fafdsfadsfasdfads" } ] });
-  dom().addNewText({left:0, top:20, right:100, bottom:20}, true);
-  dom().setTextRuns({ initialAttrs:{ alignment:"center", antiAliasSharpness:192, antiAliasStrength:64, baselineShift:0, bold:false, face:"Arial", fillColor:"#666666", horizontalScale:1, italic:false, leading:1, leadingMode:"percentage", overSample:8, paragraphIndent:0, paragraphSpacingAfter:0, paragraphSpacingBefore:0, rangeKerning:0, size:"10pt", underline:false }, textRuns:[ { changedAttrs:{  }, characters:"fafdsfadsfasdfads" } ] });
+  fw.getDocumentDOM().addNewText({left:0, top:0, right:100, bottom:20}, true);
+  fw.getDocumentDOM().setTextRuns({ initialAttrs:{ alignment:"center", antiAliasSharpness:192, antiAliasStrength:64, baselineShift:0, bold:false, face:"Arial", fillColor:"#666666", horizontalScale:1, italic:false, leading:1, leadingMode:"percentage", overSample:8, paragraphIndent:0, paragraphSpacingAfter:0, paragraphSpacingBefore:0, rangeKerning:0, size:"10pt", underline:false }, textRuns:[ { changedAttrs:{  }, characters:"fafdsfadsfasdfads" } ] });
+  fw.getDocumentDOM().addNewText({left:0, top:20, right:100, bottom:20}, true);
+  fw.getDocumentDOM().setTextRuns({ initialAttrs:{ alignment:"center", antiAliasSharpness:192, antiAliasStrength:64, baselineShift:0, bold:false, face:"Arial", fillColor:"#666666", horizontalScale:1, italic:false, leading:1, leadingMode:"percentage", overSample:8, paragraphIndent:0, paragraphSpacingAfter:0, paragraphSpacingBefore:0, rangeKerning:0, size:"10pt", underline:false }, textRuns:[ { changedAttrs:{  }, characters:"fafdsfadsfasdfads" } ] });
 
   run_command('Select','Text Objects');
   assert_equal('Two text boxes exist', fw.selection.length, 2);
@@ -335,8 +329,8 @@ test('Text boxes are resized properly', function(){
   });
 
   // Create a group
-  dom().selectAll();
-  dom().group("normal");
+  fw.getDocumentDOM().selectAll();
+  fw.getDocumentDOM().group("normal");
 
   run_command('Select','Text Objects');
   run_command('Size', 'Width +10');
@@ -345,34 +339,17 @@ test('Text boxes are resized properly', function(){
   });
 });
 
-
 // Text
 test('Text commands', function(){
   
 });
 
-// End test
+
+// End test ////////////////////////////////////////////////////////////////////////////
 msg = '\n' + fw.appName + ": " + asserts + ' asserts, ' + ok + ' ok, ' + fail + ' failed. Test run in ' + (new Date() - start_time) + ' ms.';
 log(msg);
 
-function fix_date(num){
-  num = num.toString();
-  if (num.length < 2) {
-    num = "0" + num;
-  };
-  return num;
-}
+alert(msg);
 
-var d = new Date();
-var year = d.getFullYear();
-var month = fix_date((d.getMonth() + 1));
-var day = fix_date(d.getDate());
-var hour = fix_date(d.getHours());
-var minute = fix_date(d.getMinutes());
-var seconds = fix_date(d.getSeconds());
-var milliseconds = fix_date(d.getMilliseconds());
-var folder_name = year + month + day + hour + minute + seconds + milliseconds;
-
-File.create(test_output, oc_folder + '/logs/test_' + folder_name + '_' + fw.appName.replace(' ','_') + '.txt');
-
+//File.create(test_output, oc_folder + '/logs/test_' + fw.appName.replace(' ','_') + '.txt');
 fw.closeDocument(empty_doc,false);

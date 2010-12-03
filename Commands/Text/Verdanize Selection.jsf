@@ -1,4 +1,4 @@
 /**DOC**
 Sets currently selected text blocks to Verdana.
 **DOC**/
-dom().applyFontMarkup("face", "Verdana");
+fw.getDocumentDOM().applyFontMarkup("face", "Verdana");

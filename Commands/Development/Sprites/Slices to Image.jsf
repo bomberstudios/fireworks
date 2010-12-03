@@ -4,13 +4,13 @@ try {
   alert("This command requires the bs.js library\rGet it at http://github.com/bomberstudios/fireworks/");
 };
 
-var sprite_name = doc.docTitleWithoutExtension;
+var sprite_name = fw.getDocumentDOM().docTitleWithoutExtension;
 var sprite_file = sprite_name + ".png";
 
 var slices_array = new Array();
 
 // show slice layer
-dom().setWebObjectsVisibility(true);
+fw.getDocumentDOM().setWebObjectsVisibility(true);
 
 // Select all
 Selection.all().each(function(e){

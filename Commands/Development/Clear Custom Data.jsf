@@ -4,7 +4,7 @@ try {
   alert("This command requires the bs.js library\rGet it at http://github.com/bomberstudios/fireworks/");
 };
 
-var doc = dom();
+var doc = fw.getDocumentDOM();
 for (var l=0; l < doc.layers.length; l++) {
   doc.selectAllOnLayer(l,true,false);
 }

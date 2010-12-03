@@ -7,16 +7,14 @@ try {
   alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
 };
 
-doc = dom();
+var old_guides = Guides.get(),
+    new_page   = prompt("Copy guides to Page number:");
 
-old_guides = Guides.get();
-
-new_page = prompt("Copy guides to Page number:");
-doc.changeCurrentPage(new_page-1);
+fw.getDocumentDOM().changeCurrentPage(new_page-1);
 
 for (var k = old_guides.vGuides.length - 1; k >= 0; k--){
-  doc.addGuide(old_guides.vGuides[k],"vertical");
+  fw.getDocumentDOM().addGuide(old_guides.vGuides[k],"vertical");
 };
 for (var l = old_guides.hGuides.length - 1; l >= 0; l--){
-  doc.addGuide(old_guides.hGuides[l],"horizontal");
+  fw.getDocumentDOM().addGuide(old_guides.hGuides[l],"horizontal");
 };

@@ -17,16 +17,16 @@ try {
   alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
 };
 
-choice = fw.popupColorPickerOverMouse("#00000000", true, false);
+var choice = fw.popupColorPickerOverMouse("#00000000", true, false);
 
 Selection.each(function(sel) {
   fw.selection = sel;
   switch (choice) {
     case "#ffffff00":
-      dom().setBrushNColor(null, "#ffffff00");
+      fw.getDocumentDOM().setBrushNColor(null, "#ffffff00");
       break;
     default:
-      dom().setBrushColor(choice);
+      fw.getDocumentDOM().setBrushColor(choice);
       break;
   }
 });

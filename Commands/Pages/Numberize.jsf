@@ -17,19 +17,18 @@ function pad_number(n){
 }
 
 try {
-  var i = dom().pagesCount;
-  if (dom().hasMasterPage()) {
+  var i = fw.getDocumentDOM().pagesCount;
+  if (fw.getDocumentDOM().hasMasterPage()) {
     i = i-1; // we don't want to number the master page...
   };
   Pages.each(function(){
-    var doc = dom();
-    var current_pagename = doc.pageName;
+    var current_pagename = fw.getDocumentDOM().pageName;
     var regex = /^(\d\d)_/;
     if (regex.test(current_pagename)) {
       var new_pagename = current_pagename.replace(regex,pad_number(i) + "_");
-      doc.setPageName(doc.currentPageNum, new_pagename);
+      fw.getDocumentDOM().setPageName(fw.getDocumentDOM().currentPageNum, new_pagename);
     } else {
-      doc.setPageName(doc.currentPageNum, pad_number(i) + "_" + current_pagename);
+      fw.getDocumentDOM().setPageName(fw.getDocumentDOM().currentPageNum, pad_number(i) + "_" + current_pagename);
     }
     i--;
   });

@@ -1,11 +1,6 @@
 // bs.js Library
 // a collection of (hopefully) useful tools for Fireworks
 
-function dom(){
-  return fw.getDocumentDOM();
-};
-var doc = dom();
-
 // Utility methods
 FwArray.prototype.clone = Array.prototype.clone = function(){
   return [].concat(this);
@@ -86,8 +81,8 @@ Element.resize = function(w,h){
   //var y_pos = Math.round(this.top);
   w = Math.round(w);
   h = Math.round(h);
-  //dom().setSelectionBounds({left:x_pos,top:y_pos,right:(x_pos + w),bottom:(y_pos + h)},"autoTrimImages transformAttributes");
-  dom().resizeSelection(w,h);
+  //fw.getDocumentDOM().setSelectionBounds({left:x_pos,top:y_pos,right:(x_pos + w),bottom:(y_pos + h)},"autoTrimImages transformAttributes");
+  fw.getDocumentDOM().resizeSelection(w,h);
 };
 Element.set_position = function(x,y){
   fw.selection = this;
@@ -161,31 +156,30 @@ User = {
 
 Document = {
   path: function(){
-    return fw.getDocumentPath(null).split(escape(dom().docTitleWithoutExtension))[0];
+    return fw.getDocumentPath(null).split(escape(fw.getDocumentDOM().docTitleWithoutExtension))[0];
   },
   dump: function(){
-    var doc = dom();
     var filePath = fw.userJsCommandsDir;
-    var fileName = doc.docTitleWithoutExtension;
+    var fileName = fw.getDocumentDOM().docTitleWithoutExtension;
     if(fileName == ""){
       fileName = "untitled";
     }
     fileName = "/" + fileName + "_dump.txt";
     Files.createFile(filePath + fileName,".txt","FWMX");
     var my_file = Files.open(filePath + fileName,true); // Open file for writing
-    my_file.write(doc.javascriptString);
+    my_file.write(fw.getDocumentDOM().javascriptString);
     my_file.close();
   },
   export_in: function(path,options){
     if (options == undefined) {
       Document.set_export_as_png_24();
     } else {
-      dom().setExportOptions(options);
+      fw.getDocumentDOM().setExportOptions(options);
     }
     fw.exportDocumentAs(null, path, null);
   },
   set_export_as_png_24: function(){
-    dom().setExportOptions({animAutoCrop:true,animAutoDifference:true,applyScale:false,colorMode:"24 bit",crop:false,cropBottom:0,cropLeft:0,cropRight:0,cropTop:0,ditherMode:"none",ditherPercent:100,exportFormat:"PNG",frameInfo:[  ],interlacedGIF:false,jpegQuality:80,jpegSelPreserveButtons:false,jpegSelPreserveText:true,jpegSelQuality:90,jpegSelQualityEnabled:false,jpegSmoothness:0,jpegSubsampling:0,localAdaptive:true,lossyGifAmount:0,macCreator:"",macFileType:"",name:"PNG 24",numCustomEntries:0,numEntriesRequested:0,numGridEntries:6,optimized:true,paletteEntries:null,paletteInfo:null,paletteMode:"adaptive",paletteTransparency:"none",percentScale:100,progressiveJPEG:false,savedAnimationRepeat:0,sorting:"none",useScale:true,webSnapAdaptive:false,webSnapTolerance:14,xSize:0,ySize:0});
+    fw.getDocumentDOM().setExportOptions({animAutoCrop:true,animAutoDifference:true,applyScale:false,colorMode:"24 bit",crop:false,cropBottom:0,cropLeft:0,cropRight:0,cropTop:0,ditherMode:"none",ditherPercent:100,exportFormat:"PNG",frameInfo:[  ],interlacedGIF:false,jpegQuality:80,jpegSelPreserveButtons:false,jpegSelPreserveText:true,jpegSelQuality:90,jpegSelQualityEnabled:false,jpegSmoothness:0,jpegSubsampling:0,localAdaptive:true,lossyGifAmount:0,macCreator:"",macFileType:"",name:"PNG 24",numCustomEntries:0,numEntriesRequested:0,numGridEntries:6,optimized:true,paletteEntries:null,paletteInfo:null,paletteMode:"adaptive",paletteTransparency:"none",percentScale:100,progressiveJPEG:false,savedAnimationRepeat:0,sorting:"none",useScale:true,webSnapAdaptive:false,webSnapTolerance:14,xSize:0,ySize:0});
   },
   is_saved: function(){
     return (fw.getDocumentPath(null) != "");
@@ -194,7 +188,7 @@ Document = {
 
 Guides = {
   clear: function(direction){
-    var dom = dom();
+    var dom = fw.getDocumentDOM();
     if(!direction){
       dom.removeAllGuides('horizontal');
       dom.removeAllGuides('vertical');
@@ -203,15 +197,15 @@ Guides = {
     }
   },
   get: function(){
-    // We don't return the dom().guides object
+    // We don't return the fw.getDocumentDOM().guides object
     // Instead, we clone the contents of the vGuides and hGuides arrays,
     // so we have a 'snapshot' of the guides. Extremely useful for
     // guide manipulation like that on the Document.guide.remove()
     // function (where we delete a guide by clearing all guides and
     // then re-creating all the original guides except the one we
     // wanted to delete...)
-    var current_v_guides = dom().guides.vGuides;
-    var current_h_guides = dom().guides.hGuides;
+    var current_v_guides = fw.getDocumentDOM().guides.vGuides;
+    var current_h_guides = fw.getDocumentDOM().guides.hGuides;
     var current_guides = {
       vGuides: [],
       hGuides: []
@@ -251,14 +245,14 @@ Guides = {
     }
   },
   addVertical: function(where){
-    dom().addGuide(where,"vertical");
+    fw.getDocumentDOM().addGuide(where,"vertical");
   },
   addHorizontal: function(where){
-    dom().addGuide(where,"horizontal");
+    fw.getDocumentDOM().addGuide(where,"horizontal");
   },
   vertical_grid: function(grid_width,number_of_columns,gutter_width){
 
-    doc = dom();
+    var doc = fw.getDocumentDOM();
 
     // Check if there's an object selected, and use its position as the starting position
     sel = doc.getSelectionBounds();
@@ -293,9 +287,9 @@ Guides = {
     }
   },
   horizontal_grid: function(grid_width,number_of_columns,gutter_width){
-    doc = dom();
+    var doc = fw.getDocumentDOM();
     // Check if there's an object selected, and use its position as the starting position
-    sel = doc.getSelectionBounds();
+    var sel = doc.getSelectionBounds();
     var start_position;
     if(sel){
       start_position = sel.top;
@@ -323,11 +317,11 @@ Guides = {
 Selection = {
   stored_selection: [],
   all: function(){
-    dom().selectAll();
+    fw.getDocumentDOM().selectAll();
     return fw.selection;
   },
   get_bounds: function(){
-    return dom().getSelectionBounds();
+    return fw.getDocumentDOM().getSelectionBounds();
   },
   width: function(){
     sel = Selection.get_bounds();
@@ -402,8 +396,8 @@ Selection = {
         merged_text.textRuns.push(current_text_run);
       }
     });
-    dom().addNewText({left:Selection.left(), top:Selection.top(), right:Selection.right(), bottom:Selection.bottom()}, true);
-    dom().setTextRuns(merged_text);
+    fw.getDocumentDOM().addNewText({left:Selection.left(), top:Selection.top(), right:Selection.right(), bottom:Selection.bottom()}, true);
+    fw.getDocumentDOM().setTextRuns(merged_text);
   }
 };
 
@@ -457,20 +451,20 @@ File = {
 Pages = {
   count: function(){
     try {
-      return dom().pagesCount;
+      return fw.getDocumentDOM().pagesCount;
     } catch (exception) {
       // Create page at the end of page list...
-      dom().addNewPage();
+      fw.getDocumentDOM().addNewPage();
 
       // Move it to the first position
-      last_page_index = dom().currentPageNum;
-      dom().reorderPages(last_page_index, 0);
+      last_page_index = fw.getDocumentDOM().currentPageNum;
+      fw.getDocumentDOM().reorderPages(last_page_index, 0);
 
       // Change active page to first page
-      dom().changeCurrentPage(0);
+      fw.getDocumentDOM().changeCurrentPage(0);
 
       // Remove it
-      dom().deletePageAt(0);
+      fw.getDocumentDOM().deletePageAt(0);
   
       return last_page_index;
     }
@@ -478,12 +472,12 @@ Pages = {
   each: function(callback){
     var i = Pages.count() - 1;
     for (i; i >= 0; i--){
-      dom().changeCurrentPage(i);
+      fw.getDocumentDOM().changeCurrentPage(i);
       callback.call(this,i);
     }
   },
   vertical_trim: function(){
-    var doc = dom();
+    var doc = fw.getDocumentDOM();
     var l = doc.layers.length - 1;
     for (l; l >= 0; l--){
       doc.selectAllOnLayer(l,true,false);

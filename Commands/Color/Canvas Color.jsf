@@ -11,4 +11,4 @@ try {
 };
 
 choice = fw.popupColorPickerOverMouse("#00000000", true, false);
-doc.setDocumentCanvasColor(choice);
+fw.getDocumentDOM().setDocumentCanvasColor(choice);

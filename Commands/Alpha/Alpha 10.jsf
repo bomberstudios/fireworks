@@ -2,4 +2,4 @@
 /**DOC**
 Set the selected objects’ alpha to 10%
 **DOC**/
-dom().setOpacity(10);
+fw.getDocumentDOM().setOpacity(10);

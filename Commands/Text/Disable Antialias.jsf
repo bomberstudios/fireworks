@@ -7,15 +7,14 @@ try {
   alert("This command requires the bs.js library\rGet it at http://github.com/bomberstudios/fireworks/");
 };
 
-doc = dom();
-var current_page = doc.currentPageNum;
+var current_page = fw.getDocumentDOM().currentPageNum;
 
 Pages.each(function(){
-  doc.selectAll();
+  fw.getDocumentDOM().selectAll();
   sel = fw.selection;
   Selection.each( function(el) {
     el.antiAliased = false;
   });
-  doc.selectNone();
+  fw.getDocumentDOM().selectNone();
 });
-doc.changeCurrentPage(current_page);
+fw.getDocumentDOM().changeCurrentPage(current_page);
