@@ -79,15 +79,10 @@ fw.browseForFolderURL = function(){
 
 function setup() {
   test_document = fw.createFireworksDocument({x:400,y:400}, {pixelsPerUnit:72, units:"inch"}, '#ffffff00');
-  a = new Array(10);
-  for (var i=0; i < a.length; i++) {
-    a[i] = i;
-  };
   add_rectangle();
 }
 function teardown() {
   fw.closeDocument(test_document,false);
-  delete(a);
 }
 function run_command(kind, command){
   try {

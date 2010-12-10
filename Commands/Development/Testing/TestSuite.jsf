@@ -35,24 +35,30 @@ assert_equal('Test Suite runs teardown', fw.selection.length,0);
 // API
 test('Array extensions are defined', function(){
   assert_equal( 'Array.clone is defined', typeof(fw.selection.clone), "function" );
-  assert_equal( 'Array.each is defined', typeof(a.each), "function" );
-  assert_equal( 'Array.each_with_index is defined', typeof(a.each_with_index), "function" );
-  assert_equal( 'Array.is_group is defined', typeof(a.is_group), "function" );
+  assert_equal( 'Array.each is defined', typeof(fw.selection.each), "function" );
+  assert_equal( 'Array.each_with_index is defined', typeof(fw.selection.each_with_index), "function" );
+  assert_equal( 'Array.is_group is defined', typeof(fw.selection[0].is_group), "function" );
   assert_equal( 'Number.times is defined', typeof((5).times), "function" );
   assert_equal( 'Array.each_in_group is defined', typeof(fw.selection[0].each_in_group), 'function');
 });
+
 test('Array extensions work', function(){
-  count = 0;
+  var a     = [0,1,2,3,4,5,6,7,8,9],
+      count = 0;
+
   a.each(function(p){
     count++;
   });
+
   assert_equal( 'Array.each works', count, a.length );
+
   count = 0;
   a.each_with_index(function(p,index){
     count += index;
   });
   assert_equal( 'Array.each_with_index works', count, 9+8+7+6+5+4+3+2+1 );
-  b = a.clone();
+
+  var b = a.clone();
   assert_equal('Array.clone works',b[4],4);
 });
 
@@ -164,7 +170,6 @@ test('Effects: Repeat Horizontal', function(){
   assert_equal('Item is repeated 10 times', fw.selection.length, 11);
   assert_equal('Item is spaced properly', Selection.width(), ((11 * 100) + (10 * 10)));
 });
-
 
 test('Effects: Repeat Vertical', function(){
   prompt_return = 10;
@@ -349,7 +354,24 @@ test('Text commands', function(){
 msg = '\n' + fw.appName + ": " + asserts + ' asserts, ' + ok + ' ok, ' + fail + ' failed. Test run in ' + (new Date() - start_time) + ' ms.';
 log(msg);
 
-alert(msg);
+function fix_date(num){
+  num = num.toString();
+  if (num.length < 2) {
+    num = "0" + num;
+  };
+  return num;
+}
 
-//File.create(test_output, oc_folder + '/logs/test_' + fw.appName.replace(' ','_') + '.txt');
+var d = new Date();
+var year = d.getFullYear();
+var month = fix_date((d.getMonth() + 1));
+var day = fix_date(d.getDate());
+var hour = fix_date(d.getHours());
+var minute = fix_date(d.getMinutes());
+var seconds = fix_date(d.getSeconds());
+var milliseconds = fix_date(d.getMilliseconds());
+var folder_name = year + month + day + hour + minute + seconds + milliseconds;
+
+File.create(test_output, oc_folder + '/logs/test_' + folder_name + '_' + fw.appName.replace(' ','_') + '.txt');
+
 fw.closeDocument(empty_doc,false);
