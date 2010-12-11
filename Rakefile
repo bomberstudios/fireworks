@@ -12,6 +12,7 @@ DOWNLOAD_SERVER = "http://orangecommands.com/dl/"
 @fw_versions = ["CS3","CS4","CS5"]
 # @fw_versions = ["CS3","CS5"]
 @orangecommands = FW::Library.new 'Commands'
+@pro = false
 
 def app_folder
   os = RUBY_PLATFORM
@@ -22,11 +23,20 @@ end
 
 desc "Update About... command"
 task :about do
-  cp '../OrangeCommandsAbout/deploy/OrangeCommandsAbout.swf', './Commands/About Orange Commands.swf'
+  if @pro
+    system("cd ../OrangeCommandsAbout && rake pro")
+    cp "../OrangeCommandsAbout/deploy/OrangeCommandsAboutPro.swf", "Commands/About Orange Commands.swf"
+  else
+    system("cd ../OrangeCommandsAbout && rake")
+    cp "../OrangeCommandsAbout/deploy/OrangeCommandsAbout.swf", "Commands/About Orange Commands.swf"
+  end
+end
+task :about_pro do
+  @pro = true
 end
 
 desc "Build MXI file with Commands"
-task :mxi => [:clean, :about] do
+task :mxi => :clean do
   @files = @orangecommands.files
   @fw_versions.each do |fw_version|
     case fw_version
@@ -77,9 +87,9 @@ end
 
 desc "Build MXP files"
 task :mxp do
-  system("'/Applications/Adobe Extension Manager CS4/Adobe Extension Manager CS4.app/Contents/MacOS/Adobe Extension Manager CS4' -suppress -package mxi=OrangeCommands_#{ORANGE_COMMANDS_VERSION}_CS3.mxi mxp=OrangeCommands_#{ORANGE_COMMANDS_VERSION}_CS3.mxp")
-  system("'/Applications/Adobe Extension Manager CS4/Adobe Extension Manager CS4.app/Contents/MacOS/Adobe Extension Manager CS4' -suppress -package mxi=OrangeCommands_#{ORANGE_COMMANDS_VERSION}_CS4.mxi mxp=OrangeCommands_#{ORANGE_COMMANDS_VERSION}_CS4.mxp")
-  system("'/Applications/Adobe Extension Manager CS5/Adobe Extension Manager CS5.app/Contents/MacOS/Adobe Extension Manager CS5' -suppress -package mxi=OrangeCommands_#{ORANGE_COMMANDS_VERSION}_CS5.mxi mxp=OrangeCommands_#{ORANGE_COMMANDS_VERSION}_CS5.mxp")
+  system("'/Applications/Adobe Extension Manager CS4/Adobe Extension Manager CS4.app/Contents/MacOS/Adobe Extension Manager CS4' -suppress -package mxi=OrangeCommands_#{ORANGE_COMMANDS_VERSION}_CS3.mxi mxp=OrangeCommands#{@pro ? 'Pro': ''}_#{ORANGE_COMMANDS_VERSION}_CS3.mxp")
+  system("'/Applications/Adobe Extension Manager CS4/Adobe Extension Manager CS4.app/Contents/MacOS/Adobe Extension Manager CS4' -suppress -package mxi=OrangeCommands_#{ORANGE_COMMANDS_VERSION}_CS4.mxi mxp=OrangeCommands#{@pro ? 'Pro': ''}_#{ORANGE_COMMANDS_VERSION}_CS4.mxp")
+  system("'/Applications/Adobe Extension Manager CS5/Adobe Extension Manager CS5.app/Contents/MacOS/Adobe Extension Manager CS5' -suppress -package mxi=OrangeCommands_#{ORANGE_COMMANDS_VERSION}_CS5.mxi mxp=OrangeCommands#{@pro ? 'Pro': ''}_#{ORANGE_COMMANDS_VERSION}_CS5.mxp")
 end
 
 task :clean do
@@ -90,23 +100,28 @@ desc "Pack OrangeCommands as ZIP files"
 task :pack do
   @fw_versions.each do |version|
     %x(cp "en/Keyboard\ Shortcuts/#{version}/"*.xml .)
-    %x(zip -9 "OrangeCommands_#{ORANGE_COMMANDS_VERSION}_#{version}.zip" OrangeCommands_#{ORANGE_COMMANDS_VERSION}_#{version}.mxp *.xml README.html)
-    %x(rm *.xml)
+    %x(zip -9 "OrangeCommands#{@pro ? 'Pro': ''}_#{ORANGE_COMMANDS_VERSION}_#{version}.zip" OrangeCommands#{@pro ? 'Pro': ''}_#{ORANGE_COMMANDS_VERSION}_#{version}.mxp *.xml README.html)
   end
+  %x(rm *.xml *.mxi)
   FileUtils.mkdir_p "pkg/#{ORANGE_COMMANDS_VERSION}"
-  system("mv *.zip *.mxi *.mxp pkg/#{ORANGE_COMMANDS_VERSION}/")
+  system("mv *.zip *.mxp pkg/#{ORANGE_COMMANDS_VERSION}/")
+  if @pro
+    %x(cd pkg/#{ORANGE_COMMANDS_VERSION} && zip -9 "OrangeCommandsPro_All_Versions.zip" OrangeCommandsPro*.zip)
+  end
 end
 
 desc "Release ZIP files to the world"
 task :release do
   system("git push origin master")
   @fw_versions.each do |version|
-    %x(scp pkg/#{ORANGE_COMMANDS_VERSION}/OrangeCommands_#{ORANGE_COMMANDS_VERSION}_#{version}.zip oc:www/dl/)
-    %x(scp pkg/#{ORANGE_COMMANDS_VERSION}/OrangeCommands_#{ORANGE_COMMANDS_VERSION}_#{version}.zip oc:www/dl/orangecommands_latest_#{version.downcase}.zip)
+    system("scp 'pkg/#{ORANGE_COMMANDS_VERSION}/OrangeCommands_#{ORANGE_COMMANDS_VERSION}_#{version}.zip' oc:www/dl/")
+    system("ssh oc cp www/dl/OrangeCommands_#{ORANGE_COMMANDS_VERSION}_#{version}.zip www/dl/orangecommands_latest_#{version.downcase}.zip")
   end
 end
 
-task :default => [ :clean, :shortcuts, :readme, :mxi, :mxp, :pack ]
+task :default => [ :clean, :shortcuts, :readme, :about, :mxi, :mxp, :pack ]
+
+task :pro => [:about_pro, :default]
 
 task :install do
   system("rsync -azv Commands \"/Applications/Adobe\ Fireworks\ CS3/Configuration/\" --exclude='Development' --exclude='*.md'")
@@ -123,14 +138,12 @@ task :readme do
 end
 
 def run_test version
-  rm "/Users/ale/Desktop/test_output_Fireworks_#{version}.txt" if File.exist? "/Users/ale/Desktop/test_output_Fireworks_#{version}.txt"
-  %x(open -W -a "/Applications/Adobe\ Fireworks\ #{version}/Adobe\ Fireworks\ #{version}.app" Commands/Development/Testing/TestSuite.jsf Commands/Development/Testing/Quit.jsf)
-  puts File.readlines("/Users/ale/Desktop/test_output_Fireworks_#{version}.txt").last if File.exist? "/Users/ale/Desktop/test_output_Fireworks_#{version}.txt"
+  %x(open -ga "/Applications/Adobe\ Fireworks\ #{version}/Adobe\ Fireworks\ #{version}.app" Commands/Development/Testing/TestSuite.jsf)
 end
 
 namespace :test do
   desc 'Test in Fireworks CS3 only'
-  task :cs3 => :install do
+  task :cs3 do
     run_test 'CS3'
   end
 
@@ -149,3 +162,40 @@ end
 
 desc 'Run Test Suite'
 task :test => :"test:all"
+
+task :kill do
+  @fw_versions.each do |version|
+    system("killall 'Adobe Fireworks #{version}'")
+  end
+end
+
+task :count do
+  puts @orangecommands.files.size
+end
+
+task :monitor do
+  files = {}
+  command = 'foo'
+
+  # Dir["logs/*.txt"].each { |file|
+  Dir["logs/*.txt", "Commands/**/*.jsf"].each { |file|
+    files[file] = File.mtime(file)
+  }
+
+  loop do
+    sleep 1
+    changed_file, last_changed = files.find { |file, last_changed|
+      File.mtime(file) > last_changed
+    }
+    if changed_file
+      files[changed_file] = File.mtime(changed_file)
+      if changed_file['txt']
+        puts File.readlines(changed_file).last# if File.exist? "/Users/ale/Desktop/test_output_Fireworks_#{version}.txt"
+      end
+      if changed_file['jsf']
+        system('rake test:all')
+      end
+    end
+  end
+  puts "=> done"
+end
