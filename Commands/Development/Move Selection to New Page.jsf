@@ -1,0 +1,11 @@
+// requested by @chunwui
+
+fw.getDocumentDOM().clipCut();
+fw.getDocumentDOM().addNewPage();
+fw.getDocumentDOM().clipPaste("ask user", "vector");
+
+var page_name = prompt("Page Name:",fw.getDocumentDOM().pageName);
+
+if(page_name){
+  fw.getDocumentDOM().setPageName(fw.getDocumentDOM().currentPageNum,page_name);
+}
