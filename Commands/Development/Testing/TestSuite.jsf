@@ -234,6 +234,17 @@ test('Position',function(){
 
   // Objects with border
   fw.getDocumentDOM().setBrushNColor({ alphaRemap:"none", angle:0, antiAliased:true, aspect:100, blackness:0, category:"bc_Pencil", concentration:100, dashOffSize1:2, dashOffSize2:2, dashOffSize3:2, dashOnSize1:8, dashOnSize2:1, dashOnSize3:1, diameter:24, feedback:"brush", flowRate:0, maxCount:15, minSize:1, name:"bn_1-Pixel Anti-Aliased", numDashes:0, shape:"circle", softenMode:"bell curve", softness:0, spacing:15, textureBlend:0, textureEdge:0, tipColoringMode:"random", tipCount:1, tipSpacing:0, tipSpacingMode:"random", type:"simple" }, "#000066");
+  fw.getDocumentDOM().setBrushPlacement('center');
+  prompt_return = '100,100';
+  run_command('Position','Set Position');
+  assert_equal('set_position works properly for objects with border', fw.selection[0].left, 100);
+
+  fw.getDocumentDOM().setBrushPlacement('outside');
+  prompt_return = '100,100';
+  run_command('Position','Set Position');
+  assert_equal('set_position works properly for objects with border', fw.selection[0].left, 100);
+
+  fw.getDocumentDOM().setBrushPlacement('inside');
   prompt_return = '100,100';
   run_command('Position','Set Position');
   assert_equal('set_position works properly for objects with border', fw.selection[0].left, 100);
