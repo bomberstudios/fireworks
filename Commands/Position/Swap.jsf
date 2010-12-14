@@ -15,4 +15,6 @@ if (fw.selection.length != 2) {
 
   second_object.left = first_position.left;
   second_object.top  = first_position.top;
+
+  fw.selection = [ first_object, second_object];
 }
