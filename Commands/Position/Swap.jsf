@@ -1,0 +1,18 @@
+/**DOC**
+Swaps the position of two selected objects.
+**DOC**/
+
+if (fw.selection.length != 2) {
+  alert('This swaps the position of two objects, so it makes sense to select two objects, right? :)');
+} else {
+  var first_object    = fw.selection[0],
+      second_object   = fw.selection[1],
+      first_position  = { left: first_object.left, top: first_object.top },
+      second_position = { left: second_object.left, top: second_object.top };
+
+  first_object.left = second_position.left;
+  first_object.top  = second_position.top;
+
+  second_object.left = first_position.left;
+  second_object.top  = first_position.top;
+}
