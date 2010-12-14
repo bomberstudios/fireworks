@@ -12,7 +12,9 @@ This command does its best and try to copy the currently selected object(s) attr
     -moz-radial-gradient(19% 75% 90deg,ellipse closest-side, #ababab, #c9c9c9, #c7c7c7 100%)
   - alpha in gradients
   - support things other than Rectangles and Paths:
-    - Group (Autoshapes are Groups...?)
+    - Group
+    - Autoshape
+      - Autoshapes have a .smartShapeCode property
     - Text
     - Instance (Symbols) (does it make sense?)
   - HSLA
@@ -29,10 +31,17 @@ try {
 var sprintf=(function(){function a(d){return Object.prototype.toString.call(d).slice(8,-1).toLowerCase();}function b(e,f){for(var d=[];f>0;d[--f]=e){}return d.join("");}var c=function(){if(!c.cache.hasOwnProperty(arguments[0])){c.cache[arguments[0]]=c.parse(arguments[0]);}return c.format.call(null,c.cache[arguments[0]],arguments);};c.format=function(m,l){var q=1,o=m.length,g="",r,d=[],h,f,j,e,n,p;for(h=0;h<o;h++){g=a(m[h]);if(g==="string"){d.push(m[h]);}else{if(g==="array"){j=m[h];if(j[2]){r=l[q];for(f=0;f<j[2].length;f++){if(!r.hasOwnProperty(j[2][f])){throw (sprintf('[sprintf] property "%s" does not exist',j[2][f]));}r=r[j[2][f]];}}else{if(j[1]){r=l[j[1]];}else{r=l[q++];}}if(/[^s]/.test(j[8])&&(a(r)!="number")){throw (sprintf("[sprintf] expecting number but found %s",a(r)));}switch(j[8]){case"b":r=r.toString(2);break;case"c":r=String.fromCharCode(r);break;case"d":r=parseInt(r,10);break;case"e":r=j[7]?r.toExponential(j[7]):r.toExponential();break;case"f":r=j[7]?parseFloat(r).toFixed(j[7]):parseFloat(r);break;case"o":r=r.toString(8);break;case"s":r=((r=String(r))&&j[7]?r.substring(0,j[7]):r);break;case"u":r=Math.abs(r);break;case"x":r=r.toString(16);break;case"X":r=r.toString(16).toUpperCase();break;}r=(/[def]/.test(j[8])&&j[3]&&r>=0?"+"+r:r);n=j[4]?j[4]=="0"?"0":j[4].charAt(1):" ";p=j[6]-String(r).length;e=j[6]?b(n,p):"";d.push(j[5]?r+e:e+r);}}}return d.join("");};c.cache={};c.parse=function(d){var g=d,h=[],j=[],i=0;while(g){if((h=/^[^\x25]+/.exec(g))!==null){j.push(h[0]);}else{if((h=/^\x25{2}/.exec(g))!==null){j.push("%");}else{if((h=/^\x25(?:([1-9]\d*)\$|\(([^\)]+)\))?(\+)?(0|'[^$])?(-)?(\d+)?(?:\.(\d+))?([b-fosuxX])/.exec(g))!==null){if(h[2]){i|=1;var k=[],f=h[2],e=[];if((e=/^([a-z_][a-z_\d]*)/i.exec(f))!==null){k.push(e[1]);while((f=f.substring(e[0].length))!==""){if((e=/^\.([a-z_][a-z_\d]*)/i.exec(f))!==null){k.push(e[1]);}else{if((e=/^\[(\d+)\]/.exec(f))!==null){k.push(e[1]);}else{throw ("[sprintf] huh?");}}}}else{throw ("[sprintf] huh?");}h[2]=k;}else{i|=2;}if(i===3){throw ("[sprintf] mixing positional and named placeholders is not (yet) supported");}j.push(h);}else{throw ("[sprintf] huh?");}}}g=g.substring(h[0].length);}return j;};return c;})();var vsprintf=function(b,a){a.unshift(b);return sprintf.apply(null,a);};
 
 CSS3 = {
+  from: function(obj, index) {
+    switch(obj.kind()) {
+      case 'text':
+        return this.css_from_text(obj, index);
+      default:
+        return this.css_from_object(obj, index);
+    }
+  },
   css_from_object: function(obj, index) {
     var sel  = obj,
         attr = sel.pathAttributes,
-        name = sel.name || 'item' + (index + 1),
         css  = "";
 
     // fill
@@ -127,7 +136,7 @@ CSS3 = {
     // shadows (inner, outer...)
     // transforms (rotation...)
 
-    css = "#" + name + " {\n";
+    css = CSS3.selector_from(obj, index);
     css += "  margin: 0;\n";
     css += "  padding: 0;\n";
     css += "  display: block;\n";
@@ -186,6 +195,61 @@ CSS3 = {
     };
     css += "}\n";
     return css;
+  },
+  selector_from: function(obj, index) {
+    var id = obj.name || 'item' + (index + 1);
+    return '#' + id;
+  },
+  css_from_text: function(obj, index){
+    var text_css = this.selector_from(obj, index),
+        attr     = obj.textRuns.initialAttrs;
+
+    text_css += ' {\n';
+
+    // family
+    text_css += sprintf('  font-family: %s;\n', attr.face);
+
+    // size
+    text_css += sprintf('  font-size: %s;\n', attr.size);
+
+    // weight
+    if (attr.bold == 'true') {
+      text_css += '  font-weight: bold;\n';
+    };
+
+    // style
+    if (attr.italic == 'true') {
+      text_css += '  font-style: italic;\n';
+    };
+
+    // decoration
+    if (attr.underline == 'true') {
+      text_css += '  text-decoration: underline;\n';
+    };
+
+    // align
+    text_css += sprintf('  text-align: %s;\n', attr.alignment);
+
+    // color
+    text_css += sprintf('  color: %s;\n', attr.fillColor);
+
+    // line height
+    var line_height = "";
+    if (attr.leadingMode == 'percentage') {
+      line_height = attr.leading * 100 + '%';
+    } else {
+      line_height = attr.leading + 'px';
+    };
+    text_css += sprintf('  line-height: %s;\n', line_height);
+
+    // TODO:
+    // - text-indent
+    // - margins
+    // - kerning
+    // paragraphIndent:0, paragraphSpacingAfter:0, paragraphSpacingBefore:0, rangeKerning:0
+
+    text_css += '}\n';
+    return text_css;
   }
 };
 
@@ -194,7 +258,7 @@ if (fw.selection.length == 0) {
 } else {
   var css_output = "";
   fw.selection.each_with_index(function(obj,i) {
-    css_output += CSS3.css_from_object(obj,i);
+    css_output += CSS3.from(obj,i);
   });
   fw.getDocumentDOM().clipCopyJsToExecute(css_output);
 }

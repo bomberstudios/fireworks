@@ -96,11 +96,22 @@ Element.set_position = function(x,y){
     this.top = y;
   }
 };
+
 Element.is_symbol = function(){
-  return (this.__proto__ == Instance);
+  return (this.kind() == 'symbol');
 };
 Element.is_text = function(){
-  return (this.__proto__ == Text.prototype);
+  return (this.kind() == 'text');
+};
+Element.kind = function(){
+
+  if(this.smartShapeCode != undefined ) { return 'autoshape'; };
+
+  if (this.__proto__ == Text.prototype ) { return 'text'; };
+
+  if (this.__proto__ == Instance ) { return 'symbol'; };
+
+  return 'element';
 };
 
 function dump(obj) {
