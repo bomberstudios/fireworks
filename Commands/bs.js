@@ -92,8 +92,20 @@ Element.set_position = function(x,y){
     this.rawLeft = x + 2;
     this.rawTop = y + 2;
   } else {
-    this.left = x;
-    this.top = y;
+    var x_offset = 0,
+        y_offset = 0;
+
+    if (this.pathAttributes.brush) {
+      if(this.pathAttributes.brushPlacement == 'outside') {
+        y_offset = this.pathAttributes.brush.diameter;
+      }
+      if(this.pathAttributes.brushPlacement == 'center') {
+        y_offset = Math.floor(this.pathAttributes.brush.diameter / 2);
+      }
+      x_offset = y_offset * 2;
+    };
+    this.left = x - x_offset;
+    this.top = y - y_offset;
   }
 };
 
