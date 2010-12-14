@@ -1,5 +1,5 @@
 /**DOC**
-This command does its best and try to copy the currently selected object's attributes as CSS3 styles.
+This command does its best and try to copy the currently selected object(s) attributes as CSS3 styles.
 **DOC**/
 
 /*
@@ -28,159 +28,173 @@ try {
 // sprintf
 var sprintf=(function(){function a(d){return Object.prototype.toString.call(d).slice(8,-1).toLowerCase();}function b(e,f){for(var d=[];f>0;d[--f]=e){}return d.join("");}var c=function(){if(!c.cache.hasOwnProperty(arguments[0])){c.cache[arguments[0]]=c.parse(arguments[0]);}return c.format.call(null,c.cache[arguments[0]],arguments);};c.format=function(m,l){var q=1,o=m.length,g="",r,d=[],h,f,j,e,n,p;for(h=0;h<o;h++){g=a(m[h]);if(g==="string"){d.push(m[h]);}else{if(g==="array"){j=m[h];if(j[2]){r=l[q];for(f=0;f<j[2].length;f++){if(!r.hasOwnProperty(j[2][f])){throw (sprintf('[sprintf] property "%s" does not exist',j[2][f]));}r=r[j[2][f]];}}else{if(j[1]){r=l[j[1]];}else{r=l[q++];}}if(/[^s]/.test(j[8])&&(a(r)!="number")){throw (sprintf("[sprintf] expecting number but found %s",a(r)));}switch(j[8]){case"b":r=r.toString(2);break;case"c":r=String.fromCharCode(r);break;case"d":r=parseInt(r,10);break;case"e":r=j[7]?r.toExponential(j[7]):r.toExponential();break;case"f":r=j[7]?parseFloat(r).toFixed(j[7]):parseFloat(r);break;case"o":r=r.toString(8);break;case"s":r=((r=String(r))&&j[7]?r.substring(0,j[7]):r);break;case"u":r=Math.abs(r);break;case"x":r=r.toString(16);break;case"X":r=r.toString(16).toUpperCase();break;}r=(/[def]/.test(j[8])&&j[3]&&r>=0?"+"+r:r);n=j[4]?j[4]=="0"?"0":j[4].charAt(1):" ";p=j[6]-String(r).length;e=j[6]?b(n,p):"";d.push(j[5]?r+e:e+r);}}}return d.join("");};c.cache={};c.parse=function(d){var g=d,h=[],j=[],i=0;while(g){if((h=/^[^\x25]+/.exec(g))!==null){j.push(h[0]);}else{if((h=/^\x25{2}/.exec(g))!==null){j.push("%");}else{if((h=/^\x25(?:([1-9]\d*)\$|\(([^\)]+)\))?(\+)?(0|'[^$])?(-)?(\d+)?(?:\.(\d+))?([b-fosuxX])/.exec(g))!==null){if(h[2]){i|=1;var k=[],f=h[2],e=[];if((e=/^([a-z_][a-z_\d]*)/i.exec(f))!==null){k.push(e[1]);while((f=f.substring(e[0].length))!==""){if((e=/^\.([a-z_][a-z_\d]*)/i.exec(f))!==null){k.push(e[1]);}else{if((e=/^\[(\d+)\]/.exec(f))!==null){k.push(e[1]);}else{throw ("[sprintf] huh?");}}}}else{throw ("[sprintf] huh?");}h[2]=k;}else{i|=2;}if(i===3){throw ("[sprintf] mixing positional and named placeholders is not (yet) supported");}j.push(h);}else{throw ("[sprintf] huh?");}}}g=g.substring(h[0].length);}return j;};return c;})();var vsprintf=function(b,a){a.unshift(b);return sprintf.apply(null,a);};
 
-if (fw.selection.length == 0 || fw.selection.length > 1) {
-  alert('You need to select ONE object');
-} else {
-  var sel = fw.selection[0];
+CSS3 = {
+  css_from_object: function(obj, index) {
+    var sel  = obj,
+        attr = sel.pathAttributes,
+        name = sel.name || 'item' + (index + 1),
+        css  = "";
 
-  var attr = sel.pathAttributes;
-  var name = sel.name || 'item';
-
-  // fill
-  var fill = attr.fill;
-  var gradient = {};
-  if (fill) {
-    var background_color;
-    if (fill.gradient) {
-      var gradient_start = {
-        x: attr.fillHandle1.x - sel.left,
-        y: attr.fillHandle1.y - sel.top
-      };
-      var gradient_end = {
-        x: attr.fillHandle2.x - sel.left,
-        y: attr.fillHandle2.y - sel.top
-      };
-      gradient = {
-        type: 'linear',
-        from: gradient_start.x + ' ' + gradient_start.y,
-        to: gradient_end.x + ' ' + gradient_end.y,
-        colors: [].concat(fill.gradient.nodes),
-        alphas: [].concat(fill.gradient.opacityNodes)
-      };
-      var top_color = gradient.colors[0].color;
-      background_color = top_color;
-      var bottom_color = gradient.colors[gradient.colors.length-1].color;
+    // fill
+    var fill = attr.fill;
+    var gradient = {};
+    if (fill) {
+      var background_color;
+      if (fill.gradient) {
+        var gradient_start = {
+          x: attr.fillHandle1.x - sel.left,
+          y: attr.fillHandle1.y - sel.top
+        };
+        var gradient_end = {
+          x: attr.fillHandle2.x - sel.left,
+          y: attr.fillHandle2.y - sel.top
+        };
+        gradient = {
+          type: 'linear',
+          from: gradient_start.x + ' ' + gradient_start.y,
+          to: gradient_end.x + ' ' + gradient_end.y,
+          colors: [].concat(fill.gradient.nodes),
+          alphas: [].concat(fill.gradient.opacityNodes)
+        };
+        var top_color = gradient.colors[0].color;
+        background_color = top_color;
+        var bottom_color = gradient.colors[gradient.colors.length-1].color;
+      } else {
+        background_color = attr.fillColor;
+      }
     } else {
-      background_color = attr.fillColor;
+      gradient = undefined;
+      background_color = 'transparent';
     }
-  } else {
-    gradient = undefined;
-    background_color = 'transparent';
-  }
 
-  // border
-  var brush = attr.brush;
-  var border;
-  if (brush) {
-    border = {
-      size: brush.diameter,
-      color: Color.hex_to_rgba(attr.brushColor)
+    // border
+    var brush = attr.brush;
+    var border;
+    if (brush) {
+      border = {
+        size: brush.diameter,
+        color: Color.hex_to_rgba(attr.brushColor)
+      };
+    } else {
+      border = undefined;
+    }
+
+    // opacity
+    var opacity = sel.opacity / 100;
+
+    // border-radius
+    if (sel.roundness) {
+      var border_radius;
+      if(sel.mode == 'exact') {
+        border_radius = sel.roundness;
+      } else {
+        border_radius = (sel.roundness * sel.height) / 2;
+      }
+      border_radius = Math.floor(border_radius); // because Fireworks uses float numbers
     };
-  } else {
-    border = undefined;
-  }
 
-  // opacity
-  var opacity = sel.opacity / 100;
-
-  // border-radius
-  if (sel.roundness) {
-    var border_radius;
-    if(sel.mode == 'exact') {
-      border_radius = sel.roundness;
+    // Shadows
+    var shadows = [];
+    if (sel.effectList) {
+      var fxs = [].concat(sel.effectList.effects);
+      var radians=Math.PI/180;
+      fxs.each(function(fx){
+        if (fx.category == "Shadow and Glow") {
+          shadows.push({
+            type: (fx.name == "Inner Shadow") ? 'inset' : '',
+            color: Color.hex_to_rgba(fx.ShadowColor),
+            blur: fx.ShadowBlur,
+            x: Math.abs(Math.cos(fx.ShadowAngle * radians)) < 0.00000001 ? 0 : fx.ShadowDistance * Math.cos(fx.ShadowAngle*(radians)),
+            y: -fx.ShadowDistance * Math.sin(fx.ShadowAngle*(radians))
+          });
+        };
+      });
     } else {
-      border_radius = (sel.roundness * sel.height) / 2;
+      shadows = [];
     }
-    border_radius = Math.floor(border_radius); // because Fireworks uses float numbers
-  };
 
-  // Shadows
-  var shadows = [];
-  if (sel.effectList) {
-    var fxs = [].concat(sel.effectList.effects);
-    var radians=Math.PI/180;
-    fxs.each(function(fx){
-      if (fx.category == "Shadow and Glow") {
-        shadows.push({
-          type: (fx.name == "Inner Shadow") ? 'inset' : '',
-          color: Color.hex_to_rgba(fx.ShadowColor),
-          blur: fx.ShadowBlur,
-          x: Math.abs(Math.cos(fx.ShadowAngle * radians)) < 0.00000001 ? 0 : fx.ShadowDistance * Math.cos(fx.ShadowAngle*(radians)),
-          y: -fx.ShadowDistance * Math.sin(fx.ShadowAngle*(radians))
-        });
-      };
-    });
-  } else {
-    shadows = [];
+    // size
+    var w = sel.width;
+    var h = sel.height;
+    if (border) {
+      w -= (border.size-1)*2;
+      h -= (border.size-1)*2;
+    }
+
+    // color & gradient
+    // border size & color
+    // border-radius
+    // shadows (inner, outer...)
+    // transforms (rotation...)
+
+    css = "#" + name + " {\n";
+    css += "  margin: 0;\n";
+    css += "  padding: 0;\n";
+    css += "  display: block;\n";
+    css += "  width: " + w + "px;\n";
+    css += "  height: " + h + "px;\n";
+    if (opacity < 1) {
+      css += "  opacity: "+opacity+";\n";
+    };
+    if (border) {
+      css += "  border: " + border.size + "px solid " + border.color + ";\n";
+    };
+
+    // border-radius
+    // if it is a circle, then use border-radius: 9999px; (can we detect it?)
+    if (border_radius > 0) {
+      css += "  -webkit-border-radius: " + border_radius + "px;\n";
+      css += "  -moz-border-radius: " + border_radius + "px;\n";
+      css += "  border-radius: " + border_radius + "px;\n";
+    };
+
+    // box-shadow
+    if (shadows.length > 0) {
+      var tmp_shadows = [];
+      shadows.each(function(shadow){
+        tmp_shadows.push(shadow.type + " " + shadow.color + " " + shadow.x + "px " + shadow.y + "px " + shadow.blur + "px");
+      });
+      css += "  -webkit-box-shadow: " + tmp_shadows.join(',') + ";\n";
+      css += "  -moz-box-shadow: " + tmp_shadows.join(',') + ";\n";
+      css += "  box-shadow: " + tmp_shadows.join(',') + ";\n";
+    };
+    css += "  background: "+background_color+";\n"; // old browsers
+    if (gradient.colors) {
+      // webkit gradient
+      var webkit_gradient = sprintf("  background-image: -webkit-gradient(%(type)s, %(from)s, %(to)s,", gradient);
+      var color_stops = [];
+      gradient.colors.each(function(color){
+        css_color_stop = sprintf("color-stop(%.2f,%s)",color.position, Color.hex_to_rgba(color.color));
+        color_stops.push(css_color_stop);
+      });
+      webkit_gradient += color_stops.join(', ');
+      webkit_gradient += ");\n";
+
+      // Moz gradient
+      var moz_gradient = sprintf("  background-image: -moz-linear-gradient(%(from)1s, ", gradient);
+      color_stops = [];
+      gradient.colors.each(function(color){
+        css_color_stop = sprintf("%s %.2f%%",Color.hex_to_rgba(color.color), color.position * 100);
+        color_stops.push(css_color_stop);
+      });
+      moz_gradient += color_stops.join(', ');
+      moz_gradient += ");\n";
+
+      css += webkit_gradient;
+      css += moz_gradient;
+      css += "  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='"+top_color+"', endColorstr='"+bottom_color+"',GradientType=0 );\n";
+    };
+    css += "}\n";
+    return css;
   }
+};
 
-  // size
-  var w = sel.width;
-  var h = sel.height;
-  if (border) {
-    w -= (border.size-1)*2;
-    h -= (border.size-1)*2;
-  }
-
-  // color & gradient
-  // border size & color
-  // border-radius
-  // see if it is a circle, then use border-radius: 9999px;
-  // shadows (inner, outer...)
-  // transforms (rotation...)
-
-  var css = "." + name + " {\n";
-  css += "  margin: 0;\n";
-  css += "  padding: 0;\n";
-  css += "  display: block;\n";
-  css += "  width: " + w + "px;\n";
-  css += "  height: " + h + "px;\n";
-  if (opacity < 1) {
-    css += "  opacity: "+opacity+";\n";
-  };
-  if (border) {
-    css += "  border: " + border.size + "px solid " + border.color + ";\n";
-  };
-  if (border_radius > 0) {
-    css += "  -webkit-border-radius: " + border_radius + "px;\n";
-    css += "  -moz-border-radius: " + border_radius + "px;\n";
-    css += "  border-radius: " + border_radius + "px;\n";
-  };
-  if (shadows.length > 0) {
-    var tmp_shadows = [];
-    shadows.each(function(shadow){
-      tmp_shadows.push(shadow.type + " " + shadow.color + " " + shadow.x + "px "+shadow.y+"px "+shadow.blur+"px");
-    });
-    css += "  -webkit-box-shadow: " + tmp_shadows.join(',') + ";\n";
-    css += "  -moz-box-shadow: " + tmp_shadows.join(',') + ";\n";
-  };
-  css += "  background: "+background_color+";\n"; // old browsers
-  if (gradient.colors) {
-    // webkit gradient
-    var webkit_gradient = sprintf("  background-image: -webkit-gradient(%(type)s, %(from)s, %(to)s,", gradient);
-    var color_stops = [];
-    gradient.colors.each(function(color){
-      css_color_stop = sprintf("color-stop(%.2f,%s)",color.position, Color.hex_to_rgba(color.color));
-      color_stops.push(css_color_stop);
-    });
-    webkit_gradient += color_stops.join(', ');
-    webkit_gradient += ");\n";
-
-    // Moz gradient
-    var moz_gradient = sprintf("  background-image: -moz-linear-gradient(%(from)1s, ", gradient);
-    color_stops = [];
-    gradient.colors.each(function(color){
-      css_color_stop = sprintf("%s %.2f%%",Color.hex_to_rgba(color.color), color.position * 100);
-      color_stops.push(css_color_stop);
-    });
-    moz_gradient += color_stops.join(', ');
-    moz_gradient += ");\n";
-
-    css += webkit_gradient;
-    css += moz_gradient;
-    css += "  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='"+top_color+"', endColorstr='"+bottom_color+"',GradientType=0 );\n";
-  };
-  css += "}\n";
-
-  fw.getDocumentDOM().clipCopyJsToExecute(css);
+if (fw.selection.length == 0) {
+  alert('This command requires a selection');
+} else {
+  var css_output = "";
+  fw.selection.each_with_index(function(obj,i) {
+    css_output += CSS3.css_from_object(obj,i);
+  });
+  fw.getDocumentDOM().clipCopyJsToExecute(css_output);
 }
