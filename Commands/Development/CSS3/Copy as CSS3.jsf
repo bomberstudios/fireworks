@@ -5,6 +5,7 @@ This command does its best and try to copy the currently selected object(s) attr
 /*
   DONE:
   - non-vertical gradients (not supported in Firefox, that uses a -moz-linear-gradient(19% 75% 196deg,#C9C9C9 0%, #C7C7C7 100%) syntax)
+  - Text support
 
   TODO:
   - radial gradients:
@@ -15,7 +16,6 @@ This command does its best and try to copy the currently selected object(s) attr
     - Group
     - Autoshape
       - Autoshapes have a .smartShapeCode property
-    - Text
     - Instance (Symbols) (does it make sense?)
   - HSLA
   - ems instead of pixels?
@@ -39,10 +39,14 @@ CSS3 = {
         return this.css_from_object(obj, index);
     }
   },
+  selector_from: function(obj, index) {
+    var id = obj.name || 'item' + (index + 1);
+    return '#' + id;
+  },
   css_from_object: function(obj, index) {
     var sel  = obj,
         attr = sel.pathAttributes,
-        css  = "";
+        css  = this.selector_from(obj, index) + ' {\n';
 
     // fill
     var fill = attr.fill;
@@ -136,12 +140,14 @@ CSS3 = {
     // shadows (inner, outer...)
     // transforms (rotation...)
 
-    css = CSS3.selector_from(obj, index);
     css += "  margin: 0;\n";
     css += "  padding: 0;\n";
     css += "  display: block;\n";
+
+    // Size
     css += "  width: " + w + "px;\n";
     css += "  height: " + h + "px;\n";
+
     if (opacity < 1) {
       css += "  opacity: "+opacity+";\n";
     };
@@ -195,10 +201,6 @@ CSS3 = {
     };
     css += "}\n";
     return css;
-  },
-  selector_from: function(obj, index) {
-    var id = obj.name || 'item' + (index + 1);
-    return '#' + id;
   },
   css_from_text: function(obj, index){
     var text_css = this.selector_from(obj, index),
