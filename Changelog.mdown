@@ -1,3 +1,6 @@
+## 1.6.6 - 2010-12-10
+- Fixed a bug where Orange Commands wouldn't work properly when installed along other extensions.
+
 ## 1.6.5 - 2010-11-10
 - 62300167fe (Fixed a nasty bug, reported by @nachogil that happened when resizing items inside groups.)
 - 51a672b5d4 (FIXED: Pages » Numberize was numbering in reverse order. Fix by @inefable)
