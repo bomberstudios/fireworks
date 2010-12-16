@@ -63,17 +63,22 @@ Text.prototype.resize = function(w,h) {
     w = Math.round(w);
     h = Math.round(h);
     this.autoExpand = false;
-    this.rawWidth = w - 4; // amazingly stupid bug in Fireworks...
-    //this.rawHeight = h; // doesn't work, so we'll increase/decrease line-height
-    var offset = Math.round(h - this.height),
+
+    var offset = Math.round(h - Math.round(this.height)),
         leading = this.textRuns.initialAttrs.leading,
         leadingMode = this.textRuns.initialAttrs.leadingMode;
 
     if (leadingMode == 'percentage') {
       offset = offset/100;
     };
-    fw.getDocumentDOM().setTextLeading(leading + offset, leadingMode);
-  } else this.autoExpand = true;
+
+    this.rawWidth = w - 4; // amazingly stupid bug in Fireworks...
+    if (offset) {
+      fw.getDocumentDOM().setTextLeading(leading + offset, leadingMode);
+    };
+  } else {
+    this.autoExpand = true;
+  }
 };
 Object.prototype.is_group = function(){
   return (this == "[object Group]");
