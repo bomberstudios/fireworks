@@ -9,7 +9,7 @@ try {
 };
 
 if (fw.selection.length == 1) {
-  default_width = fw.selection[0].width;
+  default_width = Math.round(fw.selection[0].width);
 } else {
   default_width = 0;
 }

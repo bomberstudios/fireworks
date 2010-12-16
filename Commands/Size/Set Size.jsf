@@ -9,8 +9,8 @@ try {
 };
 
 if (fw.selection.length == 1) {
-  default_height = fw.selection[0].height;
-  default_width = fw.selection[0].width;
+  default_height = Math.round(fw.selection[0].height);
+  default_width = Math.round(fw.selection[0].width);
 } else {
   default_height = 0;
   default_width = 0;
