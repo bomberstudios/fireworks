@@ -5,42 +5,33 @@
 FwArray.prototype.clone = Array.prototype.clone = function(){
   return [].concat(this);
 };
-
-FwArray.prototype.each = Array.prototype.each = function(callback,traverse_groups){
-  Selection.forget();
-  if (traverse_groups == undefined) {
-    traverse_groups = true;
-  };
-  for (var i = this.length - 1; i >= 0; i--){
-    el = this[i];
-    if (el.is_group() && traverse_groups) {
-      el.each_in_group(callback);
-    } else {
-      callback.call(this,this[i]);
-      Selection.stored_selection.push(fw.selection[0]);
-    }
-  };
-  Selection.restore();
-};
-
 FwArray.prototype.each_with_index = Array.prototype.each_with_index = function(callback,traverse_groups){
   Selection.forget();
-  if (traverse_groups == undefined) {
-    traverse_groups = true;
-  };
+
   var count = 0;
   for (var i = this.length - 1; i >= 0; i--){
     el = this[i];
+    fw.selection = el;
+
+    switch (el.kind()) {
+      case 'autoshape':
+        traverse_groups = false;
+        break;
+      default:
+        traverse_groups |= true;
+    }
+
     if (el.is_group() && traverse_groups) {
       el.each_in_group(callback);
     } else {
-      callback.call(this,this[i],count);
+      callback.call(this,el,count);
       Selection.stored_selection.push(fw.selection[0]);
     }
     count++;
   };
   Selection.restore();
 };
+FwArray.prototype.each = Array.prototype.each = FwArray.prototype.each_with_index;
 
 Number.prototype.times = function(callback){
   for (var s = this - 1; s >= 0; s--){
@@ -101,24 +92,38 @@ Element.set_position = function(x,y){
   fw.selection = this;
   x = Math.round(x);
   y = Math.round(y);
-  if (this.is_text()){
-    this.rawLeft = x + 2;
-    this.rawTop = y + 2;
-  } else {
-    var x_offset = 0,
-        y_offset = 0;
 
-    if (this.pathAttributes.brush) {
-      if(this.pathAttributes.brushPlacement == 'outside') {
-        y_offset = this.pathAttributes.brush.diameter;
-      }
-      if(this.pathAttributes.brushPlacement == 'center') {
-        y_offset = Math.floor(this.pathAttributes.brush.diameter / 2);
-      }
-      x_offset = y_offset * 2;
-    };
-    this.left = x - x_offset;
-    this.top = y - y_offset;
+  switch (this.kind()) {
+    case 'text':
+      this.rawLeft = x + 2;
+      this.rawTop = y + 2;
+      break;
+    case 'image':
+      this.left = x;
+      this.top = y;
+      break;
+    case 'autoshape':
+      fw.getDocumentDOM().moveSelectionBy({x: x - this.left, y: y - this.top}, false, false);
+      break;
+    case 'element':
+      var x_offset = 0,
+          y_offset = 0;
+
+      if (this.pathAttributes.brush) {
+        if(this.pathAttributes.brushPlacement == 'outside') {
+          y_offset = this.pathAttributes.brush.diameter;
+        }
+        if(this.pathAttributes.brushPlacement == 'center') {
+          y_offset = Math.floor(this.pathAttributes.brush.diameter / 2);
+        }
+        x_offset = y_offset * 2;
+      };
+      this.left = x - x_offset;
+      this.top = y - y_offset;
+      break;
+    default:
+      // don't do anything for unknown objects...
+      break;
   }
 };
 
@@ -128,13 +133,15 @@ Element.is_symbol = function(){
 Element.is_text = function(){
   return (this.kind() == 'text');
 };
-Element.kind = function(){
+Object.prototype.kind = function(){
 
   if(this.smartShapeCode != undefined ) { return 'autoshape'; };
 
   if (this.__proto__ == Text.prototype ) { return 'text'; };
 
   if (this.__proto__ == Instance ) { return 'symbol'; };
+
+  if (this == "[object Image]") { return 'image'; };
 
   return 'element';
 };
@@ -388,7 +395,7 @@ Selection = {
     return Selection.get_bounds().bottom;
   },
   each: function(callback){
-    fw.selection.each(callback);
+    [].concat(fw.selection).each(callback);
   },
   save: function(){
     this.stored_selection = fw.selection.clone();
