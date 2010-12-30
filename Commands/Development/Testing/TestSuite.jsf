@@ -249,7 +249,15 @@ test('Position',function(){
   run_command('Position','Set Position');
   assert_equal('set_position works properly for objects with border', fw.selection[0].left, 100);
 
-  // Position works properly for text objects
+  // TODO: Position works properly for text objects
+
+  // Position works for bitmap objects
+  fw.getDocumentDOM().selectAll();
+  fw.getDocumentDOM().flattenSelection();
+  prompt_return = '130,100';
+  run_command('Position','Set Position');
+  assert_equal('set_position works properly for bitmaps', fw.selection[0].left, 130);
+
 });
 
 // Properties: DONE
