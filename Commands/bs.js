@@ -18,7 +18,10 @@ FwArray.prototype.each_with_index = Array.prototype.each_with_index = function(c
         traverse_groups = false;
         break;
       default:
-        traverse_groups |= true;
+        if (traverse_groups == undefined) {
+          traverse_groups = true;
+        }
+        break;
     }
 
     if (el.is_group() && traverse_groups) {
@@ -99,6 +102,7 @@ Element.set_position = function(x,y){
       this.rawTop = y + 2;
       break;
     case 'image':
+    case 'group':
       this.left = x;
       this.top = y;
       break;
@@ -136,6 +140,8 @@ Element.is_text = function(){
 Object.prototype.kind = function(){
 
   if(this.smartShapeCode != undefined ) { return 'autoshape'; };
+
+  if (this.elements) { return 'group'; };
 
   if (this.__proto__ == Text.prototype ) { return 'text'; };
 

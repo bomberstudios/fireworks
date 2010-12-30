@@ -17,7 +17,7 @@ if (s) {
   var x = s.split(",")[0];
   var y = s.split(",")[1];
 
-  Selection.each(function(o) {
+  fw.selection.clone().each(function(o) {
     o.set_position(eval(x),eval(y));
-  });
+  }, false);
 };
