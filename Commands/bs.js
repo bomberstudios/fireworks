@@ -8,7 +8,9 @@ FwArray.prototype.clone = Array.prototype.clone = function(){
 FwArray.prototype.each_with_index = Array.prototype.each_with_index = function(callback,traverse_groups){
   Selection.forget();
 
-  var count = 0;
+  var count = 0,
+      groups = 0;
+
   for (var i = this.length - 1; i >= 0; i--){
     el = this[i];
     fw.selection = el;
@@ -17,6 +19,8 @@ FwArray.prototype.each_with_index = Array.prototype.each_with_index = function(c
       case 'autoshape':
         traverse_groups = false;
         break;
+      case 'group':
+        groups++;
       default:
         if (traverse_groups == undefined) {
           traverse_groups = true;
@@ -33,6 +37,9 @@ FwArray.prototype.each_with_index = Array.prototype.each_with_index = function(c
     count++;
   };
   Selection.restore();
+  if (groups > 0) {
+    fw.getDocumentDOM().selectParents();
+  };
 };
 FwArray.prototype.each = Array.prototype.each = FwArray.prototype.each_with_index;
 

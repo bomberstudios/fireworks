@@ -385,7 +385,7 @@ test('Text boxes are resized properly', function(){
   run_command('Size', 'Width +10');
   fw.selection.each_with_index(function(textbox,index){
     assert_equal('Text box ' + index + ' is resized when grouped', textbox.width, 124); // stupid Fireworks
-  });
+  },true);
 });
 
 // Text
