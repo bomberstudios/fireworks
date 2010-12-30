@@ -7,6 +7,7 @@
   TODO:
   - use test files for heavyweight stuff (400 elements resize, 6000x6000 canvas...)
     - fw.openDocument(fileURL string or array);
+  - test text-box vertical resizing
   - test all commands
 */
 
@@ -112,11 +113,27 @@ test( 'Align commands: Space', function(){
 
 // Alpha: DONE
 test( 'Alpha commands', function(){
-  [10,20,30,40,50,60,70,80,90,100].each(function(alpha){
-    run_command("Alpha","Alpha "+alpha);
-    // This is a *very* bad test, but that's just because Fireworks does some funky stuff with opacity...
-    assert_equal( 'Alpha ' + alpha + ' works', Math.round(fw.selection[0].opacity),alpha);
-  });
+  // This is a *very* bad test, but that's just because Fireworks does some funky stuff with opacity...
+  run_command("Alpha","Alpha 10");
+  assert_equal( 'Alpha 10 works', Math.round(fw.selection[0].opacity),10);
+  run_command("Alpha","Alpha 20");
+  assert_equal( 'Alpha 20 works', Math.round(fw.selection[0].opacity),20);
+  run_command("Alpha","Alpha 30");
+  assert_equal( 'Alpha 30 works', Math.round(fw.selection[0].opacity),30);
+  run_command("Alpha","Alpha 40");
+  assert_equal( 'Alpha 40 works', Math.round(fw.selection[0].opacity),40);
+  run_command("Alpha","Alpha 50");
+  assert_equal( 'Alpha 50 works', Math.round(fw.selection[0].opacity),50);
+  run_command("Alpha","Alpha 60");
+  assert_equal( 'Alpha 60 works', Math.round(fw.selection[0].opacity),60);
+  run_command("Alpha","Alpha 70");
+  assert_equal( 'Alpha 70 works', Math.round(fw.selection[0].opacity),70);
+  run_command("Alpha","Alpha 80");
+  assert_equal( 'Alpha 80 works', Math.round(fw.selection[0].opacity),80);
+  run_command("Alpha","Alpha 90");
+  assert_equal( 'Alpha 90 works', Math.round(fw.selection[0].opacity),90);
+  run_command("Alpha","Alpha 100");
+  assert_equal( 'Alpha 100 works', Math.round(fw.selection[0].opacity),100);
 });
 
 
