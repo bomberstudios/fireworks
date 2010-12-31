@@ -7,7 +7,7 @@ require "erb"
 require 'fileutils'
 require 'lib/library'
 
-ORANGE_COMMANDS_VERSION = "1.6.6"
+ORANGE_COMMANDS_VERSION = "1.6.7"
 DOWNLOAD_SERVER = "http://orangecommands.com/dl/"
 @fw_versions = ["CS3","CS4","CS5"]
 # @fw_versions = ["CS3","CS5"]
@@ -119,14 +119,19 @@ task :release do
   end
 end
 
-task :default => [ :clean, :shortcuts, :readme, :about, :mxi, :mxp, :pack ]
+task :normal => [ :clean, :shortcuts, :readme, :about, :mxi, :mxp, :pack ] do
+  puts "Orange Commands #{ORANGE_COMMANDS_VERSION} ready"
+end
 
-task :pro => [:about_pro, :default]
+task :pro    => [ :clean, :shortcuts, :readme, :about_pro, :about, :mxi, :mxp, :pack ] do
+  puts "Orange Commands Pro #{ORANGE_COMMANDS_VERSION} ready"
+end
+
 
 task :install do
-  system("rsync -azv Commands \"/Applications/Adobe\ Fireworks\ CS3/Configuration/\" --exclude='Development' --exclude='*.md'")
-  system("rsync -azv Commands \"/Applications/Adobe\ Fireworks\ CS4/Configuration/\" --exclude='Development' --exclude='*.md'")
-  system("rsync -azv Commands \"/Applications/Adobe\ Fireworks\ CS5/Configuration/\" --exclude='Development' --exclude='*.md'")
+  system("rsync -azv Commands \"/Applications/Adobe\ Fireworks\ CS3/Configuration/\" --exclude='*.md'")
+  system("rsync -azv Commands \"/Applications/Adobe\ Fireworks\ CS4/Configuration/\" --exclude='*.md'")
+  system("rsync -azv Commands \"/Applications/Adobe\ Fireworks\ CS5/Configuration/\" --exclude='*.md'")
 end
 
 desc "Build docs"
