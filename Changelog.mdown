@@ -1,3 +1,10 @@
+## 1.6.7 - 2010-12-31
+- ad9d6d1372 (New command: Position » Swap)
+- ab894c3981 (FIXED: Position commands do not work properly for objects with border)
+- 0148a5ed55 (New feature: vertical size commands now modify line-height when applied to text boxes)
+- 3f2fdb7733 (Fix bitmap object positioning bug)
+- 8cc43296bd (Properly restore selections when you are editing groups.)
+
 ## 1.6.6 - 2010-12-10
 - Fixed a bug where Orange Commands wouldn't work properly when installed along other extensions.
 
