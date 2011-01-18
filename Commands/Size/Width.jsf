@@ -13,7 +13,7 @@ if (fw.selection.length == 1) {
 } else {
   default_width = 0;
 }
-var w = prompt("Object Width (pixels; 0 for auto)",default_width);
+var w = prompt("Object Width in Pixels:\n(You can use math operations, use 0 for auto-width in text boxes)",default_width);
 
 fw.selection.each_with_index(function(o,i) {
   o.resize(eval(w),o.height);

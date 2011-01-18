@@ -16,7 +16,7 @@ if (fw.selection.length == 1) {
   default_width = 0;
 }
 
-var s = prompt("Object Size in Pixels",default_width+","+default_height);
+var s = prompt("Object Size in Pixels:\n(You can use math operations)",default_width+","+default_height);
 if ( s ) {
   var w = s.split(",")[0];
   var h = s.split(",")[1];

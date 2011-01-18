@@ -12,7 +12,7 @@ try {
 default_x = Math.round(fw.selection[0].left);
 default_y = Math.round(fw.selection[0].top);
 
-var s = prompt("New position:",default_x+","+default_y);
+var s = prompt("Enter the new position in x,y format:\n(You can use math operations)",default_x+","+default_y);
 if (s) {
   var x = s.split(",")[0];
   var y = s.split(",")[1];
