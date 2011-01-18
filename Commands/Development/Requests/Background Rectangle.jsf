@@ -1,7 +1,3 @@
-var width = fw.getDocumentDOM().width,
-    height = fw.getDocumentDOM().height,
-    bg = fw.getDocumentDOM().backgroundColor;
-
-fw.getDocumentDOM().setFillNColor({ category:"fc_Solid", ditherColors:[ "#000000", "#000000" ], edgeType:"hard", feather:0, gradient:null, name:"fn_Normal", pattern:null, shape:"solid", stampingMode:"blend", textureBlend:0, webDitherTransparent:false }, bg);
-fw.getDocumentDOM().addNewRectanglePrimitive({left:0, top:0, right:width, bottom:height}, 0);
+fw.getDocumentDOM().addNewRectanglePrimitive({left:0, top:0, right:fw.getDocumentDOM().width, bottom:fw.getDocumentDOM().height}, 0);
+fw.getDocumentDOM().setFillNColor({ category:"fc_Solid", ditherColors:[ "#000000", "#000000" ], edgeType:"hard", feather:0, gradient:null, name:"fn_Normal", pattern:null, shape:"solid", stampingMode:"blend", textureBlend:0, webDitherTransparent:false }, fw.getDocumentDOM().backgroundColor);
 fw.getDocumentDOM().arrange("back");
