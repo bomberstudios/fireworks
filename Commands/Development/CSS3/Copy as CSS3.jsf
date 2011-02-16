@@ -238,7 +238,7 @@ CSS3 = {
     // line height
     var line_height = "";
     if (attr.leadingMode == 'percentage') {
-      line_height = attr.leading * 100 + '%';
+      line_height = Math.round(attr.leading * 100) + '%';
     } else {
       line_height = attr.leading + 'px';
     };
