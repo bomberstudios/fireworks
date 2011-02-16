@@ -585,7 +585,7 @@ Color = {
 
     // Alpha
     if (a.length == 3) {
-      alpha = 1;
+      return hexstr;
     } else if (a[3] == 0) {
       alpha = 0;
     } else {
