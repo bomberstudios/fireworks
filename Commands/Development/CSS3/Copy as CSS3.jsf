@@ -212,7 +212,7 @@ CSS3 = {
     text_css += sprintf('  font-family: %s;\n', attr.face);
 
     // size
-    text_css += sprintf('  font-size: %s;\n', attr.size);
+    text_css += sprintf('  font-size: %s;\n', attr.size.replace('pt','px'));
 
     // weight
     if (attr.bold == 'true') {
