@@ -570,6 +570,9 @@ Color = {
     } else if (hexstr.length == 6 || hexstr.length == 8) {
       a = hexstr.match(/(\w{2})/g);
     }
+    if (a.length == 3) {
+      return '#' + hexstr;
+    }
     for (i = a.length - 1; i >= 0; i--){
       if (a[i].length == 2) {
         a[i] = parseInt(a[i], 16);
@@ -584,9 +587,7 @@ Color = {
     b = a[2];
 
     // Alpha
-    if (a.length == 3) {
-      return hexstr;
-    } else if (a[3] == 0) {
+    if (a[3] == 0) {
       alpha = 0;
     } else {
       alpha =  Math.round((a[3] / parseInt('ff',16))*100) / 100;
