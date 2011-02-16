@@ -93,7 +93,7 @@ CSS3 = {
     }
 
     // opacity
-    var opacity = sel.opacity / 100;
+    var opacity = Math.round(sel.opacity) / 100;
 
     // border-radius
     if (sel.roundness) {
