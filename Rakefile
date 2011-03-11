@@ -7,9 +7,9 @@ require "erb"
 require 'fileutils'
 require 'lib/library'
 
-ORANGE_COMMANDS_VERSION = "1.6.7"
+ORANGE_COMMANDS_VERSION = "1.7-dev"
 DOWNLOAD_SERVER = "http://orangecommands.com/dl/"
-@fw_versions = ["CS3","CS4","CS5"]
+@fw_versions = ["CS3","CS4","CS5", "CS5.1"]
 # @fw_versions = ["CS3","CS5"]
 @orangecommands = FW::Library.new 'Commands'
 @pro = false
@@ -132,6 +132,7 @@ task :install do
   system("rsync -azv Commands \"/Applications/Adobe\ Fireworks\ CS3/Configuration/\" --exclude='*.md'")
   system("rsync -azv Commands \"/Applications/Adobe\ Fireworks\ CS4/Configuration/\" --exclude='*.md'")
   system("rsync -azv Commands \"/Applications/Adobe\ Fireworks\ CS5/Configuration/\" --exclude='*.md'")
+  system("rsync -azv Commands \"/Applications/Adobe\ Fireworks\ CS5.1/Configuration/\" --exclude='*.md'")
 end
 
 desc "Build docs"
@@ -162,7 +163,12 @@ namespace :test do
     run_test 'CS5'
   end
 
-  task :all => [:install, :cs3, :cs4, :cs5]
+  desc 'Test in Fireworks CS5.1 only'
+  task :cs51 => :install do
+    run_test 'CS5.1'
+  end
+
+  task :all => [:install, :cs3, :cs4, :cs5, :cs51]
 end
 
 desc 'Run Test Suite'
