@@ -8,7 +8,7 @@ try {
 };
 
 if (fw.selection.length > 0) {
-  var spacing = prompt("Horizontal spacing:",10);
+  var spacing = orangecommands.params || prompt("Horizontal spacing:",10);
   function sort_by_position(a,b){
     return a.left - b.left;
   }

@@ -1,5 +1,24 @@
 // bs.js Library
 // a collection of (hopefully) useful tools for Fireworks
+var orangecommands = orangecommands || {
+  VERSION: "1.7-dev",
+  params: null,
+  run: function(kind, command, params) {
+    // Reset params
+    orangecommands.params = null;
+    // runs a command with the specified parameters
+    try {
+      var f = fw.appJsCommandsDir + "/" + kind + "/" + encodeURIComponent(command) + ".jsf";
+      if (params != undefined) {
+        orangecommands.params = params;
+      };
+      fw.runScript(f);
+      orangecommands.params = null;
+    } catch (exception) {
+      alert("Error running command " + kind + "/" + command + ".\n" + [exception, exception.lineNumber, exception.fileName].join("\n"));
+    }
+  }
+};
 
 // Utility methods
 FwArray.prototype.clone = Array.prototype.clone = function(){
@@ -12,7 +31,7 @@ FwArray.prototype.each_with_index = Array.prototype.each_with_index = function(c
       groups = 0;
 
   for (var i = this.length - 1; i >= 0; i--){
-    el = this[i];
+    var el = this[i];
     fw.selection = el;
 
     switch (el.kind()) {

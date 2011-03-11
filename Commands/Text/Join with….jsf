@@ -8,7 +8,7 @@ try {
   alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
 };
 
-var join_string = prompt("Join with: ", '');
+var join_string = orangecommands.params || prompt("Join with: ", '');
 
 if (join_string) {
   Selection.join(join_string);

@@ -9,7 +9,7 @@ try {
   alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
 };
 
-var folder_name = fw.browseForFolderURL("Choose an export folder",null);
+var folder_name = orangecommands.params || fw.browseForFolderURL("Choose an export folder",null);
 
 fw.documents.each(function(current_document){
   docu = fw.findOpenDocument(current_document.filePathForSave);

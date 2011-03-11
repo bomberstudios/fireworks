@@ -8,7 +8,7 @@ try {
   alert("This command requires the bs.js library\rGet it at http://github.com/bomberstudios/fireworks/");
 };
 
-var bullet_string = prompt("Bullet with: ", '\u2022');
+var bullet_string = orangecommands.params || prompt("Bullet with: ", '\u2022');
 
 Selection.each(function(t){
   var merged_text = {};

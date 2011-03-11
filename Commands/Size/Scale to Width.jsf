@@ -13,7 +13,7 @@ if (fw.selection.length == 1) {
 } else {
   default_width = 0;
 }
-var w = prompt("Scale to Width",default_width);
+var w = orangecommands.params || prompt("Scale to Width",default_width);
 
 fw.selection.each_with_index(function(o,i) {
   var new_width  = eval(w);

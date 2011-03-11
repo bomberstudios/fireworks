@@ -2,9 +2,13 @@
 /**DOC**
 Sets the height of the canvas.
 **DOC**/
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://github.com/bomberstudios/fireworks/");
+};
 
-var default_height = fw.getDocumentDOM().height;
-
-var h = prompt("Canvas height in pixels",default_height);
+var default_height = fw.getDocumentDOM().height,
+    h = orangecommands.params || prompt("Canvas height in pixels",default_height);
 
 fw.getDocumentDOM().setDocumentCanvasSize({left:0, top:0, right:fw.getDocumentDOM().width, bottom:eval(h)}, true);

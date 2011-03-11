@@ -2,13 +2,16 @@
 /**DOC**
 Sets the size of the canvas.
 **DOC**/
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://github.com/bomberstudios/fireworks/");
+};
 
-var default_width = fw.getDocumentDOM().width;
-var default_height = fw.getDocumentDOM().height;
-
-var s = prompt("Canvas size in pixels",default_width + "," + default_height);
-
-var w = s.split(",")[0];
-var h = s.split(",")[1];
+var default_width = fw.getDocumentDOM().width,
+    default_height = fw.getDocumentDOM().height,
+    s = orangecommands.params || prompt("Canvas size in pixels",default_width + "," + default_height),
+    w = s.split(",")[0],
+    h = s.split(",")[1];
 
 fw.getDocumentDOM().setDocumentCanvasSize({left:0, top:0, right:eval(w), bottom: eval(h)}, true);

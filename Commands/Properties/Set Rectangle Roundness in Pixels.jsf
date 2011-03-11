@@ -9,8 +9,9 @@ try {
   alert("This command requires the bs.js library\rGet it at http://github.com/bomberstudios/fireworks/");
 };
 
-var sel = fw.selection[0];
-var border_radius = 0;
+var sel = fw.selection[0],
+    border_radius = 0;
+
 if (sel.roundness) {
   if(sel.mode == 'exact') {
     border_radius = sel.roundness;
@@ -19,7 +20,7 @@ if (sel.roundness) {
   }
 };
 
-var roundness_in_pixels = prompt("Set rectangle roundness in pixels:",Math.round(border_radius));
+var roundness_in_pixels = orangecommands.params || prompt("Set rectangle roundness in pixels:",Math.round(border_radius));
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");
 } catch(e){
@@ -32,13 +33,13 @@ try {
     if(fw.appName.indexOf('CS5') != -1) {
       fw.getDocumentDOM().setRectRoundness(roundness_in_pixels, 'exact');
     } else {
-      var w = Selection.width();
-      var h = Selection.height();
+      var w = Selection.width(),
+          h = Selection.height();
       if(h < w){
         w = h;
       }
-      var percentage_of_total_width = roundness_in_pixels*100/w;
-      var roundness = percentage_of_total_width*2;
+      var percentage_of_total_width = roundness_in_pixels*100/w,
+          roundness = percentage_of_total_width*2;
       fw.getDocumentDOM().setRectRoundness(roundness/100);
     }
   });

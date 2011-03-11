@@ -10,5 +10,5 @@ try {
   alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
 };
 
-choice = fw.popupColorPickerOverMouse("#00000000", true, false);
+var choice = orangecommands.params || fw.popupColorPickerOverMouse("#00000000", true, false);
 fw.getDocumentDOM().setDocumentCanvasColor(choice);

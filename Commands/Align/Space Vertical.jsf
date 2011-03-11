@@ -8,7 +8,7 @@ try {
 };
 
 if (fw.selection.length > 0) {
-  var spacing = prompt("Vertical spacing:",10);
+  var spacing = orangecommands.params || prompt("Vertical spacing:",10);
   function sort_by_vertical_position(a,b){
     return a.top - b.top;
   }
