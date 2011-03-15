@@ -13,7 +13,7 @@ var folder_name = fw.browseForFolderURL("Choose an export folder",null);
 
 Pages.each(function(){
   var export_file_name = fw.getDocumentDOM().pageName;
-  var export_file_path =  folder_name + "/" + export_file_name + ".png";
+  var export_file_path =  Files.makePathFromDirAndFile(folder_name, export_file_name + ".png");
   if (fw.getDocumentDOM().hasMasterPage() && fw.getDocumentDOM().currentPageNum == 0) {
     // don't export master page
   } else {
