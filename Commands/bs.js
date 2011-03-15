@@ -231,7 +231,7 @@ User = {
 
 Document = {
   path: function(){
-    return fw.getDocumentPath(null).split(escape(fw.getDocumentDOM().docTitleWithoutExtension))[0];
+    return Files.getDirectory(fw.getDocumentPath(null)) + "/";
   },
   dump: function(){
     var filePath = fw.userJsCommandsDir;
