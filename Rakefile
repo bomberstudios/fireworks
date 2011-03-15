@@ -144,7 +144,7 @@ task :readme do
 end
 
 def run_test version
-  %x(open -ga "/Applications/Adobe\ Fireworks\ #{version}/Adobe\ Fireworks\ #{version}.app" Commands/Development/Testing/TestSuite.jsf)
+  %x(open Commands/Development/Testing/TestSuite.jsf -a "Adobe Fireworks #{version}.app")
 end
 
 namespace :test do
@@ -164,7 +164,7 @@ namespace :test do
   end
 
   desc 'Test in Fireworks CS5.1 only'
-  task :cs51 => :install do
+  task :cs51 do
     run_test 'CS5.1'
   end
 
