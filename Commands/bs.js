@@ -548,17 +548,9 @@ Pages = {
   vertical_trim: function(){
     var doc = fw.getDocumentDOM(),
         l = doc.layers.length - 1;
+    doc.setElementLocked(-1, -1, -1, false, true, false); // unlock everything
     for (l; l >= 0; l--){
       doc.selectAllOnLayer(l,true,false);
-      // Here be dragons.
-      // Now, *this* is a perfect example of why Fireworks seems to be
-      // coded by a bunch of drunk monkeys. If you don't add the "lock everything"
-      // line, the command works *but* if you UNDO it, *everything* will be locked
-      // regardless of its original state. I wish my prose would be as cool as to
-      // allow me to say something like <http://twitter.com/pieratt/status/5238194652>
-      // but the best I can muster is a simple "Adobe, fuck you".
-      doc.setElementLocked(-1, -1, -1, true, true, true); // lock everything
-      doc.setElementLocked(-1, -1, -1, false, true, false); // unlock everything
     }
     var doc_height = Selection.bottom();
     doc.setDocumentCanvasSize({left:0, top: 0, right: doc.width, bottom: doc_height}, true);
