@@ -220,8 +220,8 @@ function benchmark(func){
 
 User = {
   getLanguage: function(){
-    var tmp = Files.getLanguageDirectory().split("/");
-    var lang = ((tmp[tmp.length-1]).substr(0,2)).toLowerCase();
+    var tmp = Files.getLanguageDirectory().split("/"),
+        lang = ((tmp[tmp.length-1]).substr(0,2)).toLowerCase();
     return lang;
   },
   getJSDir: function(){
@@ -234,8 +234,9 @@ Document = {
     return Files.getDirectory(fw.getDocumentPath(null)) + "/";
   },
   dump: function(){
-    var filePath = fw.userJsCommandsDir;
-    var fileName = fw.getDocumentDOM().docTitleWithoutExtension;
+    var filePath = fw.userJsCommandsDir,
+        fileName = fw.getDocumentDOM().docTitleWithoutExtension;
+
     if(fileName == ""){
       fileName = "untitled";
     }
@@ -279,12 +280,10 @@ Guides = {
     // function (where we delete a guide by clearing all guides and
     // then re-creating all the original guides except the one we
     // wanted to delete...)
-    var current_v_guides = fw.getDocumentDOM().guides.vGuides;
-    var current_h_guides = fw.getDocumentDOM().guides.hGuides;
-    var current_guides = {
-      vGuides: [],
-      hGuides: []
-    };
+    var current_v_guides = fw.getDocumentDOM().guides.vGuides,
+        current_h_guides = fw.getDocumentDOM().guides.hGuides,
+        current_guides = { vGuides: [], hGuides: [] };
+
     for (var i = current_v_guides.length - 1; i >= 0; i--){
       current_guides.vGuides.push(current_v_guides[i]);
     }
@@ -327,22 +326,19 @@ Guides = {
   },
   vertical_grid: function(grid_width,number_of_columns,gutter_width){
 
-    var doc = fw.getDocumentDOM();
+    var doc = fw.getDocumentDOM(),
+        sel = doc.getSelectionBounds(),
+        start_position;
 
-    // Check if there's an object selected, and use its position as the starting position
-    sel = doc.getSelectionBounds();
-    var start_position;
     if(sel){
       start_position = Math.floor(sel.left);
     } else {
       start_position = 0;
     }
   
-    var guide_position = start_position;
-    var last_guide_position = 0;
-
-    // Calculate column width
-    var column_width = Math.floor(( grid_width - ( (number_of_columns - 1) * gutter_width ) ) / number_of_columns);
+    var guide_position = start_position,
+        last_guide_position = 0,
+        column_width = Math.floor(( grid_width - ( (number_of_columns - 1) * gutter_width ) ) / number_of_columns);
 
     // Make sure the guides are visible
     doc.setShowGuides(true);
@@ -362,19 +358,17 @@ Guides = {
     }
   },
   horizontal_grid: function(grid_width,number_of_columns,gutter_width){
-    var doc = fw.getDocumentDOM();
-    // Check if there's an object selected, and use its position as the starting position
-    var sel = doc.getSelectionBounds();
-    var start_position;
+    var doc = fw.getDocumentDOM(),
+        sel = doc.getSelectionBounds(),
+        start_position;
+
     if(sel){
       start_position = sel.top;
     } else {
       start_position = 0;
     }
-    var guide_position = start_position;
-
-    // Calculate column width
-    var column_width = Math.floor(( grid_width - ( (number_of_columns - 1) * gutter_width ) ) / number_of_columns);
+    var guide_position = start_position,
+        column_width = Math.floor(( grid_width - ( (number_of_columns - 1) * gutter_width ) ) / number_of_columns);
 
     // Make sure the guides are visible
     doc.setShowGuides(true);
@@ -399,7 +393,7 @@ Selection = {
     return fw.getDocumentDOM().getSelectionBounds();
   },
   width: function(){
-    sel = Selection.get_bounds();
+    var sel = Selection.get_bounds();
     if(sel){
       return (sel.right - sel.left);
     } else {
@@ -552,8 +546,8 @@ Pages = {
     }
   },
   vertical_trim: function(){
-    var doc = fw.getDocumentDOM();
-    var l = doc.layers.length - 1;
+    var doc = fw.getDocumentDOM(),
+        l = doc.layers.length - 1;
     for (l; l >= 0; l--){
       doc.selectAllOnLayer(l,true,false);
       // Here be dragons.
