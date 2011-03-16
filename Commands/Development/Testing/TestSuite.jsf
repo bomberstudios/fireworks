@@ -497,3 +497,5 @@ var folder_name = year + month + day + hour + minute + seconds + milliseconds;
 File.create(test_output, oc_folder + '/logs/test_' + folder_name + '_' + fw.appName.replace(' ','-') + '.txt');
 
 fw.closeDocument(empty_doc,false);
+
+alert(msg);
