@@ -30,7 +30,7 @@ FwArray.prototype.each_with_index = Array.prototype.each_with_index = function(c
   var count = 0,
       groups = 0;
 
-  for (var i = this.length - 1; i >= 0; i--){
+  for (var i = 0; i < this.length; i++){
     var el = this[i];
     fw.selection = el;
 
@@ -68,7 +68,7 @@ Number.prototype.times = function(callback){
   };
 };
 Element.each_in_group = function(callback){
-  for (var e = this.elements.length - 1; e >= 0; e--){
+  for (var e = 0; e < this.elements.length; e++){
     if (this.elements[e].is_group()) {
       this.elements[e].each_in_group(callback);
     } else {
@@ -109,12 +109,14 @@ Element.resize = function(w,h){
   //};
   if(isNaN(w) || isNaN(h)) return;
   fw.selection = this;
-  // Round numbers, because half pixels suck big time
+
+  // Old method: more precise, but slow & crashy
   //var x_pos = Math.round(this.left);
   //var y_pos = Math.round(this.top);
+  //fw.getDocumentDOM().setSelectionBounds({left:x_pos,top:y_pos,right:(x_pos + w),bottom:(y_pos + h)},"autoTrimImages transformAttributes");
+
   w = Math.round(w);
   h = Math.round(h);
-  //fw.getDocumentDOM().setSelectionBounds({left:x_pos,top:y_pos,right:(x_pos + w),bottom:(y_pos + h)},"autoTrimImages transformAttributes");
   fw.getDocumentDOM().resizeSelection(w,h);
 };
 Element.set_position = function(x,y){
@@ -454,7 +456,7 @@ Selection = {
     text_fields.sort(Sort.by_x);
     text_fields.sort(Sort.by_y);
     text_fields.each(function(t){
-      for (var i = t.textRuns.textRuns.length - 1; i >= 0; i--){
+      for (var i = 0; i < t.textRuns.textRuns.length; i++){
         var current_text_run = t.textRuns.textRuns[i];
         if (i == t.textRuns.textRuns.length - 1) {
           current_text_run.characters += delimiter;
@@ -539,8 +541,8 @@ Pages = {
     }
   },
   each: function(callback){
-    var i = Pages.count() - 1;
-    for (i; i >= 0; i--){
+    var p = Pages.count();
+    for (var i=0; i < p; i++){
       fw.getDocumentDOM().changeCurrentPage(i);
       callback.call(this,i);
     }

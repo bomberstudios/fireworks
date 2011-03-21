@@ -5,4 +5,4 @@ var page_list = [];
 Pages.each(function() {
   page_list.push(fw.getDocumentDOM().pageName);
 });
-fw.getDocumentDOM().clipCopyJsToExecute(page_list.reverse().join('\n'));
+fw.getDocumentDOM().clipCopyJsToExecute(page_list.join('\n'));
