@@ -17,9 +17,9 @@ function pad_number(n){
 }
 
 try {
-  var i = fw.getDocumentDOM().pagesCount;
+  var i = 1;
   if (fw.getDocumentDOM().hasMasterPage()) {
-    i = i-1; // we don't want to number the master page...
+    i = 0; // we don't want to number the master page...
   };
   Pages.each(function(){
     var current_pagename = fw.getDocumentDOM().pageName;
@@ -30,7 +30,7 @@ try {
     } else {
       fw.getDocumentDOM().setPageName(fw.getDocumentDOM().currentPageNum, pad_number(i) + "_" + current_pagename);
     }
-    i--;
+    i++;
   });
 } catch(e){
   alert("Something went terribly wrong...");

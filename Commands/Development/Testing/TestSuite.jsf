@@ -109,6 +109,7 @@ test('Test Suite runs setup', function(){
 assert_equal('Test Suite runs teardown', fw.selection.length,0);
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // API
 test('Array extensions are defined', function(){
   assert_equal( 'Array.clone is defined', typeof(fw.selection.clone), "function" );
@@ -140,7 +141,8 @@ test('Array extensions work', function(){
 });
 
 
-// Align: DONE
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Align
 test( 'Align commands: Center', function(){
 
   fw.getDocumentDOM().selectAll();
@@ -186,10 +188,12 @@ test( 'Align commands: Space', function(){
   fw.getDocumentDOM().selectAll();
   orangecommands.run('Align','Space Vertical', 10);
   assert_equal('Elements are spaced vertically',Selection.height(),430);
+
 });
 
 
-// Alpha: DONE
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Alpha
 test( 'Alpha commands', function(){
   // This is a *very* bad test, but that's just because Fireworks does some funky stuff with opacity...
   orangecommands.run("Alpha","Alpha 10");
@@ -215,7 +219,8 @@ test( 'Alpha commands', function(){
 });
 
 
-// Canvas: DONE
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Canvas
 test( 'Canvas', function(){
   orangecommands.run("Canvas","Canvas Width", 110);
   assert_equal('Canvas Width is 110', fw.getDocumentDOM().width, 110);
@@ -227,6 +232,7 @@ test( 'Canvas', function(){
 });
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Color
 test('Color',function(){
   orangecommands.run('Color','Canvas Color', '#00ff00');
@@ -244,6 +250,7 @@ test('Color',function(){
 });
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Effects
 // No idea how I should test these, so I just basically run them all and expect Fireworks not to explode
 // Bombs in CS3
@@ -270,32 +277,23 @@ test('Effects: Repeat Vertical', function(){
 });
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Export
-test('Export',function(){
+test('Export: All Pages as PNG24 in',function(){
+
   orangecommands.run('Pages','Add Page');
 
   prompt_folder = oc_folder + '/tmp';
   Files.deleteFileIfExisting(prompt_folder);
   Files.createDirectory(prompt_folder);
 
-  //orangecommands.run('Export','All Pages as PNG 24 in…');
-  // Command can't be tested with its current name, so we copy & paste the code here :/
-  var folder_name = fw.browseForFolderURL("Choose an export folder",null);
-
-  Pages.each(function(){
-    var export_file_name = fw.getDocumentDOM().pageName;
-    var export_file_path =  folder_name + "/" + export_file_name + ".png";
-    if (fw.getDocumentDOM().hasMasterPage() && fw.getDocumentDOM().currentPageNum == 0) {
-      // don't export master page
-    } else {
-      Document.export_in(export_file_path);
-    }
-  });
-
+  orangecommands.run('Export','All Pages as PNG 24 in');
   assert_equal('All pages are exported', Files.enumFiles(prompt_folder).length, 2);
+
 });
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Export Settings
 test('Export Settings',function(){
   // TODO: check all pages in multipage document
@@ -303,10 +301,16 @@ test('Export Settings',function(){
   assert_equal('PNG is set as export setting for all pages', fw.getDocumentDOM().exportOptions.exportFormat, 'PNG');
 });
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Grids
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Guides
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Pages
 // tests: numbers are added in the correct order (actually fixed in 51a672b5d4 (FIXED: Pages » Numberize was numbering in reverse order, due to the changes in ad324885b5 (Use inverse loops everywhere). Fix by @inefable))
 // This test seems to bomb CS3
@@ -498,4 +502,4 @@ File.create(test_output, oc_folder + '/logs/test_' + folder_name + '_' + fw.appN
 
 fw.closeDocument(empty_doc,false);
 
-alert(msg);
+//alert(msg);

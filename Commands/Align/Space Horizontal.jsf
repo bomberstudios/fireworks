@@ -15,7 +15,7 @@ if (fw.selection.length > 0) {
 
   var position = Selection.left();
 
-  Selection.each(function(item){
+  fw.selection.clone().sort(sort_by_position).each(function(item){
     item.set_position(position, item.top);
     position = item.left + item.width + spacing;
   });
