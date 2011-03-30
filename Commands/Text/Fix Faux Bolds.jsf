@@ -1,0 +1,77 @@
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e) {
+  alert("This command requires the bs.js library\rGet it at http://github.com/bomberstudios/fireworks/");
+};
+
+if (fw.appName.indexOf('CS3') != -1 ) {
+  alert("This command is only needed in Fireworks CS4 and CS5");
+} else {
+
+  orangecommands.run('Select', 'Text Objects');
+
+  var replacements = 0;
+
+  function bold(font) {
+    if (font == 'ArialMT') {
+      return { bold: false, face: 'Arial-BoldMT' };
+    } else {
+      // We should check if the font has a bold weight...
+      var bolded = font + '-Bold';
+      // Add a test text box
+      fw.getDocumentDOM().addNewText({left:0, top:0, right:100, bottom:20}, true);
+      fw.getDocumentDOM().setTextRuns({ initialAttrs:{ face: bolded }, textRuns:[ { changedAttrs:{  }, characters:"fafdsfadsfasdfads" } ] });
+      var face = fw.selection[0].textRuns.initialAttrs.face;
+      fw.getDocumentDOM().deleteSelection(false);
+
+      if (face == bolded) {
+        return { bold: false, face: bolded };
+      } else {
+        return { bold: true, face: font };
+      }
+    }
+  }
+
+  fw.selection.clone().each(function(item) {
+    // Fix text blocks that only have bold text
+    if (item.textRuns.initialAttrs.bold && (item.font.indexOf('Bold') == -1) && item.textRuns.textRuns.length == 1) {
+      fw.selection = item;
+      var bolded = bold(item.font);
+      if (bolded.bold) {
+        // do nothing
+      } else {
+        fw.getDocumentDOM().removeCharacterMarkup("b");
+        fw.getDocumentDOM().applyFontMarkup("face", bolded.face);
+      }
+      replacements++;
+    } else {
+      // Fix individual textRuns
+      var indexes_to_fix = [];
+      item.textRuns.textRuns.each_with_index(function(tr, index) {
+        if (tr.changedAttrs.bold && (tr.changedAttrs.face.indexOf('Bold') == -1)) {
+          indexes_to_fix.push(index);
+        }
+      });
+
+      if (indexes_to_fix.length > 0) {
+        var original_textruns = item.textRuns.textRuns.clone(),
+            fixed_textruns = original_textruns.clone();
+
+        original_textruns.each_with_index(function(textrun,index) {
+          fixed_textruns[index].changedAttrs = {};
+        });
+
+        indexes_to_fix.each(function(idx) {
+          fixed_textruns[idx].changedAttrs = bold(item.textRuns.textRuns[idx].changedAttrs.face);
+          replacements++;
+        });
+
+        fw.selection = item;
+        fw.getDocumentDOM().setTextRuns({
+          initialAttrs: item.textRuns.initialAttrs,
+          textRuns: fixed_textruns
+        });
+      };
+    };
+  });
+}
