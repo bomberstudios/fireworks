@@ -30,7 +30,8 @@ var test_document,
     test_output = "";
 
 function log(msg){
-  test_output += msg + ' (' + new Date() + ')\n';
+  // test_output += '\n' + msg + ' (' + new Date() + ')';
+  test_output += '\n' + msg;
 }
 
 // General setup
@@ -498,7 +499,8 @@ var seconds = fix_date(d.getSeconds());
 var milliseconds = fix_date(d.getMilliseconds());
 var folder_name = year + month + day + hour + minute + seconds + milliseconds;
 
-File.create(test_output, oc_folder + '/logs/test_' + folder_name + '_' + fw.appName.replace(' ','-') + '.txt');
+File.create(test_output, oc_folder + '/logs/' + fw.appName.replace(' ','-') + '.txt');
+// File.create(test_output, oc_folder + '/logs/test_' + folder_name + '_' + fw.appName.replace(' ','-') + '.txt');
 
 fw.closeDocument(empty_doc,false);
 

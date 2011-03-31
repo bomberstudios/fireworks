@@ -1,10 +1,12 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    ruby-fsevent (0.2.1)
     watcher (1.2.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  ruby-fsevent
   watcher
