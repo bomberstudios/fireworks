@@ -1,7 +1,14 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    httpclient (2.1.6.1)
+    json (1.5.1)
+    rake (0.8.7)
     ruby-fsevent (0.2.1)
+    smusher (0.4.6)
+      httpclient
+      json
+      rake
     watcher (1.2.0)
 
 PLATFORMS
@@ -9,4 +16,5 @@ PLATFORMS
 
 DEPENDENCIES
   ruby-fsevent
+  smusher
   watcher
