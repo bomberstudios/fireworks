@@ -1,3 +1,9 @@
+## 1.7 - 2011-03-31
+- b2eb8e7908 (Better prompts in size and position commands)
+- 888a2979fc (FIXED: Export bug for documents saved in a folder whose name contains the document name (i.e: Foo Bar/Foo.png))
+- f49031974b (NEW: Fix Faux Bolds)
+- 509b978738 (Renamed commands with an ellipsis in the filename)
+
 ## 1.6.7 - 2010-12-31
 - ad9d6d1372 (New command: Position » Swap)
 - ab894c3981 (FIXED: Position commands do not work properly for objects with border)

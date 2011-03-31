@@ -1,4 +1,4 @@
-# Orange Commands v1.6.7 for Adobe Fireworks
+# Orange Commands v1.7 for Adobe Fireworks
 
 Orange Commands is a collection of scripts for Adobe Fireworks that make the life of a web designer easier (or at least allow him/her to work faster :)
 
@@ -6,15 +6,16 @@ Orange Commands is a collection of scripts for Adobe Fireworks that make the lif
 ## Installation
 
 1. Download:
-    - [Orange Commands 1.6.7 for Fireworks CS3](http://orangecommands.com/dl/OrangeCommands_1.6.7_CS3.zip)
-    - [Orange Commands 1.6.7 for Fireworks CS4](http://orangecommands.com/dl/OrangeCommands_1.6.7_CS4.zip)
-    - [Orange Commands 1.6.7 for Fireworks CS5](http://orangecommands.com/dl/OrangeCommands_1.6.7_CS5.zip)
+    - [Orange Commands 1.7 for Fireworks CS3](http://orangecommands.com/dl/OrangeCommands_1.7_CS3.zip)
+    - [Orange Commands 1.7 for Fireworks CS4](http://orangecommands.com/dl/OrangeCommands_1.7_CS4.zip)
+    - [Orange Commands 1.7 for Fireworks CS5](http://orangecommands.com/dl/OrangeCommands_1.7_CS5.zip)
 
 2. Expand the ZIP.
 3. Double click the MXP file to install the commands.
 4. To install the custom keyboard shortcuts, copy the XML files to:
 
-      /Users/you/Library/Application Support/Adobe/Fireworks CSX/yourlanguage/Keyboard Shortcuts/
+      Mac: /Users/**YOU**/Library/Application Support/Adobe/Fireworks CS5/**YOURLANGUAGE**/Keyboard Shortcuts/  
+      Win: \\Users\\**YOU**\\AppData\\Roaming\\Adobe\\Fireworks CS5\\**YOUR LANGUAGE**\\Keyboard Shortcuts
 
 5. Change the keyboard shortcuts in Fireworks in the "Fireworks » Keyboard Shortcuts..." menu, and pick one of the '+ Extras' sets.
 6. Restart Fireworks
@@ -158,13 +159,13 @@ What the command does is this:
 ### Export
 
 
-- **All Documents as JPG in…**  (No shortcut)
+- **All Documents as JPG in**  (No shortcut)
   
   Exports all pages as JPG with the highest quality (100).  
 The commands prompts you for a folder to export, and files are saved with the document's name plus '_page_X' as the file names.  
 It also changes the Optimize settings for all pages, because I hate the "GIF as default format" :)
 
-- **All Pages as PNG 24 in…**  (No shortcut)
+- **All Pages as PNG 24 in**  (No shortcut)
   
   Exports all pages as flattened (non editable) PNG files with a 24 bits color depth.  
 The commands prompts you for a folder to export, and files are saved with the page names as the file names.  
@@ -176,7 +177,7 @@ It also changes the Optimize settings for all pages, because I hate the "GIF as 
 The files are saved in a folder named YYYYMMDDHHMMSS (i.e: 20091028170642) inside the current folder, with the page names as the file names.  
 It also changes the Optimize settings for all pages, because I hate the "GIF as default format" :)
 
-- **Current Page as PNG 24 in…**  (No shortcut)
+- **Current Page as PNG 24 in**  (No shortcut)
   
   Exports the current page as a flattened (non editable) PNG file with a 24 bits color depth. This command will ask you for the filename and folder location, and is specially built for @plumilla.
 
@@ -405,6 +406,10 @@ All Size commands support math operations, so you can quickly make an object 23 
 - **Disable Antialias**  (No shortcut)
   
   Disable text antialiasing in all pages of the current document.
+
+- **Fix Faux Bolds**  (No shortcut)
+  
+  Replaces fake bold text with proper Bold family in Fireworks CS4 & CS5
 
 - **Join with…**  (CTRL + SHIFT + J)
   
