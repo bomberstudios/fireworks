@@ -183,30 +183,3 @@ end
 task :count do
   puts @orangecommands.files.size
 end
-
-task :monitor do
-  files = {}
-  command = 'foo'
-
-  # Dir["logs/*.txt"].each { |file|
-  Dir["logs/*.txt", "Commands/**/*.jsf"].each { |file|
-    files[file] = File.mtime(file)
-  }
-
-  loop do
-    sleep 1
-    changed_file, last_changed = files.find { |file, last_changed|
-      File.mtime(file) > last_changed
-    }
-    if changed_file
-      files[changed_file] = File.mtime(changed_file)
-      if changed_file['txt']
-        puts File.readlines(changed_file).last# if File.exist? "/Users/ale/Desktop/test_output_Fireworks_#{version}.txt"
-      end
-      if changed_file['jsf']
-        system('rake test:all')
-      end
-    end
-  end
-  puts "=> done"
-end
