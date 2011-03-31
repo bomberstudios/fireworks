@@ -1,3 +1,7 @@
+/**DOC**
+Replaces fake bold text with proper Bold family in Fireworks CS4 & CS5
+**DOC**/
+
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");
 } catch(e) {
