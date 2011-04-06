@@ -50,15 +50,18 @@ function colorscale(hexstr, scalefactor) {
   return a.join('');
 }
 
-var original_color = fw.selection[0].pathAttributes.fillColor;
-var lighter_color = "#" + colorscale(original_color,2.5);
+var original_color = fw.selection[0].pathAttributes.fillColor,
+    lighter_color = "#" + colorscale(original_color,2.5),
+    original_edge = fw.selection[0].pathAttributes.fill.edgeType,
+    original_feather = fw.selection[0].pathAttributes.fill.feather;
+
 
 fw.getDocumentDOM().setFill(
   {
     category:"fc_Linear",
     ditherColors:[ "#000000", "#000000" ],
-    edgeType:"antialiased",
-    feather:0,
+    edgeType: original_edge,
+    feather:original_feather,
     gradient:{ name:"cn_Custom", nodes:[ { color: lighter_color, isOpacityNode:false, position:0 }, { color: original_color, isOpacityNode:false, position:1 } ],
     opacityNodes:[ { color:"#000000", isOpacityNode:true, position:0 }, { color:"#000000", isOpacityNode:true, position:1 } ] },
     name:"Linear Smooth",
