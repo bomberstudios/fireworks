@@ -1,0 +1,35 @@
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://github.com/bomberstudios/fireworks/");
+};
+
+fw.selection.clone().each(function(elem) {
+  var border_radius = 0;
+  if (elem.roundness) {
+    if(elem.mode == 'exact') {
+      border_radius = elem.roundness;
+    } else {
+      border_radius = (elem.roundness * elem.height) / 2;
+    }
+  };
+
+  fw.selection = elem;
+  fw.getDocumentDOM().cloneSelection();
+  fw.getDocumentDOM().moveSelectionBy({x:-1, y:-1}, false, false);
+
+  orangecommands.run('Size', 'Width +1');
+  orangecommands.run('Size', 'Width +1');
+
+  orangecommands.run('Size', 'Height +1');
+  orangecommands.run('Size', 'Height +1');
+
+  orangecommands.run('Color', 'Fill Color', '#000000');
+
+  if (border_radius > 0) {
+    orangecommands.run('Properties', 'Set Rectangle Roundness in Pixels', border_radius + 1);
+  };
+
+  fw.getDocumentDOM().arrange("backward");
+});
+
