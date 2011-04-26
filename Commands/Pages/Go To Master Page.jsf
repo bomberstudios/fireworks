@@ -1,0 +1,4 @@
+// shortcut: CTRL + SHIFT + M
+if (fw.getDocumentDOM().hasMasterPage()) {
+  fw.getDocumentDOM().changeCurrentPage(0);
+};
