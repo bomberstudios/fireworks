@@ -1,0 +1,14 @@
+// shortcut: CTRL + SHIFT + 1
+/**DOC**
+Set the selected objects’ stroke alpha to 10%
+**DOC**/
+
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://github.com/bomberstudios/fireworks/");
+};
+
+Selection.each(function(item) {
+  item.pathAttributes.brush.concentration = 10;
+});

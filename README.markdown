@@ -92,6 +92,50 @@ A collection of commands to change an object's alpha. They work on the currently
   
   Set the selected objects’ alpha to 90%
 
+- **Stroke Alpha 10**  (CTRL + SHIFT + 1)
+  
+  Set the selected objects’ stroke alpha to 10%
+
+- **Stroke Alpha 100**  (CTRL + SHIFT + 0)
+  
+  Set the selected objects’ stroke alpha to 100%
+
+- **Stroke Alpha 20**  (CTRL + SHIFT + 2)
+  
+  Set the selected objects’ stroke alpha to 20%
+
+- **Stroke Alpha 30**  (CTRL + SHIFT + 3)
+  
+  Set the selected objects’ stroke alpha to 30%
+
+- **Stroke Alpha 40**  (CTRL + SHIFT + 4)
+  
+  Set the selected objects’ stroke alpha to 40%
+
+- **Stroke Alpha 50**  (CTRL + SHIFT + 5)
+  
+  Set the selected objects’ stroke alpha to 50%
+
+- **Stroke Alpha 60**  (CTRL + SHIFT + 6)
+  
+  Set the selected objects’ stroke alpha to 60%
+
+- **Stroke Alpha 70**  (CTRL + SHIFT + 7)
+  
+  Set the selected objects’ stroke alpha to 70%
+
+- **Stroke Alpha 80**  (CTRL + SHIFT + 8)
+  
+  Set the selected objects’ stroke alpha to 80%
+
+- **Stroke Alpha 90**  (CTRL + SHIFT + 9)
+  
+  Set the selected objects’ stroke alpha to 90%
+
+- **Stroke Alpha To**  (No shortcut)
+  
+  Set the selected objects’ stroke alpha
+
 ### Canvas
 
 

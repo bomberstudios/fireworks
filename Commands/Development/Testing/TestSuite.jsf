@@ -218,6 +218,32 @@ test( 'Alpha commands', function(){
   orangecommands.run("Alpha","Alpha 100");
   assert_equal( 'Alpha 100 works', Math.round(fw.selection[0].opacity),100);
 });
+test('Alpha Stroke', function() {
+  orangecommands.run('Color', 'Stroke Color', '#fc0');
+  assert_equal('Alpha Stroke is 100', fw.selection[0].pathAttributes.brush.concentration, 100);
+  orangecommands.run('Alpha', 'Stroke Alpha 10');
+  assert_equal('Alpha Stroke is 10', fw.selection[0].pathAttributes.brush.concentration, 10);
+  orangecommands.run('Alpha', 'Stroke Alpha 20');
+  assert_equal('Alpha Stroke is 20', fw.selection[0].pathAttributes.brush.concentration, 20);
+  orangecommands.run('Alpha', 'Stroke Alpha 30');
+  assert_equal('Alpha Stroke is 30', fw.selection[0].pathAttributes.brush.concentration, 30);
+  orangecommands.run('Alpha', 'Stroke Alpha 40');
+  assert_equal('Alpha Stroke is 40', fw.selection[0].pathAttributes.brush.concentration, 40);
+  orangecommands.run('Alpha', 'Stroke Alpha 50');
+  assert_equal('Alpha Stroke is 50', fw.selection[0].pathAttributes.brush.concentration, 50);
+  orangecommands.run('Alpha', 'Stroke Alpha 60');
+  assert_equal('Alpha Stroke is 60', fw.selection[0].pathAttributes.brush.concentration, 60);
+  orangecommands.run('Alpha', 'Stroke Alpha 70');
+  assert_equal('Alpha Stroke is 70', fw.selection[0].pathAttributes.brush.concentration, 70);
+  orangecommands.run('Alpha', 'Stroke Alpha 80');
+  assert_equal('Alpha Stroke is 80', fw.selection[0].pathAttributes.brush.concentration, 80);
+  orangecommands.run('Alpha', 'Stroke Alpha 90');
+  assert_equal('Alpha Stroke is 90', fw.selection[0].pathAttributes.brush.concentration, 90);
+  orangecommands.run('Alpha', 'Stroke Alpha 100');
+  assert_equal('Alpha Stroke is 100', fw.selection[0].pathAttributes.brush.concentration, 100);
+  orangecommands.run('Alpha', 'Stroke Alpha To', 42);
+  assert_equal('Alpha Stroke is 42', fw.selection[0].pathAttributes.brush.concentration, 42);
+});
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

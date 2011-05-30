@@ -1,0 +1,14 @@
+/**DOC**
+Set the selected objects’ stroke alpha
+**DOC**/
+
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://github.com/bomberstudios/fireworks/");
+};
+var target_alpha = orangecommands.params || prompt('Set stroke alpha to:', 100);
+
+Selection.each(function(item) {
+  item.pathAttributes.brush.concentration = target_alpha;
+});
