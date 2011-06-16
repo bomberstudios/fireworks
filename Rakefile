@@ -6,6 +6,7 @@ require "rdiscount"
 require "erb"
 require 'fileutils'
 require 'lib/library'
+require 'colored'
 
 ORANGE_COMMANDS_VERSION = "1.7"
 DOWNLOAD_SERVER = "http://orangecommands.com/dl/"
@@ -76,7 +77,7 @@ task :shortcuts do
     Dir["#{folder}/*.xml"].each do |f|
       cp f, "#{xml_target_dirs[i]}/"
       file_name = File.basename(f,".xml")
-      puts "Generating #{file_name} + Extras"
+      puts "Generating #{file_name} + Extras".green
       file_contents = File.read(f)
       open("#{xml_target_dirs[i]}/#{file_name}.xml","w") do |new_file|
         new_file << file_contents.gsub(LINE_REGEXP,new_commands)
