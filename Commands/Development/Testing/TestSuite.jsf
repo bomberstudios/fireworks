@@ -144,13 +144,15 @@ test('Array extensions work', function(){
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Align
-test( 'Align commands: Center', function(){
+test('Align commands: Center', function(){
+
 
   fw.getDocumentDOM().selectAll();
   fw.selection[0].left = 100 * Math.random();
   fw.selection[0].top = 100 * Math.random();
   orangecommands.run('Align', 'Center on Canvas - Horizontal');
   assert_equal('Object is centered horizontally', fw.selection[0].left, 150);
+
 
   fw.getDocumentDOM().selectAll();
   fw.selection[0].left = 100 * Math.random();
@@ -180,7 +182,7 @@ test( 'Align commands: Center', function(){
 
 });
 
-test( 'Align commands: Space', function(){
+test('Align commands: Space', function(){
 
   (3).times(add_rectangle);
   fw.getDocumentDOM().selectAll();
@@ -195,7 +197,7 @@ test( 'Align commands: Space', function(){
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Alpha
-test( 'Alpha commands', function(){
+test('Alpha commands', function(){
   // This is a *very* bad test, but that's just because Fireworks does some funky stuff with opacity...
   orangecommands.run("Alpha","Alpha 10");
   assert_equal( 'Alpha 10 works', Math.round(fw.selection[0].opacity),10);
@@ -248,7 +250,7 @@ test('Alpha Stroke', function() {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Canvas
-test( 'Canvas', function(){
+test('Canvas', function(){
   orangecommands.run("Canvas","Canvas Width", 110);
   assert_equal('Canvas Width is 110', fw.getDocumentDOM().width, 110);
   orangecommands.run("Canvas","Canvas Height", 110);
@@ -403,7 +405,7 @@ test('Properties',function(){
 });
 
 // Select
-test( 'Select text objects', function(){
+test('Select text objects', function(){
   fw.getDocumentDOM().addNewText({left:0, top:0, right:100, bottom:20}, true);
   fw.getDocumentDOM().setTextRuns({ initialAttrs:{ alignment:"center", antiAliasSharpness:192, antiAliasStrength:64, baselineShift:0, bold:false, face:"Arial", fillColor:"#666666", horizontalScale:1, italic:false, leading:1, leadingMode:"percentage", overSample:8, paragraphIndent:0, paragraphSpacingAfter:0, paragraphSpacingBefore:0, rangeKerning:0, size:"10pt", underline:false }, textRuns:[ { changedAttrs:{  }, characters:"fafdsfadsfasdfads" } ] });
   fw.getDocumentDOM().addNewText({left:0, top:20, right:100, bottom:20}, true);
