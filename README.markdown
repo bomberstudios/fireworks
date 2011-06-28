@@ -306,6 +306,10 @@ Commands to create grids using guides (the commands formerly known as "Reticulat
   
   Duplicates the current page at the end of the page list.
 
+- **Go To Master Page**  (CTRL + SHIFT + M)
+  
+  The Pages » Go To Master Page command acts as a toggle: run it when in a page and it takes you to the master page. Run it again in the master page, and it takes you back to the page you were in before running the command for the first time.
+
 - **Numberize**  (No shortcut)
   
   Adds a number in front of every page name (except the Master Page), according to its order in the page panel.  
