@@ -296,6 +296,12 @@ Commands to create grids using guides (the commands formerly known as "Reticulat
   
   Pastes the guides copied with the "Guides » Copy" command (works accross documents!).
 
+### Layers
+
+
+- **Unlock All**  (CTRL + SHIFT + U)
+  
+  
 ### Pages
 
 

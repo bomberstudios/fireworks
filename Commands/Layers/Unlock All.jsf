@@ -1,0 +1,2 @@
+// shortcut: CTRL + SHIFT + U
+fw.getDocumentDOM().setElementLocked(-1, -1, -1, false, true, true);
