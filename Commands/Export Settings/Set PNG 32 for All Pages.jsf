@@ -1,0 +1,12 @@
+/*
+**DOC**
+A command to set the export format of all pages as PNG in 32 bits (something that is currently *so* time consuming and convoluted that it makes you want to cry)
+**DOC**
+*/
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
+};
+
+Pages.each(Document.set_export_as_png_32);
