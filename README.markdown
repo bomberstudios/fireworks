@@ -1,4 +1,4 @@
-# Orange Commands v1.7 for Adobe Fireworks
+# Orange Commands v1.7-pre for Adobe Fireworks
 
 Orange Commands is a collection of scripts for Adobe Fireworks that make the life of a web designer easier (or at least allow him/her to work faster :)
 
@@ -6,9 +6,9 @@ Orange Commands is a collection of scripts for Adobe Fireworks that make the lif
 ## Installation
 
 1. Download:
-    - [Orange Commands 1.7 for Fireworks CS3](http://orangecommands.com/dl/OrangeCommands_1.7_CS3.zip)
-    - [Orange Commands 1.7 for Fireworks CS4](http://orangecommands.com/dl/OrangeCommands_1.7_CS4.zip)
-    - [Orange Commands 1.7 for Fireworks CS5](http://orangecommands.com/dl/OrangeCommands_1.7_CS5.zip)
+    - [Orange Commands 1.7-pre for Fireworks CS3](http://orangecommands.com/dl/OrangeCommands_1.7-pre_CS3.zip)
+    - [Orange Commands 1.7-pre for Fireworks CS4](http://orangecommands.com/dl/OrangeCommands_1.7-pre_CS4.zip)
+    - [Orange Commands 1.7-pre for Fireworks CS5](http://orangecommands.com/dl/OrangeCommands_1.7-pre_CS5.zip)
 
 2. Expand the ZIP.
 3. Double click the MXP file to install the commands.
@@ -170,6 +170,9 @@ Commands to change an object's fill and stroke color. When pressing the shortcut
 ### Effects
 
 
+- **Fake Border**  (No shortcut)
+  
+  
 - **Lightbox**  (No shortcut)
   
   Creates a Lightbox.  
@@ -242,6 +245,10 @@ This way, you can use your PNG file as a sprite.
   
   A command to set the export format of all pages as PNG in 24 bits (something that is currently *so* time consuming and convoluted that it makes you want to cry)
 
+- **Set PNG 32 for All Pages**  (No shortcut)
+  
+  A command to set the export format of all pages as PNG in 32 bits (something that is currently *so* time consuming and convoluted that it makes you want to cry)
+
 ### Grids
 Commands to create grids using guides (the commands formerly known as "Reticulator")
 
@@ -308,6 +315,10 @@ Commands to create grids using guides (the commands formerly known as "Reticulat
 - **Add Page**  (CTRL + SHIFT + N)
   
   
+- **DeNumberize**  (No shortcut)
+  
+  Removes the page number added by the Numberize command.
+
 - **Duplicate Current**  (CTRL + SHIFT + D)
   
   Duplicates the current page at the end of the page list.

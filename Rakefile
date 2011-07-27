@@ -8,7 +8,7 @@ require 'fileutils'
 require 'lib/library'
 require 'colored'
 
-ORANGE_COMMANDS_VERSION = "1.7"
+ORANGE_COMMANDS_VERSION = "1.7-pre"
 DOWNLOAD_SERVER = "http://orangecommands.com/dl/"
 @fw_versions = ["CS3","CS4","CS5"]
 # @fw_versions = ["CS3","CS4","CS5", "CS5.1"]
