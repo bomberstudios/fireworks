@@ -1,0 +1,34 @@
+/**DOC**
+Removes the page number added by the Numberize command.
+**DOC**/
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
+};
+
+function pad_number(n){
+  if ( n < 10 ) {
+    return "0" + n;
+  } else {
+    return n.toString();
+  }
+}
+
+try {
+  var i = 1;
+  if (fw.getDocumentDOM().hasMasterPage()) {
+    i = 0; // we don't want to number the master page...
+  };
+  Pages.each(function(){
+    var current_pagename = fw.getDocumentDOM().pageName;
+    var regex = /^(\d\d)_/;
+    if (regex.test(current_pagename)) {
+      var new_pagename = current_pagename.replace(regex,"");
+      fw.getDocumentDOM().setPageName(fw.getDocumentDOM().currentPageNum, new_pagename);
+    }
+    i++;
+  });
+} catch(e){
+  alert("Something went terribly wrong...");
+}
