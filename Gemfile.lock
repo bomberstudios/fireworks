@@ -5,6 +5,7 @@ GEM
     httpclient (2.1.6.1)
     json (1.5.1)
     rake (0.8.7)
+    rdiscount (1.6.8)
     ruby-fsevent (0.2.1)
     smusher (0.4.6)
       httpclient
@@ -17,6 +18,7 @@ PLATFORMS
 
 DEPENDENCIES
   colored
+  rdiscount
   ruby-fsevent
   smusher
   watcher
