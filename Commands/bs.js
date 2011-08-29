@@ -233,7 +233,12 @@ User = {
 
 Document = {
   path: function(){
-    return Files.getDirectory(fw.getDocumentPath(null)) + "/";
+    if (fw.getDocumentPath(null) == '') {
+      // not saved
+      return null;
+    } else {
+      return Files.getDirectory(fw.getDocumentPath(null)) + "/";
+    }
   },
   dump: function(){
     var filePath = fw.userJsCommandsDir,

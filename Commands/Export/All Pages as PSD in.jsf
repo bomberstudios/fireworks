@@ -1,0 +1,18 @@
+/**DOC**
+Exports all pages as PSD files.
+The command prompts you for a folder to export, and files are saved with the page names as the file names.
+**DOC**/
+
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\nGet it at http://bomberstudios.com/fireworks/");
+};
+
+var folder_name = fw.browseForFolderURL("Choose an export folder",Document.path());
+
+Pages.each(function(){
+  var export_file_name = fw.getDocumentDOM().pageName;
+  var export_file_path =  folder_name + "/" + export_file_name + ".psd";
+  fw.exportPSD(null, export_file_path);
+});
