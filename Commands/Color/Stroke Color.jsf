@@ -29,4 +29,7 @@ Selection.each(function(sel) {
       fw.getDocumentDOM().setBrushColor(choice);
       break;
   }
+  // Finally, copy the chosen color to the clipboard, just because...
+  fw.getDocumentDOM().clipCopyJsToExecute(choice);
+
 });
