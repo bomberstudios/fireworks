@@ -1,4 +1,4 @@
-# Orange Commands v1.7-pre for Adobe Fireworks
+# Orange Commands v1.7 for Adobe Fireworks
 
 Orange Commands is a collection of scripts for Adobe Fireworks that make the life of a web designer easier (or at least allow him/her to work faster :)
 
@@ -6,9 +6,9 @@ Orange Commands is a collection of scripts for Adobe Fireworks that make the lif
 ## Installation
 
 1. Download:
-    - [Orange Commands 1.7-pre for Fireworks CS3](http://orangecommands.com/dl/OrangeCommands_1.7-pre_CS3.zip)
-    - [Orange Commands 1.7-pre for Fireworks CS4](http://orangecommands.com/dl/OrangeCommands_1.7-pre_CS4.zip)
-    - [Orange Commands 1.7-pre for Fireworks CS5](http://orangecommands.com/dl/OrangeCommands_1.7-pre_CS5.zip)
+    - [Orange Commands 1.7 for Fireworks CS3](http://orangecommands.com/dl/OrangeCommands_1.7_CS3.zip)
+    - [Orange Commands 1.7 for Fireworks CS4](http://orangecommands.com/dl/OrangeCommands_1.7_CS4.zip)
+    - [Orange Commands 1.7 for Fireworks CS5](http://orangecommands.com/dl/OrangeCommands_1.7_CS5.zip)
 
 2. Expand the ZIP.
 3. Double click the MXP file to install the commands.
@@ -170,6 +170,12 @@ Commands to change an object's fill and stroke color. When pressing the shortcut
 ### Effects
 
 
+- **Background Rectangle**  (No shortcut)
+  
+  
+- **Fake Border Inside**  (No shortcut)
+  
+  
 - **Fake Border**  (No shortcut)
   
   
@@ -223,6 +229,11 @@ It also changes the Optimize settings for all pages, because I hate the "GIF as 
   Exports all pages as flattened (non editable) PNG files with a 24 bits color depth.  
 The files are saved in a folder named YYYYMMDDHHMMSS (i.e: 20091028170642) inside the current folder, with the page names as the file names.  
 It also changes the Optimize settings for all pages, because I hate the "GIF as default format" :)
+
+- **All Pages as PSD in**  (No shortcut)
+  
+  Exports all pages as PSD files.
+The command prompts you for a folder to export, and files are saved with the page names as the file names.
 
 - **Current Page as PNG 24 in**  (No shortcut)
   
@@ -321,7 +332,7 @@ Commands to create grids using guides (the commands formerly known as "Reticulat
 
 - **Duplicate Current**  (CTRL + SHIFT + D)
   
-  Duplicates the current page at the end of the page list.
+  Duplicates the current page and sets it as the current page.
 
 - **Go To Master Page**  (CTRL + SHIFT + M)
   
