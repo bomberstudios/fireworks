@@ -4,6 +4,8 @@ GEM
     colored (1.2)
     httpclient (2.1.6.1)
     json (1.5.1)
+    maruku (0.6.0)
+      syntax (>= 1.0.0)
     rake (0.8.7)
     rdiscount (1.6.8)
     ruby-fsevent (0.2.1)
@@ -11,6 +13,7 @@ GEM
       httpclient
       json
       rake
+    syntax (1.0.0)
     watcher (1.2.0)
 
 PLATFORMS
@@ -18,6 +21,7 @@ PLATFORMS
 
 DEPENDENCIES
   colored
+  maruku
   rdiscount
   ruby-fsevent
   smusher
