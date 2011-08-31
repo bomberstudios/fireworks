@@ -180,6 +180,9 @@ Object.prototype.kind = function(){
   return 'element';
 };
 
+// Globals
+fw.version = fw.appName.match(/\d+/);
+
 function dump(obj) {
   var output = "Dumping " + obj + "\n\n";
   for ( var i in obj ){

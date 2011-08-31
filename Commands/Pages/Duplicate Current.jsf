@@ -1,6 +1,6 @@
 // shortcut: CTRL + SHIFT + D
 /**DOC**
-Duplicates the current page at the end of the page list.
+Duplicates the current page and sets it as the current page.
 **DOC**/
 
 try {
@@ -11,5 +11,9 @@ try {
 
 var original_name = fw.getDocumentDOM().pageName;
 fw.getDocumentDOM().duplicatePage(fw.getDocumentDOM().currentPageNum);
-fw.getDocumentDOM().changeCurrentPage(Pages.count() - 1);
+if (fw.version <= 3) {
+  fw.getDocumentDOM().changeCurrentPage(Pages.count() - 1);
+} else {
+  fw.getDocumentDOM().changeCurrentPage(fw.getDocumentDOM().currentPageNum + 1);
+}
 fw.getDocumentDOM().setPageName(fw.getDocumentDOM().currentPageNum, original_name + ' (copy)');
