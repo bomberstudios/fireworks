@@ -182,6 +182,9 @@ Object.prototype.kind = function(){
 
 // Globals
 fw.version = fw.appName.match(/\d+/);
+fw.copy = function(txt){
+  fw.getDocumentDOM().clipCopyJsToExecute(txt);
+}
 
 function dump(obj) {
   var output = "Dumping " + obj + "\n\n";
