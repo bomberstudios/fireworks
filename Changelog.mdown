@@ -1,14 +1,22 @@
-## 1.7-pre
-- b2eb8e7908 Better prompts in size and position commands
-- 888a2979fc FIXED: Export bug for documents saved in a folder whose name contains the document name (i.e: Foo Bar/Foo.png)
-- f49031974b NEW: Fix Faux Bolds
-- 509b978738 Renamed commands with an ellipsis in the filename
-- 2cf27b4e48 NEW: Fake Border
-- f08c129cb0 NEW: Pages » Go To Master Page
-- 0948b838ef NEW: Stroke Alpha commands
-- 87b44225e8 NEW: PNG 32 Export Setting
-- 6f159a501d NEW: Pages » DeNumberize command
-- 932248393f NEW: Layers » Unlock All
+1.7 / 2011-08-31
+================
+
+  * [FIXED] Pages » Duplicate Current now works properly in Fireworks CS4 and up.
+  * [FIXED] Respect antialias type in objects when applying Plastic effect.
+  * [FIXED] Export bug for documents saved in a folder whose name contains the document name (i.e: Foo Bar/Foo.png)
+  * [FIXED] Better prompts in size and position commands
+
+  * [NEW] Alpha » Stroke Alpha commands
+  * [NEW] Copy color to clipboard when using the Color commands
+  * [NEW] Effects » Background Rectangle, as requested by @superfetz
+  * [NEW] Effects » Fake Border
+  * [NEW] Effects » Fake Border Inside
+  * [NEW] Export » All Pages as PSD in
+  * [NEW] Layers » Unlock All
+  * [NEW] Pages » DeNumberize command
+  * [NEW] Pages » Go To Master Page. It acts as a toggle: run it when in a page and it takes you to the master page. Run it again in the master page, and it takes you back to the page you were in before running the command for the first time.
+  * [NEW] Export Settings » Set PNG 32 for All Pages
+  * [NEW] Text » Fix Faux Bolds
 
 
 ## 1.6.7 - 2010-12-31
