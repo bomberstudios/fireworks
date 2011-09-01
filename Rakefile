@@ -8,7 +8,7 @@ require 'fileutils'
 require 'lib/library'
 require 'colored'
 
-ORANGE_COMMANDS_VERSION = "1.7-pre"
+ORANGE_COMMANDS_VERSION = "1.7"
 DOWNLOAD_SERVER = "http://orangecommands.com/dl/"
 @fw_versions = ["CS3","CS4","CS5"]
 # @fw_versions = ["CS3","CS4","CS5", "CS5.1"]
@@ -29,7 +29,7 @@ task :about do
     system("cd ../OrangeCommandsAbout && rake pro")
     cp "../OrangeCommandsAbout/deploy/OrangeCommandsAboutPro.swf", "Commands/About Orange Commands.swf"
   else
-    system("cd ../OrangeCommandsAbout && rake")
+    system("cd ../OrangeCommandsAbout && rake normal")
     cp "../OrangeCommandsAbout/deploy/OrangeCommandsAbout.swf", "Commands/About Orange Commands.swf"
   end
 end
@@ -74,15 +74,16 @@ task :shortcuts do
   end
 
   xml_source_dirs.each_with_index do |folder,i|
+    puts "Shortcuts for #{folder}".white
     Dir["#{folder}/*.xml"].each do |f|
-      cp f, "#{xml_target_dirs[i]}/"
+      cp f, "#{xml_target_dirs[i]}/", :verbose => false
       file_name = File.basename(f,".xml")
       puts "Generating #{file_name} + Extras".green
       file_contents = File.read(f)
       open("#{xml_target_dirs[i]}/#{file_name}.xml","w") do |new_file|
         new_file << file_contents.gsub(LINE_REGEXP,new_commands)
       end
-      mv "#{xml_target_dirs[i]}/#{file_name}.xml", "#{xml_target_dirs[i]}/#{file_name} + Extras.xml"
+      mv "#{xml_target_dirs[i]}/#{file_name}.xml", "#{xml_target_dirs[i]}/#{file_name} + Extras.xml", :verbose => false
     end
   end
 end
@@ -104,6 +105,8 @@ task :pack do
     %x(cp "en/Keyboard\ Shortcuts/#{version}/"*.xml .)
     %x(zip -9 "OrangeCommands#{@pro ? 'Pro': ''}_#{ORANGE_COMMANDS_VERSION}_#{version}.zip" OrangeCommands#{@pro ? 'Pro': ''}_#{ORANGE_COMMANDS_VERSION}_#{version}.mxp *.xml README.html)
   end
+  # ZIP all release for upload to adobe.com
+  %x(zip -9 OrangeCommands_#{ORANGE_COMMANDS_VERSION}_All.zip *.zip)
   %x(rm *.xml *.mxi)
   FileUtils.mkdir_p "pkg/#{ORANGE_COMMANDS_VERSION}"
   system("mv *.zip *.mxp pkg/#{ORANGE_COMMANDS_VERSION}/")
@@ -135,6 +138,7 @@ task :install do
   system("rsync -azv Commands \"/Applications/Adobe\ Fireworks\ CS4/Configuration/\" --exclude='*.md'")
   system("rsync -azv Commands \"/Applications/Adobe\ Fireworks\ CS5/Configuration/\" --exclude='*.md'")
   system("rsync -azv Commands \"/Applications/Adobe\ Fireworks\ CS5.1/Configuration/\" --exclude='*.md'")
+  system("rsync -azv Commands \"/Applications/Adobe\ Fireworks\ CS6/Configuration/\" --exclude='*.md'")
 end
 
 desc "Build docs"
@@ -170,7 +174,14 @@ namespace :test do
     run_test 'CS5.1'
   end
 
-  task :all => [:install, :cs3, :cs4, :cs5, :cs51]
+  desc 'Test in Fireworks CS6 only'
+  task :cs6 do
+    run_test 'CS6'
+  end
+
+  
+
+  task :all => [:install, :cs3, :cs4, :cs5, :cs51, :cs6]
 end
 
 desc 'Run Test Suite'
