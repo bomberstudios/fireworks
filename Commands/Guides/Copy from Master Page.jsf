@@ -1,0 +1,27 @@
+/**DOC**
+Copies the guides from the master page to the current one.
+**DOC**/
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
+}
+
+if (fw.getDocumentDOM().hasMasterPage()) {
+  var start_page = fw.getDocumentDOM().currentPageNum,
+      new_page   = 1;
+
+  fw.getDocumentDOM().changeCurrentPage(new_page-1);
+
+  old_guides = Guides.get();
+
+  fw.getDocumentDOM().changeCurrentPage(start_page);
+  for (var k = old_guides.vGuides.length - 1; k >= 0; k--){
+    fw.getDocumentDOM().addGuide(old_guides.vGuides[k],"vertical");
+  }
+  for (var l = old_guides.hGuides.length - 1; l >= 0; l--){
+    fw.getDocumentDOM().addGuide(old_guides.hGuides[l],"horizontal");
+  }
+} else {
+  alert("Document doesn't have a Master Page to copy from!");
+}

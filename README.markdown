@@ -298,6 +298,10 @@ Commands to create grids using guides (the commands formerly known as "Reticulat
   
   Removes all vertical guides from the current page.
 
+- **Copy from Master Page**  (No shortcut)
+  
+  Copies the guides from the master page to the current one.
+
 - **Copy from Page**  (No shortcut)
   
   Asks for a page number, and copies the guides from that page to the current one.
