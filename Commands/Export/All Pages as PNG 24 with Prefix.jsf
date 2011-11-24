@@ -1,0 +1,45 @@
+/**DOC**
+Exactly as 'All Pages as PNG 24', but asks for a prefix to be added before each page's name.  
+This command is useful when you have a complex nomenclature for files, but don't want to fill your Pages panel with it :)
+**DOC**/
+// TODO: use fw.exportPages() in FW CS5
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
+};
+
+
+if(Document.is_saved()) {
+
+  function fix_date(num){
+    num = num.toString();
+    if (num.length < 2) {
+      num = "0" + num;
+    };
+    return num;
+  }
+
+  var d = new Date();
+  var year = d.getFullYear();
+  var month = fix_date((d.getMonth() + 1));
+  var day = fix_date(d.getDate());
+  var hour = fix_date(d.getHours());
+  var minute = fix_date(d.getMinutes());
+  var folder_name = year + month + day + hour + minute;
+
+  Files.createDirectory(Document.path() + folder_name);
+  var prefix = orangecommands.params || prompt("Prefix:",null);
+
+  Pages.each(function(){
+    var export_file_name = fw.getDocumentDOM().pageName;
+    var export_file_path =  Document.path() + folder_name + "/" + prefix + export_file_name + ".png";
+    if (fw.getDocumentDOM().hasMasterPage() && fw.getDocumentDOM().currentPageNum == 0) {
+      // don't export master page
+    } else {
+      Document.export_in(export_file_path);
+    }
+  });
+} else {
+  alert("You need to save the document first!");
+}

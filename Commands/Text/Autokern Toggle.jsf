@@ -1,0 +1,15 @@
+/**DOC**
+Toggles the 'Auto kern' property of selected text objects.
+**DOC**/
+
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://github.com/bomberstudios/fireworks/");
+};
+Selection.each(function(e) {
+  var kern = e.autoKern;
+  if (kern != undefined) {
+    fw.getDocumentDOM().setTextAutoKern(!kern);
+  };
+});

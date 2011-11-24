@@ -224,6 +224,11 @@ It also changes the Optimize settings for all pages, because I hate the "GIF as 
 The commands prompts you for a folder to export, and files are saved with the page names as the file names.  
 It also changes the Optimize settings for all pages, because I hate the "GIF as default format" :)
 
+- **All Pages as PNG 24 with Prefix**  (No shortcut)
+  
+  Exactly as 'All Pages as PNG 24', but asks for a prefix to be added before each page's name.  
+This command is useful when you have a complex nomenclature for files, but don't want to fill your Pages panel with it :)
+
 - **All Pages as PNG 24**  (CTRL + ALT + SHIFT + X)
   
   Exports all pages as flattened (non editable) PNG files with a 24 bits color depth.  
@@ -474,6 +479,10 @@ All Size commands support math operations, so you can quickly make an object 23 
 - **Arialize Selection**  (CTRL + A)
   
   Sets currently selected text blocks to Arial.
+
+- **Autokern Toggle**  (No shortcut)
+  
+  Toggles the 'Auto kern' property of selected text objects.
 
 - **Bulletize with…**  (No shortcut)
   
