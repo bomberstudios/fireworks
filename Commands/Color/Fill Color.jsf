@@ -20,26 +20,29 @@ var choice = orangecommands.params || fw.popupColorPickerOverMouse("#00000000", 
 
 Selection.each(function(sel) {
   fw.selection = sel;
-  if (sel.is_symbol()) {
-    // TODO: do not replace effects in symbol, just add the color fill effect
-    var original_effects = fw.selection[0].effectList;
-    fw.getDocumentDOM().applyEffects({ category:"UNUSED", effects:[ { Blendmode:0, Color:choice, EffectIsVisible:true, EffectMoaID:"{dd54adc0-a279-11d3-b92a000502f3fdbe}", Opacity:100, category:"Adjust Color", name:"Color Fill" } ], name:"UNUSED" });
-  } else {
-    // if the current object's fill is set to none, we'll have to assign a default fill before we can change the color.
-    if(!sel.pathAttributes.fill){
-      fw.getDocumentDOM().setFillNColor({ category:"fc_Solid", ditherColors:[ "#000000", "#000000" ], edgeType:"antialiased", feather:0, gradient:null, name:"fn_Normal", pattern:null, shape:"solid", stampingMode:"blend opaque", textureBlend:0, webDitherTransparent:false }, "#000000");
-    }
-    // make the object's fill a solid color
-    sel.pathAttributes.fill.category = 'fc_Solid';
-    switch (choice) {
-      case "#ffffff00":
-        fw.getDocumentDOM().setFillNColor(null, choice);
-        break;
-      default:
-        fw.getDocumentDOM().setFillColor(choice);
-        break;
-    }
-    // Finally, copy the chosen color to the clipboard, just because...
-    fw.copy(choice);
+  switch (sel.kind()) {
+    case "symbol":
+      // TODO: do not replace effects in symbol, just add the color fill effect
+      var original_effects = fw.selection[0].effectList;
+      fw.getDocumentDOM().applyEffects({ category:"UNUSED", effects:[ { Blendmode:0, Color:choice, EffectIsVisible:true, EffectMoaID:"{dd54adc0-a279-11d3-b92a000502f3fdbe}", Opacity:100, category:"Adjust Color", name:"Color Fill" } ], name:"UNUSED" });
+      break;
+    case "element":
+      // if the current object's fill is set to none, we'll have to assign a default fill before we can change the color.
+      if(!sel.pathAttributes.fill){
+        fw.getDocumentDOM().setFillNColor({ category:"fc_Solid", ditherColors:[ "#000000", "#000000" ], edgeType:"antialiased", feather:0, gradient:null, name:"fn_Normal", pattern:null, shape:"solid", stampingMode:"blend opaque", textureBlend:0, webDitherTransparent:false }, "#000000");
+      }
+      // make the object's fill a solid color
+      sel.pathAttributes.fill.category = 'fc_Solid';
+    default:
+      switch (choice) {
+        case "#ffffff00":
+          fw.getDocumentDOM().setFillNColor(null, choice);
+          break;
+        default:
+          fw.getDocumentDOM().setFillColor(choice);
+          break;
+      }
   }
+  // Finally, copy the chosen color to the clipboard, just because...
+  fw.copy(choice);
 });
