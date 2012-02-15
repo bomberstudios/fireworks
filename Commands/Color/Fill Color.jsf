@@ -23,8 +23,21 @@ Selection.each(function(sel) {
   switch (sel.kind()) {
     case "symbol":
       // TODO: do not replace effects in symbol, just add the color fill effect
-      var original_effects = fw.selection[0].effectList;
-      fw.getDocumentDOM().applyEffects({ category:"UNUSED", effects:[ { Blendmode:0, Color:choice, EffectIsVisible:true, EffectMoaID:"{dd54adc0-a279-11d3-b92a000502f3fdbe}", Opacity:100, category:"Adjust Color", name:"Color Fill" } ], name:"UNUSED" });
+      var original_effects = fw.selection[0].effectList,
+          has_color_fill = false,
+          color_effect = { Blendmode:0, Color:choice, EffectIsVisible:true, EffectMoaID:"{dd54adc0-a279-11d3-b92a000502f3fdbe}", Opacity:100, category:"Adjust Color", name:"Color Fill" };
+
+      for( var i=0; i < original_effects.effects.length; i++) {
+        if (original_effects.effects[i].name == "Color Fill") {
+          original_effects.effects[i] = color_effect;
+          has_color_fill = true;
+        }
+      }
+      if (!has_color_fill) {
+        original_effects.effects[original_effects.effects.length] = color_effect;
+      };
+
+      fw.getDocumentDOM().applyEffects(original_effects);
       break;
     case "element":
       // if the current object's fill is set to none, we'll have to assign a default fill before we can change the color.
