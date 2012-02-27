@@ -1,0 +1,14 @@
+/*
+**DOC**
+Pastes the color copied using the Copy Fill Color command to all selected objects.
+**DOC**
+*/
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
+};
+
+if (orangecommands.fillColor != undefined) {
+  orangecommands.run('Color','Fill Color', orangecommands.fillColor);
+};

@@ -159,9 +159,17 @@ Commands to change an object's fill and stroke color. When pressing the shortcut
   
   Set Canvas Color
 
+- **Copy Fill Color**  (No shortcut)
+  
+  Copies the currently selected object's fill color.
+
 - **Fill Color**  (CTRL + C)
   
   Set fill color. If the selection is a group, every object inside the group will be filled with the selected color. If the selected object has a gradient fill, it will be replaced with a solid fill. If the selected object is a Symbol, a Color Effect will be applied to it.
+
+- **Paste Fill Color**  (No shortcut)
+  
+  Pastes the color copied using the Copy Fill Color command to all selected objects.
 
 - **Stroke Color**  (CTRL + SHIFT + C)
   
