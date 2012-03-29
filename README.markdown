@@ -276,6 +276,10 @@ This way, you can use your PNG file as a sprite.
 ### Grids
 Commands to create grids using guides (the commands formerly known as "Reticulator")
 
+- **Baseline**  (No shortcut)
+  
+  Creates an horizontal typographyc baseline.
+
 - **Reticulator 950-12-10**  (No shortcut)
   
   Creates a 950 pixels wide layout, with 12 columns and a 10 px gutter.

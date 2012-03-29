@@ -1,0 +1,17 @@
+/**DOC**
+Creates an horizontal typographyc baseline.
+**DOC**/
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
+};
+
+var type_size = prompt("Type size",16),
+    number_of_guides = fw.getDocumentDOM().height / type_size,
+    start = type_size;
+
+for (var i=0; i < number_of_guides; i++) {
+  Guides.addHorizontal(start);
+  start += type_size;
+};
