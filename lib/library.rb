@@ -21,10 +21,10 @@ module FW
     end
     def modifiers
       {
-      :CTRL => 8,
-      :COMMAND => 4,
-      :SHIFT => 2,
-      :ALT => 1
+        :CTRL => 8,
+        :COMMAND => 4,
+        :SHIFT => 2,
+        :ALT => 1
       }
     end
     def keycodes
