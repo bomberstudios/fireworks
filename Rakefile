@@ -10,11 +10,9 @@ require 'colored'
 require 'lib/library'
 require 'lib/fireworks'
 
-ORANGE_COMMANDS_VERSION = "1.7"
+ORANGE_COMMANDS_VERSION = "1.7.1"
 DOWNLOAD_SERVER = "http://orangecommands.com/dl/"
-@fw_versions = ["CS3","CS4","CS5"]
-# @fw_versions = ["CS3","CS4","CS5", "CS5.1"]
-# @fw_versions = ["CS3","CS5"]
+@fw_versions = ["CS3","CS4","CS5", "CS6"]
 @orangecommands = FW::Library.new 'Commands'
 @pro = false
 
@@ -96,8 +94,9 @@ end
 desc "Build MXP files"
 task :mxp do
   system("'/Applications/Adobe Extension Manager CS4/Adobe Extension Manager CS4.app/Contents/MacOS/Adobe Extension Manager CS4' -suppress -package mxi=OrangeCommands_#{ORANGE_COMMANDS_VERSION}_CS3.mxi mxp=OrangeCommands#{@pro ? 'Pro': ''}_#{ORANGE_COMMANDS_VERSION}_CS3.mxp")
-  system("'/Applications/Adobe Extension Manager CS4/Adobe Extension Manager CS4.app/Contents/MacOS/Adobe Extension Manager CS4' -suppress -package mxi=OrangeCommands_#{ORANGE_COMMANDS_VERSION}_CS4.mxi mxp=OrangeCommands#{@pro ? 'Pro': ''}_#{ORANGE_COMMANDS_VERSION}_CS4.mxp")
-  system("'/Applications/Adobe Extension Manager CS5/Adobe Extension Manager CS5.app/Contents/MacOS/Adobe Extension Manager CS5' -suppress -package mxi=OrangeCommands_#{ORANGE_COMMANDS_VERSION}_CS5.mxi mxp=OrangeCommands#{@pro ? 'Pro': ''}_#{ORANGE_COMMANDS_VERSION}_CS5.mxp")
+  @fw_versions.reject { |v| v == "CS3" }.each do |version|
+    system("'/Applications/Adobe Extension Manager #{version}/Adobe Extension Manager #{version}.app/Contents/MacOS/Adobe Extension Manager #{version}' -suppress -package mxi=OrangeCommands_#{ORANGE_COMMANDS_VERSION}_#{version}.mxi mxp=OrangeCommands#{@pro ? 'Pro': ''}_#{ORANGE_COMMANDS_VERSION}_#{version}.mxp")
+  end
 end
 
 task :clean do
@@ -123,6 +122,7 @@ end
 desc "Release ZIP files to the world"
 task :release do
   system("git push origin master")
+  system("git release #{ORANGE_COMMANDS_VERSION}")
   @fw_versions.each do |version|
     system("scp 'pkg/#{ORANGE_COMMANDS_VERSION}/OrangeCommands_#{ORANGE_COMMANDS_VERSION}_#{version}.zip' oc:www/dl/")
     system("ssh oc cp www/dl/OrangeCommands_#{ORANGE_COMMANDS_VERSION}_#{version}.zip www/dl/orangecommands_latest_#{version.downcase}.zip")
@@ -139,11 +139,9 @@ end
 
 
 task :install do
-  system("rsync -azv Commands \"/Applications/Adobe\ Fireworks\ CS3/Configuration/\" --exclude='*.md'")
-  system("rsync -azv Commands \"/Applications/Adobe\ Fireworks\ CS4/Configuration/\" --exclude='*.md'")
-  system("rsync -azv Commands \"/Applications/Adobe\ Fireworks\ CS5/Configuration/\" --exclude='*.md'")
-  system("rsync -azv Commands \"/Applications/Adobe\ Fireworks\ CS5.1/Configuration/\" --exclude='*.md'")
-  system("rsync -azv Commands \"/Applications/Adobe\ Fireworks\ CS6/Configuration/\" --exclude='*.md'")
+  @fw_versions.each do |version|
+    system("rsync -azv Commands \"/Applications/Adobe\ Fireworks\ #{version}/Configuration/\" --exclude='*.md'")
+  end
 end
 
 desc "Build docs"
@@ -174,19 +172,12 @@ namespace :test do
     run_test 'CS5'
   end
 
-  desc 'Test in Fireworks CS5.1 only'
-  task :cs51 do
-    run_test 'CS5.1'
-  end
-
   desc 'Test in Fireworks CS6 only'
   task :cs6 do
     run_test 'CS6'
   end
 
-  
-
-  task :all => [:install, :cs3, :cs4, :cs5, :cs51, :cs6]
+  task :all => [:install, :cs3, :cs4, :cs5, :cs6]
 end
 
 desc 'Run Test Suite'
