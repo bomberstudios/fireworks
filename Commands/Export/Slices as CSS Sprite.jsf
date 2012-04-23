@@ -1,6 +1,5 @@
 /**DOC**
-Exports the slices in the current document as a .css file.  
-This way, you can use your PNG file as a sprite.
+Exports the slices in the current document as a .css file. This way, you can use your PNG file as a sprite. This mostly useless in CS6, as the feature is included in this version, but it's nice for earlier versions.
 **DOC**/
 
 /*
