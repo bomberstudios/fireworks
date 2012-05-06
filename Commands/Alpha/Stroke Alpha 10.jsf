@@ -3,6 +3,7 @@
 Set the selected objects’ stroke alpha to 10%
 **DOC**/
 
+// TODO: In CS6, you can set the stroke's alpha by setting the color in RGBA
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");
 } catch(e){
