@@ -7,7 +7,7 @@ try {
   alert("This command requires the bs.js library\rGet it at http://github.com/bomberstudios/fireworks/");
 };
 
-var copies = orangecommands.params || prompt("Number of copies",10),
+var copies = orangecommands.params || prompt("Number of copies",9),
     spacing = orangecommands.params || prompt("Distance",10);
 
 (copies).times(function(){
