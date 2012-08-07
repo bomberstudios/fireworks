@@ -1,0 +1,40 @@
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("This command requires the bs.js library\rGet it at http://github.com/bomberstudios/fireworks/");
+}
+
+Pages.each(function() {
+
+  var page_number = fw.getDocumentDOM().currentPageNum + 1,
+      page_width = fw.getDocumentDOM().width,
+      page_height = fw.getDocumentDOM().height,
+      updating = false;
+
+  fw.getDocumentDOM().selectAll();
+  Selection.each(function(e) {
+    if (e.name == "paginator_" + page_number) {
+      fw.getDocumentDOM().setTextRuns({ initialAttrs:{ alignment:"right", antiAliasSharpness:192, antiAliasStrength:64, baselineShift:0, bold:true, face:"Arial", fillColor:"#666666", horizontalScale:1, italic:false, leading:1, leadingMode:"percentage", overSample:8, paragraphIndent:0, paragraphSpacingAfter:0, paragraphSpacingBefore:0, rangeKerning:0, size:"24pt", underline:false }, textRuns:[ { changedAttrs:{  }, characters: page_number } ] });
+      fw.getDocumentDOM().setElementName("paginator_" + page_number);
+      updating = true;
+    }
+  });
+
+  if (!updating) {
+    // Add text box
+    fw.getDocumentDOM().addNewText({left:page_width, top:0, right:page_width, bottom:100}, true);
+
+    fw.getDocumentDOM().setFillEdgeMode("antialias", 0);
+    fw.getDocumentDOM().setTextAutoKern(true);
+    fw.getDocumentDOM().setTextAntiAliasing("smooth");
+
+    fw.getDocumentDOM().setTextOrientation("horizontal left to right");
+    fw.getDocumentDOM().setTextAlignment("right");
+    fw.getDocumentDOM().setTextAutoExpand(true);
+
+    fw.getDocumentDOM().setTextRuns({ initialAttrs:{ alignment:"right", antiAliasSharpness:192, antiAliasStrength:64, baselineShift:0, bold:true, face:"Arial", fillColor:"#666666", horizontalScale:1, italic:false, leading:1, leadingMode:"percentage", overSample:8, paragraphIndent:0, paragraphSpacingAfter:0, paragraphSpacingBefore:0, rangeKerning:0, size:"24pt", underline:false }, textRuns:[ { changedAttrs:{  }, characters: page_number } ] });
+
+    fw.getDocumentDOM().setElementName("paginator_" + page_number);
+  };
+
+});
