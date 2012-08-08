@@ -4,6 +4,16 @@ try {
   alert("This command requires the bs.js library\rGet it at http://github.com/bomberstudios/fireworks/");
 }
 
+var font_family = "Arial",
+    font_size = "24pt",
+    font_color = "#666666",
+    font_bold = true;
+
+function update_marker(page_number) {
+  fw.getDocumentDOM().setTextRuns({ initialAttrs:{ alignment:"right", antiAliasSharpness:192, antiAliasStrength:64, baselineShift:0, bold:font_bold, face:font_family, fillColor:font_color, horizontalScale:1, italic:false, leading:1, leadingMode:"percentage", overSample:8, paragraphIndent:0, paragraphSpacingAfter:0, paragraphSpacingBefore:0, rangeKerning:0, size:font_size, underline:false }, textRuns:[ { changedAttrs:{  }, characters: page_number } ] });
+  fw.getDocumentDOM().setElementName("paginator_" + page_number);
+}
+
 Pages.each(function() {
 
   var page_number = fw.getDocumentDOM().currentPageNum + 1,
@@ -13,16 +23,15 @@ Pages.each(function() {
 
   fw.getDocumentDOM().selectAll();
   Selection.each(function(e) {
-    if (e.name == "paginator_" + page_number) {
-      fw.getDocumentDOM().setTextRuns({ initialAttrs:{ alignment:"right", antiAliasSharpness:192, antiAliasStrength:64, baselineShift:0, bold:true, face:"Arial", fillColor:"#666666", horizontalScale:1, italic:false, leading:1, leadingMode:"percentage", overSample:8, paragraphIndent:0, paragraphSpacingAfter:0, paragraphSpacingBefore:0, rangeKerning:0, size:"24pt", underline:false }, textRuns:[ { changedAttrs:{  }, characters: page_number } ] });
-      fw.getDocumentDOM().setElementName("paginator_" + page_number);
+    if (e.name.match(/paginator_(\d+)/)) {
+      update_marker(page_number);
       updating = true;
     }
   });
 
   if (!updating) {
     // Add text box
-    fw.getDocumentDOM().addNewText({left:page_width, top:0, right:page_width, bottom:100}, true);
+    fw.getDocumentDOM().addNewText({left:page_width - 4, top: 4, right:page_width - 4, bottom:100}, true);
 
     fw.getDocumentDOM().setFillEdgeMode("antialias", 0);
     fw.getDocumentDOM().setTextAutoKern(true);
@@ -32,9 +41,8 @@ Pages.each(function() {
     fw.getDocumentDOM().setTextAlignment("right");
     fw.getDocumentDOM().setTextAutoExpand(true);
 
-    fw.getDocumentDOM().setTextRuns({ initialAttrs:{ alignment:"right", antiAliasSharpness:192, antiAliasStrength:64, baselineShift:0, bold:true, face:"Arial", fillColor:"#666666", horizontalScale:1, italic:false, leading:1, leadingMode:"percentage", overSample:8, paragraphIndent:0, paragraphSpacingAfter:0, paragraphSpacingBefore:0, rangeKerning:0, size:"24pt", underline:false }, textRuns:[ { changedAttrs:{  }, characters: page_number } ] });
+    update_marker(page_number);
 
-    fw.getDocumentDOM().setElementName("paginator_" + page_number);
-  };
+  }
 
 });
