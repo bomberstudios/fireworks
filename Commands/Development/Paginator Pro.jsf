@@ -10,39 +10,48 @@ var font_family = "Arial",
     font_bold = true;
 
 function update_marker(page_number) {
+  if (!fw.getDocumentDOM().hasMasterPage()) {
+    page_number += 1;
+  }
   fw.getDocumentDOM().setTextRuns({ initialAttrs:{ alignment:"right", antiAliasSharpness:192, antiAliasStrength:64, baselineShift:0, bold:font_bold, face:font_family, fillColor:font_color, horizontalScale:1, italic:false, leading:1, leadingMode:"percentage", overSample:8, paragraphIndent:0, paragraphSpacingAfter:0, paragraphSpacingBefore:0, rangeKerning:0, size:font_size, underline:false }, textRuns:[ { changedAttrs:{  }, characters: page_number } ] });
   fw.getDocumentDOM().setElementName("paginator_" + page_number);
 }
 
 Pages.each(function() {
 
-  var page_number = fw.getDocumentDOM().currentPageNum + 1,
+  var page_number = fw.getDocumentDOM().currentPageNum,
       page_width = fw.getDocumentDOM().width,
       page_height = fw.getDocumentDOM().height,
       updating = false;
 
-  fw.getDocumentDOM().selectAll();
-  Selection.each(function(e) {
-    if (e.name.match(/paginator_(\d+)/)) {
+  if (fw.getDocumentDOM().hasMasterPage() && page_number === 0) {
+    // do nothing
+  } else {
+
+    fw.getDocumentDOM().selectAll();
+
+    Selection.each(function(e) {
+      if (e.name !== null && e.name.match(/paginator_(\d+)/)) {
+        update_marker(page_number);
+        updating = true;
+      }
+    });
+
+    if (!updating) {
+      // Add text box
+      fw.getDocumentDOM().addNewText({left:page_width - 4, top: 4, right:page_width - 4, bottom:100}, true);
+
+      fw.getDocumentDOM().setFillEdgeMode("antialias", 0);
+      fw.getDocumentDOM().setTextAutoKern(true);
+      fw.getDocumentDOM().setTextAntiAliasing("smooth");
+
+      fw.getDocumentDOM().setTextOrientation("horizontal left to right");
+      fw.getDocumentDOM().setTextAlignment("right");
+      fw.getDocumentDOM().setTextAutoExpand(true);
+
       update_marker(page_number);
-      updating = true;
+
     }
-  });
-
-  if (!updating) {
-    // Add text box
-    fw.getDocumentDOM().addNewText({left:page_width - 4, top: 4, right:page_width - 4, bottom:100}, true);
-
-    fw.getDocumentDOM().setFillEdgeMode("antialias", 0);
-    fw.getDocumentDOM().setTextAutoKern(true);
-    fw.getDocumentDOM().setTextAntiAliasing("smooth");
-
-    fw.getDocumentDOM().setTextOrientation("horizontal left to right");
-    fw.getDocumentDOM().setTextAlignment("right");
-    fw.getDocumentDOM().setTextAutoExpand(true);
-
-    update_marker(page_number);
-
   }
 
 });
