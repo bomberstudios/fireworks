@@ -6,7 +6,7 @@ The command prompts you for a folder to export, and files are saved with the pag
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");
 } catch(e){
-  alert("This command requires the bs.js library\nGet it at http://bomberstudios.com/fireworks/");
+  alert("This command requires the bs.js library\nGet it at http://orangecommands.com");
 };
 
 var folder_name = fw.browseForFolderURL("Choose an export folder",Document.path());

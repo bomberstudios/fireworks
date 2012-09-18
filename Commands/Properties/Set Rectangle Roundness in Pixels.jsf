@@ -6,7 +6,7 @@ This command only makes sense for CS3, as CS4 lets you specify roundness in pixe
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");
 } catch(e){
-  alert("This command requires the bs.js library\rGet it at http://github.com/bomberstudios/fireworks/");
+  alert("There was a problem running this command.\rThis is usually related to an installation problem, so please visit http://orangecommands.com and download an updated installer.\r\rSorry for the inconvenience.");
 };
 
 var sel = fw.selection[0],
@@ -24,7 +24,7 @@ var roundness_in_pixels = orangecommands.params || prompt("Set rectangle roundne
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");
 } catch(e){
-  alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
+  alert("There was a problem running this command.\rThis is usually related to an installation problem, so please visit http://orangecommands.com and download an updated installer.\r\rSorry for the inconvenience.");
 };
 
 try {

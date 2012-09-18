@@ -6,7 +6,7 @@ This command tries to fix a nasty bug where Fireworks will draw an item at a sub
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");
 } catch(e) {
-  alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
+  alert("There was a problem running this command.\rThis is usually related to an installation problem, so please visit http://orangecommands.com and download an updated installer.\r\rSorry for the inconvenience.");
 };
 
 Selection.each(function(o) {

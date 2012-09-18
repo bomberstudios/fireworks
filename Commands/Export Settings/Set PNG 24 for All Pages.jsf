@@ -6,7 +6,7 @@ A command to set the export format of all pages as PNG in 24 bits (something tha
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");
 } catch(e){
-  alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
+  alert("There was a problem running this command.\rThis is usually related to an installation problem, so please visit http://orangecommands.com and download an updated installer.\r\rSorry for the inconvenience.");
 };
 
 Pages.each(Document.set_export_as_png_24);

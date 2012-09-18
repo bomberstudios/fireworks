@@ -4,7 +4,7 @@ Exports the current page as a flattened (non editable) PNG file with a 24 bits c
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");
 } catch(e){
-  alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
+  alert("There was a problem running this command.\rThis is usually related to an installation problem, so please visit http://orangecommands.com and download an updated installer.\r\rSorry for the inconvenience.");
 };
 
 Document.set_export_as_png_24();

@@ -6,7 +6,7 @@ Copies the currently selected object's fill color.
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");
 } catch(e){
-  alert("This command requires the bs.js library\rGet it at http://bomberstudios.com/fireworks/");
+  alert("There was a problem running this command.\rThis is usually related to an installation problem, so please visit http://orangecommands.com and download an updated installer.\r\rSorry for the inconvenience.");
 };
 var color = fw.selection[0].pathAttributes.fillColor;
 orangecommands.fillColor = color;

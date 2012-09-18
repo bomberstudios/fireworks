@@ -1,7 +1,7 @@
 try {
   fw.runScript(fw.appJsCommandsDir + "/bs.js");
 } catch(e){
-  alert("This command requires the bs.js library\rGet it at http://github.com/bomberstudios/fireworks/");
+  alert("There was a problem running this command.\rThis is usually related to an installation problem, so please visit http://orangecommands.com and download an updated installer.\r\rSorry for the inconvenience.");
 };
 
 var sprite_name = fw.getDocumentDOM().docTitleWithoutExtension;
