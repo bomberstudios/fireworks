@@ -1,4 +1,4 @@
-# Orange Commands v1.7.1 for Adobe Fireworks
+# Orange Commands v1.7.2 for Adobe Fireworks
 
 Orange Commands is a collection of scripts for Adobe Fireworks that make the life of a web designer easier (or at least allow him/her to work faster :)
 
@@ -6,10 +6,10 @@ Orange Commands is a collection of scripts for Adobe Fireworks that make the lif
 ## Installation
 
 1. Download:
-    - [Orange Commands 1.7.1 for Fireworks CS3](http://orangecommands.com/dl/OrangeCommands_1.7.1_CS3.zip)
-    - [Orange Commands 1.7.1 for Fireworks CS4](http://orangecommands.com/dl/OrangeCommands_1.7.1_CS4.zip)
-    - [Orange Commands 1.7.1 for Fireworks CS5](http://orangecommands.com/dl/OrangeCommands_1.7.1_CS5.zip)
-    - [Orange Commands 1.7.1 for Fireworks CS6](http://orangecommands.com/dl/OrangeCommands_1.7.1_CS6.zip)
+    - [Orange Commands 1.7.2 for Fireworks CS3](http://orangecommands.com/dl/OrangeCommands_1.7.2_CS3.zip)
+    - [Orange Commands 1.7.2 for Fireworks CS4](http://orangecommands.com/dl/OrangeCommands_1.7.2_CS4.zip)
+    - [Orange Commands 1.7.2 for Fireworks CS5](http://orangecommands.com/dl/OrangeCommands_1.7.2_CS5.zip)
+    - [Orange Commands 1.7.2 for Fireworks CS6](http://orangecommands.com/dl/OrangeCommands_1.7.2_CS6.zip)
 
 2. Expand the ZIP.
 3. Double click the MXP file to install the commands.
@@ -260,8 +260,7 @@ I.e: if your file is called CoolDesign.png, and the current page is called 'Home
 
 - **Slices as CSS Sprite**  (No shortcut)
   
-  Exports the slices in the current document as a .css file.  
-This way, you can use your PNG file as a sprite.
+  Exports the slices in the current document as a .css file. This way, you can use your PNG file as a sprite. This mostly useless in CS6, as the feature is included in this version, but it's nice for earlier versions.
 
 ### Export Settings
 

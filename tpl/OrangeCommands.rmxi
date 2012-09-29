@@ -15,7 +15,7 @@
     ]]>
   </ui-access>
   <files>
-<% @files.each do |filename| %>    <file source="<%= filename %>" destination="$fireworks/Configuration/<%= filename %>" />
+<% @files.each do |filename| %>    <file source="<%= filename %>" destination="$fireworks/Configuration/<%= File.dirname(filename) %>" />
 <% end %>
   </files>
 </macromedia-extension>

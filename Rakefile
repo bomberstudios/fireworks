@@ -10,9 +10,9 @@ require 'colored'
 require 'lib/library'
 require 'lib/fireworks'
 
-ORANGE_COMMANDS_VERSION = "1.7.1"
+ORANGE_COMMANDS_VERSION = "1.7.2"
 DOWNLOAD_SERVER = "http://orangecommands.com/dl/"
-@fw_versions = ["CS3","CS4","CS5", "CS6"]
+@fw_versions = ["CS3","CS4","CS5","CS6"]
 @orangecommands = FW::Library.new 'Commands'
 @pro = false
 
