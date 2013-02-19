@@ -1,0 +1,37 @@
+/**DOC**
+This command scales the selected elements to fit specified dimensions, preserving their aspect ratio.
+**DOC***/
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("There was a problem running this command.\rThis is usually related to an installation problem, so please visit http://orangecommands.com and download an updated installer.\r\rSorry for the inconvenience.");
+}
+
+if (fw.selection.length > 0) {
+  var default_height = 20;
+  var default_width = 20;
+  var s = orangecommands.params || prompt("Aspect ratio (width/height):\n(You can use math operations)",default_width+","+default_height);
+
+  var final_width = s ? parseInt(s.split(",")[0], 10) : default_width;
+  var final_height = s ? parseInt(s.split(",")[1], 10) : default_height;
+  var final_ratio = final_width / final_height;
+
+  function resize(obj) {
+    var nh, nw;
+    var oh = obj.height;
+    var ow = obj.width;
+    var obj_ratio = ow / oh;
+
+    if (obj_ratio < final_ratio) {
+      nh = final_height;
+      nw = ow / (oh / nh);
+    } else {
+      nw = final_width;
+      nh = oh / (ow / nw);
+    }
+
+    obj.resize(nw, nh);
+  }
+
+  fw.selection.each(resize, false);
+}

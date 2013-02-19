@@ -445,6 +445,15 @@ test( 'Size command, single object', function(){
   assert_equal('Selected item is 1 pixel shorter', fw.selection[0].height, 110);
   orangecommands.run("Size","Height -10");
   assert_equal('Selected item is 10 pixels shorter', fw.selection[0].height, 100);
+
+  (10).times(add_rectangle);
+  fw.getDocumentDOM().selectAll();
+  orangecommands.run("Size","Scale to Fit...", "20,20");
+  fw.selection.each(function(obj) {
+      assert_equal('Selected item height is 20 pixels', obj.height, 20);
+      assert_equal('Selected item width is 20 pixels', obj.width, 20);
+  });
+
 });
 
 test( 'Size command, multiple objects', function(){
