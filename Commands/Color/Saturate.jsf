@@ -1,0 +1,23 @@
+/*
+**DOC**
+Makes the fill color more saturated.
+**DOC**
+*/
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("There was a problem running this command.\rThis is usually related to an installation problem, so please visit http://orangecommands.com and download an updated installer.\r\rSorry for the inconvenience.");
+};
+
+if (fw.selection.length > 0) {
+	var default_amount = 0.1;
+	var a = orangecommands.params || parseFloat(prompt("Amount (from 0.1 to 1)", default_amount));
+	var amount = a || default_amount;
+
+	Selection.each(function(sel) {
+	    var color = ColorJS(sel.pathAttributes.fillColor);
+
+	    Color.fill(sel,
+	    	color.saturateByAmount(amount).toRGB().toCSS());
+	});
+}

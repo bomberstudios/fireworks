@@ -1,0 +1,19 @@
+/*
+**DOC**
+Copies the currently selected object's fill color converted to RGBA. Takes the alpha channel from the element's opacity.
+**DOC**
+*/
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("There was a problem running this command.\rThis is usually related to an installation problem, so please visit http://orangecommands.com and download an updated installer.\r\rSorry for the inconvenience.");
+};
+
+if (fw.selection.length > 0) {
+	var color = ColorJS(fw.selection[0].pathAttributes.fillColor).toRGB();
+	var alpha = Math.round(fw.selection[0].opacity) / 100;
+	var color_s = "rgba(" + color.getRed() * 255 + ", " + color.getGreen() * 255 + ", " + color.getBlue() * 255 + ", " + alpha + ")";
+
+	orangecommands.fillColor = color_s;
+	fw.copy(color_s);
+}
