@@ -1,0 +1,22 @@
+/*
+**DOC**
+Copies the result of blending selected object's fill color with selected color in the colorpicker. Uses object's opacity for color blending.
+**DOC**
+*/
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("There was a problem running this command.\rThis is usually related to an installation problem, so please visit http://orangecommands.com and download an updated installer.\r\rSorry for the inconvenience.");
+};
+
+if (fw.selection.length > 0) {
+	var sel = fw.selection[0];
+	var bg_color = ColorJS(orangecommands.params || fw.popupColorPickerOverMouse("#00000000", true, false));
+	var fg_color = ColorJS(sel.pathAttributes.fillColor);
+	var alpha = Math.round(sel.opacity) / 100;
+
+	var blend_color = bg_color.blend(fg_color, alpha).toRGB().toCSS();
+
+	orangecommands.fillColor = blend_color;
+	fw.copy(blend_color);
+}

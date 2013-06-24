@@ -286,6 +286,43 @@ test('Color',function(){
   Selection.each(function(e){
     assert_equal('Fill Color sets color of elements inside groups', e.pathAttributes.fillColor, '#00ff00');
   });
+  Selection.each(function(e){
+    Color.fill(e, '#000000');
+    fw.getDocumentDOM().setOpacity(50);
+    orangecommands.run('Color','Blend Color', '#ffffff');
+    assert_equal('Blend color sets color', e.pathAttributes.fillColor,
+      ColorJS("#FFFFFF").blend(ColorJS("#000000"), 0.5).toCSS() );
+  });
+  Selection.each(function(e){
+    Color.fill(e, '#FFFFFF');
+    orangecommands.run('Color','Darken', 0.1);
+    assert_equal('Color is 0.1 darker', e.pathAttributes.fillColor,
+      ColorJS("#FFFFFF").darkenByAmount(0.1).toCSS().toLowerCase());
+  });
+  Selection.each(function(e){
+    Color.fill(e, '#ffffff');
+    orangecommands.run('Color','Ligthen', '0.1');
+    assert_equal('Color is 0.1 lighter', e.pathAttributes.fillColor,
+      ColorJS("#ffffff").lightenByAmount(0.1).toCSS().toLowerCase());
+  });
+  Selection.each(function(e){
+    Color.fill(e, '#ff0000');
+    orangecommands.run('Color','Desaturate', '0.1');
+    assert_equal('Color is 0.1 less saturated', e.pathAttributes.fillColor,
+      ColorJS("#ff0000").desaturateByAmount(0.1).toCSS().toLowerCase());
+  });
+  Selection.each(function(e){
+    Color.fill(e, '#ff0000');
+    orangecommands.run('Color','Saturate', '0.1');
+    assert_equal('Color is 0.1 more saturated', e.pathAttributes.fillColor,
+      ColorJS("#ff0000").saturateByAmount(0.1).toCSS().toLowerCase());
+  });
+  Selection.each(function(e){
+    Color.fill(e, '#ff0000');
+    orangecommands.run('Color','Shift Hue', '180');
+    assert_equal('Color hue changed 180deg', e.pathAttributes.fillColor,
+      ColorJS("#ff0000").shiftHue(180).toCSS().toLowerCase());
+  });
 });
 
 
