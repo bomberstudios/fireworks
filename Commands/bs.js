@@ -20,6 +20,13 @@ var orangecommands = orangecommands || {
   }
 };
 
+
+try {
+  fw.runScript(fw.appJsCommandsDir + "/color.js");
+} catch (e) {
+  alert("Error loading library for color manipulation.\n" + [exception, exception.lineNumber, exception.fileName].join("\n"));
+}
+
 // Utility methods
 FwArray.prototype.clone = Array.prototype.clone = function(){
   return [].concat(this);
@@ -614,6 +621,46 @@ Color = {
       alpha =  Math.round((a[3] / parseInt('ff',16))*100) / 100;
     }
     return 'rgba('+r+','+g+','+b+','+alpha+')';
+  },
+
+  fill: function(sel, color) {
+    fw.selection = sel;
+    switch (sel.kind()) {
+      case "symbol":
+        // TODO: do not replace effects in symbol, just add the color fill effect
+        var original_effects = fw.selection[0].effectList,
+            has_color_fill = false,
+            color_effect = { Blendmode:0, Color:color, EffectIsVisible:true, EffectMoaID:"{dd54adc0-a279-11d3-b92a000502f3fdbe}", Opacity:100, category:"Adjust Color", name:"Color Fill" };
+
+        for( var i=0; i < original_effects.effects.length; i++) {
+          if (original_effects.effects[i].name == "Color Fill") {
+            original_effects.effects[i] = color_effect;
+            has_color_fill = true;
+          }
+        }
+        if (!has_color_fill) {
+          original_effects.effects[original_effects.effects.length] = color_effect;
+        };
+
+        fw.getDocumentDOM().applyEffects(original_effects);
+        break;
+      case "element":
+        // if the current object's fill is set to none, we'll have to assign a default fill before we can change the color.
+        if(!sel.pathAttributes.fill){
+          fw.getDocumentDOM().setFillNColor({ category:"fc_Solid", ditherColors:[ "#000000", "#000000" ], edgeType:"antialiased", feather:0, gradient:null, name:"fn_Normal", pattern:null, shape:"solid", stampingMode:"blend opaque", textureBlend:0, webDitherTransparent:false }, "#000000");
+        }
+        // make the object's fill a solid color
+        sel.pathAttributes.fill.category = 'fc_Solid';
+      default:
+        switch (color) {
+          case "#ffffff00":
+            fw.getDocumentDOM().setFillNColor(null, color);
+            break;
+          default:
+            fw.getDocumentDOM().setFillColor(color);
+            break;
+        }
+    }
   }
 };
 

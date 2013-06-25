@@ -1,0 +1,23 @@
+/*
+**DOC**
+Changes the hue of a color.
+**DOC**
+*/
+try {
+  fw.runScript(fw.appJsCommandsDir + "/bs.js");
+} catch(e){
+  alert("There was a problem running this command.\rThis is usually related to an installation problem, so please visit http://orangecommands.com and download an updated installer.\r\rSorry for the inconvenience.");
+};
+
+if (fw.selection.length > 0) {
+	var default_degrees = 5;
+	var d = orangecommands.params || parseInt(prompt("Degrees (from 1 to 360)", default_degrees), 10);
+	var degrees = d || default_degrees;
+
+	Selection.each(function(sel) {
+	    var color = ColorJS(sel.pathAttributes.fillColor);
+
+	    Color.fill(sel,
+	    	color.shiftHue(degrees).toRGB().toCSS());
+	});
+}
