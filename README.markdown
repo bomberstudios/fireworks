@@ -18,7 +18,7 @@ Orange Commands is a collection of scripts for Adobe Fireworks that make the lif
       Mac: /Users/**YOU**/Library/Application Support/Adobe/Fireworks CS5/**YOURLANGUAGE**/Keyboard Shortcuts/  
       Win: \\Users\\**YOU**\\AppData\\Roaming\\Adobe\\Fireworks CS5\\**YOUR LANGUAGE**\\Keyboard Shortcuts
 
-5. Change the keyboard shortcuts in Fireworks in the "Fireworks » Keyboard Shortcuts..." menu, and pick one of the '+ Extras' sets.
+5. Change the keyboard shortcuts in Fireworks in the "Fireworks » Keyboard Shortcuts..." menu, and pick one of the '+ Extras' sets. If you are using Mac OSX, make sure the Ctrl + Arrow keys are not being used by Mission Control by unchecking them in System Preferences » Keyboard » Keyboard Shortcuts.
 6. Restart Fireworks
 7. Enjoy!
 
