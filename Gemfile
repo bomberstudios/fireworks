@@ -1,4 +1,5 @@
-source :rubygems
+source 'https://rubygems.org'
+
 gem 'watcher'
 gem 'ruby-fsevent'
 gem 'smusher'

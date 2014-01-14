@@ -7,8 +7,8 @@ require "erb"
 require 'fileutils'
 require 'colored'
 
-require 'lib/library'
-require 'lib/fireworks'
+require './lib/library'
+require './lib/fireworks'
 
 ORANGE_COMMANDS_VERSION = "1.7.2"
 DOWNLOAD_SERVER = "http://orangecommands.com/dl/"

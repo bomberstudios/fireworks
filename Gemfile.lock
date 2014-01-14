@@ -1,20 +1,18 @@
 GEM
-  remote: http://rubygems.org/
+  remote: https://rubygems.org/
   specs:
     colored (1.2)
     fluby (0.7.4)
     httpclient (2.1.6.1)
     json (1.5.1)
-    maruku (0.6.0)
-      syntax (>= 1.0.0)
-    rake (0.8.7)
+    maruku (0.7.0)
+    rake (10.1.1)
     rdiscount (1.6.8)
     ruby-fsevent (0.2.1)
     smusher (0.4.6)
       httpclient
       json
       rake
-    syntax (1.0.0)
     watcher (1.2.0)
 
 PLATFORMS
