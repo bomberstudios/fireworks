@@ -485,6 +485,13 @@ All Size commands support math operations, so you can quickly make an object 23 
   
   Sets the width of the selection.
 
+### States
+
+
+- **Duplicate State**  (No shortcut)
+
+  This command duplicates the current state. It was created to work around a bug in Fireworks CS6, where duplicating states would not duplicate symbols. There's a small glitch, though: if you had locked objects in your states, they will be unlocked on the new state. It's a small price to pay, IMHO, but I'll keep trying to make it work properly.
+
 ### Text
 
 

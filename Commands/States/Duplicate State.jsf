@@ -1,0 +1,44 @@
+// Duplicate State, a fix for the bug described here: http://forums.adobe.com/message/5987155
+/**DOC**
+This command duplicates the current state. It was created to work around a bug in Fireworks CS6, where duplicating states would not duplicate symbols. There's a small glitch, though: if you had locked objects in your states, they will be unlocked on the new state. It's a small price to pay, IMHO, but I'll keep trying to make it work properly.
+**DOC**/
+
+var dom = fw.getDocumentDOM(),
+    startFrame = dom.currentFrameNum,
+    layers = dom.frames[startFrame].layers,
+    lockedLayers = [],
+    layer;
+
+// Store a reference to locked layers
+for (var i = 0; i < layers.length; i++) {
+  layer = layers[i];
+  if (layer.locked) {
+    lockedLayers.push(layer);
+  }
+  // Process subelements
+  if (layer.elemsandsublayers) {
+    var sublayers = layer.elemsandsublayers;
+    for (var j = 0; j < sublayers.length; j++) {
+      if (sublayers[j].locked) {
+        lockedLayers.push(sublayers[j]);
+      }
+    }
+  }
+}
+
+// Unlock all layers
+fw.getDocumentDOM().setElementLocked(-1, -1, -1, false, true, true);
+
+// Actual state duplication
+fw.getDocumentDOM().selectAll();
+fw.getDocumentDOM().duplicateFrame(-1, 1, "after current", true);
+
+// Relock all the layers that we unlocked
+fw.getDocumentDOM().currentFrameNum = startFrame;
+for (var i = 0; i < lockedLayers.length; i++) {
+  fw.selection = lockedLayers[i];
+  fw.getDocumentDOM().lockSelection();
+}
+
+fw.getDocumentDOM().currentFrameNum = startFrame + 1;
+// TODO: change lock status in new elements so that they match the source frame
