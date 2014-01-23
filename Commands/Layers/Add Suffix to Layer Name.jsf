@@ -1,0 +1,10 @@
+/**DOC**
+Asks for a suffix, and adds it to the end of the current layer name
+**DOC**/
+
+var current_layer = fw.getDocumentDOM().layers[fw.getDocumentDOM().currentLayerNum],
+    suffix = prompt("Suffix:","");
+
+if(suffix){
+  fw.getDocumentDOM().setLayerName(-1, current_layer.name + suffix);
+}
