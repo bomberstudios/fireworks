@@ -365,7 +365,7 @@ Commands to create grids using guides (the commands formerly known as "Reticulat
 
 - **Paste**  (No shortcut)
 
-  Pastes the guides copied with the "Guides » Copy" command (works accross documents!).
+  Pastes the guides copied with the "Guides » Copy" command (works across documents!).
 
 ### Layers
 
