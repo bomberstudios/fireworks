@@ -7,3 +7,4 @@ gem 'colored'
 gem 'rdiscount'
 gem 'maruku'
 gem 'fluby'
+gem "json", ">= 1.5.5"
