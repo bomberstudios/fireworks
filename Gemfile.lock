@@ -6,7 +6,7 @@ GEM
     httpclient (2.8.3)
     json (2.2.0)
     maruku (0.7.3)
-    rake (12.3.2)
+    rake (13.0.1)
     rdiscount (2.2.0.1)
     ruby-fsevent (0.2.1)
     smusher (0.4.9)
