@@ -4,7 +4,7 @@ GEM
     colored (1.2)
     fluby (0.7.4)
     httpclient (2.8.3)
-    json (2.2.0)
+    json (2.3.0)
     maruku (0.7.3)
     rake (13.0.1)
     rdiscount (2.2.0.1)
