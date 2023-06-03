@@ -6,5 +6,6 @@ gem 'smusher'
 gem 'colored'
 gem 'rdiscount'
 gem 'maruku'
+gem 'rexml'
 gem 'fluby'
-gem "json", ">= 1.5.5"
+gem "json"

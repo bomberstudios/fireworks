@@ -1,11 +1,7 @@
 # encoding: utf-8
+require "bundler"
 
-require "rubygems"
-require "rake"
-require "rdiscount"
-require "erb"
-require 'fileutils'
-require 'colored'
+Bundler.require
 
 require './lib/library'
 require './lib/fireworks'
