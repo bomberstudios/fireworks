@@ -1,30 +1,25 @@
 # Orange Commands v1.7.2 for Adobe Fireworks
 
-Orange Commands is a collection of scripts for Adobe Fireworks that make the life of a web designer easier (or at least allow him/her to work faster :)
-
+Orange Commands is a collection of scripts for Adobe Fireworks that make the life of a web designer easier (or at least allow them to work faster :)
 
 ## Installation
 
-1. Download:
+1. Download and unzip:
     - [Orange Commands 1.7.2 for Fireworks CS3](https://github.com/bomberstudios/fireworks/releases/download/1.7.2/OrangeCommands_1.7.2_CS3.zip)
     - [Orange Commands 1.7.2 for Fireworks CS4](https://github.com/bomberstudios/fireworks/releases/download/1.7.2/OrangeCommands_1.7.2_CS4.zip)
     - [Orange Commands 1.7.2 for Fireworks CS5](https://github.com/bomberstudios/fireworks/releases/download/1.7.2/OrangeCommands_1.7.2_CS5.zip)
     - [Orange Commands 1.7.2 for Fireworks CS6](https://github.com/bomberstudios/fireworks/releases/download/1.7.2/OrangeCommands_1.7.2_CS6.zip)
 
-2. Expand the ZIP.
-3. Double click the MXP file to install the commands.
-4. To install the custom keyboard shortcuts, copy the XML files to:
+1. Double click the MXP file to install the commands.
+1. To install the custom keyboard shortcuts, copy the XML files to:
+    - Mac: `/Users/**YOU**/Library/Application Support/Adobe/Fireworks CS5/**YOURLANGUAGE**/Keyboard Shortcuts/`
+    - Win: `\\Users\\**YOU**\\AppData\\Roaming\\Adobe\\Fireworks CS5\\**YOUR LANGUAGE**\\Keyboard Shortcuts`
 
-      Mac: /Users/**YOU**/Library/Application Support/Adobe/Fireworks CS5/**YOURLANGUAGE**/Keyboard Shortcuts/
-      Win: \\Users\\**YOU**\\AppData\\Roaming\\Adobe\\Fireworks CS5\\**YOUR LANGUAGE**\\Keyboard Shortcuts
-
-5. Change the keyboard shortcuts in Fireworks in the "Fireworks » Keyboard Shortcuts..." menu, and pick one of the '+ Extras' sets. If you are using Mac OSX, make sure the Ctrl + Arrow keys are not being used by Mission Control by unchecking them in System Preferences » Keyboard » Keyboard Shortcuts.
-6. Restart Fireworks
-7. Enjoy!
-
+1. Change the keyboard shortcuts opening the "Fireworks » Keyboard Shortcuts..." menu, and pick one of the '+ Extras' sets. If you are using Mac OSX, make sure the Ctrl + Arrow keys are not being used by Mission Control by unchecking them in System Preferences » Keyboard » Keyboard Shortcuts.
+1. Restart Fireworks
+1. Enjoy!
 
 ## Commands: What they do, and how to use them
-
 
 ### Align
 
@@ -365,10 +360,14 @@ Commands to create grids using guides (the commands formerly known as "Reticulat
 
 - **Paste**  (No shortcut)
 
-  Pastes the guides copied with the "Guides » Copy" command (works across documents!).
+  Pastes the guides copied with the "Guides » Copy" command (works accross documents!).
 
 ### Layers
 
+
+- **Add Suffix to Layer Name**  (No shortcut)
+
+  Asks for a suffix, and adds it to the end of the current layer name
 
 - **Unlock All**  (CTRL + SHIFT + U)
 

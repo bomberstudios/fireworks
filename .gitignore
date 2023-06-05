@@ -20,3 +20,4 @@ pkg
 logs
 tmp
 vendor/bundle
+Gemfile.lock

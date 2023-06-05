@@ -7,7 +7,7 @@ require './lib/library'
 require './lib/fireworks'
 
 ORANGE_COMMANDS_VERSION = "1.7.2"
-DOWNLOAD_SERVER = "http://orangecommands.com/dl/"
+DOWNLOAD_SERVER = "https://github.com/bomberstudios/fireworks/releases/download/1.7.2/"
 @fw_versions = ["CS3","CS4","CS5","CS6"]
 @orangecommands = FW::Library.new 'Commands'
 @pro = false
